@@ -89,6 +89,14 @@
       "pre-commit": "yarn lint"
     }
   },
+  "puppeteer": {
+    "args": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
+    "executablePath": "/usr/bin/chromium-browser",
+    "ignoreHTTPSErrors": true
+  },
   "scripts": {
     "start-js": "react-app-rewired start",
     "build-js": "react-app-rewired build",
