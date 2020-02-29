@@ -23,13 +23,13 @@ interface NavbarBrandLogoProps {
 }
 
 const navbarBrandFull: NavbarBrandLogoProps = {
-  src: '/assets/img/brand/logo.svg',
-  width: 89,
-  height: 25,
+  src: '/assets/img/brand/rang-dong.png',
+  width: 120,
+  height: 30,
 };
 
 const navbarBrandMinimized: NavbarBrandLogoProps = {
-  src: '/assets/img/brand/sygnet.svg',
+  src: '/assets/img/brand/rang-dong-minimized.png',
   width: 30,
   height: 30,
 };
