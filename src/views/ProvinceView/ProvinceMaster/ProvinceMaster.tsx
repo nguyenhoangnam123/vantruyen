@@ -203,10 +203,10 @@ function ProvinceMaster() {
             </Row>
           </Form>
           <div className="d-flex justify-content-end mt-2">
-            <button className="btn btn-primary mr-2" onClick={handleSearch}>
+            <button className="btn btn-sm btn-primary mr-2" onClick={handleSearch}>
               {translate(generalLanguageKeys.actions.filter)}
             </button>
-            <button className="btn btn-outline-secondary text-dark" onClick={handleReset}>
+            <button className="btn btn-sm btn-outline-secondary text-dark" onClick={handleReset}>
               <i className="fa mr-2 fa-times"/>
               {translate(generalLanguageKeys.actions.reset)}
             </button>
@@ -226,19 +226,19 @@ function ProvinceMaster() {
                  <>
                    <div className="d-flex justify-content-between">
                      <div className="flex-shrink-1 d-flex align-items-center">
-                       <button className="btn btn-primary mr-2" onClick={handleGoCreate}>
+                       <button className="btn btn-sm btn-primary mr-2" onClick={handleGoCreate}>
                          <i className="fa mr-2 fa-plus"/>
                          {translate(generalLanguageKeys.actions.create)}
                        </button>
-                       <button className="btn btn-danger mr-2" disabled={!hasSelected} onClick={handleBatchDelete}>
+                       <button className="btn btn-sm btn-danger mr-2" disabled={!hasSelected} onClick={handleBatchDelete}>
                          <i className="fa mr-2 fa-trash"/>
                          {translate(generalLanguageKeys.actions.delete)}
                        </button>
-                       <label className="btn btn-outline-primary mr-2 mb-0" htmlFor="master-import">
+                       <label className="btn btn-sm btn-outline-primary mr-2 mb-0" htmlFor="master-import">
                          <i className="fa mr-2 fa-upload"/>
                          {translate(generalLanguageKeys.actions.import)}
                        </label>
-                       <button className="btn btn-outline-primary mr-2" onClick={handleExport}>
+                       <button className="btn btn-sm btn-outline-primary mr-2" onClick={handleExport}>
                          <i className="fa mr-2 fa-download"/>
                          {translate(generalLanguageKeys.actions.export)}
                        </button>
