@@ -2,45 +2,44 @@ $themes: (
         default: (
         ),
 );
-$primary: #ec4649;
-$white : #fff;
+$red: #E35B5A;
+$white : #ffffff;
+$primary: #23282c;
 
-$sidebar-bg: $white;
-$sidebar-nav-link-color: #23282c;
+$sidebar-nav-link-color: $primary;
 $sidebar-nav-link-bg: $white;
 
-
-
-$sidebar-nav-link-hover-bg: rgba($primary, 0.8);
-$sidebar-nav-link-hover-color: $white;
-
-
-$sidebar-minimizer-bg: $white ;
-$sidebar-minimizer-hover-bg: $primary;
-$sidebar-minimizer-hover-indicator-color: $white;
-$sidebar-minimizer-indicator-color:$primary;
-
-$sidebar-nav-link-icon-color: #23282c;
-$sidebar-nav-link-active-icon-color: $white;
-
-$input-focus-border-color: $primary;
-$input-btn-focus-color: rgba($primary, 0.25);
-
-$sidebar-nav-dropdown-bg: $white;
-$sidebar-nav-dropdown-color: #23282c;
-$sidebar-nav-dropdown-indicator-hover-color: $white;
-
-$sidebar-nav-link-active-bg: $primary;
+$sidebar-nav-link-active-bg: $red;
 $sidebar-nav-link-active-color: $white;
 
+$sidebar-nav-link-hover-bg: $white;
+$sidebar-nav-link-hover-color:$red;
+
+$sidebar-minimizer-bg: $white ;
+$sidebar-minimizer-hover-bg: $red;
+$sidebar-minimizer-hover-indicator-color: $white;
+$sidebar-minimizer-indicator-color:$red;
+
+$sidebar-nav-link-icon-color: $primary;
+$sidebar-nav-link-active-icon-color:$white;
+
+$sidebar-nav-dropdown-bg: $white;
+$sidebar-nav-dropdown-color: $primary;
+$sidebar-nav-dropdown-hover-color: $white;
+
+$sidebar-bg: $white;
+
+$input-focus-border-color: $red;
+$input-btn-focus-color: rgba($red, 0.25);
+$primary: $red;
+
 .sidebar .nav-link {
-        border-radius: 6px;
         margin: 2px;
-        padding: 8px;
+        padding: 4px;
         height: 35px;
 }
 .sidebar .nav-dropdown.open .nav-link:hover{
-        color: $white;
+        color: $red;
 }
 
 .sidebar .nav-dropdown.open .nav-link.active {
@@ -54,4 +53,17 @@ $sidebar-nav-link-active-color: $white;
         padding-left: 14px;
 }
 
+.sidebar .nav-link.active:hover{
+        color: $white;
+        background: $red;
+}
+
+.sidebar .nav-link:hover .nav-icon {
+        color: $red;
+}
+.sidebar .nav-link.active:hover .nav-icon {
+        color: $white;
+ }
+    
+    
 
