@@ -2,30 +2,56 @@ $themes: (
         default: (
         ),
 );
-
-$sidebar-nav-link-color: #23282c;
-$sidebar-nav-link-bg: #fff;
-
-$sidebar-nav-link-active-bg: #fff;
-$sidebar-nav-link-active-color: #23282c;
-
-$sidebar-nav-link-hover-bg: #ec4649;
-$sidebar-nav-link-hover-color: #fff;
-
-$sidebar-minimizer-bg: #fff ;
-$sidebar-minimizer-hover-bg: #ec4649;
-$sidebar-minimizer-hover-indicator-color: #fff;
-$sidebar-minimizer-indicator-color:#ec4649;
-
-$sidebar-nav-link-icon-color: #ec4649;
-$sidebar-nav-link-active-icon-color:#ec4649;
-
-$sidebar-nav-dropdown-bg: #fff;
-$sidebar-nav-dropdown-color: #23282c;
-$sidebar-nav-dropdown-hover-color: #fff;
-
-$sidebar-bg: #fff;
-
-$input-focus-border-color: #ec4649;
-$input-btn-focus-color: rgba(#ec4649, 0.25);
 $primary: #ec4649;
+$white : #fff;
+
+$sidebar-bg: $white;
+$sidebar-nav-link-color: #23282c;
+$sidebar-nav-link-bg: $white;
+
+
+
+$sidebar-nav-link-hover-bg: rgba($primary, 0.8);
+$sidebar-nav-link-hover-color: $white;
+
+
+$sidebar-minimizer-bg: $white ;
+$sidebar-minimizer-hover-bg: $primary;
+$sidebar-minimizer-hover-indicator-color: $white;
+$sidebar-minimizer-indicator-color:$primary;
+
+$sidebar-nav-link-icon-color: #23282c;
+$sidebar-nav-link-active-icon-color: $white;
+
+$input-focus-border-color: $primary;
+$input-btn-focus-color: rgba($primary, 0.25);
+
+$sidebar-nav-dropdown-bg: $white;
+$sidebar-nav-dropdown-color: #23282c;
+$sidebar-nav-dropdown-indicator-hover-color: $white;
+
+$sidebar-nav-link-active-bg: $primary;
+$sidebar-nav-link-active-color: $white;
+
+.sidebar .nav-link {
+        border-radius: 6px;
+        margin: 2px;
+        padding: 8px;
+        height: 35px;
+}
+.sidebar .nav-dropdown.open .nav-link:hover{
+        color: $white;
+}
+
+.sidebar .nav-dropdown.open .nav-link.active {
+        color:$white;
+}
+
+.navbar{
+        justify-content: unset;
+}
+.sidebar .nav-dropdown-items .nav-item a {
+        padding-left: 14px;
+}
+
+

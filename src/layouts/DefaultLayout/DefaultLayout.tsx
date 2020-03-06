@@ -1,7 +1,7 @@
 import Header from '@coreui/react/lib/Header';
 import NavbarBrand from '@coreui/react/lib/NavbarBrand';
 import Sidebar from '@coreui/react/lib/Sidebar';
-import SidebarMinimizer from '@coreui/react/lib/SidebarMinimizer';
+// import SidebarMinimizer from '@coreui/react/lib/SidebarMinimizer';
 import SidebarNav from '@coreui/react/lib/SidebarNav';
 import SidebarToggler from '@coreui/react/lib/SidebarToggler';
 import {menu} from 'config/menu';
@@ -46,6 +46,7 @@ function DefaultLayout(props: RouteConfigComponentProps) {
     }),
     [translate],
   );
+  const SidebarWithRouter : any = withRouter(SidebarNav);
 
   return (
     <div className="app">
@@ -58,8 +59,8 @@ function DefaultLayout(props: RouteConfigComponentProps) {
       </Header>
       <div className="app-body">
         <Sidebar display="lg" fixed>
-          <SidebarNav navConfig={translatedMenu} router={ReactRouterDOM}/>
-          <SidebarMinimizer/>
+          <SidebarWithRouter navConfig={translatedMenu} router={ReactRouterDOM}/>
+          {/* <SidebarMinimizer/> */}
         </Sidebar>
         <main className="main">
           <div className="app-content">
