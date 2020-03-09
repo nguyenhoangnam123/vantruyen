@@ -1,0 +1,8 @@
+version: '3'
+services:
+    dms-frontend:
+        image: registry.truesight.asia/dms-frontend:latest
+        volumes:
+            - ./nginx/conf.d/:/etc/nginx/conf.d/
+        ports:
+            - 8081:80
