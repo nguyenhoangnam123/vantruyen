@@ -2,6 +2,7 @@ version: '3'
 services:
     dms-frontend:
         image: registry.truesight.asia/dms-frontend:latest
+        restart: always
         volumes:
             - ./nginx/conf.d/:/etc/nginx/conf.d/
         ports:
