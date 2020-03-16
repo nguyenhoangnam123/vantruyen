@@ -1,0 +1,4 @@
+{
+  "name": "application-user-role-mapping-table",
+  "main": "ApplicationUserRoleMappingTable.tsx"
+}

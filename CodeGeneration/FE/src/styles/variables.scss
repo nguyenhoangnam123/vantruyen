@@ -1,0 +1,175 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/variables";
+
+$themes: (
+  default: ()
+);
+
+$red: #e35b5a;
+$white: #ffffff;
+$primary: #23282c;
+
+// $input-focus-border-color: $red;
+// $input-btn-focus-color: rgba($red, 0.25);
+
+//sidebar
+.sidebar {
+  background-color: $white;
+}
+.sidebar .nav-link {
+  color: $primary;
+  background-color: $white;
+  margin: 0px;
+  padding: 4px;
+  height: 35px;
+}
+.sidebar ul.nav {
+  border-right: 1px solid #e3e3e3;
+}
+.sidebar .nav-link.active {
+  background: $red;
+  color: $white;
+}
+.sidebar .nav-link:hover {
+  color: $red;
+  background: $white;
+}
+.sidebar .nav-link.active .nav-icon {
+  color: $white;
+}
+.sidebar .nav-link:hover .nav-icon {
+  color: $red;
+}
+.sidebar .nav-link.active:hover .nav-icon {
+  color: $white;
+}
+.sidebar .nav-dropdown.open .nav-link:hover {
+  color: $red;
+}
+
+.sidebar .nav-dropdown.open .nav-link.active {
+  color: $white;
+}
+
+.navbar {
+  justify-content: unset;
+}
+.sidebar .nav-dropdown-items .nav-item a {
+  padding-left: 14px;
+}
+
+.sidebar .nav-link.active:hover {
+  color: $white;
+  background: $red;
+}
+.sidebar ul.nav {
+  border-right: 1px solid $red;
+}
+
+// Button
+.btn-primary {
+  background-color: $red;
+  border-color: $red;
+}
+.btn-primary:hover {
+  background-color: $red;
+  border-color: $red;
+}
+.btn-primary:not(:disabled):not(.disabled):active {
+  background-color: $red;
+  border-color: $red;
+}
+
+.btn-primary.focus,
+.btn-primary:focus,
+.btn-outline-primary.btn-primary.focus,
+.btn-outline-primary:focus {
+  box-shadow: 0 0 0 0.2rem rgba($red, 0.5);
+}
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0.2rem rgba($red, 0.5);
+}
+
+.btn-outline-primary {
+  border-color: $red;
+  color: $red;
+}
+
+.btn-outline-primary:hover {
+  background-color: $red;
+  border-color: $red;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active {
+  background-color: $red;
+  border-color: $red;
+}
+
+.btn-link {
+  color: $red;
+}
+
+.btn-link:hover{
+  color: rgba($color: $red, $alpha: 0.8);
+}
+
+// Input
+.ant-input:hover {
+  border-color: $red;
+}
+
+.ant-input:focus {
+  border-color: $red;
+  box-shadow: 0 0 0 2px rgba($color: $red, $alpha: 0.5);
+}
+
+.ant-select-selection:hover,
+.ant-select-selection:disabled,
+.ant-select-selection:focus {
+  border-color: $red;
+  box-shadow: 0 0 0 2px rgba($color: $red, $alpha: 0.5);
+}
+// Input Number
+.ant-input-number-sm input {
+  height: calc(1.5em + 0.5rem - 1px);
+}
+.ant-input-number-input {
+  height: calc(1.5em + 0.5rem - 1px);
+}
+// From
+.form-control:focus {
+  border-color: $red;
+  box-shadow: 0 0 0 2px rgba($color: $red, $alpha: 0.5);
+}
+
+// DatePicker
+.ant-calendar-picker:hover .ant-calendar-picker-input:not(.ant-input-disabled) {
+  border-color: $red;
+}
+.ant-calendar-date:active {
+  background-color: $red;
+}
+
+.ant-calendar-selected-day .ant-calendar-date {
+  background-color: rgba($red, $alpha: 0.5);
+}
+.ant-calendar-date:hover {
+  background-color: rgba($red, $alpha: 0.3);
+}
+.ant-calendar-today .ant-calendar-date {
+  color: $red;
+  border-color: $red;
+}
+
+// Tab
+.ant-tabs-ink-bar {
+  background-color: $red;
+}
+.ant-tabs-nav .ant-tabs-tab-active {
+  color: $red;
+}
+.ant-tabs-nav .ant-tabs-tab:hover {
+  color: rgba($color: $red, $alpha: 0.8);
+}

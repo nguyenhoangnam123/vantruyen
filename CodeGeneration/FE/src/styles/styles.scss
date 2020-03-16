@@ -1,0 +1,28 @@
+@import "~@coreui/coreui/dist/css/coreui.min.css";
+@import "~@coreui/icons/css/coreui-icons.min.css";
+@import "~font-awesome/css/font-awesome.css";
+
+@import "mixins";
+:root {
+  font-size: 0.875rem;
+}
+
+.page {
+  &.master-page {
+    input {
+      &[type="file"] {
+        &.hidden {
+          @include hidden();
+        }
+      }
+    }
+  }
+}
+
+.ant-card {
+  &.head-borderless {
+    .ant-card-head {
+      border: none;
+    }
+  }
+}

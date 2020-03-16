@@ -1,0 +1,15 @@
+E:\FIS\CodeGenerator\CodeGeneration\bin\Debug\netcoreapp2.2\App\React\api_constant.hbs
+E:\FIS\CodeGenerator\CodeGeneration\bin\Debug\netcoreapp2.2\App\React\menu.hbs
+E:\FIS\CodeGenerator\CodeGeneration\bin\Debug\netcoreapp2.2\App\React\route.hbs
+E:\FIS\CodeGenerator\CodeGeneration\bin\Debug\netcoreapp2.2\App\React\route_constant.hbs
+E:\FIS\CodeGenerator\CodeGeneration\bin\Debug\netcoreapp2.2\CodeGeneration.deps.json
+E:\FIS\CodeGenerator\CodeGeneration\bin\Debug\netcoreapp2.2\CodeGeneration.runtimeconfig.json
+E:\FIS\CodeGenerator\CodeGeneration\bin\Debug\netcoreapp2.2\CodeGeneration.runtimeconfig.dev.json
+E:\FIS\CodeGenerator\CodeGeneration\bin\Debug\netcoreapp2.2\CodeGeneration.dll
+E:\FIS\CodeGenerator\CodeGeneration\bin\Debug\netcoreapp2.2\CodeGeneration.pdb
+E:\FIS\CodeGenerator\CodeGeneration\obj\Debug\netcoreapp2.2\CodeGeneration.csprojAssemblyReference.cache
+E:\FIS\CodeGenerator\CodeGeneration\obj\Debug\netcoreapp2.2\CodeGeneration.csproj.CoreCompileInputs.cache
+E:\FIS\CodeGenerator\CodeGeneration\obj\Debug\netcoreapp2.2\CodeGeneration.AssemblyInfoInputs.cache
+E:\FIS\CodeGenerator\CodeGeneration\obj\Debug\netcoreapp2.2\CodeGeneration.AssemblyInfo.cs
+E:\FIS\CodeGenerator\CodeGeneration\obj\Debug\netcoreapp2.2\CodeGeneration.dll
+E:\FIS\CodeGenerator\CodeGeneration\obj\Debug\netcoreapp2.2\CodeGeneration.pdb
