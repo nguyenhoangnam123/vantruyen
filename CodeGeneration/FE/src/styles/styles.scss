@@ -3,9 +3,17 @@
 @import "~font-awesome/css/font-awesome.css";
 
 @import "mixins";
+$fontSize: 0.875rem;
 :root {
-  font-size: 0.875rem;
+  font-size: $fontSize;
 }
+.ant-form label{
+  font-size: $fontSize;
+}
+.ant-table{
+  font-size: $fontSize;
+}
+
 
 .page {
   &.master-page {

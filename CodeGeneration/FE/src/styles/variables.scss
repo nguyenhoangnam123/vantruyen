@@ -10,8 +10,6 @@ $red: #e35b5a;
 $white: #ffffff;
 $primary: #23282c;
 
-// $input-focus-border-color: $red;
-// $input-btn-focus-color: rgba($red, 0.25);
 
 //sidebar
 .sidebar {
@@ -25,7 +23,7 @@ $primary: #23282c;
   height: 35px;
 }
 .sidebar ul.nav {
-  border-right: 1px solid #e3e3e3;
+  border-right: 1px solid rgba($color: $red, $alpha: 0.5);
 }
 .sidebar .nav-link.active {
   background: $red;
@@ -111,8 +109,8 @@ $primary: #23282c;
   color: $red;
 }
 
-.btn-link:hover{
-  color: rgba($color: $red, $alpha: 0.8);
+.btn-link:hover {
+  color: rgba($color: $red, $alpha: 0.5);
 }
 
 // Input
@@ -135,8 +133,27 @@ $primary: #23282c;
 .ant-input-number-sm input {
   height: calc(1.5em + 0.5rem - 1px);
 }
-.ant-input-number-input {
+.ant-input-number:hover,
+.ant-input-number:focus {
+  border-color: $red;
+}
+.ant-input-number:focus,
+.ant-input-number-focused {
+  border-color: $red;
+  box-shadow: 0 0 0 2px rgba($color: $red, $alpha: 0.5);
+}
+.ant-input-number-handler:hover .ant-input-number-handler-up-inner,
+.ant-input-number-handler:hover .ant-input-number-handler-down-inner {
+  color: $red;
+}
+.ant-input-number-input,
+.ant-input-number-sm {
   height: calc(1.5em + 0.5rem - 1px);
+  width: 100%;
+}
+.ant-input-number-input-wrap .focus {
+  box-shadow: 0 0 0 2px rgba($color: $red, $alpha: 0.5);
+  border-color: $red;
 }
 // From
 .form-control:focus {
@@ -171,5 +188,13 @@ $primary: #23282c;
   color: $red;
 }
 .ant-tabs-nav .ant-tabs-tab:hover {
-  color: rgba($color: $red, $alpha: 0.8);
+  color: rgba($color: $red, $alpha: 0.5);
+}
+
+// button
+button:focus{
+  outline:5px auto $red;
+}
+.ant-spin{
+  color: $red;
 }

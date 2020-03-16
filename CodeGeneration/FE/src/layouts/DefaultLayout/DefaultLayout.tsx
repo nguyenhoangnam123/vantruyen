@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { Switch, withRouter } from 'react-router';
 import { renderRoutes, RouteConfig, RouteConfigComponentProps } from 'react-router-config';
 import * as ReactRouterDOM from 'react-router-dom';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './DefaultLayout.scss';
 import { ROOT_ROUTE, APPLICATION_USER_ROUTE } from 'config/route-consts';
 
@@ -28,6 +28,7 @@ const navbarBrandFull: NavbarBrandLogoProps = {
   src: 'https://rangdong.com.vn/themes/rangdong/images/logo.png',
   width: 89,
   height: 30,
+  alt: 'DMS Rang Dong',
 };
 
 const navbarBrandMinimized: NavbarBrandLogoProps = {
