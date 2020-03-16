@@ -1,0 +1,4 @@
+{
+  "name": "permission-field-mapping-table",
+  "main": "PermissionFieldMappingTable.tsx"
+}

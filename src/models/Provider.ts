@@ -1,22 +1,19 @@
-import {Model} from 'core/models';
-import {ErrorMap} from 'react3l';
-import {ProviderType} from './ProviderType';
-import {ApplicationUser} from './ApplicationUser';
+import { Model } from 'core/models';
+import { ErrorMap } from 'react3l';
+import { Moment } from 'moment';
 
-export class Provider extends Model {
-  public id?: number;
-
-  public name?: string;
-
-  public providerTypeId?: number;
-
-  public value?: string;
-
-  public isDefault?: boolean;
-
-  public providerType?: ProviderType;
-
-  public applicationUsers?: ApplicationUser[];
-
-  public errors?: ErrorMap<Provider>;
+export class Provider extends Model 
+{
+    public id?: number;
+    public name?: string;
+    public googleRedirectUri?: string;
+    public aDIP?: string;
+    public aDUsername?: string;
+    public aDPassword?: string;
+    public googleClient?: string;
+    public googleClientSecret?: string;
+    public microsoftClient?: string;
+    public microsoftClientSecret?: string;
+    public microsoftRedirectUri?: string;
+    public errors?: ErrorMap<Provider>;
 }
