@@ -6,13 +6,19 @@ import {API_BASE_URL} from 'core/config';
 import {url} from 'core/helpers/string';
 import {generalLanguageKeys} from 'config/consts';
 import nameof from 'ts-nameof.macro';
+import {useParams} from 'react-router';
+import {debounce} from 'core/helpers/debounce';
+import {Moment} from 'moment';
+import v4 from 'uuid/v4';
+import {TableRowSelection} from 'antd/lib/table';
 
 export class CRUDService {
   public useMaster<T extends Model, TFilter extends ModelFilter>(
     modelClass: new () => T,
     modelFilterClass: new () => TFilter,
-    getList: (filter: TFilter) => Promise<T[]>,
     count: (filter: TFilter) => Promise<number>,
+    getList: (filter: TFilter) => Promise<T[]>,
+    getDetail: (id: number | string) => Promise<T>,
   ): [
     TFilter,
     Dispatch<SetStateAction<TFilter>>,
@@ -22,8 +28,9 @@ export class CRUDService {
     Dispatch<SetStateAction<boolean>>,
     number,
     boolean,
+    boolean,
     T,
-    (t: T) => () => void,
+    (id: string | number) => () => void,
     () => void,
     <TF extends Filter>(field: string) => (f: TF) => void,
     () => void,
@@ -35,6 +42,7 @@ export class CRUDService {
     const [total, setTotal] = React.useState<number>(0);
     const [previewModel, setPreviewModel] = React.useState<T>(new modelClass());
     const [previewVisible, setPreviewVisible] = React.useState<boolean>(false);
+    const [previewLoading, setPreviewLoading] = React.useState<boolean>(false);
 
     React.useEffect(
       () => {
@@ -55,13 +63,21 @@ export class CRUDService {
     );
 
     const handleOpenPreview = React.useCallback(
-      (t: T) => {
+      (id: number | string) => {
         return () => {
-          setPreviewModel(t);
+          setPreviewModel(new modelClass());
+          setPreviewLoading(true);
           setPreviewVisible(true);
+          getDetail(id)
+            .then((tDetail: T) => {
+              setPreviewModel(tDetail);
+            })
+            .finally(() => {
+              setPreviewLoading(false);
+            });
         };
       },
-      [],
+      [getDetail, modelClass],
     );
 
     const handleClosePreview = React.useCallback(
@@ -106,6 +122,7 @@ export class CRUDService {
       loading,
       setLoading,
       total,
+      previewLoading,
       previewVisible,
       previewModel,
       handleOpenPreview,
@@ -180,6 +197,365 @@ export class CRUDService {
         [baseRoute],
       ),
     ];
+  }
+
+  public useDetail<T extends Model>(
+    modelClass: new () => T,
+    handleGet: (id: number | string) => Promise<T>,
+    onSave: (t: T) => Promise<T>,
+  ): [
+    T,
+    Dispatch<SetStateAction<T>>,
+    boolean,
+    Dispatch<SetStateAction<boolean>>,
+    boolean,
+    () => void,
+  ] {
+    const [loading, setLoading] = React.useState<boolean>(false);
+    const [t, setT] = React.useState<T>(new modelClass());
+    const {id} = useParams();
+    const isDetail: boolean = (typeof id !== 'undefined');
+
+    React.useEffect(
+      () => {
+        if (isDetail) {
+          setLoading(true);
+          handleGet(id)
+            .then((t: T) => {
+              setT(t);
+            })
+            .finally(() => {
+              setLoading(false);
+            });
+        }
+      },
+      [handleGet, id, isDetail],
+    );
+
+    const handleSave = React.useCallback(
+      () => {
+        setLoading(true);
+        onSave(t)
+          .then((t: T) => {
+            setT(t);
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      },
+      [onSave, t],
+    );
+
+    return [
+      t,
+      setT,
+      loading,
+      setLoading,
+      isDetail,
+      handleSave,
+    ];
+  }
+
+  public useChangeHandlers<T extends Model>(
+    model?: T,
+    setModel?: (t: T) => void,
+  ): [
+    (field: string) => (value) => void,
+    (field: string) => (value) => void,
+    (field: string) => (value) => void,
+  ] {
+    const handleSetInputValue = React.useCallback(
+      (field: string, value?: string | number | boolean | null) => {
+        setModel(Model.clone<T>({
+          ...model, [field]: value,
+        }));
+      },
+      [model, setModel],
+    );
+
+    const handleDebounceInputValue = React.useCallback(
+      debounce(handleSetInputValue),
+      [handleSetInputValue],
+    );
+
+    const handleChangeSimpleField = React.useCallback(
+      (field: string, debounce: boolean = false) => {
+        return (event: React.ChangeEvent<HTMLInputElement> | number | string | boolean) => {
+          if (typeof event === 'object' && event !== null) {
+            if ('target' in event) {
+              if (debounce) {
+                return handleDebounceInputValue(field, event.target.value);
+              }
+              return handleSetInputValue(field, event.target.value);
+            }
+            if ('format' in event) {
+              setModel(Model.clone<T>({
+                ...model,
+                [field]: event,
+              }));
+            }
+          }
+          if (debounce) {
+            return handleDebounceInputValue(field, event);
+          }
+          return handleSetInputValue(field, event as (string | number | boolean));
+        };
+      },
+      [handleDebounceInputValue, handleSetInputValue, model, setModel],
+    );
+
+    const handleUpdateDateField = React.useCallback(
+      (field: string) => {
+        return (moment: Moment) => {
+          setModel(Model.clone<T>({
+            ...model, [field]: moment,
+          }));
+        };
+      },
+      [model, setModel],
+    );
+
+    const handleChangeObjectField = React.useCallback(
+      (field: string) => {
+        return (id?: number | string | null, t?: T) => {
+          setModel(Model.clone<T>({
+            ...model, [field]: t,
+            [`${field}Id`]: id,
+          }));
+        };
+      },
+      [model, setModel],
+    );
+    return [handleChangeSimpleField, handleChangeObjectField, handleUpdateDateField];
+  }
+
+  public useContentTable<T extends Model, TContent extends Model>(
+    model: T,
+    setModel: (t: T) => void,
+    field: string,
+  ): [
+    TContent[],
+    (v: TContent[]) => void,
+    () => void,
+    (id: number) => () => void,
+  ] {
+    const value: TContent[] = React.useMemo(
+      () => {
+        if (model[field]) {
+          model[field]?.forEach((t: T) => {
+            if (!t?.key) {
+              if (t?.id) {
+                t.key = t.id;
+              } else {
+                t.key = v4();
+              }
+            }
+          });
+          return model[field];
+        }
+        return [];
+      },
+      [field, model],
+    );
+
+    const setValue = React.useCallback(
+      (v: TContent[]) => {
+        setModel(Model.clone<T>({
+          ...model, [field]: v,
+        }));
+      },
+      [field, model, setModel],
+    );
+
+    const handleDelete = React.useCallback(
+      (index: number) => {
+        return () => {
+          value.splice(index, 1);
+          setValue([...value]);
+        };
+      },
+      [value, setValue],
+    );
+
+    const handleAdd = React.useCallback(
+      () => {
+        const newContent: TContent = new Model() as TContent;
+        newContent.key = v4();
+        if (value instanceof Array) {
+          setValue([...value, newContent]);
+        } else {
+          setValue([newContent]);
+        }
+      },
+      [setValue, value],
+    );
+
+    return [value, setValue, handleAdd, handleDelete];
+  }
+
+  public useBulkModal<T extends Model, TModelFilter extends ModelFilter>(
+    modelFilterClass: new () => TModelFilter,
+    getList: (filter: TModelFilter) => Promise<T[]>,
+    count: (filter: TModelFilter) => Promise<number>,
+  ): [
+    TModelFilter,
+    Dispatch<SetStateAction<TModelFilter>>,
+    boolean,
+    boolean,
+    T[],
+    number,
+    () => void,
+    () => void,
+  ] {
+    const [visible, setVisible] = React.useState<boolean>(false);
+    const [loading, setLoading] = React.useState<boolean>(false);
+    const [filter, setFilter] = React.useState<TModelFilter>(new modelFilterClass());
+    const [list, setList] = React.useState<T[]>([]);
+    const [total, setTotal] = React.useState<number>(0);
+
+    const handleOpenModal = React.useCallback(
+      () => {
+        setVisible(true);
+        setLoading(true);
+        Promise.all([
+          getList(filter),
+          count(filter),
+        ])
+          .then(([list, total]) => {
+            setList(list);
+            setTotal(total);
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      },
+      [count, filter, getList],
+    );
+
+    const handleCloseModal = React.useCallback(
+      () => {
+        setVisible(false);
+      },
+      [],
+    );
+
+    return [
+      filter,
+      setFilter,
+      visible,
+      loading,
+      list,
+      total,
+      handleOpenModal,
+      handleCloseModal,
+    ];
+  }
+
+  public useDefaultSelectedRowKeys<T extends Model>(list: T[]): number[] {
+    return React.useMemo(
+      () => list
+        .filter((t: T) => typeof t.id === 'number' && !Number.isNaN(t.id))
+        .map((t: T) => t.id),
+      [list],
+    );
+  }
+
+  public useDefaultList<T extends Model>(t: T): T[] {
+    return React.useMemo(
+      () => {
+        if (typeof t === 'object' && t !== null) {
+          return [t];
+        }
+        return [];
+      },
+      [t],
+    );
+  }
+
+  public useContentModal<T extends Model, TFilter extends ModelFilter>(
+    getList: (tFilter: TFilter) => Promise<T[]>,
+    count: (tFilter: TFilter) => Promise<number>,
+    filterClass: new () => TFilter,
+  ): [
+    boolean,
+    boolean,
+    T[],
+    number,
+    () => void,
+    () => void,
+    TFilter,
+    Dispatch<SetStateAction<TFilter>>,
+  ] {
+    const [visible, setVisible] = React.useState<boolean>(false);
+    const [loading, setLoading] = React.useState<boolean>(false);
+    const [filter, setFilter] = React.useState<TFilter>(new filterClass());
+    const [list, setList] = React.useState<T[]>([]);
+    const [total, setTotal] = React.useState<number>(0);
+
+    const handleOpen = React.useCallback(
+      () => {
+        setVisible(true);
+      },
+      [],
+    );
+
+    const handleClose = React.useCallback(
+      () => {
+        setVisible(false);
+      },
+      [],
+    );
+
+    React.useEffect(
+      () => {
+        if (visible) {
+          setLoading(true);
+          Promise.all([
+            getList(filter),
+            count(filter),
+          ])
+            .then(([list, total]) => {
+              setList(list);
+              setTotal(total);
+            })
+            .finally(() => {
+              setLoading(false);
+            });
+        }
+      },
+      [count, filter, getList, visible],
+    );
+
+    return [
+      loading,
+      visible,
+      list,
+      total,
+      handleOpen,
+      handleClose,
+      filter,
+      setFilter,
+    ];
+  }
+
+  public useContentModalList<T extends Model>(
+    list: T[],
+    setList: Dispatch<SetStateAction<T[]>>,
+  ): TableRowSelection<T> {
+    return React.useMemo(
+      () => ({
+        selectedRowKeys: list.map((t: T) => t.id),
+        onSelect: (record: T, selected: boolean) => {
+          if (selected) {
+            list.push(record);
+            setList([...list]);
+          } else {
+            setList(list.filter((t: T) => t.id !== record.id));
+          }
+        },
+      }),
+      [list, setList],
+    );
   }
 }
 

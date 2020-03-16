@@ -1,4 +1,33 @@
 {
+  "applicationUsers": {
+    "applicationUserType": "",
+    "createdAt": "",
+    "detail": {
+      "title": ""
+    },
+    "displayName": "",
+    "email": "",
+    "id": "",
+    "isActive": "",
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "phone": "",
+    "provider": "",
+    "roleContentTable": {
+      "popup": {
+        "title": ""
+      }
+    },
+    "tabs": {
+      "roles": {
+        "title": ""
+      }
+    },
+    "userStatus": "",
+    "username": ""
+  },
   "filters": {
     "dateFilter": {
       "equal": "",
@@ -43,6 +72,7 @@
   },
   "general": {
     "actions": {
+      "add": "",
       "close": "",
       "create": "",
       "delete": "",
@@ -51,6 +81,7 @@
       "import": "",
       "label": "",
       "reset": "",
+      "save": "",
       "search": "",
       "update": ""
     },
@@ -75,16 +106,25 @@
     }
   },
   "menu": {
+    "applicationUsers": "",
     "provinces": ""
   },
   "provinces": {
     "code": "",
     "createdAt": "",
+    "detail": {
+      "title": ""
+    },
     "id": "",
+    "isActive": "",
     "master": {
       "title": ""
     },
     "name": "",
     "provinceType": ""
+  },
+  "roles": {
+    "id": "",
+    "name": ""
   }
 }

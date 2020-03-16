@@ -1,4 +1,5 @@
 import Card from 'antd/lib/card';
+import Spin from 'antd/lib/spin';
 import Form from 'antd/lib/form';
 import Table, {ColumnProps} from 'antd/lib/table';
 import {Col, Row} from 'antd/lib/grid';
@@ -23,6 +24,7 @@ import AdvancedStringFilter from 'components/AdvancedStringFilter/AdvancedString
 import AdvancedIdFilter from 'components/AdvancedIdFilter/AdvancedIdFilter';
 import MasterPreview from 'components/MasterPreview/MasterPreview';
 import AdvancedDateFilter from 'components/AdvancedDateFilter/AdvancedDateFilter';
+import CollapsibleCard from 'components/CollapsibleCard/CollapsibleCard';
 
 const {Item: FormItem} = Form;
 
@@ -37,6 +39,7 @@ function ProvinceMaster() {
     loading,
     setLoading,
     total,
+    previewLoading,
     previewVisible,
     previewModel,
     handleOpenPreview,
@@ -47,8 +50,9 @@ function ProvinceMaster() {
   ] = crudService.useMaster<Province, ProvinceFilter>(
     Province,
     ProvinceFilter,
-    provinceRepository.list,
     provinceRepository.count,
+    provinceRepository.list,
+    provinceRepository.get,
   );
   const [handleGoCreate, handleGoDetail] = routerService.useMasterNavigation(PROVINCE_ROUTE);
   const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total);
@@ -86,9 +90,9 @@ function ProvinceMaster() {
     list,
     setList,
   );
-  const [handleBatchDelete] = tableService.useBatchDeleteHandler(
+  const [handleBulkDelete] = tableService.useBulkDeleteHandler(
     rowSelection.selectedRowKeys,
-    provinceRepository.batchDelete,
+    provinceRepository.bulkDelete,
     setLoading,
   );
 
@@ -122,13 +126,13 @@ function ProvinceMaster() {
         render(id: number, province: Province) {
           return (
             <div className="d-flex justify-content-center">
-              <button className="btn btn-link text-warning" onClick={handleOpenPreview(province)}>
+              <button className="btn btn-sm btn-link text-warning" onClick={handleOpenPreview(id)}>
                 <i className="fa fa-eye"/>
               </button>
-              <button className="btn btn-link" onClick={handleGoDetail(id)}>
+              <button className="btn btn-sm btn-link" onClick={handleGoDetail(id)}>
                 <i className="fa fa-edit"/>
               </button>
-              <button className="btn btn-link text-danger" onClick={handleDelete(province)}>
+              <button className="btn btn-sm btn-link text-danger" onClick={handleDelete(province)}>
                 <i className="fa fa-trash"/>
               </button>
             </div>
@@ -139,10 +143,42 @@ function ProvinceMaster() {
     [handleDelete, handleGoDetail, handleOpenPreview, list, pagination, sorter, translate],
   );
 
+  const tableTitle = React.useCallback(
+    () => (
+      <>
+        <div className="d-flex justify-content-between">
+          <div className="flex-shrink-1 d-flex align-items-center">
+            <button className="btn btn-sm btn-primary mr-2" onClick={handleGoCreate}>
+              <i className="fa mr-2 fa-plus"/>
+              {translate(generalLanguageKeys.actions.create)}
+            </button>
+            <button className="btn btn-sm btn-danger mr-2" disabled={!hasSelected}
+                    onClick={handleBulkDelete}>
+              <i className="fa mr-2 fa-trash"/>
+              {translate(generalLanguageKeys.actions.delete)}
+            </button>
+            <label className="btn btn-sm btn-outline-primary mr-2 mb-0" htmlFor="master-import">
+              <i className="fa mr-2 fa-upload"/>
+              {translate(generalLanguageKeys.actions.import)}
+            </label>
+            <button className="btn btn-sm btn-outline-primary mr-2" onClick={handleExport}>
+              <i className="fa mr-2 fa-download"/>
+              {translate(generalLanguageKeys.actions.export)}
+            </button>
+          </div>
+          <div className="flex-shrink-1 d-flex align-items-center">
+            {translate('general.master.pagination', {pageSize: pagination.pageSize, total})}
+          </div>
+        </div>
+      </>
+    ),
+    [handleBulkDelete, handleExport, handleGoCreate, hasSelected, pagination.pageSize, total, translate],
+  );
+
   return (
     <div className="page master-page">
       <Card title={translate('provinces.master.title')}>
-        <Card className="mb-4" title={translate(generalLanguageKeys.actions.search)}>
+        <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
           <Form {...formItemLayout}>
             <Row>
               <Col className="pl-1" span={8}>
@@ -204,6 +240,7 @@ function ProvinceMaster() {
           </Form>
           <div className="d-flex justify-content-end mt-2">
             <button className="btn btn-sm btn-primary mr-2" onClick={handleSearch}>
+              <i className="fa fa-search mr-2"/>
               {translate(generalLanguageKeys.actions.filter)}
             </button>
             <button className="btn btn-sm btn-outline-secondary text-dark" onClick={handleReset}>
@@ -211,7 +248,7 @@ function ProvinceMaster() {
               {translate(generalLanguageKeys.actions.reset)}
             </button>
           </div>
-        </Card>
+        </CollapsibleCard>
         <Table dataSource={list}
                columns={columns}
                bordered
@@ -222,50 +259,26 @@ function ProvinceMaster() {
                pagination={pagination}
                rowSelection={rowSelection}
                onChange={handleTableChange}
-               title={() => (
-                 <>
-                   <div className="d-flex justify-content-between">
-                     <div className="flex-shrink-1 d-flex align-items-center">
-                       <button className="btn btn-sm btn-primary mr-2" onClick={handleGoCreate}>
-                         <i className="fa mr-2 fa-plus"/>
-                         {translate(generalLanguageKeys.actions.create)}
-                       </button>
-                       <button className="btn btn-sm btn-danger mr-2" disabled={!hasSelected} onClick={handleBatchDelete}>
-                         <i className="fa mr-2 fa-trash"/>
-                         {translate(generalLanguageKeys.actions.delete)}
-                       </button>
-                       <label className="btn btn-sm btn-outline-primary mr-2 mb-0" htmlFor="master-import">
-                         <i className="fa mr-2 fa-upload"/>
-                         {translate(generalLanguageKeys.actions.import)}
-                       </label>
-                       <button className="btn btn-sm btn-outline-primary mr-2" onClick={handleExport}>
-                         <i className="fa mr-2 fa-download"/>
-                         {translate(generalLanguageKeys.actions.export)}
-                       </button>
-                     </div>
-                     <div className="flex-shrink-1 d-flex align-items-center">
-                       {translate('general.master.pagination', {pageSize: pagination.pageSize, total})}
-                     </div>
-                   </div>
-                 </>
-               )}
+               title={tableTitle}
         />
         <input type="file" className="hidden" id="master-import" onChange={handleImport}/>
         <MasterPreview isOpen={previewVisible} onClose={handleClosePreview} size="xl">
-          <Descriptions title={previewModel.name} bordered>
-            <Descriptions.Item label={translate('provinces.id')}>
-              {previewModel.id}
-            </Descriptions.Item>
-            <Descriptions.Item label={translate('provinces.provinceType')}>
-              {previewModel.provinceType?.name}
-            </Descriptions.Item>
-            <Descriptions.Item label={translate('provinces.code')}>
-              {previewModel.code}
-            </Descriptions.Item>
-            <Descriptions.Item label={translate('provinces.name')}>
-              {previewModel.name}
-            </Descriptions.Item>
-          </Descriptions>
+          <Spin spinning={previewLoading}>
+            <Descriptions title={previewModel.name} bordered>
+              <Descriptions.Item label={translate('provinces.id')}>
+                {previewModel.id}
+              </Descriptions.Item>
+              <Descriptions.Item label={translate('provinces.provinceType')}>
+                {previewModel.provinceType?.name}
+              </Descriptions.Item>
+              <Descriptions.Item label={translate('provinces.code')}>
+                {previewModel.code}
+              </Descriptions.Item>
+              <Descriptions.Item label={translate('provinces.name')}>
+                {previewModel.name}
+              </Descriptions.Item>
+            </Descriptions>
+          </Spin>
         </MasterPreview>
       </Card>
     </div>

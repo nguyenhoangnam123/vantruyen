@@ -1,6 +1,7 @@
 {
   "general": {
     "actions": {
+      "add": "",
       "close": "",
       "create": "",
       "delete": "",
@@ -9,6 +10,7 @@
       "import": "",
       "label": "",
       "reset": "",
+      "save": "",
       "search": "",
       "update": ""
     },
