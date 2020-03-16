@@ -1,6 +1,5 @@
 import React from 'react';
 import DatePicker from 'antd/lib/date-picker';
-import Switch from 'antd/lib/switch';
 import {crudService, routerService} from 'core/services';
 import Spin from 'antd/lib/spin';
 import Card from 'antd/lib/card';
@@ -8,28 +7,13 @@ import Form from 'antd/lib/form';
 import Tabs from 'antd/lib/tabs';
 import {useTranslation} from 'react-i18next';
 import {generalLanguageKeys} from 'config/consts';
-import Select from 'components/Select/Select';
 import nameof from 'ts-nameof.macro';
 import {defaultDetailFormLayout} from 'config/ant-design/form';
 import InputNumber from 'components/InputNumber/InputNumber';
 import {formService} from 'core/services/FormService';
 import './SiteDetail.scss';
-import { siteRepository }  from 'views/SiteView/SiteRepository';
-import { Site } from 'models/Site'; 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import {siteRepository} from 'views/SiteView/SiteRepository';
+import {Site} from 'models/Site';
 
 const {TabPane} = Tabs;
 
@@ -39,10 +23,10 @@ function SiteDetail() {
   const [translate] = useTranslation();
 
   // Service goback
-    const [handleGoBack] = routerService.useGoBack();
+  const [handleGoBack] = routerService.useGoBack();
 
   // Hooks, useDetail, useChangeHandler
-    const [
+  const [
     site,
     setSite,
     loading,
@@ -55,23 +39,23 @@ function SiteDetail() {
     siteRepository.save,
   );
 
-    const [
+  const [
     handleChangeSimpleField,
     handleChangeObjectField,
     handleChangeDateField,
   ] = crudService.useChangeHandlers<Site>(site, setSite);
 
   // Enums  -----------------------------------------------------------------------------------------------------------------------------------------
-  
-  //-------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // -------------------------------------------------------------------------------------------------------------------------------------------------
 
   // Reference  -------------------------------------------------------------------------------------------------------------------------------------
-  
-  //-------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // -------------------------------------------------------------------------------------------------------------------------------------------------
 
   // Default List -----------------------------------------------------------------------------------------------------------------------------------
-  
-  //-------------------------------------------------------------------------------------------------------------------------------------------------  
+
+  // -------------------------------------------------------------------------------------------------------------------------------------------------
 
   return (
     <div className="page detail-page">
@@ -91,92 +75,82 @@ function SiteDetail() {
             </button>
           </div>
           <Form {...defaultDetailFormLayout}>
-            
+
             <FormItem label={translate('sites.id')}
                       validateStatus={formService.getValidationStatus<Site>(site.errors, nameof(site.id))}
-                      help={ site.errors?.id }
+                      help={site.errors?.id}
             >
-              <InputNumber defaultValue={ site.id }
+              <InputNumber defaultValue={site.id}
                            className="w-100"
                            onChange={handleChangeSimpleField(nameof(site.id))}
               />
             </FormItem>
-            
-            
-            
+
 
             <FormItem label={translate('sites.name')}
                       validateStatus={formService.getValidationStatus<Site>(site.errors, nameof(site.name))}
-                      help={ site.errors?.name }
+                      help={site.errors?.name}
             >
               <input type="text"
-                           defaultValue={ site.name }
-                           className="form-control form-control-sm"
-                           onChange={handleChangeSimpleField(nameof(site.name))}
+                     defaultValue={site.name}
+                     className="form-control form-control-sm"
+                     onChange={handleChangeSimpleField(nameof(site.name))}
               />
             </FormItem>
-            
-            
-            
+
 
             <FormItem label={translate('sites.uRL')}
                       validateStatus={formService.getValidationStatus<Site>(site.errors, nameof(site.uRL))}
-                      help={ site.errors?.uRL }
+                      help={site.errors?.uRL}
             >
               <input type="text"
-                           defaultValue={ site.uRL }
-                           className="form-control form-control-sm"
-                           onChange={handleChangeSimpleField(nameof(site.uRL))}
+                     defaultValue={site.uRL}
+                     className="form-control form-control-sm"
+                     onChange={handleChangeSimpleField(nameof(site.uRL))}
               />
             </FormItem>
-            
-            
-            
+
 
             <FormItem label={translate('sites.status')}
                       validateStatus={formService.getValidationStatus<Site>(site.errors, nameof(site.status))}
-                      help={ site.errors?.status }
+                      help={site.errors?.status}
             >
             </FormItem>
-            
-            
-            
+
 
             <FormItem label={translate('sites.createdAt')}
                       validateStatus={formService.getValidationStatus<Site>(site.errors, nameof(site.createdAt))}
-                      help={ site.errors?.createdAt }
-            >            
-              <DatePicker defaultValue={ site.createdAt }
+                      help={site.errors?.createdAt}
+            >
+              <DatePicker defaultValue={site.createdAt}
                           onChange={handleChangeDateField(nameof(site.createdAt))}
                           className="w-100"
               />
-            </FormItem>              
-            
-            
+            </FormItem>
+
 
             <FormItem label={translate('sites.updatedAt')}
                       validateStatus={formService.getValidationStatus<Site>(site.errors, nameof(site.updatedAt))}
-                      help={ site.errors?.updatedAt }
-            >            
-              <DatePicker defaultValue={ site.updatedAt }
+                      help={site.errors?.updatedAt}
+            >
+              <DatePicker defaultValue={site.updatedAt}
                           onChange={handleChangeDateField(nameof(site.updatedAt))}
                           className="w-100"
               />
-            </FormItem>              
-            
-            
+            </FormItem>
+
 
             <FormItem label={translate('sites.deletedAt')}
                       validateStatus={formService.getValidationStatus<Site>(site.errors, nameof(site.deletedAt))}
-                      help={ site.errors?.deletedAt }
-            >            
-              <DatePicker defaultValue={ site.deletedAt }
+                      help={site.errors?.deletedAt}
+            >
+              <DatePicker defaultValue={site.deletedAt}
                           onChange={handleChangeDateField(nameof(site.deletedAt))}
                           className="w-100"
               />
-            </FormItem>              
-            
-            
+            </FormItem>
+
+
           </Form>
           <div className="d-flex justify-content-end mt-4">
             <button className="btn btn-sm btn-primary" onClick={handleSave}>
@@ -187,7 +161,7 @@ function SiteDetail() {
         </Card>
         <Card className="mt-2">
           <Tabs defaultActiveKey="1">
-            
+
           </Tabs>
           <div className="d-flex justify-content-end mt-4">
             <button className="btn btn-sm btn-primary" onClick={handleSave}>

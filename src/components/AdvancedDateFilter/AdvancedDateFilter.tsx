@@ -10,7 +10,7 @@ import classNames from 'classnames';
 export interface AdvancedDateFilterProps extends ComponentProps<any> {
   filter: DateFilter;
 
-  filterType?: keyof DateFilter | string;
+  filterType: keyof DateFilter | string;
 
   onChange?(filter: DateFilter);
 }
@@ -55,7 +55,6 @@ function AdvancedDateFilter(props: AdvancedDateFilterProps) {
           <DatePicker.RangePicker value={dateFilterRange}
                                   onChange={handleChangeRange}
                                   className={classNames('advanced-date-filter', className)}
-                                  size="small"
           />
         );
       }

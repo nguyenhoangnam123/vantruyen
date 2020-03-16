@@ -13,11 +13,13 @@ import {Col, Row} from 'antd/lib/grid';
 import AdvancedIdFilter from 'components/AdvancedIdFilter/AdvancedIdFilter';
 import CollapsibleCard from 'components/CollapsibleCard/CollapsibleCard';
 
-import { applicationUserRepository } from 'views/ApplicationUserView/ApplicationUserRepository';
-import { ApplicationUser } from 'models/ApplicationUser';
-import { ApplicationUserRoleMapping } from 'models/ApplicationUserRoleMapping';
-import { ApplicationUserRoleMappingFilter } from 'models/ApplicationUserRoleMappingFilter';
-import ApplicationUserRoleMappingModal from 'views/ApplicationUserView/ApplicationUserDetail/ApplicationUserRoleMappingModal/ApplicationUserRoleMappingModal';
+import {applicationUserRepository} from 'views/ApplicationUserView/ApplicationUserRepository';
+import {ApplicationUser} from 'models/ApplicationUser';
+import {ApplicationUserRoleMapping} from 'models/ApplicationUserRoleMapping';
+import {ApplicationUserRoleMappingFilter} from 'models/ApplicationUserRoleMappingFilter';
+import ApplicationUserRoleMappingModal
+  from 'views/ApplicationUserView/ApplicationUserDetail/ApplicationUserRoleMappingModal/ApplicationUserRoleMappingModal';
+
 const {Item: FormItem} = Form;
 
 function ApplicationUserRoleMappingTable(props: ContentTableProps<ApplicationUser, ApplicationUserRoleMapping>) {
@@ -39,7 +41,7 @@ function ApplicationUserRoleMappingTable(props: ContentTableProps<ApplicationUse
     nameof(model.applicationUserRoleMappings),
   );
 
-    const [
+  const [
     loading,
     visible,
     list,
@@ -90,8 +92,9 @@ function ApplicationUserRoleMappingTable(props: ContentTableProps<ApplicationUse
         sortOrder: getOrderTypeForTable<ApplicationUser>(nameof(dataSource[0].name), sorter),
         render(name: string, applicationUserRoleMapping: ApplicationUserRoleMapping) {
           return (
-            <FormItem validateStatus={formService.getValidationStatus<ApplicationUserRoleMapping>(applicationUserRoleMapping.errors, nameof(applicationUserRoleMapping.name))}
-                      help={ applicationUserRoleMapping.errors?.name }
+            <FormItem
+              validateStatus={formService.getValidationStatus<ApplicationUserRoleMapping>(applicationUserRoleMapping.errors, nameof(applicationUserRoleMapping.name))}
+              help={applicationUserRoleMapping.errors?.name}
             >
               <input type="text"
                      className="form-control form-control-sm"
@@ -129,7 +132,7 @@ function ApplicationUserRoleMappingTable(props: ContentTableProps<ApplicationUse
     ),
     [handleOpen, translate],
   );
-    const tableFooter = React.useCallback(
+  const tableFooter = React.useCallback(
     () => (
       <>
         <button className="btn btn-link" onClick={handleAdd}>
@@ -141,29 +144,29 @@ function ApplicationUserRoleMappingTable(props: ContentTableProps<ApplicationUse
     [handleAdd, translate],
   );
 
-    return (
+  return (
     <>
-    <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
+      <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
         <ApplicationUserRoleMappingModal title={translate('applicationUser.applicationUserRoleMappingModal.title')}
-                          selectedList={ applicationUserRoleMappings }
-                          setSelectedList={ setApplicationUserRoleMappings }
-                          list={list}
-                          total={total}
-                          isOpen={visible}
-                          loading={loading}
-                          toggle={handleClose}
-                          onClose={handleClose}
-                          filter={ applicationUserRoleMappingFilter }
-                          setFilter={setApplicationUserRoleMappingFilter}
+                                         selectedList={applicationUserRoleMappings}
+                                         setSelectedList={setApplicationUserRoleMappings}
+                                         list={list}
+                                         total={total}
+                                         isOpen={visible}
+                                         loading={loading}
+                                         toggle={handleClose}
+                                         onClose={handleClose}
+                                         filter={applicationUserRoleMappingFilter}
+                                         setFilter={setApplicationUserRoleMappingFilter}
         />
         <Form {...formItemLayout}>
           <Row>
             <Col className="pl-1" span={8}>
               <FormItem className="mb-0" label={translate('applicationUsers.id')}>
                 <AdvancedIdFilter filterType={nameof(applicationUserRoleMappingFilter.applicationUserId.equal)}
-                                      filter={ applicationUserRoleMappingFilter.applicationUserId }
-                                      onChange={handleFilter(nameof(applicationUserRoleMappingFilter.applicationUserId))}
-                                      className="w-100"/>
+                                  filter={applicationUserRoleMappingFilter.applicationUserId}
+                                  onChange={handleFilter(nameof(applicationUserRoleMappingFilter.applicationUserId))}
+                                  className="w-100"/>
               </FormItem>
             </Col>
           </Row>

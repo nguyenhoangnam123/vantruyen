@@ -2,37 +2,32 @@ import React from 'react';
 import Card from 'antd/lib/card';
 import Spin from 'antd/lib/spin';
 import Form from 'antd/lib/form';
-import Table, { ColumnProps } from 'antd/lib/table';
-import { Col, Row } from 'antd/lib/grid';
+import Table, {ColumnProps} from 'antd/lib/table';
+import {Col, Row} from 'antd/lib/grid';
 import Descriptions from 'antd/lib/descriptions';
-import { crudService, routerService } from 'core/services';
-import {
-  getOrderTypeForTable,
-  renderMasterIndex
-} from 'helpers/ant-design/table';
-import { useTranslation } from 'react-i18next';
+import {crudService, routerService} from 'core/services';
+import {getOrderTypeForTable, renderMasterIndex} from 'helpers/ant-design/table';
+import {useTranslation} from 'react-i18next';
 import nameof from 'ts-nameof.macro';
-import { tableService } from 'services';
-import { formItemLayout } from 'config/ant-design/form';
+import {tableService} from 'services';
+import {formItemLayout} from 'config/ant-design/form';
 import AdvancedStringFilter from 'components/AdvancedStringFilter/AdvancedStringFilter';
 import AdvancedIdFilter from 'components/AdvancedIdFilter/AdvancedIdFilter';
-import AdvancedNumberFilter from 'components/AdvancedNumberFilter/AdvancedNumberFilter';
 import MasterPreview from 'components/MasterPreview/MasterPreview';
-import { generalColumnWidths, generalLanguageKeys } from 'config/consts';
+import {generalColumnWidths, generalLanguageKeys} from 'config/consts';
 
-import { PAGE_ROUTE } from 'config/route-consts';
-import { API_PAGE_ROUTE } from 'config/api-consts';
+import {PAGE_ROUTE} from 'config/route-consts';
+import {API_PAGE_ROUTE} from 'config/api-consts';
 import './PageMaster.scss';
-import { pageRepository }  from 'views/PageView/PageRepository';
-import { Page } from 'models/Page';
-import { PageFilter} from 'models/PageFilter';
+import {pageRepository} from 'views/PageView/PageRepository';
+import {Page} from 'models/Page';
+import {PageFilter} from 'models/PageFilter';
 
-
-const { Item: FormItem } = Form;
+const {Item: FormItem} = Form;
 
 function PageMaster() {
   const [translate] = useTranslation();
-  
+
   const [
     filter,
     setFilter,
@@ -55,8 +50,8 @@ function PageMaster() {
     pageRepository.count,
     pageRepository.list,
     pageRepository.get,
-    );
-  
+  );
+
   const [handleGoCreate, handleGoDetail] = routerService.useMasterNavigation(PAGE_ROUTE);
   const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total);
   const [rowSelection, hasSelected] = tableService.useRowSelection<Page>();
@@ -75,142 +70,142 @@ function PageMaster() {
   const [handleExport] = crudService.useExport(API_PAGE_ROUTE);
 
   // Enums  -----------------------------------------------------------------------------------------------------------------------------------------
-  
+
   // ------------------------------------------------------------------------------------------------------------------------------------------------
 
   // Reference  -------------------------------------------------------------------------------------------------------------------------------------
-  
+
   const [viewFilter, setViewFilter] = React.useState<PageFilter>(new PageFilter());
-  
+
   // ------------------------------------------------------------------------------------------------------------------------------------------------
 
-   // Delete handlers -------------------------------------------------------------------------------------------------------------------------------
+  // Delete handlers -------------------------------------------------------------------------------------------------------------------------------
   const [handleDelete] = tableService.useDeleteHandler<Page>(
     pageRepository.delete,
     setLoading,
     list,
-    setList
+    setList,
   );
   const [handleBulkDelete] = tableService.useBulkDeleteHandler(
     rowSelection.selectedRowKeys,
     pageRepository.bulkDelete,
-    setLoading
+    setLoading,
   );
   // ------------------------------------------------------------------------------------------------------------------------------------------------
 
-  const columns: Array<ColumnProps<Page>> = React.useMemo(
+  const columns: ColumnProps<Page>[] = React.useMemo(
     () => {
       return [
-      {
-        title: translate(generalLanguageKeys.columns.index),
-        key: nameof(generalLanguageKeys.index),
-        width: generalColumnWidths.index,
-        render: renderMasterIndex<Page>(pagination)
-      },
-      
-      {
+        {
+          title: translate(generalLanguageKeys.columns.index),
+          key: nameof(generalLanguageKeys.index),
+          width: generalColumnWidths.index,
+          render: renderMasterIndex<Page>(pagination),
+        },
+
+        {
           title: translate('pages.id'),
           key: nameof(list[0].id),
           dataIndex: nameof(list[0].id),
           sorter: true,
           sortOrder: getOrderTypeForTable<Page>(
             nameof(list[0].id),
-            sorter
+            sorter,
           ),
-          
-      },
-      
-      {
+
+        },
+
+        {
           title: translate('pages.name'),
           key: nameof(list[0].name),
           dataIndex: nameof(list[0].name),
           sorter: true,
           sortOrder: getOrderTypeForTable<Page>(
             nameof(list[0].name),
-            sorter
+            sorter,
           ),
-          
-      },
-      
-      {
+
+        },
+
+        {
           title: translate('pages.path'),
           key: nameof(list[0].path),
           dataIndex: nameof(list[0].path),
           sorter: true,
           sortOrder: getOrderTypeForTable<Page>(
             nameof(list[0].path),
-            sorter
+            sorter,
           ),
-          
-      },
-      
-      {
+
+        },
+
+        {
           title: translate('pages.viewId'),
           key: nameof(list[0].viewId),
           dataIndex: nameof(list[0].viewId),
           sorter: true,
           sortOrder: getOrderTypeForTable<Page>(
             nameof(list[0].viewId),
-            sorter
+            sorter,
           ),
-          
-      },
-      
-      {
+
+        },
+
+        {
           title: translate('pages.isDeleted'),
           key: nameof(list[0].isDeleted),
           dataIndex: nameof(list[0].isDeleted),
           sorter: true,
           sortOrder: getOrderTypeForTable<Page>(
             nameof(list[0].isDeleted),
-            sorter
+            sorter,
           ),
-          
-      },
-      
-      {
+
+        },
+
+        {
           title: translate('pages.view'),
           key: nameof(list[0].view),
           dataIndex: nameof(list[0].view),
           sorter: true,
           sortOrder: getOrderTypeForTable<Page>(
             nameof(list[0].view),
-            sorter
+            sorter,
           ),
-          
-      },
-      
-      {
-        title: translate(generalLanguageKeys.actions.label),
-        key: nameof(generalLanguageKeys.columns.actions),
-        dataIndex: nameof(list[0].id),
-        width: generalColumnWidths.actions,
-        align: 'center',
-        render(id: number, page: Page) {
-          return (
-            <div className='d-flex justify-content-center'>
-              <button
-                className='btn btn-sm btn-link text-warning'
-                onClick={handleOpenPreview(id)}
-              >
-                <i className='fa fa-eye' />
-              </button>
-              <button
-                className='btn btn-sm btn-link'
-                onClick={handleGoDetail(id)}
-              >
-                <i className='fa fa-edit' />
-              </button>
-              <button
-                className='btn btn-sm btn-link text-danger'
-                onClick={handleDelete(page)}
-              >
-                <i className='fa fa-trash' />
-              </button>
-            </div>
-          );
-        }
-      }
+
+        },
+
+        {
+          title: translate(generalLanguageKeys.actions.label),
+          key: nameof(generalLanguageKeys.columns.actions),
+          dataIndex: nameof(list[0].id),
+          width: generalColumnWidths.actions,
+          align: 'center',
+          render(id: number, page: Page) {
+            return (
+              <div className="d-flex justify-content-center">
+                <button
+                  className="btn btn-sm btn-link text-warning"
+                  onClick={handleOpenPreview(id)}
+                >
+                  <i className="fa fa-eye"/>
+                </button>
+                <button
+                  className="btn btn-sm btn-link"
+                  onClick={handleGoDetail(id)}
+                >
+                  <i className="fa fa-edit"/>
+                </button>
+                <button
+                  className="btn btn-sm btn-link text-danger"
+                  onClick={handleDelete(page)}
+                >
+                  <i className="fa fa-trash"/>
+                </button>
+              </div>
+            );
+          },
+        },
       ];
     },
     // tslint:disable-next-line:max-line-length
@@ -233,7 +228,7 @@ function PageMaster() {
         >
           <Form {...formItemLayout}>
             <Row>
-              
+
               <Col className="pl-1" span={8}>
                 <FormItem
                   className="mb-0"
@@ -241,54 +236,49 @@ function PageMaster() {
                 >
 
 
-                    <AdvancedIdFilter
-                      filterType={nameof(filter.id.equal)}
-                      filter={ filter.id }
-                      onChange={handleFilter(nameof(filter.id))}
-                      className="w-100"
-                    />
+                  <AdvancedIdFilter
+                    filterType={nameof(filter.id.equal)}
+                    filter={filter.id}
+                    onChange={handleFilter(nameof(filter.id))}
+                    className="w-100"
+                  />
                 </FormItem>
               </Col>
-              
-              
+
 
               <Col className="pl-1" span={8}>
                 <FormItem
                   className="mb-0"
                   label={translate('pages.name')}
                 >
-                    <AdvancedStringFilter
-                      filterType={nameof(filter.name.startWith)}
-                      filter={filter.id}
-                      onChange={handleFilter(nameof(previewModel.id))}
-                      className="w-100"
-                    />
+                  <AdvancedStringFilter
+                    filterType={nameof(filter.name.startWith)}
+                    filter={filter.id}
+                    onChange={handleFilter(nameof(previewModel.id))}
+                    className="w-100"
+                  />
 
 
                 </FormItem>
               </Col>
-              
-              
+
 
               <Col className="pl-1" span={8}>
                 <FormItem
                   className="mb-0"
                   label={translate('pages.path')}
                 >
-                    <AdvancedStringFilter
-                      filterType={nameof(filter.path.startWith)}
-                      filter={filter.id}
-                      onChange={handleFilter(nameof(previewModel.id))}
-                      className="w-100"
-                    />
+                  <AdvancedStringFilter
+                    filterType={nameof(filter.path.startWith)}
+                    filter={filter.id}
+                    onChange={handleFilter(nameof(previewModel.id))}
+                    className="w-100"
+                  />
 
 
                 </FormItem>
               </Col>
-              
-              
 
-              
 
               <Col className="pl-1" span={8}>
                 <FormItem
@@ -299,12 +289,8 @@ function PageMaster() {
 
                 </FormItem>
               </Col>
-              
-              
 
-              
 
-              
             </Row>
           </Form>
           <div className="d-flex justify-content-end mt-2">
@@ -318,7 +304,7 @@ function PageMaster() {
               className="btn btn-sm btn-outline-secondary text-dark"
               onClick={handleReset}
             >
-              <i className="fa mr-2 fa-times" />
+              <i className="fa mr-2 fa-times"/>
               {translate(generalLanguageKeys.actions.reset)}
             </button>
           </div>
@@ -342,7 +328,7 @@ function PageMaster() {
                     className="btn btn-sm btn-primary mr-2"
                     onClick={handleGoCreate}
                   >
-                    <i className="fa mr-2 fa-plus" />
+                    <i className="fa mr-2 fa-plus"/>
                     {translate(generalLanguageKeys.actions.create)}
                   </button>
                   <button
@@ -350,28 +336,28 @@ function PageMaster() {
                     disabled={!hasSelected}
                     onClick={handleBulkDelete}
                   >
-                    <i className="fa mr-2 fa-trash" />
+                    <i className="fa mr-2 fa-trash"/>
                     {translate(generalLanguageKeys.actions.delete)}
                   </button>
                   <label
                     className="btn btn-sm btn-outline-primary mr-2 mb-0"
                     htmlFor="master-import"
                   >
-                    <i className="fa mr-2 fa-upload" />
+                    <i className="fa mr-2 fa-upload"/>
                     {translate(generalLanguageKeys.actions.import)}
                   </label>
                   <button
                     className="btn btn-sm btn-outline-primary mr-2"
                     onClick={handleExport}
                   >
-                    <i className="fa mr-2 fa-download" />
+                    <i className="fa mr-2 fa-download"/>
                     {translate(generalLanguageKeys.actions.export)}
                   </button>
                 </div>
                 <div className="flex-shrink-1 d-flex align-items-center">
                   {translate('general.master.pagination', {
                     pageSize: pagination.pageSize,
-                    total
+                    total,
                   })}
                 </div>
               </div>
@@ -383,7 +369,7 @@ function PageMaster() {
           className="hidden"
           id="master-import"
           onChange={handleImport}
-        />  
+        />
         <MasterPreview
           isOpen={previewVisible}
           onClose={handleClosePreview}
@@ -391,34 +377,32 @@ function PageMaster() {
         >
           <Spin spinning={previewLoading}>
             <Descriptions title={previewModel.name} bordered>
-              
+
               <Descriptions.Item label={translate('pages.id')}>
-                { previewModel?.id }
+                {previewModel?.id}
               </Descriptions.Item>
-              
-                            
+
+
               <Descriptions.Item label={translate('pages.name')}>
-                { previewModel?.name }
+                {previewModel?.name}
               </Descriptions.Item>
-              
-                            
+
+
               <Descriptions.Item label={translate('pages.path')}>
-                { previewModel?.path }
+                {previewModel?.path}
               </Descriptions.Item>
-              
-                            
-                            
+
+
               <Descriptions.Item label={translate('pages.isDeleted')}>
-                { previewModel?.isDeleted }
+                {previewModel?.isDeleted}
               </Descriptions.Item>
-              
-                            
-                            
-                          </Descriptions>
+
+
+            </Descriptions>
           </Spin>
-        </MasterPreview>                                
+        </MasterPreview>
       </Card>
-      </div>
+    </div>
   );
 }
 

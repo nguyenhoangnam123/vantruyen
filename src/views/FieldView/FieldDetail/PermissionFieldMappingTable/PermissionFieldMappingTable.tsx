@@ -13,11 +13,13 @@ import {Col, Row} from 'antd/lib/grid';
 import AdvancedIdFilter from 'components/AdvancedIdFilter/AdvancedIdFilter';
 import CollapsibleCard from 'components/CollapsibleCard/CollapsibleCard';
 
-import { fieldRepository } from 'views/FieldView/FieldRepository';
-import { Field } from 'models/Field';
-import { PermissionFieldMapping } from 'models/PermissionFieldMapping';
-import { PermissionFieldMappingFilter } from 'models/PermissionFieldMappingFilter';
-import PermissionFieldMappingModal from 'views/FieldView/FieldDetail/PermissionFieldMappingModal/PermissionFieldMappingModal';
+import {fieldRepository} from 'views/FieldView/FieldRepository';
+import {Field} from 'models/Field';
+import {PermissionFieldMapping} from 'models/PermissionFieldMapping';
+import {PermissionFieldMappingFilter} from 'models/PermissionFieldMappingFilter';
+import PermissionFieldMappingModal
+  from 'views/FieldView/FieldDetail/PermissionFieldMappingModal/PermissionFieldMappingModal';
+
 const {Item: FormItem} = Form;
 
 function PermissionFieldMappingTable(props: ContentTableProps<Field, PermissionFieldMapping>) {
@@ -39,7 +41,7 @@ function PermissionFieldMappingTable(props: ContentTableProps<Field, PermissionF
     nameof(model.permissionFieldMappings),
   );
 
-    const [
+  const [
     loading,
     visible,
     list,
@@ -90,8 +92,9 @@ function PermissionFieldMappingTable(props: ContentTableProps<Field, PermissionF
         sortOrder: getOrderTypeForTable<Field>(nameof(dataSource[0].name), sorter),
         render(name: string, permissionFieldMapping: PermissionFieldMapping) {
           return (
-            <FormItem validateStatus={formService.getValidationStatus<PermissionFieldMapping>(permissionFieldMapping.errors, nameof(permissionFieldMapping.name))}
-                      help={ permissionFieldMapping.errors?.name }
+            <FormItem
+              validateStatus={formService.getValidationStatus<PermissionFieldMapping>(permissionFieldMapping.errors, nameof(permissionFieldMapping.name))}
+              help={permissionFieldMapping.errors?.name}
             >
               <input type="text"
                      className="form-control form-control-sm"
@@ -129,7 +132,7 @@ function PermissionFieldMappingTable(props: ContentTableProps<Field, PermissionF
     ),
     [handleOpen, translate],
   );
-    const tableFooter = React.useCallback(
+  const tableFooter = React.useCallback(
     () => (
       <>
         <button className="btn btn-link" onClick={handleAdd}>
@@ -141,29 +144,29 @@ function PermissionFieldMappingTable(props: ContentTableProps<Field, PermissionF
     [handleAdd, translate],
   );
 
-    return (
+  return (
     <>
-    <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
+      <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
         <PermissionFieldMappingModal title={translate('field.permissionFieldMappingModal.title')}
-                          selectedList={ permissionFieldMappings }
-                          setSelectedList={ setPermissionFieldMappings }
-                          list={list}
-                          total={total}
-                          isOpen={visible}
-                          loading={loading}
-                          toggle={handleClose}
-                          onClose={handleClose}
-                          filter={ permissionFieldMappingFilter }
-                          setFilter={setPermissionFieldMappingFilter}
+                                     selectedList={permissionFieldMappings}
+                                     setSelectedList={setPermissionFieldMappings}
+                                     list={list}
+                                     total={total}
+                                     isOpen={visible}
+                                     loading={loading}
+                                     toggle={handleClose}
+                                     onClose={handleClose}
+                                     filter={permissionFieldMappingFilter}
+                                     setFilter={setPermissionFieldMappingFilter}
         />
         <Form {...formItemLayout}>
           <Row>
             <Col className="pl-1" span={8}>
               <FormItem className="mb-0" label={translate('fields.id')}>
                 <AdvancedIdFilter filterType={nameof(permissionFieldMappingFilter.fieldId.equal)}
-                                      filter={ permissionFieldMappingFilter.fieldId }
-                                      onChange={handleFilter(nameof(permissionFieldMappingFilter.fieldId))}
-                                      className="w-100"/>
+                                  filter={permissionFieldMappingFilter.fieldId}
+                                  onChange={handleFilter(nameof(permissionFieldMappingFilter.fieldId))}
+                                  className="w-100"/>
               </FormItem>
             </Col>
           </Row>

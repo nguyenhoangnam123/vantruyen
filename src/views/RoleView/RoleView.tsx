@@ -15,6 +15,6 @@ function RoleView(props: RouteConfigComponentProps) {
   );
 }
 
-export { RoleMaster, RoleDetail };
+export {RoleMaster, RoleDetail};
 
 export default withRouter(RoleView);

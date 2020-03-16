@@ -1,6 +1,4 @@
 import React from 'react';
-import DatePicker from 'antd/lib/date-picker';
-import Switch from 'antd/lib/switch';
 import {crudService, routerService} from 'core/services';
 import Spin from 'antd/lib/spin';
 import Card from 'antd/lib/card';
@@ -8,28 +6,13 @@ import Form from 'antd/lib/form';
 import Tabs from 'antd/lib/tabs';
 import {useTranslation} from 'react-i18next';
 import {generalLanguageKeys} from 'config/consts';
-import Select from 'components/Select/Select';
 import nameof from 'ts-nameof.macro';
 import {defaultDetailFormLayout} from 'config/ant-design/form';
 import InputNumber from 'components/InputNumber/InputNumber';
 import {formService} from 'core/services/FormService';
 import './ViewDetail.scss';
-import { viewRepository }  from 'views/ViewView/ViewRepository';
-import { View } from 'models/View'; 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import {viewRepository} from 'views/ViewView/ViewRepository';
+import {View} from 'models/View';
 
 const {TabPane} = Tabs;
 
@@ -39,10 +22,10 @@ function ViewDetail() {
   const [translate] = useTranslation();
 
   // Service goback
-    const [handleGoBack] = routerService.useGoBack();
+  const [handleGoBack] = routerService.useGoBack();
 
   // Hooks, useDetail, useChangeHandler
-    const [
+  const [
     view,
     setView,
     loading,
@@ -55,23 +38,23 @@ function ViewDetail() {
     viewRepository.save,
   );
 
-    const [
+  const [
     handleChangeSimpleField,
     handleChangeObjectField,
     handleChangeDateField,
   ] = crudService.useChangeHandlers<View>(view, setView);
 
   // Enums  -----------------------------------------------------------------------------------------------------------------------------------------
-  
-  //-------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // -------------------------------------------------------------------------------------------------------------------------------------------------
 
   // Reference  -------------------------------------------------------------------------------------------------------------------------------------
-  
-  //-------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // -------------------------------------------------------------------------------------------------------------------------------------------------
 
   // Default List -----------------------------------------------------------------------------------------------------------------------------------
-  
-  //-------------------------------------------------------------------------------------------------------------------------------------------------  
+
+  // -------------------------------------------------------------------------------------------------------------------------------------------------
 
   return (
     <div className="page detail-page">
@@ -91,65 +74,49 @@ function ViewDetail() {
             </button>
           </div>
           <Form {...defaultDetailFormLayout}>
-            
+
             <FormItem label={translate('views.id')}
                       validateStatus={formService.getValidationStatus<View>(view.errors, nameof(view.id))}
-                      help={ view.errors?.id }
+                      help={view.errors?.id}
             >
-              <InputNumber defaultValue={ view.id }
+              <InputNumber defaultValue={view.id}
                            className="w-100"
                            onChange={handleChangeSimpleField(nameof(view.id))}
               />
             </FormItem>
-            
-            
-            
+
 
             <FormItem label={translate('views.name')}
                       validateStatus={formService.getValidationStatus<View>(view.errors, nameof(view.name))}
-                      help={ view.errors?.name }
+                      help={view.errors?.name}
             >
               <input type="text"
-                           defaultValue={ view.name }
-                           className="form-control form-control-sm"
-                           onChange={handleChangeSimpleField(nameof(view.name))}
+                     defaultValue={view.name}
+                     className="form-control form-control-sm"
+                     onChange={handleChangeSimpleField(nameof(view.name))}
               />
             </FormItem>
-            
-            
-            
+
 
             <FormItem label={translate('views.path')}
                       validateStatus={formService.getValidationStatus<View>(view.errors, nameof(view.path))}
-                      help={ view.errors?.path }
+                      help={view.errors?.path}
             >
               <input type="text"
-                           defaultValue={ view.path }
-                           className="form-control form-control-sm"
-                           onChange={handleChangeSimpleField(nameof(view.path))}
+                     defaultValue={view.path}
+                     className="form-control form-control-sm"
+                     onChange={handleChangeSimpleField(nameof(view.path))}
               />
             </FormItem>
-            
-            
-            
+
 
             <FormItem label={translate('views.isDeleted')}
                       validateStatus={formService.getValidationStatus<View>(view.errors, nameof(view.isDeleted))}
-                      help={ view.errors?.isDeleted }
+                      help={view.errors?.isDeleted}
             >
             </FormItem>
-            
-            
-            
 
-            
-            
 
-            
-            
-
-            
-            
           </Form>
           <div className="d-flex justify-content-end mt-4">
             <button className="btn btn-sm btn-primary" onClick={handleSave}>
@@ -160,7 +127,7 @@ function ViewDetail() {
         </Card>
         <Card className="mt-2">
           <Tabs defaultActiveKey="1">
-            
+
           </Tabs>
           <div className="d-flex justify-content-end mt-4">
             <button className="btn btn-sm btn-primary" onClick={handleSave}>

@@ -14,7 +14,6 @@
 # misc
 .DS_Store
 .env.development.local
-.env.development.local
 .env.test.local
 .env.production.local
 
@@ -26,6 +25,7 @@ yarn-error.log*
 .vs/
 .vscode/
 
-firebase-debug.log
-.firebase/
 dist/
+.firebase/
+
+docker-compose.override.*

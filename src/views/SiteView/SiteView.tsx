@@ -15,6 +15,6 @@ function SiteView(props: RouteConfigComponentProps) {
   );
 }
 
-export { SiteMaster, SiteDetail };
+export {SiteMaster, SiteDetail};
 
 export default withRouter(SiteView);

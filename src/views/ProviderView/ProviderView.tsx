@@ -15,6 +15,6 @@ function ProviderView(props: RouteConfigComponentProps) {
   );
 }
 
-export { ProviderMaster, ProviderDetail };
+export {ProviderMaster, ProviderDetail};
 
 export default withRouter(ProviderView);

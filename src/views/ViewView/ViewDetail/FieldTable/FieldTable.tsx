@@ -12,11 +12,10 @@ import {formItemLayout} from 'config/ant-design/form';
 import {Col, Row} from 'antd/lib/grid';
 import AdvancedIdFilter from 'components/AdvancedIdFilter/AdvancedIdFilter';
 import CollapsibleCard from 'components/CollapsibleCard/CollapsibleCard';
+import {View} from 'models/View';
+import {Field} from 'models/Field';
+import {FieldFilter} from 'models/FieldFilter';
 
-import { viewRepository } from 'views/ViewView/ViewRepository';
-import { View } from 'models/View';
-import { Field } from 'models/Field';
-import { FieldFilter } from 'models/FieldFilter';
 const {Item: FormItem} = Form;
 
 function FieldTable(props: ContentTableProps<View, Field>) {
@@ -42,7 +41,7 @@ function FieldTable(props: ContentTableProps<View, Field>) {
     fieldFilter,
     setFieldFilter,
   ] = React.useState<FieldFilter>(
-    new FieldFilter()
+    new FieldFilter(),
   );
 
   const [
@@ -82,7 +81,7 @@ function FieldTable(props: ContentTableProps<View, Field>) {
         render(name: string, field: Field) {
           return (
             <FormItem validateStatus={formService.getValidationStatus<Field>(field.errors, nameof(field.name))}
-                      help={ field.errors?.name }
+                      help={field.errors?.name}
             >
               <input type="text"
                      className="form-control form-control-sm"
@@ -111,7 +110,7 @@ function FieldTable(props: ContentTableProps<View, Field>) {
     ],
     [dataSource, handleDelete, pagination, sorter, translate],
   );
-    const tableFooter = React.useCallback(
+  const tableFooter = React.useCallback(
     () => (
       <>
         <button className="btn btn-link" onClick={handleAdd}>
@@ -123,17 +122,17 @@ function FieldTable(props: ContentTableProps<View, Field>) {
     [handleAdd, translate],
   );
 
-    return (
+  return (
     <>
-    <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
+      <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
         <Form {...formItemLayout}>
           <Row>
             <Col className="pl-1" span={8}>
               <FormItem className="mb-0" label={translate('views.id')}>
                 <AdvancedIdFilter filterType={nameof(fieldFilter.viewId.equal)}
-                                      filter={ fieldFilter.viewId }
-                                      onChange={handleFilter(nameof(fieldFilter.viewId))}
-                                      className="w-100"/>
+                                  filter={fieldFilter.viewId}
+                                  onChange={handleFilter(nameof(fieldFilter.viewId))}
+                                  className="w-100"/>
               </FormItem>
             </Col>
           </Row>

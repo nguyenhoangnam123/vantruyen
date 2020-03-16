@@ -1,15 +1,15 @@
-import { AxiosResponse } from 'axios';
+import {AxiosResponse} from 'axios';
 import nameof from 'ts-nameof.macro';
-import { url } from 'core/helpers/string';
-import { Repository } from 'core/repositories/Repository';
+import {url} from 'core/helpers/string';
+import {Repository} from 'core/repositories/Repository';
 import kebabCase from 'lodash/kebabCase';
 import {BatchId, PureModelData} from 'react3l';
 import {httpConfig} from 'config/http';
 import {API_BASE_URL} from 'core/config';
 
 import {API_SITE_ROUTE} from 'config/api-consts';
-import { Site } from 'models/Site';
-import { SiteFilter } from 'models/SiteFilter';
+import {Site} from 'models/Site';
+import {SiteFilter} from 'models/SiteFilter';
 
 export class SiteRepository extends Repository {
   constructor() {
@@ -25,13 +25,14 @@ export class SiteRepository extends Repository {
   public list = (siteFilter?: SiteFilter): Promise<Site[]> => {
     return this.http.post<Site[]>(kebabCase(nameof(this.list)), siteFilter)
       .then((response: AxiosResponse<Site[]>) => {
-        return response.data?.map((site: PureModelData<Site>) =>  Site.clone<Site>(site));
-    });
+        return response.data?.map((site: PureModelData<Site>) => Site.clone<Site>(site));
+      });
   };
+
   public get = (id: number | string): Promise<Site> => {
     return this.http.post<Site>
-      (kebabCase(nameof(this.get)), { id })
-        .then((response: AxiosResponse<Site>) => Site.clone<Site>(response.data));
+    (kebabCase(nameof(this.get)), {id})
+      .then((response: AxiosResponse<Site>) => Site.clone<Site>(response.data));
   };
 
   public create = (site: Site): Promise<Site> => {
@@ -45,19 +46,17 @@ export class SiteRepository extends Repository {
   };
 
   public delete = (site: Site): Promise<Site> => {
-      return this.http.post<Site>(kebabCase(nameof(this.delete)), site)
-        .then((response: AxiosResponse<Site>) => Site.clone<Site>(response.data));
+    return this.http.post<Site>(kebabCase(nameof(this.delete)), site)
+      .then((response: AxiosResponse<Site>) => Site.clone<Site>(response.data));
   };
 
   public save = (site: Site): Promise<Site> => {
-      return site.id ? this.update(site) : this.create(site);
+    return site.id ? this.update(site) : this.create(site);
   };
-
-  
 
   public bulkDelete = (idList: BatchId): Promise<void> => {
     return this.http.post(kebabCase(nameof(this.bulkDelete)), idList)
-    .then((response: AxiosResponse<void>) => response.data);
+      .then((response: AxiosResponse<void>) => response.data);
   };
 
   public import = (file: File, name: string = nameof(file)): Promise<void> => {
@@ -65,6 +64,7 @@ export class SiteRepository extends Repository {
     formData.append(name, file);
     return this.http.post<void>(kebabCase(nameof(this.import)), formData)
       .then((response: AxiosResponse<void>) => response.data);
-    };
-  }
-  export const siteRepository: Site = new SiteRepository();
+  };
+}
+
+export const siteRepository: Site = new SiteRepository();

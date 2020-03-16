@@ -15,6 +15,6 @@ function PermissionView(props: RouteConfigComponentProps) {
   );
 }
 
-export { PermissionMaster, PermissionDetail };
+export {PermissionMaster, PermissionDetail};
 
 export default withRouter(PermissionView);

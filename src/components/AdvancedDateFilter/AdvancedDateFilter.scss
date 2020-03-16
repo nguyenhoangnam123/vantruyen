@@ -1,7 +1,9 @@
 /* Style for AdvancedDateFilter.tsx */
 
 .advanced-date-filter {
-  input {
-    height: 24px;
+  .ant-calendar-picker-input {
+    &.ant-input {
+      height: 24px;
+    }
   }
 }

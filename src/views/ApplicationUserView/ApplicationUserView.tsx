@@ -15,6 +15,6 @@ function ApplicationUserView(props: RouteConfigComponentProps) {
   );
 }
 
-export { ApplicationUserMaster, ApplicationUserDetail };
+export {ApplicationUserMaster, ApplicationUserDetail};
 
 export default withRouter(ApplicationUserView);

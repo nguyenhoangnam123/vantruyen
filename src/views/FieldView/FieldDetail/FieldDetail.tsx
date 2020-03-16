@@ -1,6 +1,4 @@
 import React from 'react';
-import DatePicker from 'antd/lib/date-picker';
-import Switch from 'antd/lib/switch';
 import {crudService, routerService} from 'core/services';
 import Spin from 'antd/lib/spin';
 import Card from 'antd/lib/card';
@@ -14,26 +12,14 @@ import {defaultDetailFormLayout} from 'config/ant-design/form';
 import InputNumber from 'components/InputNumber/InputNumber';
 import {formService} from 'core/services/FormService';
 import './FieldDetail.scss';
-import { fieldRepository }  from 'views/FieldView/FieldRepository';
-import { Field } from 'models/Field'; 
+import {fieldRepository} from 'views/FieldView/FieldRepository';
+import {Field} from 'models/Field';
 
+import {View} from 'models/View';
+import {ViewFilter} from 'models/ViewFilter';
 
-
-
-
-
-
-
-
-
-import { View } from 'models/View'
-import { ViewFilter } from 'models/ViewFilter'
-
-
-
-
-import PermissionFieldMappingTable from 'views/FieldView/FieldDetail/PermissionFieldMappingTable/PermissionFieldMappingTable';
-
+import PermissionFieldMappingTable
+  from 'views/FieldView/FieldDetail/PermissionFieldMappingTable/PermissionFieldMappingTable';
 
 const {TabPane} = Tabs;
 
@@ -43,10 +29,10 @@ function FieldDetail() {
   const [translate] = useTranslation();
 
   // Service goback
-    const [handleGoBack] = routerService.useGoBack();
+  const [handleGoBack] = routerService.useGoBack();
 
   // Hooks, useDetail, useChangeHandler
-    const [
+  const [
     field,
     setField,
     loading,
@@ -59,27 +45,27 @@ function FieldDetail() {
     fieldRepository.save,
   );
 
-    const [
+  const [
     handleChangeSimpleField,
     handleChangeObjectField,
     handleChangeDateField,
   ] = crudService.useChangeHandlers<Field>(field, setField);
 
   // Enums  -----------------------------------------------------------------------------------------------------------------------------------------
-  
-  //-------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // -------------------------------------------------------------------------------------------------------------------------------------------------
 
   // Reference  -------------------------------------------------------------------------------------------------------------------------------------
-  
+
   const [viewFilter, setViewFilter] = React.useState<ViewFilter>(new ViewFilter());
-  
-  //-------------------------------------------------------------------------------------------------------------------------------------------------
+
+  // -------------------------------------------------------------------------------------------------------------------------------------------------
 
   // Default List -----------------------------------------------------------------------------------------------------------------------------------
-  
+
   const defaultViewList: View[] = crudService.useDefaultList<View>(field.view);
-  
-  //-------------------------------------------------------------------------------------------------------------------------------------------------  
+
+  // -------------------------------------------------------------------------------------------------------------------------------------------------
 
   return (
     <div className="page detail-page">
@@ -99,74 +85,59 @@ function FieldDetail() {
             </button>
           </div>
           <Form {...defaultDetailFormLayout}>
-            
+
             <FormItem label={translate('fields.id')}
                       validateStatus={formService.getValidationStatus<Field>(field.errors, nameof(field.id))}
-                      help={ field.errors?.id }
+                      help={field.errors?.id}
             >
-              <InputNumber defaultValue={ field.id }
+              <InputNumber defaultValue={field.id}
                            className="w-100"
                            onChange={handleChangeSimpleField(nameof(field.id))}
               />
             </FormItem>
-            
-            
-            
+
 
             <FormItem label={translate('fields.name')}
                       validateStatus={formService.getValidationStatus<Field>(field.errors, nameof(field.name))}
-                      help={ field.errors?.name }
+                      help={field.errors?.name}
             >
               <input type="text"
-                           defaultValue={ field.name }
-                           className="form-control form-control-sm"
-                           onChange={handleChangeSimpleField(nameof(field.name))}
+                     defaultValue={field.name}
+                     className="form-control form-control-sm"
+                     onChange={handleChangeSimpleField(nameof(field.name))}
               />
             </FormItem>
-            
-            
-            
+
 
             <FormItem label={translate('fields.type')}
                       validateStatus={formService.getValidationStatus<Field>(field.errors, nameof(field.type))}
-                      help={ field.errors?.type }
+                      help={field.errors?.type}
             >
               <input type="text"
-                           defaultValue={ field.type }
-                           className="form-control form-control-sm"
-                           onChange={handleChangeSimpleField(nameof(field.type))}
+                     defaultValue={field.type}
+                     className="form-control form-control-sm"
+                     onChange={handleChangeSimpleField(nameof(field.type))}
               />
             </FormItem>
-            
-            
-            
 
-            
-            
 
             <FormItem label={translate('fields.isDeleted')}
                       validateStatus={formService.getValidationStatus<Field>(field.errors, nameof(field.isDeleted))}
-                      help={ field.errors?.isDeleted }
+                      help={field.errors?.isDeleted}
             >
             </FormItem>
-            
-            
-            
 
-            
-            
-              <Select value={ field.view?.id }
-                      onChange={handleChangeObjectField(nameof(field.view))}
-                      getList={ fieldRepository.singleListView }
-                      list={ defaultViewList }
-                      modelFilter={ viewFilter }
-                      setModelFilter={ setViewFilter }
-                      searchField={nameof(viewFilter.id)}
-              />
-            
 
-            
-            
+            <Select value={field.view?.id}
+                    onChange={handleChangeObjectField(nameof(field.view))}
+                    getList={fieldRepository.singleListView}
+                    list={defaultViewList}
+                    modelFilter={viewFilter}
+                    setModelFilter={setViewFilter}
+                    searchField={nameof(viewFilter.id)}
+            />
+
+
           </Form>
           <div className="d-flex justify-content-end mt-4">
             <button className="btn btn-sm btn-primary" onClick={handleSave}>
@@ -177,15 +148,15 @@ function FieldDetail() {
         </Card>
         <Card className="mt-2">
           <Tabs defaultActiveKey="1">
-            
+
             <TabPane key="1" tab={translate('field.tabs.roles.title')}>
-              <PermissionFieldMappingTable model={ field }
-                                setModel={ setField }
-                                field={(nameof(field.permissionFieldMappings))}
-                                onChange={handleChangeSimpleField(nameof(field.permissionFieldMappings))}
+              <PermissionFieldMappingTable model={field}
+                                           setModel={setField}
+                                           field={(nameof(field.permissionFieldMappings))}
+                                           onChange={handleChangeSimpleField(nameof(field.permissionFieldMappings))}
               />
             </TabPane>
-            
+
           </Tabs>
           <div className="d-flex justify-content-end mt-4">
             <button className="btn btn-sm btn-primary" onClick={handleSave}>

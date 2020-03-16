@@ -1,21 +1,21 @@
 import classNames from 'classnames';
-import Input from 'antd/lib/input';
 import 'components/AdvancedStringFilter/AdvancedStringFilter.scss';
 import {GuidFilter, IdFilter, NumberFilter, StringFilter} from 'core/filters';
 import React, {ChangeEvent, ComponentProps, RefObject} from 'react';
+import AntInput from 'antd/lib/input';
 
 export interface AdvancedStringFilterProps extends ComponentProps<any> {
   filter: StringFilter | NumberFilter | IdFilter | GuidFilter;
 
   filterType?: keyof StringFilter | keyof NumberFilter | keyof IdFilter | keyof GuidFilter | string;
 
-  onChange(filter: StringFilter | NumberFilter | IdFilter | GuidFilter);
+  onChange?(filter: StringFilter | NumberFilter | IdFilter | GuidFilter);
 }
 
 function AdvancedStringFilter(props: AdvancedStringFilterProps) {
   const {filter, filterType, onChange, className} = props;
 
-  const ref: RefObject<Input> = React.useRef<Input>(null);
+  const ref: RefObject<AntInput> = React.useRef<AntInput>(null);
 
   const {
     [filterType]: value,
@@ -52,13 +52,13 @@ function AdvancedStringFilter(props: AdvancedStringFilterProps) {
   );
 
   return (
-    <Input type="text"
-           ref={ref}
-           className={classNames(className)}
-           defaultValue={value}
-           onKeyPress={handlePressEnter}
-           onChange={handleChange}
-           size="small"
+    <AntInput type="text"
+              ref={ref}
+              className={classNames(className)}
+              defaultValue={value}
+              size="small"
+              onKeyPress={handlePressEnter}
+              onChange={handleChange}
     />
   );
 }
