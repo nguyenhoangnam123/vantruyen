@@ -12635,6 +12635,16 @@ pretty-hrtime@^1.0.3:
   resolved "https://registry.yarnpkg.com/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz#b7e3ea42435a4c9b2759d99e0f201eb195802ee1"
   integrity sha1-t+PqQkNaTJsnWdmeDyAesZWALuE=
 
+primeicons@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/primeicons/-/primeicons-2.0.0.tgz#ec3e5a8d4d04a09309225a5a57deb911e08dc0d3"
+  integrity sha512-GJTCeMSQU8UU1GqbsaDrg/IH+b/vSinJQl52NVpdJ7sShYLZA8Eq6jLF48Ye3N/dQloGrE07i7XsZvxQ9pNbqg==
+
+primereact@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/primereact/-/primereact-4.1.1.tgz#280708bfab04468e18739a9820cbf32f39a9ffd2"
+  integrity sha512-EiqWwQ6pAlY4rQOfVZnCaoh3mzyxZsFqQzSz/4Y8X4E22bNyfZocg6PSWejfsnlBBo+SHHN8sDoaiS+0/Nk73g==
+
 prismjs@^1.8.4:
   version "1.19.0"
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.19.0.tgz#713afbd45c3baca4b321569f2df39e17e729d4dc"

@@ -29,6 +29,8 @@
     "font-awesome": "^4.7.0",
     "i18next": "^19.3.2",
     "lodash": "^4.17.15",
+    "primeicons": "^2.0.0",
+    "primereact": "^4.1.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-i18next": "^11.3.3",
