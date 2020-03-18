@@ -89,7 +89,7 @@ function ProductDetail1() {
         statusId,
       });
     },
-    [setProduct]
+    [setProduct],
   );
 
   const statusDisplay: string = React.useMemo(
