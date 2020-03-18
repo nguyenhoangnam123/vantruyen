@@ -6,6 +6,8 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export interface RichTextEditorProps {
   value?: string;
 
+  className?: string;
+
   editorConfig?: {
     [key: string]: any;
   };
@@ -18,6 +20,7 @@ function RichTextEditor(props: RichTextEditorProps) {
     value,
     onChange,
     editorConfig,
+    className,
   } = props;
 
   const handleChange = React.useCallback(
@@ -34,6 +37,7 @@ function RichTextEditor(props: RichTextEditorProps) {
       editor={ClassicEditor}
       config={editorConfig}
       data={value}
+      className={className}
       onChange={handleChange}
     />
   );
