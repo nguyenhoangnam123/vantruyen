@@ -170,14 +170,14 @@ export const routes: RouteConfig[] =
             [
               {
                 path: join(PRODUCT_ROUTE, ':id'),
-                component: ProductDetail,
+                component: ProductDetail1,
               },
-              // {
-              //   path: join(PRODUCT_ROUTE),
-              //   component: ProductMaster,
-              // },
               {
                 path: join(PRODUCT_ROUTE),
+                component: ProductMaster,
+              },
+              {
+                path: join(PRODUCT_ROUTE, 'detail1'),
                 component: ProductDetail1,
               },
             ],
