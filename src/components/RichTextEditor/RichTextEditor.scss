@@ -1,1 +1,13 @@
 /* Style for RichTextEditor.tsx */
+
+@media screen and (min-width: 1920px) {
+  .ck.ck-editor {
+    width: 700px !important;
+  }
+}
+
+.ck-editor__main {
+  .ck-content {
+    min-height: 357px;
+  }
+}

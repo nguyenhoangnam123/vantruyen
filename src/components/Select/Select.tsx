@@ -1,12 +1,12 @@
-import AntSelect, {OptionProps, SelectProps as AntSelectProps} from 'antd/lib/select';
-import {AxiosError} from 'axios';
+import AntSelect, { OptionProps, SelectProps as AntSelectProps } from 'antd/lib/select';
+import { AxiosError } from 'axios';
 import classNames from 'classnames';
 import './Select.scss';
-import {debounce} from 'core/helpers/debounce';
-import {Model, ModelFilter} from 'core/models';
-import React, {Dispatch, ReactElement, Ref, SetStateAction} from 'react';
+import { debounce } from 'core/helpers/debounce';
+import { Model, ModelFilter } from 'core/models';
+import React, { Dispatch, ReactElement, Ref, SetStateAction } from 'react';
 
-const {Option} = AntSelect;
+const { Option } = AntSelect;
 
 export interface SelectOptionProps<T extends Model> extends OptionProps {
   'data-content': T;
@@ -138,7 +138,7 @@ const Select = React.forwardRef(
         onSearch={handleSearch}
         defaultValue={defaultValue}
         value={value}
-        size="small"
+        size="default"
       >
         {list.map((t: T) => (
           <Option key={t.id} data-content={t} value={t.id}>
