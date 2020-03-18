@@ -253,7 +253,7 @@ function ProductDetail1() {
                       <RichTextEditor
                         className="text-editor"
                         value={product.description}
-                        onChange={handleChangeSimpleField(nameof(product.description))} 
+                        onChange={handleChangeSimpleField(nameof(product.description))}
                         />
                     </div> */}
 
