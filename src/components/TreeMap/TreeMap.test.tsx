@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {MemoryRouter} from 'react-router-dom';
 
-import TreeSelect from './TreeSelect';
+import TreeMap from './TreeMap';
 
-describe('TreeSelect', () => {
+describe('TreeMap', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div');
         ReactDOM.render(
             <MemoryRouter>
-                <TreeSelect/>
+                <TreeMap/>
             </MemoryRouter>,
             div,
         );

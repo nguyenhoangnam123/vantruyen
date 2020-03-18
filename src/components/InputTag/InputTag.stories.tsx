@@ -1,15 +1,23 @@
-import InputTag from 'components/InputTag/InputTag';
-import React from 'react';
+import React, { useState } from 'reactn';
+import InputTag from './InputTag';
+import { storiesOf } from '@storybook/react';
 import nameof from 'ts-nameof.macro';
 
-export default {
-  title: nameof(InputTag),
-};
+export const title: string = 'InputTag';
 
-export function Default() {
-  const [tags, setTags] = React.useState<string[]>(['Đen', 'Đỏ', 'Vàng']);
+function Default() {
+  const [value, setValue] = useState<string[]>([]);
 
   return (
-    <InputTag tags={tags} onChange={setTags}/>
+    <InputTag
+      value={value}
+      onChange={(value: string[]) => {
+        setValue(value);
+      }}
+    />
   );
 }
+
+storiesOf('TagInput', module)
+  .add(nameof(Default), Default);
+
