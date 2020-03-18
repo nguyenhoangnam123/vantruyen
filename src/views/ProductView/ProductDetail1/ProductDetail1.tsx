@@ -21,9 +21,9 @@ import { UnitOfMeasureFilter } from 'models/UnitOfMeasureFilter';
 import { Supplier } from 'models/Supplier';
 import { Brand } from 'models/Brand';
 import { BrandFilter } from 'models/BrandFilter';
-import RichTextEditor from 'components/RichTextEditor/RichTextEditor';
+// import RichTextEditor from 'components/RichTextEditor/RichTextEditor';
 import ImageUpload from 'components/ImageUpload/ImageUpload';
-import classNames from 'classnames';
+// import classNames from 'classnames';
 import { Image } from 'models/Image';
 
 const { TabPane } = Tabs;
@@ -82,16 +82,25 @@ function ProductDetail1() {
   const defaultBrandList: Brand[] = crudService.useDefaultList<Brand>(product.brand);
 
 
-  const handleChangeStatus = React.useCallback(
-    (checked: boolean) => {
-      const isActive: boolean = checked;
-      setProduct({
-        ...product,
-        isActive,
-      });
-    },
-    [setProduct],
-  );
+  // const handleChangeStatus = React.useCallback(
+  //   (checked: boolean) => {
+  //     const isActive: boolean = checked;
+  //     console.log('handleChangeStatus', product)
+  //     // setProduct({
+  //     //   ...product,
+  //     //   isActive,
+  //     // });
+  //   },
+  //   [],
+  // );
+
+  function handleChangeStatus(checked: boolean) {
+    const isActive: boolean = checked;
+    setProduct({
+      ...product,
+      isActive,
+    });
+  }
 
   // const statusDisplay: string = React.useMemo(
   //   () => {
