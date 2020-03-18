@@ -24,6 +24,7 @@ import { BrandFilter } from 'models/BrandFilter';
 import RichTextEditor from 'components/RichTextEditor/RichTextEditor';
 import ImageUpload from 'components/ImageUpload/ImageUpload';
 import classNames from 'classnames';
+import { Image } from 'models/Image';
 
 const { TabPane } = Tabs;
 
@@ -53,7 +54,7 @@ function ProductDetail1() {
   const [
     handleChangeSimpleField,
     handleChangeObjectField,
-    handleChangeDateField,
+    // handleChangeDateField,
   ] = crudService.useChangeHandlers<Product>(product, setProduct);
 
   // Filter
@@ -83,28 +84,38 @@ function ProductDetail1() {
 
   const handleChangeStatus = React.useCallback(
     (checked: boolean) => {
-      const statusId: number = checked ? 1 : 2;
+      const isActive: boolean = checked;
       setProduct({
         ...product,
-        statusId,
+        isActive,
       });
     },
     [setProduct],
   );
 
-  const statusDisplay: string = React.useMemo(
-    () => {
-      // if (statusList) {
-      //   const status: ProductStatus = statusList.find((status: ProductStatus) => status.id === product.statusId);
-      //   if (status) {
-      //     return status.name;
-      //   }
-      // }
-      return null;
-    },
-    [product],
-  );
+  // const statusDisplay: string = React.useMemo(
+  //   () => {
+  //     if (statusList) {
+  //       const status: ProductStatus = statusList.find((status: ProductStatus) => status.id === product.statusId);
+  //       if (status) {
+  //         return status.name;
+  //       }
+  //     }
+  //     return null;
+  //   },
+  //   [],
+  // );
 
+
+  const handleChangeImages = React.useCallback(
+    (images: Image[]) => {
+      setProduct({
+        ...product,
+        images,
+      });
+    },
+    [setProduct],
+  );
 
   return (
     <div className="page detail-page">
@@ -161,10 +172,10 @@ function ProductDetail1() {
                     </FormItem>
                     <Form.Item label={translate('productDetail.status')}>
                       <div className="product-status">
-                        <Switch checked={product.statusId === 1} onChange={handleChangeStatus} />
-                        <span className={classNames('status-display', { active: product.statusId === 1, inactive: product.statusId === 2 })}>
+                        <Switch checked={product.isActive === true} onChange={handleChangeStatus} />
+                        {/* <span className={classNames('status-display', { active: product.isActive === true, inactive: product.isActive === false })}>
                           {statusDisplay}
-                        </span>
+                        </span> */}
                       </div>
                     </Form.Item>
 
@@ -225,15 +236,26 @@ function ProductDetail1() {
                   </div>
                   <div className="col-6">
                     <div className="product-image">
-                      <ImageUpload />
+                      {/* <ImageUpload /> */}
+                      <Form.Item label={translate('productDetail.images')}>
+                        <ImageUpload
+                          defaultItems={product.images}
+                          limit={15}
+                          aspectRatio={1}
+                          onUpload={productRepository.uploadImage}
+                          onChange={handleChangeImages}
+                        // action="/api/product/product-detail/upload-image"
+                        />
+                      </Form.Item>
                     </div>
-                    <div className="product-editor">
+                    {/* <div className="product-editor">
                       <label>{translate('products.description')}</label>
                       <RichTextEditor
                         className="text-editor"
                         value={product.description}
-                        onChange={handleChangeSimpleField(nameof(product.description))} />
-                    </div>
+                        onChange={handleChangeSimpleField(nameof(product.description))} 
+                        />
+                    </div> */}
 
                   </div>
                 </div>
