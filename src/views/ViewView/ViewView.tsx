@@ -15,6 +15,6 @@ function ViewView(props: RouteConfigComponentProps) {
   );
 }
 
-export {ViewMaster, ViewDetail};
+export { ViewMaster, ViewDetail };
 
 export default withRouter(ViewView);

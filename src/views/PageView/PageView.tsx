@@ -15,6 +15,6 @@ function PageView(props: RouteConfigComponentProps) {
   );
 }
 
-export {PageMaster, PageDetail};
+export { PageMaster, PageDetail };
 
 export default withRouter(PageView);

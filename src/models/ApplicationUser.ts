@@ -1,8 +1,8 @@
 import {Model} from 'core/models';
 import {ErrorMap} from 'react3l';
-import {Moment} from 'moment';
+import {Provider} from './Provider';
 import {UserStatus} from './UserStatus';
-import {ApplicationUserRoleMapping} from './ApplicationUserRoleMapping';
+import {Role} from './Role';
 
 export class ApplicationUser extends Model {
   public id?: number;
@@ -19,15 +19,15 @@ export class ApplicationUser extends Model {
 
   public userStatusId?: number;
 
-  public createdAt?: Moment;
+  public retryTime?: number;
 
-  public updatedAt?: Moment;
+  public providerId?: number;
 
-  public deletedAt?: Moment;
+  public provider?: Provider;
 
   public userStatus?: UserStatus;
 
-  public applicationUserRoleMappings?: ApplicationUserRoleMapping[];
+  public roles?: Role[];
 
   public errors?: ErrorMap<ApplicationUser>;
 }

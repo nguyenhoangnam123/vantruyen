@@ -1,14 +1,8 @@
-import {ModelFilter} from 'core/models/ModelFilter';
-import {DateFilter, IdFilter, StringFilter} from 'core/filters';
+import { IdFilter, StringFilter, NumberFilter, DateFilter  } from 'core/filters';
+import { ModelFilter } from 'core/models';
 
-export class ProvinceFilter extends ModelFilter {
-  public id: IdFilter = new IdFilter();
-
-  public name: StringFilter = new StringFilter();
-
-  public code: StringFilter = new StringFilter();
-
-  public provinceTypeId: IdFilter = new IdFilter();
-
-  public createdAt: DateFilter = new DateFilter();
+export class ProvinceFilter extends ModelFilter  {
+  public id?: IdFilter = new IdFilter();
+  public name?: StringFilter = new StringFilter();
+  public priority?: NumberFilter = new NumberFilter();
 }

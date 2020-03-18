@@ -15,6 +15,6 @@ function FieldView(props: RouteConfigComponentProps) {
   );
 }
 
-export {FieldMaster, FieldDetail};
+export { FieldMaster, FieldDetail };
 
 export default withRouter(FieldView);

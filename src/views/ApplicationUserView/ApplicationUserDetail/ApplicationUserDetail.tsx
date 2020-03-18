@@ -1,25 +1,25 @@
 import React from 'react';
+import './ApplicationUserDetail.scss';
 import DatePicker from 'antd/lib/date-picker';
+import Switch from 'antd/lib/switch';
 import {crudService, routerService} from 'core/services';
+import {applicationUserRepository} from 'views/ApplicationUserView/ApplicationUserRepository';
+import {ApplicationUser} from 'models/ApplicationUser';
 import Spin from 'antd/lib/spin';
 import Card from 'antd/lib/card';
 import Form from 'antd/lib/form';
-import Tabs from 'antd/lib/tabs';
 import {useTranslation} from 'react-i18next';
 import {generalLanguageKeys} from 'config/consts';
+import {defaultDetailFormLayout} from 'config/ant-design/form';
 import Select from 'components/Select/Select';
 import nameof from 'ts-nameof.macro';
-import {defaultDetailFormLayout} from 'config/ant-design/form';
 import InputNumber from 'components/InputNumber/InputNumber';
-import {formService} from 'core/services/FormService';
-import './ApplicationUserDetail.scss';
-import {applicationUserRepository} from 'views/ApplicationUserView/ApplicationUserRepository';
-import {ApplicationUser} from 'models/ApplicationUser';
-
 import {UserStatus} from 'models/UserStatus';
-
-import ApplicationUserRoleMappingTable
-  from 'views/ApplicationUserView/ApplicationUserDetail/ApplicationUserRoleMappingTable/ApplicationUserRoleMappingTable';
+import RoleContentTable from 'views/ApplicationUserView/ApplicationUserDetail/RoleContentTable/RoleContentTable';
+import {formService} from 'core/services/FormService';
+import {ProviderFilter} from 'models/ProviderFilter';
+import Tabs from 'antd/lib/tabs';
+import {Provider} from 'models/Provider';
 
 const {TabPane} = Tabs;
 
@@ -27,11 +27,8 @@ const {Item: FormItem} = Form;
 
 function ApplicationUserDetail() {
   const [translate] = useTranslation();
-
-  // Service goback
   const [handleGoBack] = routerService.useGoBack();
 
-  // Hooks, useDetail, useChangeHandler
   const [
     applicationUser,
     setApplicationUser,
@@ -51,19 +48,16 @@ function ApplicationUserDetail() {
     handleChangeDateField,
   ] = crudService.useChangeHandlers<ApplicationUser>(applicationUser, setApplicationUser);
 
-  // Enums  -----------------------------------------------------------------------------------------------------------------------------------------
-
+  /**
+   * This section is for enums
+   */
   const [userStatusList] = crudService.useEnumList<UserStatus>(applicationUserRepository.singleListUserStatus);
 
-  // -------------------------------------------------------------------------------------------------------------------------------------------------
-
-  // Reference  -------------------------------------------------------------------------------------------------------------------------------------
-
-  // -------------------------------------------------------------------------------------------------------------------------------------------------
-
-  // Default List -----------------------------------------------------------------------------------------------------------------------------------
-
-  // -------------------------------------------------------------------------------------------------------------------------------------------------
+  /**
+   * This section is for reference fields
+   */
+  const [providerFilter, setProviderFilter] = React.useState<ProviderFilter>(new ProviderFilter());
+  const defaultProviderList: Provider[] = crudService.useDefaultList<Provider>(applicationUser.provider);
 
   return (
     <div className="page detail-page">
@@ -83,136 +77,102 @@ function ApplicationUserDetail() {
             </button>
           </div>
           <Form {...defaultDetailFormLayout}>
-
             <FormItem label={translate('applicationUsers.id')}
                       validateStatus={formService.getValidationStatus<ApplicationUser>(applicationUser.errors, nameof(applicationUser.id))}
                       help={applicationUser.errors?.id}
             >
+              {/* Number field */}
               <InputNumber defaultValue={applicationUser.id}
                            className="w-100"
                            onChange={handleChangeSimpleField(nameof(applicationUser.id))}
               />
             </FormItem>
-
-
             <FormItem label={translate('applicationUsers.username')}
                       validateStatus={formService.getValidationStatus<ApplicationUser>(applicationUser.errors, nameof(applicationUser.username))}
                       help={applicationUser.errors?.username}
             >
+              {/* Text field */}
               <input type="text"
-                     defaultValue={applicationUser.username}
                      className="form-control form-control-sm"
+                     name={nameof(applicationUser.username)}
+                     defaultValue={applicationUser.username}
                      onChange={handleChangeSimpleField(nameof(applicationUser.username))}
               />
             </FormItem>
-
-
-            <FormItem label={translate('applicationUsers.password')}
-                      validateStatus={formService.getValidationStatus<ApplicationUser>(applicationUser.errors, nameof(applicationUser.password))}
-                      help={applicationUser.errors?.password}
-            >
-              <input type="text"
-                     defaultValue={applicationUser.password}
-                     className="form-control form-control-sm"
-                     onChange={handleChangeSimpleField(nameof(applicationUser.password))}
-              />
-            </FormItem>
-
-
             <FormItem label={translate('applicationUsers.displayName')}
                       validateStatus={formService.getValidationStatus<ApplicationUser>(applicationUser.errors, nameof(applicationUser.displayName))}
                       help={applicationUser.errors?.displayName}
             >
               <input type="text"
-                     defaultValue={applicationUser.displayName}
                      className="form-control form-control-sm"
+                     name={nameof(applicationUser.displayName)}
+                     defaultValue={applicationUser.displayName}
                      onChange={handleChangeSimpleField(nameof(applicationUser.displayName))}
               />
             </FormItem>
-
-
             <FormItem label={translate('applicationUsers.email')}
                       validateStatus={formService.getValidationStatus<ApplicationUser>(applicationUser.errors, nameof(applicationUser.email))}
                       help={applicationUser.errors?.email}
             >
               <input type="text"
-                     defaultValue={applicationUser.email}
                      className="form-control form-control-sm"
+                     name={nameof(applicationUser.email)}
+                     defaultValue={applicationUser.email}
                      onChange={handleChangeSimpleField(nameof(applicationUser.email))}
               />
             </FormItem>
-
-
-            <FormItem label={translate('applicationUsers.phone')}
-                      validateStatus={formService.getValidationStatus<ApplicationUser>(applicationUser.errors, nameof(applicationUser.phone))}
-                      help={applicationUser.errors?.phone}
+            <FormItem label={translate('applicationUsers.userStatus')}
+                      validateStatus={formService.getValidationStatus<ApplicationUser>(applicationUser.errors, nameof(applicationUser.userStatus))}
+                      help={applicationUser.errors?.userStatus}
             >
-              <input type="text"
-                     defaultValue={applicationUser.phone}
-                     className="form-control form-control-sm"
-                     onChange={handleChangeSimpleField(nameof(applicationUser.phone))}
+              {/* Enum field */}
+              <Select value={applicationUser.userStatus?.id}
+                      onChange={handleChangeObjectField(nameof(applicationUser.userStatus))}
+                      list={userStatusList}
               />
             </FormItem>
-
-
+            <FormItem label={translate('applicationUsers.provider')}
+                      validateStatus={formService.getValidationStatus<ApplicationUser>(applicationUser.errors, nameof(applicationUser.provider))}
+                      help={applicationUser.errors?.provider}
+            >
+              {/* Enum field */}
+              <Select value={applicationUser.provider?.id}
+                      onChange={handleChangeObjectField(nameof(applicationUser.provider))}
+                      getList={applicationUserRepository.singleListProvider}
+                      list={defaultProviderList}
+                      modelFilter={providerFilter}
+                      setModelFilter={setProviderFilter}
+                      searchField={nameof(providerFilter.name)}
+              />
+            </FormItem>
+            <FormItem label={translate('applicationUsers.isActive')}
+                      validateStatus={formService.getValidationStatus<ApplicationUser>(applicationUser.errors, nameof(applicationUser.isActive))}
+                      help={applicationUser.errors?.isActive}
+            >
+              {/* Boolean field */}
+              <Switch defaultChecked={applicationUser.isActive}
+                      onChange={handleChangeSimpleField(nameof(applicationUser.isActive))}
+              />
+            </FormItem>
             <FormItem label={translate('applicationUsers.createdAt')}
                       validateStatus={formService.getValidationStatus<ApplicationUser>(applicationUser.errors, nameof(applicationUser.createdAt))}
                       help={applicationUser.errors?.createdAt}
             >
+              {/* Date field */}
               <DatePicker defaultValue={applicationUser.createdAt}
                           onChange={handleChangeDateField(nameof(applicationUser.createdAt))}
                           className="w-100"
               />
             </FormItem>
-
-
-            <FormItem label={translate('applicationUsers.updatedAt')}
-                      validateStatus={formService.getValidationStatus<ApplicationUser>(applicationUser.errors, nameof(applicationUser.updatedAt))}
-                      help={applicationUser.errors?.updatedAt}
-            >
-              <DatePicker defaultValue={applicationUser.updatedAt}
-                          onChange={handleChangeDateField(nameof(applicationUser.updatedAt))}
-                          className="w-100"
-              />
-            </FormItem>
-
-
-            <FormItem label={translate('applicationUsers.deletedAt')}
-                      validateStatus={formService.getValidationStatus<ApplicationUser>(applicationUser.errors, nameof(applicationUser.deletedAt))}
-                      help={applicationUser.errors?.deletedAt}
-            >
-              <DatePicker defaultValue={applicationUser.deletedAt}
-                          onChange={handleChangeDateField(nameof(applicationUser.deletedAt))}
-                          className="w-100"
-              />
-            </FormItem>
-
-
-            <Select value={applicationUser.userStatus?.id}
-                    onChange={handleChangeObjectField(nameof(applicationUser.userStatus))}
-                    list={userStatusList}
-            />
-
-
           </Form>
-          <div className="d-flex justify-content-end mt-4">
-            <button className="btn btn-sm btn-primary" onClick={handleSave}>
-              <i className="fa mr-2 fa-save"/>
-              {translate(generalLanguageKeys.actions.save)}
-            </button>
-          </div>
-        </Card>
-        <Card className="mt-2">
           <Tabs defaultActiveKey="1">
-
-            <TabPane key="1" tab={translate('applicationUser.tabs.roles.title')}>
-              <ApplicationUserRoleMappingTable model={applicationUser}
-                                               setModel={setApplicationUser}
-                                               field={(nameof(applicationUser.applicationUserRoleMappings))}
-                                               onChange={handleChangeSimpleField(nameof(applicationUser.applicationUserRoleMappings))}
+            <TabPane key="1" tab={translate('applicationUsers.tabs.roles.title')}>
+              <RoleContentTable model={applicationUser}
+                                setModel={setApplicationUser}
+                                field={nameof(applicationUser.roles)}
+                                onChange={handleChangeSimpleField(nameof(applicationUser.roles))}
               />
             </TabPane>
-
           </Tabs>
           <div className="d-flex justify-content-end mt-4">
             <button className="btn btn-sm btn-primary" onClick={handleSave}>

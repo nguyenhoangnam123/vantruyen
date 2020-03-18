@@ -12,10 +12,11 @@ import {formItemLayout} from 'config/ant-design/form';
 import {Col, Row} from 'antd/lib/grid';
 import AdvancedIdFilter from 'components/AdvancedIdFilter/AdvancedIdFilter';
 import CollapsibleCard from 'components/CollapsibleCard/CollapsibleCard';
-import {View} from 'models/View';
-import {Permission} from 'models/Permission';
-import {PermissionFilter} from 'models/PermissionFilter';
 
+import { viewRepository } from 'views/ViewView/ViewRepository';
+import { View } from 'models/View';
+import { Permission } from 'models/Permission';
+import { PermissionFilter } from 'models/PermissionFilter';
 const {Item: FormItem} = Form;
 
 function PermissionTable(props: ContentTableProps<View, Permission>) {
@@ -80,9 +81,8 @@ function PermissionTable(props: ContentTableProps<View, Permission>) {
         sortOrder: getOrderTypeForTable<View>(nameof(dataSource[0].name), sorter),
         render(name: string, permission: Permission) {
           return (
-            <FormItem
-              validateStatus={formService.getValidationStatus<Permission>(permission.errors, nameof(permission.name))}
-              help={permission.errors?.name}
+            <FormItem validateStatus={formService.getValidationStatus<Permission>(permission.errors, nameof(permission.name))}
+                      help={ permission.errors?.name }
             >
               <input type="text"
                      className="form-control form-control-sm"
@@ -111,7 +111,7 @@ function PermissionTable(props: ContentTableProps<View, Permission>) {
     ],
     [dataSource, handleDelete, pagination, sorter, translate],
   );
-  const tableFooter = React.useCallback(
+    const tableFooter = React.useCallback(
     () => (
       <>
         <button className="btn btn-link" onClick={handleAdd}>
@@ -123,17 +123,17 @@ function PermissionTable(props: ContentTableProps<View, Permission>) {
     [handleAdd, translate],
   );
 
-  return (
+    return (
     <>
-      <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
+    <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
         <Form {...formItemLayout}>
           <Row>
             <Col className="pl-1" span={8}>
               <FormItem className="mb-0" label={translate('views.id')}>
-                <AdvancedIdFilter filterType={nameof(permissionFilter.viewId.equal)}
-                                  filter={permissionFilter.viewId}
-                                  onChange={handleFilter(nameof(permissionFilter.viewId))}
-                                  className="w-100"/>
+                {/* <AdvancedIdFilter filterType={nameof(permissionFilter.viewId.equal)}
+                                      filter={ permissionFilter.viewId }
+                                      onChange={handleFilter(nameof(permissionFilter.viewId))}
+                                      className="w-100"/> */}
               </FormItem>
             </Col>
           </Row>

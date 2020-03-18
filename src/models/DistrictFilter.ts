@@ -1,10 +1,9 @@
-import {ModelFilter} from 'core/models/ModelFilter';
-import {IdFilter, StringFilter} from 'core/filters';
+import { IdFilter, StringFilter, NumberFilter, DateFilter  } from 'core/filters';
+import { ModelFilter } from 'core/models';
 
-export class DistrictFilter extends ModelFilter {
-  public id: IdFilter = new IdFilter();
-
-  public name: StringFilter = new StringFilter();
-
-  public provinceId: IdFilter = new IdFilter();
+export class DistrictFilter extends ModelFilter  {
+  public id?: IdFilter = new IdFilter();
+  public name?: StringFilter = new StringFilter();
+  public priority?: NumberFilter = new NumberFilter();
+  public provinceId?: IdFilter = new IdFilter();
 }

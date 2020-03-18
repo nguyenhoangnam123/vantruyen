@@ -1,17 +1,61 @@
-export const APPLICATION_USER_ROUTE: string = '/applicationUsers';
-
+export const APPLICATION_USER_ROUTE: string = '/applicationUser';
+export const APP_USER_ROUTE: string = '/appUsers';
+export const ORGANIZATION_ROUTE: string = '/organizations';
+export const STORE_GROUPING_ROUTE: string = '/stoneGroupings';
+export const DISTRICT_ROUTE: string = '/districts';
 export const FIELD_ROUTE: string = '/fields';
-
+export const IMAGE_ROUTE: string = '/images';
+export const ITEM_ROUTE: string = '/items';
 export const PAGE_ROUTE: string = '/pages';
-
-export const PERMISSION_ROUTE: string = '/permissions';
-
-export const PROVIDER_ROUTE: string = '/providers';
-
+export const PERMISSION_ROUTE: string = '/permissions'; export const API_APP_USER_ROUTE: string = 'rpc/portal/app-user';
+export const API_APP_USER_ROLE_MAPPING_ROUTE: string = 'rpc/portal/app-user-role-mapping';
+export const API_BRAND_ROUTE: string = 'rpc/portal/brand';
+export const API_DISTRICT_ROUTE: string = 'rpc/portal/district';
+export const API_FIELD_ROUTE: string = 'rpc/portal/field';
+export const API_IMAGE_ROUTE: string = 'rpc/portal/image';
+export const API_ITEM_ROUTE: string = 'rpc/portal/item';
+export const API_MENU_ROUTE: string = 'rpc/portal/menu';
+export const API_ORGANIZATION_ROUTE: string = 'rpc/portal/organization';
+export const API_PAGE_ROUTE: string = 'rpc/portal/page';
+export const API_PERMISSION_ROUTE: string = 'rpc/portal/permission';
+export const API_PERMISSION_FIELD_MAPPING_ROUTE: string = 'rpc/portal/permission-field-mapping';
+export const API_PERMISSION_PAGE_MAPPING_ROUTE: string = 'rpc/portal/permission-page-mapping';
+export const API_PRODUCT_ROUTE: string = 'rpc/portal/product';
+export const API_PRODUCT_GROUPING_ROUTE: string = 'rpc/portal/product-grouping';
+export const API_PRODUCT_IMAGE_MAPPING_ROUTE: string = 'rpc/portal/product-image-mapping';
+export const API_PRODUCT_TYPE_ROUTE: string = 'rpc/portal/product-type';
+export const API_PROVINCE_ROUTE: string = 'rpc/portal/province';
+export const API_ROLE_ROUTE: string = 'rpc/portal/role';
+export const API_STORE_ROUTE: string = 'rpc/portal/store';
+export const API_STORE_GROUPING_ROUTE: string = 'rpc/portal/store-grouping';
+export const API_STORE_IMAGE_MAPPING_ROUTE: string = 'rpc/portal/store-image-mapping';
+export const API_STORE_TYPE_ROUTE: string = 'rpc/portal/store-type';
+export const API_SUPPLIER_ROUTE: string = 'rpc/portal/supplier';
+export const API_TAX_TYPE_ROUTE: string = 'rpc/portal/tax-type';
+export const API_UNIT_OF_MEASURE_ROUTE: string = 'rpc/portal/unit-of-measure';
+export const API_UNIT_OF_MEASURE_GROUPING_CONTENT_ROUTE: string = 'rpc/portal/unit-of-measure-grouping-content';
+export const API_UNIT_OF_MEASURE_GROUPING_ROUTE: string = 'rpc/portal/unit-of-measure-grouping';
+export const API_VARIATION_ROUTE: string = 'rpc/portal/variation';
+export const API_VARIATION_GROUPING_ROUTE: string = 'rpc/portal/variation-grouping';
+export const API_WARD_ROUTE: string = 'rpc/portal/ward';
+export const PRODUCT_ROUTE: string = '/products';
+export const PRODUCT_GROUPING_ROUTE: string = '/productGroupings';
+export const PRODUCT_TYPE_ROUTE: string = '/productTypes';
+export const PROPERTY_ROUTE: string = '/properties';
+export const PROPERTY_TYPE_ROUTE: string = '/propertyTypes';
+export const PROPERTY_VALUE_ROUTE: string = '/propertyValues';
+export const PROVINCE_ROUTE: string = '/provinces';
 export const ROLE_ROUTE: string = '/roles';
-
-export const SITE_ROUTE: string = '/sites';
-
+export const STORE_TYPE_ROUTE: string = '/storeTypes';
+export const STORE_ROUTE: string = '/stores';
+export const STORE_LEVEL_ROUTE: string = '/storeLevels';
+export const SUPPLIER_ROUTE: string = '/suppliers';
+export const UNIT_OF_MEASURE_ROUTE: string = '/unitOfMeasures';
+export const TAX_TYPE_ROUTE: string = '/taxTypes';
+export const UNIT_OF_MEASURE_GROUPING_CONTENT_ROUTE: string = '/unitOfMeasureGroupingContents';
+export const UNIT_OF_MEASURE_GROUPING_ROUTE: string = '/unitOfMeasureGroupings';
+export const VARIATION_ROUTE: string = '/variations';
+export const VARIATION_GROUPING_ROUTE: string = '/variationGroupings';
 export const VIEW_ROUTE: string = '/views';
-
+export const WARD_ROUTE: string = '/wards';
 export const ROOT_ROUTE: string = '/';

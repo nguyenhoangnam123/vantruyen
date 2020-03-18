@@ -1,4 +1,4 @@
-import {IdFilter, StringFilter} from 'core/filters';
+import {IdFilter, NumberFilter, StringFilter} from 'core/filters';
 import {ModelFilter} from 'core/models';
 
 export class ApplicationUserFilter extends ModelFilter {
@@ -15,4 +15,8 @@ export class ApplicationUserFilter extends ModelFilter {
   public phone?: StringFilter = new StringFilter();
 
   public userStatusId?: IdFilter = new IdFilter();
+
+  public retryTime?: NumberFilter = new NumberFilter();
+
+  public providerId?: IdFilter = new IdFilter();
 }

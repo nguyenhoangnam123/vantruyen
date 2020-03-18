@@ -1,4 +1,6 @@
 import React from 'react';
+import DatePicker from 'antd/lib/date-picker';
+import Switch from 'antd/lib/switch';
 import {crudService, routerService} from 'core/services';
 import Spin from 'antd/lib/spin';
 import Card from 'antd/lib/card';
@@ -6,16 +8,24 @@ import Form from 'antd/lib/form';
 import Tabs from 'antd/lib/tabs';
 import {useTranslation} from 'react-i18next';
 import {generalLanguageKeys} from 'config/consts';
+import Select from 'components/Select/Select';
 import nameof from 'ts-nameof.macro';
 import {defaultDetailFormLayout} from 'config/ant-design/form';
 import InputNumber from 'components/InputNumber/InputNumber';
 import {formService} from 'core/services/FormService';
 import './RoleDetail.scss';
-import {roleRepository} from 'views/RoleView/RoleRepository';
-import {Role} from 'models/Role';
+import { roleRepository }  from 'views/RoleView/RoleRepository';
+import { Role } from 'models/Role';
 
-import ApplicationUserRoleMappingTable
-  from 'views/RoleView/RoleDetail/ApplicationUserRoleMappingTable/ApplicationUserRoleMappingTable';
+
+
+
+
+
+import AppUserRoleMappingTable from 'views/RoleView/RoleDetail/AppUserRoleMappingTable/AppUserRoleMappingTable';
+
+
+
 
 const {TabPane} = Tabs;
 
@@ -25,10 +35,10 @@ function RoleDetail() {
   const [translate] = useTranslation();
 
   // Service goback
-  const [handleGoBack] = routerService.useGoBack();
+    const [handleGoBack] = routerService.useGoBack();
 
   // Hooks, useDetail, useChangeHandler
-  const [
+    const [
     role,
     setRole,
     loading,
@@ -41,7 +51,7 @@ function RoleDetail() {
     roleRepository.save,
   );
 
-  const [
+    const [
     handleChangeSimpleField,
     handleChangeObjectField,
     handleChangeDateField,
@@ -80,25 +90,34 @@ function RoleDetail() {
 
             <FormItem label={translate('roles.id')}
                       validateStatus={formService.getValidationStatus<Role>(role.errors, nameof(role.id))}
-                      help={role.errors?.id}
+                      help={ role.errors?.id }
             >
-              <InputNumber defaultValue={role.id}
+              <InputNumber defaultValue={ role.id }
                            className="w-100"
                            onChange={handleChangeSimpleField(nameof(role.id))}
               />
             </FormItem>
 
 
+
+
             <FormItem label={translate('roles.name')}
                       validateStatus={formService.getValidationStatus<Role>(role.errors, nameof(role.name))}
-                      help={role.errors?.name}
+                      help={ role.errors?.name }
             >
               <input type="text"
-                     defaultValue={role.name}
-                     className="form-control form-control-sm"
-                     onChange={handleChangeSimpleField(nameof(role.name))}
+                           defaultValue={ role.name }
+                           className="form-control form-control-sm"
+                           onChange={handleChangeSimpleField(nameof(role.name))}
               />
             </FormItem>
+
+
+
+
+
+
+
 
 
           </Form>
@@ -113,10 +132,10 @@ function RoleDetail() {
           <Tabs defaultActiveKey="1">
 
             <TabPane key="1" tab={translate('role.tabs.roles.title')}>
-              <ApplicationUserRoleMappingTable model={role}
-                                               setModel={setRole}
-                                               field={(nameof(role.applicationUserRoleMappings))}
-                                               onChange={handleChangeSimpleField(nameof(role.applicationUserRoleMappings))}
+              <AppUserRoleMappingTable model={ role }
+                                setModel={ setRole }
+                                field={(nameof(role.appUserRoleMappings))}
+                                onChange={handleChangeSimpleField(nameof(role.appUserRoleMappings))}
               />
             </TabPane>
 

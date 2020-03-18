@@ -1,22 +1,23 @@
 import React from 'react';
-import {ContentTableProps} from 'react3l';
-import {crudService, formService} from 'core/services';
-import Table, {ColumnProps} from 'antd/lib/table';
-import {tableService} from 'services';
-import {getOrderTypeForTable, renderMasterIndex} from 'helpers/ant-design/table';
+import { ContentTableProps } from 'react3l';
+import { crudService, formService } from 'core/services';
+import Table, { ColumnProps } from 'antd/lib/table';
+import { tableService } from 'services';
+import { getOrderTypeForTable, renderMasterIndex } from 'helpers/ant-design/table';
 import nameof from 'ts-nameof.macro';
-import {useTranslation} from 'react-i18next';
-import {generalColumnWidths, generalLanguageKeys} from 'config/consts';
+import { useTranslation } from 'react-i18next';
+import { generalColumnWidths, generalLanguageKeys } from 'config/consts';
 import Form from 'antd/lib/form';
-import {formItemLayout} from 'config/ant-design/form';
-import {Col, Row} from 'antd/lib/grid';
+import { formItemLayout } from 'config/ant-design/form';
+import { Col, Row } from 'antd/lib/grid';
 import AdvancedIdFilter from 'components/AdvancedIdFilter/AdvancedIdFilter';
 import CollapsibleCard from 'components/CollapsibleCard/CollapsibleCard';
-import {View} from 'models/View';
-import {Page} from 'models/Page';
-import {PageFilter} from 'models/PageFilter';
 
-const {Item: FormItem} = Form;
+import { viewRepository } from 'views/ViewView/ViewRepository';
+import { View } from 'models/View';
+import { Page } from 'models/Page';
+import { PageFilter } from 'models/PageFilter';
+const { Item: FormItem } = Form;
 
 function PageTable(props: ContentTableProps<View, Page>) {
   const [translate] = useTranslation();
@@ -81,12 +82,12 @@ function PageTable(props: ContentTableProps<View, Page>) {
         render(name: string, page: Page) {
           return (
             <FormItem validateStatus={formService.getValidationStatus<Page>(page.errors, nameof(page.name))}
-                      help={page.errors?.name}
+              help={page.errors?.name}
             >
               <input type="text"
-                     className="form-control form-control-sm"
-                     name={nameof(name)}
-                     defaultValue={name}
+                className="form-control form-control-sm"
+                name={nameof(name)}
+                defaultValue={name}
               />
             </FormItem>
           );
@@ -101,7 +102,7 @@ function PageTable(props: ContentTableProps<View, Page>) {
           return (
             <>
               <button className="btn btn-link mr-2" onClick={handleDelete(params[2])}>
-                <i className="fa fa-trash text-danger"/>
+                <i className="fa fa-trash text-danger" />
               </button>
             </>
           );
@@ -114,7 +115,7 @@ function PageTable(props: ContentTableProps<View, Page>) {
     () => (
       <>
         <button className="btn btn-link" onClick={handleAdd}>
-          <i className="fa fa-plus mr-2"/>
+          <i className="fa fa-plus mr-2" />
           {translate(generalLanguageKeys.actions.create)}
         </button>
       </>
@@ -129,33 +130,33 @@ function PageTable(props: ContentTableProps<View, Page>) {
           <Row>
             <Col className="pl-1" span={8}>
               <FormItem className="mb-0" label={translate('views.id')}>
-                <AdvancedIdFilter filterType={nameof(pageFilter.viewId.equal)}
-                                  filter={pageFilter.viewId}
-                                  onChange={handleFilter(nameof(pageFilter.viewId))}
-                                  className="w-100"/>
+                {/* <AdvancedIdFilter filterType={nameof(pageFilter.viewId.equal)}
+                                      filter={ pageFilter.viewId }
+                                      onChange={handleFilter(nameof(pageFilter.viewId))}
+                                      className="w-100"/> */}
               </FormItem>
             </Col>
           </Row>
         </Form>
         <div className="d-flex justify-content-end mt-2">
           <button className="btn btn-sm btn-primary mr-2" onClick={handleSearch}>
-            <i className="fa fa-search mr-2"/>
+            <i className="fa fa-search mr-2" />
             {translate(generalLanguageKeys.actions.filter)}
           </button>
           <button className="btn btn-sm btn-outline-secondary text-dark" onClick={handleReset}>
-            <i className="fa mr-2 fa-times"/>
+            <i className="fa mr-2 fa-times" />
             {translate(generalLanguageKeys.actions.reset)}
           </button>
         </div>
       </CollapsibleCard>
       <Table pagination={pagination}
-             dataSource={dataSource}
-             columns={columns}
-             onChange={handleTableChange}
-             tableLayout="fixed"
-             bordered={true}
-             size="small"
-             footer={tableFooter}
+        dataSource={dataSource}
+        columns={columns}
+        onChange={handleTableChange}
+        tableLayout="fixed"
+        bordered={true}
+        size="small"
+        footer={tableFooter}
       />
     </>
   );

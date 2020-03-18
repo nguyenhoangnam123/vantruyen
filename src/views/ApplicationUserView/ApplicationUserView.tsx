@@ -1,8 +1,6 @@
 import React from 'react';
+import {Switch, withRouter} from 'react-router';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
-import {Switch, withRouter} from 'react-router-dom';
-import ApplicationUserDetail from './ApplicationUserDetail/ApplicationUserDetail';
-import ApplicationUserMaster from './ApplicationUserMaster/ApplicationUserMaster';
 import './ApplicationUserView.scss';
 
 function ApplicationUserView(props: RouteConfigComponentProps) {
@@ -10,11 +8,9 @@ function ApplicationUserView(props: RouteConfigComponentProps) {
 
   return (
     <Switch>
-      {route && renderRoutes(route.children)}
+      {route?.routes instanceof Array && renderRoutes(route.routes)}
     </Switch>
   );
 }
-
-export {ApplicationUserMaster, ApplicationUserDetail};
 
 export default withRouter(ApplicationUserView);

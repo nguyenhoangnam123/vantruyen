@@ -2,28 +2,33 @@ import React from 'react';
 import Card from 'antd/lib/card';
 import Spin from 'antd/lib/spin';
 import Form from 'antd/lib/form';
-import Table, {ColumnProps} from 'antd/lib/table';
-import {Col, Row} from 'antd/lib/grid';
+import Table, { ColumnProps } from 'antd/lib/table';
+import { Col, Row } from 'antd/lib/grid';
 import Descriptions from 'antd/lib/descriptions';
-import {crudService, routerService} from 'core/services';
-import {getOrderTypeForTable, renderMasterIndex} from 'helpers/ant-design/table';
-import {useTranslation} from 'react-i18next';
+import { crudService, routerService } from 'core/services';
+import {
+  getOrderTypeForTable,
+  renderMasterIndex,
+} from 'helpers/ant-design/table';
+import { useTranslation } from 'react-i18next';
 import nameof from 'ts-nameof.macro';
-import {tableService} from 'services';
-import {formItemLayout} from 'config/ant-design/form';
+import { tableService } from 'services';
+import { formItemLayout } from 'config/ant-design/form';
 import AdvancedStringFilter from 'components/AdvancedStringFilter/AdvancedStringFilter';
 import AdvancedIdFilter from 'components/AdvancedIdFilter/AdvancedIdFilter';
+import AdvancedNumberFilter from 'components/AdvancedNumberFilter/AdvancedNumberFilter';
 import MasterPreview from 'components/MasterPreview/MasterPreview';
-import {generalColumnWidths, generalLanguageKeys} from 'config/consts';
+import { generalColumnWidths, generalLanguageKeys } from 'config/consts';
 
-import {PERMISSION_ROUTE} from 'config/route-consts';
-import {API_PERMISSION_ROUTE} from 'config/api-consts';
+import { PERMISSION_ROUTE } from 'config/route-consts';
+import { API_PERMISSION_ROUTE } from 'config/api-consts';
 import './PermissionMaster.scss';
-import {permissionRepository} from 'views/PermissionView/PermissionRepository';
-import {Permission} from 'models/Permission';
-import {PermissionFilter} from 'models/PermissionFilter';
+import { permissionRepository }  from 'views/PermissionView/PermissionRepository';
+import { Permission } from 'models/Permission';
+import { PermissionFilter} from 'models/PermissionFilter';
 
-const {Item: FormItem} = Form;
+
+const { Item: FormItem } = Form;
 
 function PermissionMaster() {
   const [translate] = useTranslation();
@@ -50,7 +55,7 @@ function PermissionMaster() {
     permissionRepository.count,
     permissionRepository.list,
     permissionRepository.get,
-  );
+    );
 
   const [handleGoCreate, handleGoDetail] = routerService.useMasterNavigation(PERMISSION_ROUTE);
   const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total);
@@ -75,13 +80,13 @@ function PermissionMaster() {
 
   // Reference  -------------------------------------------------------------------------------------------------------------------------------------
 
-  const [roleFilter, setRoleFilter] = React.useState<PermissionFilter>(new PermissionFilter());
+  const [menuFilter, setMenuFilter] = React.useState<PermissionFilter>(new PermissionFilter());
 
-  const [viewFilter, setViewFilter] = React.useState<PermissionFilter>(new PermissionFilter());
+  const [roleFilter, setRoleFilter] = React.useState<PermissionFilter>(new PermissionFilter());
 
   // ------------------------------------------------------------------------------------------------------------------------------------------------
 
-  // Delete handlers -------------------------------------------------------------------------------------------------------------------------------
+   // Delete handlers -------------------------------------------------------------------------------------------------------------------------------
   const [handleDelete] = tableService.useDeleteHandler<Permission>(
     permissionRepository.delete,
     setLoading,
@@ -98,14 +103,14 @@ function PermissionMaster() {
   const columns: ColumnProps<Permission>[] = React.useMemo(
     () => {
       return [
-        {
-          title: translate(generalLanguageKeys.columns.index),
-          key: nameof(generalLanguageKeys.index),
-          width: generalColumnWidths.index,
-          render: renderMasterIndex<Permission>(pagination),
-        },
+      {
+        title: translate(generalLanguageKeys.columns.index),
+        key: nameof(generalLanguageKeys.index),
+        width: generalColumnWidths.index,
+        render: renderMasterIndex<Permission>(pagination),
+      },
 
-        {
+      {
           title: translate('permissions.id'),
           key: nameof(list[0].id),
           dataIndex: nameof(list[0].id),
@@ -115,9 +120,9 @@ function PermissionMaster() {
             sorter,
           ),
 
-        },
+      },
 
-        {
+      {
           title: translate('permissions.name'),
           key: nameof(list[0].name),
           dataIndex: nameof(list[0].name),
@@ -127,9 +132,9 @@ function PermissionMaster() {
             sorter,
           ),
 
-        },
+      },
 
-        {
+      {
           title: translate('permissions.roleId'),
           key: nameof(list[0].roleId),
           dataIndex: nameof(list[0].roleId),
@@ -139,21 +144,33 @@ function PermissionMaster() {
             sorter,
           ),
 
-        },
+      },
 
-        {
-          title: translate('permissions.viewId'),
-          key: nameof(list[0].viewId),
-          dataIndex: nameof(list[0].viewId),
+      {
+          title: translate('permissions.menuId'),
+          key: nameof(list[0].menuId),
+          dataIndex: nameof(list[0].menuId),
           sorter: true,
           sortOrder: getOrderTypeForTable<Permission>(
-            nameof(list[0].viewId),
+            nameof(list[0].menuId),
             sorter,
           ),
 
-        },
+      },
 
-        {
+      {
+          title: translate('permissions.menu'),
+          key: nameof(list[0].menu),
+          dataIndex: nameof(list[0].menu),
+          sorter: true,
+          sortOrder: getOrderTypeForTable<Permission>(
+            nameof(list[0].menu),
+            sorter,
+          ),
+
+      },
+
+      {
           title: translate('permissions.role'),
           key: nameof(list[0].role),
           dataIndex: nameof(list[0].role),
@@ -163,51 +180,39 @@ function PermissionMaster() {
             sorter,
           ),
 
-        },
+      },
 
-        {
-          title: translate('permissions.view'),
-          key: nameof(list[0].view),
-          dataIndex: nameof(list[0].view),
-          sorter: true,
-          sortOrder: getOrderTypeForTable<Permission>(
-            nameof(list[0].view),
-            sorter,
-          ),
-
+      {
+        title: translate(generalLanguageKeys.actions.label),
+        key: nameof(generalLanguageKeys.columns.actions),
+        dataIndex: nameof(list[0].id),
+        width: generalColumnWidths.actions,
+        align: 'center',
+        render(id: number, permission: Permission) {
+          return (
+            <div className="d-flex justify-content-center">
+              <button
+                className="btn btn-sm btn-link text-warning"
+                onClick={handleOpenPreview(id)}
+              >
+                <i className="fa fa-eye" />
+              </button>
+              <button
+                className="btn btn-sm btn-link"
+                onClick={handleGoDetail(id)}
+              >
+                <i className="fa fa-edit" />
+              </button>
+              <button
+                className="btn btn-sm btn-link text-danger"
+                onClick={handleDelete(permission)}
+              >
+                <i className="fa fa-trash" />
+              </button>
+            </div>
+          );
         },
-
-        {
-          title: translate(generalLanguageKeys.actions.label),
-          key: nameof(generalLanguageKeys.columns.actions),
-          dataIndex: nameof(list[0].id),
-          width: generalColumnWidths.actions,
-          align: 'center',
-          render(id: number, permission: Permission) {
-            return (
-              <div className="d-flex justify-content-center">
-                <button
-                  className="btn btn-sm btn-link text-warning"
-                  onClick={handleOpenPreview(id)}
-                >
-                  <i className="fa fa-eye"/>
-                </button>
-                <button
-                  className="btn btn-sm btn-link"
-                  onClick={handleGoDetail(id)}
-                >
-                  <i className="fa fa-edit"/>
-                </button>
-                <button
-                  className="btn btn-sm btn-link text-danger"
-                  onClick={handleDelete(permission)}
-                >
-                  <i className="fa fa-trash"/>
-                </button>
-              </div>
-            );
-          },
-        },
+      },
       ];
     },
     // tslint:disable-next-line:max-line-length
@@ -238,14 +243,15 @@ function PermissionMaster() {
                 >
 
 
-                  <AdvancedIdFilter
-                    filterType={nameof(filter.id.equal)}
-                    filter={filter.id}
-                    onChange={handleFilter(nameof(filter.id))}
-                    className="w-100"
-                  />
+                    <AdvancedIdFilter
+                      filterType={nameof(filter.id.equal)}
+                      filter={ filter.id }
+                      onChange={handleFilter(nameof(filter.id))}
+                      className="w-100"
+                    />
                 </FormItem>
               </Col>
+
 
 
               <Col className="pl-1" span={8}>
@@ -253,16 +259,28 @@ function PermissionMaster() {
                   className="mb-0"
                   label={translate('permissions.name')}
                 >
-                  <AdvancedStringFilter
-                    filterType={nameof(filter.name.startWith)}
-                    filter={filter.id}
-                    onChange={handleFilter(nameof(previewModel.id))}
-                    className="w-100"
-                  />
+                    <AdvancedStringFilter
+                      filterType={nameof(filter.name.startWith)}
+                      filter={filter.id}
+                      onChange={handleFilter(nameof(previewModel.id))}
+                      className="w-100"
+                    />
 
 
                 </FormItem>
               </Col>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             </Row>
@@ -278,7 +296,7 @@ function PermissionMaster() {
               className="btn btn-sm btn-outline-secondary text-dark"
               onClick={handleReset}
             >
-              <i className="fa mr-2 fa-times"/>
+              <i className="fa mr-2 fa-times" />
               {translate(generalLanguageKeys.actions.reset)}
             </button>
           </div>
@@ -302,7 +320,7 @@ function PermissionMaster() {
                     className="btn btn-sm btn-primary mr-2"
                     onClick={handleGoCreate}
                   >
-                    <i className="fa mr-2 fa-plus"/>
+                    <i className="fa mr-2 fa-plus" />
                     {translate(generalLanguageKeys.actions.create)}
                   </button>
                   <button
@@ -310,21 +328,21 @@ function PermissionMaster() {
                     disabled={!hasSelected}
                     onClick={handleBulkDelete}
                   >
-                    <i className="fa mr-2 fa-trash"/>
+                    <i className="fa mr-2 fa-trash" />
                     {translate(generalLanguageKeys.actions.delete)}
                   </button>
                   <label
                     className="btn btn-sm btn-outline-primary mr-2 mb-0"
                     htmlFor="master-import"
                   >
-                    <i className="fa mr-2 fa-upload"/>
+                    <i className="fa mr-2 fa-upload" />
                     {translate(generalLanguageKeys.actions.import)}
                   </label>
                   <button
                     className="btn btn-sm btn-outline-primary mr-2"
                     onClick={handleExport}
                   >
-                    <i className="fa mr-2 fa-download"/>
+                    <i className="fa mr-2 fa-download" />
                     {translate(generalLanguageKeys.actions.export)}
                   </button>
                 </div>
@@ -353,20 +371,25 @@ function PermissionMaster() {
             <Descriptions title={previewModel.name} bordered>
 
               <Descriptions.Item label={translate('permissions.id')}>
-                {previewModel?.id}
+                { previewModel?.id }
               </Descriptions.Item>
 
 
               <Descriptions.Item label={translate('permissions.name')}>
-                {previewModel?.name}
+                { previewModel?.name }
               </Descriptions.Item>
 
 
-            </Descriptions>
+
+
+
+
+
+                          </Descriptions>
           </Spin>
         </MasterPreview>
       </Card>
-    </div>
+      </div>
   );
 }
 

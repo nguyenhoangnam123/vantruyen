@@ -2,28 +2,33 @@ import React from 'react';
 import Card from 'antd/lib/card';
 import Spin from 'antd/lib/spin';
 import Form from 'antd/lib/form';
-import Table, {ColumnProps} from 'antd/lib/table';
-import {Col, Row} from 'antd/lib/grid';
+import Table, { ColumnProps } from 'antd/lib/table';
+import { Col, Row } from 'antd/lib/grid';
 import Descriptions from 'antd/lib/descriptions';
-import {crudService, routerService} from 'core/services';
-import {getOrderTypeForTable, renderMasterIndex} from 'helpers/ant-design/table';
-import {useTranslation} from 'react-i18next';
+import { crudService, routerService } from 'core/services';
+import {
+  getOrderTypeForTable,
+  renderMasterIndex,
+} from 'helpers/ant-design/table';
+import { useTranslation } from 'react-i18next';
 import nameof from 'ts-nameof.macro';
-import {tableService} from 'services';
-import {formItemLayout} from 'config/ant-design/form';
+import { tableService } from 'services';
+import { formItemLayout } from 'config/ant-design/form';
 import AdvancedStringFilter from 'components/AdvancedStringFilter/AdvancedStringFilter';
 import AdvancedIdFilter from 'components/AdvancedIdFilter/AdvancedIdFilter';
+import AdvancedNumberFilter from 'components/AdvancedNumberFilter/AdvancedNumberFilter';
 import MasterPreview from 'components/MasterPreview/MasterPreview';
-import {generalColumnWidths, generalLanguageKeys} from 'config/consts';
+import { generalColumnWidths, generalLanguageKeys } from 'config/consts';
 
-import {ROLE_ROUTE} from 'config/route-consts';
-import {API_ROLE_ROUTE} from 'config/api-consts';
+import { ROLE_ROUTE } from 'config/route-consts';
+import { API_ROLE_ROUTE } from 'config/api-consts';
 import './RoleMaster.scss';
-import {roleRepository} from 'views/RoleView/RoleRepository';
-import {Role} from 'models/Role';
-import {RoleFilter} from 'models/RoleFilter';
+import { roleRepository }  from 'views/RoleView/RoleRepository';
+import { Role } from 'models/Role';
+import { RoleFilter} from 'models/RoleFilter';
 
-const {Item: FormItem} = Form;
+
+const { Item: FormItem } = Form;
 
 function RoleMaster() {
   const [translate] = useTranslation();
@@ -50,7 +55,7 @@ function RoleMaster() {
     roleRepository.count,
     roleRepository.list,
     roleRepository.get,
-  );
+    );
 
   const [handleGoCreate, handleGoDetail] = routerService.useMasterNavigation(ROLE_ROUTE);
   const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total);
@@ -77,7 +82,7 @@ function RoleMaster() {
 
   // ------------------------------------------------------------------------------------------------------------------------------------------------
 
-  // Delete handlers -------------------------------------------------------------------------------------------------------------------------------
+   // Delete handlers -------------------------------------------------------------------------------------------------------------------------------
   const [handleDelete] = tableService.useDeleteHandler<Role>(
     roleRepository.delete,
     setLoading,
@@ -94,14 +99,14 @@ function RoleMaster() {
   const columns: ColumnProps<Role>[] = React.useMemo(
     () => {
       return [
-        {
-          title: translate(generalLanguageKeys.columns.index),
-          key: nameof(generalLanguageKeys.index),
-          width: generalColumnWidths.index,
-          render: renderMasterIndex<Role>(pagination),
-        },
+      {
+        title: translate(generalLanguageKeys.columns.index),
+        key: nameof(generalLanguageKeys.index),
+        width: generalColumnWidths.index,
+        render: renderMasterIndex<Role>(pagination),
+      },
 
-        {
+      {
           title: translate('roles.id'),
           key: nameof(list[0].id),
           dataIndex: nameof(list[0].id),
@@ -111,9 +116,9 @@ function RoleMaster() {
             sorter,
           ),
 
-        },
+      },
 
-        {
+      {
           title: translate('roles.name'),
           key: nameof(list[0].name),
           dataIndex: nameof(list[0].name),
@@ -123,9 +128,9 @@ function RoleMaster() {
             sorter,
           ),
 
-        },
+      },
 
-        {
+      {
           title: translate('roles.permissions'),
           key: nameof(list[0].permissions),
           dataIndex: nameof(list[0].permissions),
@@ -135,39 +140,39 @@ function RoleMaster() {
             sorter,
           ),
 
-        },
+      },
 
-        {
-          title: translate(generalLanguageKeys.actions.label),
-          key: nameof(generalLanguageKeys.columns.actions),
-          dataIndex: nameof(list[0].id),
-          width: generalColumnWidths.actions,
-          align: 'center',
-          render(id: number, role: Role) {
-            return (
-              <div className="d-flex justify-content-center">
-                <button
-                  className="btn btn-sm btn-link text-warning"
-                  onClick={handleOpenPreview(id)}
-                >
-                  <i className="fa fa-eye"/>
-                </button>
-                <button
-                  className="btn btn-sm btn-link"
-                  onClick={handleGoDetail(id)}
-                >
-                  <i className="fa fa-edit"/>
-                </button>
-                <button
-                  className="btn btn-sm btn-link text-danger"
-                  onClick={handleDelete(role)}
-                >
-                  <i className="fa fa-trash"/>
-                </button>
-              </div>
-            );
-          },
+      {
+        title: translate(generalLanguageKeys.actions.label),
+        key: nameof(generalLanguageKeys.columns.actions),
+        dataIndex: nameof(list[0].id),
+        width: generalColumnWidths.actions,
+        align: 'center',
+        render(id: number, role: Role) {
+          return (
+            <div className="d-flex justify-content-center">
+              <button
+                className="btn btn-sm btn-link text-warning"
+                onClick={handleOpenPreview(id)}
+              >
+                <i className="fa fa-eye" />
+              </button>
+              <button
+                className="btn btn-sm btn-link"
+                onClick={handleGoDetail(id)}
+              >
+                <i className="fa fa-edit" />
+              </button>
+              <button
+                className="btn btn-sm btn-link text-danger"
+                onClick={handleDelete(role)}
+              >
+                <i className="fa fa-trash" />
+              </button>
+            </div>
+          );
         },
+      },
       ];
     },
     // tslint:disable-next-line:max-line-length
@@ -198,14 +203,15 @@ function RoleMaster() {
                 >
 
 
-                  <AdvancedIdFilter
-                    filterType={nameof(filter.id.equal)}
-                    filter={filter.id}
-                    onChange={handleFilter(nameof(filter.id))}
-                    className="w-100"
-                  />
+                    <AdvancedIdFilter
+                      filterType={nameof(filter.id.equal)}
+                      filter={ filter.id }
+                      onChange={handleFilter(nameof(filter.id))}
+                      className="w-100"
+                    />
                 </FormItem>
               </Col>
+
 
 
               <Col className="pl-1" span={8}>
@@ -213,16 +219,20 @@ function RoleMaster() {
                   className="mb-0"
                   label={translate('roles.name')}
                 >
-                  <AdvancedStringFilter
-                    filterType={nameof(filter.name.startWith)}
-                    filter={filter.id}
-                    onChange={handleFilter(nameof(previewModel.id))}
-                    className="w-100"
-                  />
+                    <AdvancedStringFilter
+                      filterType={nameof(filter.name.startWith)}
+                      filter={filter.id}
+                      onChange={handleFilter(nameof(previewModel.id))}
+                      className="w-100"
+                    />
 
 
                 </FormItem>
               </Col>
+
+
+
+
 
 
             </Row>
@@ -238,7 +248,7 @@ function RoleMaster() {
               className="btn btn-sm btn-outline-secondary text-dark"
               onClick={handleReset}
             >
-              <i className="fa mr-2 fa-times"/>
+              <i className="fa mr-2 fa-times" />
               {translate(generalLanguageKeys.actions.reset)}
             </button>
           </div>
@@ -262,7 +272,7 @@ function RoleMaster() {
                     className="btn btn-sm btn-primary mr-2"
                     onClick={handleGoCreate}
                   >
-                    <i className="fa mr-2 fa-plus"/>
+                    <i className="fa mr-2 fa-plus" />
                     {translate(generalLanguageKeys.actions.create)}
                   </button>
                   <button
@@ -270,21 +280,21 @@ function RoleMaster() {
                     disabled={!hasSelected}
                     onClick={handleBulkDelete}
                   >
-                    <i className="fa mr-2 fa-trash"/>
+                    <i className="fa mr-2 fa-trash" />
                     {translate(generalLanguageKeys.actions.delete)}
                   </button>
                   <label
                     className="btn btn-sm btn-outline-primary mr-2 mb-0"
                     htmlFor="master-import"
                   >
-                    <i className="fa mr-2 fa-upload"/>
+                    <i className="fa mr-2 fa-upload" />
                     {translate(generalLanguageKeys.actions.import)}
                   </label>
                   <button
                     className="btn btn-sm btn-outline-primary mr-2"
                     onClick={handleExport}
                   >
-                    <i className="fa mr-2 fa-download"/>
+                    <i className="fa mr-2 fa-download" />
                     {translate(generalLanguageKeys.actions.export)}
                   </button>
                 </div>
@@ -313,20 +323,21 @@ function RoleMaster() {
             <Descriptions title={previewModel.name} bordered>
 
               <Descriptions.Item label={translate('roles.id')}>
-                {previewModel?.id}
+                { previewModel?.id }
               </Descriptions.Item>
 
 
               <Descriptions.Item label={translate('roles.name')}>
-                {previewModel?.name}
+                { previewModel?.name }
               </Descriptions.Item>
 
 
-            </Descriptions>
+
+                          </Descriptions>
           </Spin>
         </MasterPreview>
       </Card>
-    </div>
+      </div>
   );
 }
 

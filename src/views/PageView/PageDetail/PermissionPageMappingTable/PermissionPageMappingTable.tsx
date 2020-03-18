@@ -13,13 +13,11 @@ import {Col, Row} from 'antd/lib/grid';
 import AdvancedIdFilter from 'components/AdvancedIdFilter/AdvancedIdFilter';
 import CollapsibleCard from 'components/CollapsibleCard/CollapsibleCard';
 
-import {pageRepository} from 'views/PageView/PageRepository';
-import {Page} from 'models/Page';
-import {PermissionPageMapping} from 'models/PermissionPageMapping';
-import {PermissionPageMappingFilter} from 'models/PermissionPageMappingFilter';
-import PermissionPageMappingModal
-  from 'views/PageView/PageDetail/PermissionPageMappingModal/PermissionPageMappingModal';
-
+import { pageRepository } from 'views/PageView/PageRepository';
+import { Page } from 'models/Page';
+import { PermissionPageMapping } from 'models/PermissionPageMapping';
+import { PermissionPageMappingFilter } from 'models/PermissionPageMappingFilter';
+import PermissionPageMappingModal from 'views/PageView/PageDetail/PermissionPageMappingModal/PermissionPageMappingModal';
 const {Item: FormItem} = Form;
 
 function PermissionPageMappingTable(props: ContentTableProps<Page, PermissionPageMapping>) {
@@ -41,7 +39,7 @@ function PermissionPageMappingTable(props: ContentTableProps<Page, PermissionPag
     nameof(model.permissionPageMappings),
   );
 
-  const [
+    const [
     loading,
     visible,
     list,
@@ -92,9 +90,8 @@ function PermissionPageMappingTable(props: ContentTableProps<Page, PermissionPag
         sortOrder: getOrderTypeForTable<Page>(nameof(dataSource[0].name), sorter),
         render(name: string, permissionPageMapping: PermissionPageMapping) {
           return (
-            <FormItem
-              validateStatus={formService.getValidationStatus<PermissionPageMapping>(permissionPageMapping.errors, nameof(permissionPageMapping.name))}
-              help={permissionPageMapping.errors?.name}
+            <FormItem validateStatus={formService.getValidationStatus<PermissionPageMapping>(permissionPageMapping.errors, nameof(permissionPageMapping.name))}
+                      help={ permissionPageMapping.errors?.name }
             >
               <input type="text"
                      className="form-control form-control-sm"
@@ -132,7 +129,7 @@ function PermissionPageMappingTable(props: ContentTableProps<Page, PermissionPag
     ),
     [handleOpen, translate],
   );
-  const tableFooter = React.useCallback(
+    const tableFooter = React.useCallback(
     () => (
       <>
         <button className="btn btn-link" onClick={handleAdd}>
@@ -144,29 +141,25 @@ function PermissionPageMappingTable(props: ContentTableProps<Page, PermissionPag
     [handleAdd, translate],
   );
 
-  return (
+    return (
     <>
-      <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
+    <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
         <PermissionPageMappingModal title={translate('page.permissionPageMappingModal.title')}
-                                    selectedList={permissionPageMappings}
-                                    setSelectedList={setPermissionPageMappings}
-                                    list={list}
-                                    total={total}
-                                    isOpen={visible}
-                                    loading={loading}
-                                    toggle={handleClose}
-                                    onClose={handleClose}
-                                    filter={permissionPageMappingFilter}
-                                    setFilter={setPermissionPageMappingFilter}
+                          selectedList={ permissionPageMappings }
+                          setSelectedList={ setPermissionPageMappings }
+                          list={list}
+                          total={total}
+                          isOpen={visible}
+                          loading={loading}
+                          toggle={handleClose}
+                          onClose={handleClose}
+                          filter={ permissionPageMappingFilter }
+                          setFilter={setPermissionPageMappingFilter}
         />
         <Form {...formItemLayout}>
           <Row>
             <Col className="pl-1" span={8}>
               <FormItem className="mb-0" label={translate('pages.id')}>
-                <AdvancedIdFilter filterType={nameof(permissionPageMappingFilter.pageId.equal)}
-                                  filter={permissionPageMappingFilter.pageId}
-                                  onChange={handleFilter(nameof(permissionPageMappingFilter.pageId))}
-                                  className="w-100"/>
               </FormItem>
             </Col>
           </Row>

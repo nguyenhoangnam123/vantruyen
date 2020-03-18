@@ -1,4 +1,6 @@
 import React from 'react';
+import DatePicker from 'antd/lib/date-picker';
+import Switch from 'antd/lib/switch';
 import {crudService, routerService} from 'core/services';
 import Spin from 'antd/lib/spin';
 import Card from 'antd/lib/card';
@@ -12,14 +14,26 @@ import {defaultDetailFormLayout} from 'config/ant-design/form';
 import InputNumber from 'components/InputNumber/InputNumber';
 import {formService} from 'core/services/FormService';
 import './PageDetail.scss';
-import {pageRepository} from 'views/PageView/PageRepository';
-import {Page} from 'models/Page';
+import { pageRepository }  from 'views/PageView/PageRepository';
+import { Page } from 'models/Page';
 
-import {View} from 'models/View';
-import {ViewFilter} from 'models/ViewFilter';
 
-import PermissionPageMappingTable
-  from 'views/PageView/PageDetail/PermissionPageMappingTable/PermissionPageMappingTable';
+
+
+
+
+
+
+
+
+// import { Menu } from 'models/Menu'
+// import { MenuFilter } from 'models/MenuFilter'
+
+
+
+
+import PermissionPageMappingTable from 'views/PageView/PageDetail/PermissionPageMappingTable/PermissionPageMappingTable';
+
 
 const {TabPane} = Tabs;
 
@@ -29,10 +43,10 @@ function PageDetail() {
   const [translate] = useTranslation();
 
   // Service goback
-  const [handleGoBack] = routerService.useGoBack();
+    const [handleGoBack] = routerService.useGoBack();
 
   // Hooks, useDetail, useChangeHandler
-  const [
+    const [
     page,
     setPage,
     loading,
@@ -45,7 +59,7 @@ function PageDetail() {
     pageRepository.save,
   );
 
-  const [
+    const [
     handleChangeSimpleField,
     handleChangeObjectField,
     handleChangeDateField,
@@ -57,13 +71,13 @@ function PageDetail() {
 
   // Reference  -------------------------------------------------------------------------------------------------------------------------------------
 
-  const [viewFilter, setViewFilter] = React.useState<ViewFilter>(new ViewFilter());
+  // const [menuFilter, setMenuFilter] = React.useState<MenuFilter>(new MenuFilter());
 
   // -------------------------------------------------------------------------------------------------------------------------------------------------
 
   // Default List -----------------------------------------------------------------------------------------------------------------------------------
 
-  const defaultViewList: View[] = crudService.useDefaultList<View>(page.view);
+  // const defaultMenuList: Menu[] = crudService.useDefaultList<Menu>(page.menu);
 
   // -------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -88,54 +102,69 @@ function PageDetail() {
 
             <FormItem label={translate('pages.id')}
                       validateStatus={formService.getValidationStatus<Page>(page.errors, nameof(page.id))}
-                      help={page.errors?.id}
+                      help={ page.errors?.id }
             >
-              <InputNumber defaultValue={page.id}
+              <InputNumber defaultValue={ page.id }
                            className="w-100"
                            onChange={handleChangeSimpleField(nameof(page.id))}
               />
             </FormItem>
 
 
+
+
             <FormItem label={translate('pages.name')}
                       validateStatus={formService.getValidationStatus<Page>(page.errors, nameof(page.name))}
-                      help={page.errors?.name}
+                      help={ page.errors?.name }
             >
               <input type="text"
-                     defaultValue={page.name}
-                     className="form-control form-control-sm"
-                     onChange={handleChangeSimpleField(nameof(page.name))}
+                           defaultValue={ page.name }
+                           className="form-control form-control-sm"
+                           onChange={handleChangeSimpleField(nameof(page.name))}
               />
             </FormItem>
+
+
 
 
             <FormItem label={translate('pages.path')}
                       validateStatus={formService.getValidationStatus<Page>(page.errors, nameof(page.path))}
-                      help={page.errors?.path}
+                      help={ page.errors?.path }
             >
               <input type="text"
-                     defaultValue={page.path}
-                     className="form-control form-control-sm"
-                     onChange={handleChangeSimpleField(nameof(page.path))}
+                           defaultValue={ page.path }
+                           className="form-control form-control-sm"
+                           onChange={handleChangeSimpleField(nameof(page.path))}
               />
             </FormItem>
 
 
+
+
+
+
+
             <FormItem label={translate('pages.isDeleted')}
                       validateStatus={formService.getValidationStatus<Page>(page.errors, nameof(page.isDeleted))}
-                      help={page.errors?.isDeleted}
+                      help={ page.errors?.isDeleted }
             >
             </FormItem>
 
 
-            <Select value={page.view?.id}
-                    onChange={handleChangeObjectField(nameof(page.view))}
-                    getList={pageRepository.singleListView}
-                    list={defaultViewList}
-                    modelFilter={viewFilter}
-                    setModelFilter={setViewFilter}
-                    searchField={nameof(viewFilter.id)}
-            />
+
+
+
+
+              {/* <Select value={ page.menu?.id }
+                      onChange={handleChangeObjectField(nameof(page.menu))}
+                      getList={ pageRepository.singleListMenu }
+                      list={ defaultMenuList }
+                      modelFilter={ menuFilter }
+                      setModelFilter={ setMenuFilter }
+                      searchField={nameof(menuFilter.id)}
+              /> */}
+
+
 
 
           </Form>
@@ -150,10 +179,10 @@ function PageDetail() {
           <Tabs defaultActiveKey="1">
 
             <TabPane key="1" tab={translate('page.tabs.roles.title')}>
-              <PermissionPageMappingTable model={page}
-                                          setModel={setPage}
-                                          field={(nameof(page.permissionPageMappings))}
-                                          onChange={handleChangeSimpleField(nameof(page.permissionPageMappings))}
+              <PermissionPageMappingTable model={ page }
+                                setModel={ setPage }
+                                field={(nameof(page.permissionPageMappings))}
+                                onChange={handleChangeSimpleField(nameof(page.permissionPageMappings))}
               />
             </TabPane>
 

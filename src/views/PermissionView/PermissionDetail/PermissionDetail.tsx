@@ -1,4 +1,6 @@
 import React from 'react';
+import DatePicker from 'antd/lib/date-picker';
+import Switch from 'antd/lib/switch';
 import {crudService, routerService} from 'core/services';
 import Spin from 'antd/lib/spin';
 import Card from 'antd/lib/card';
@@ -12,20 +14,32 @@ import {defaultDetailFormLayout} from 'config/ant-design/form';
 import InputNumber from 'components/InputNumber/InputNumber';
 import {formService} from 'core/services/FormService';
 import './PermissionDetail.scss';
-import {permissionRepository} from 'views/PermissionView/PermissionRepository';
-import {Permission} from 'models/Permission';
+import { permissionRepository }  from 'views/PermissionView/PermissionRepository';
+import { Permission } from 'models/Permission';
 
-import {Role} from 'models/Role';
-import {RoleFilter} from 'models/RoleFilter';
 
-import {View} from 'models/View';
-import {ViewFilter} from 'models/ViewFilter';
 
-import PermissionFieldMappingTable
-  from 'views/PermissionView/PermissionDetail/PermissionFieldMappingTable/PermissionFieldMappingTable';
 
-import PermissionPageMappingTable
-  from 'views/PermissionView/PermissionDetail/PermissionPageMappingTable/PermissionPageMappingTable';
+
+
+
+
+// import { Menu } from 'models/Menu'
+// import { MenuFilter } from 'models/MenuFilter'
+
+
+import { Role } from 'models/Role';
+import { RoleFilter } from 'models/RoleFilter';
+
+
+
+
+import PermissionFieldMappingTable from 'views/PermissionView/PermissionDetail/PermissionFieldMappingTable/PermissionFieldMappingTable';
+
+
+
+import PermissionPageMappingTable from 'views/PermissionView/PermissionDetail/PermissionPageMappingTable/PermissionPageMappingTable';
+
 
 const {TabPane} = Tabs;
 
@@ -35,10 +49,10 @@ function PermissionDetail() {
   const [translate] = useTranslation();
 
   // Service goback
-  const [handleGoBack] = routerService.useGoBack();
+    const [handleGoBack] = routerService.useGoBack();
 
   // Hooks, useDetail, useChangeHandler
-  const [
+    const [
     permission,
     setPermission,
     loading,
@@ -51,7 +65,7 @@ function PermissionDetail() {
     permissionRepository.save,
   );
 
-  const [
+    const [
     handleChangeSimpleField,
     handleChangeObjectField,
     handleChangeDateField,
@@ -63,17 +77,17 @@ function PermissionDetail() {
 
   // Reference  -------------------------------------------------------------------------------------------------------------------------------------
 
-  const [roleFilter, setRoleFilter] = React.useState<RoleFilter>(new RoleFilter());
+  // const [menuFilter, setMenuFilter] = React.useState<MenuFilter>(new MenuFilter());
 
-  const [viewFilter, setViewFilter] = React.useState<ViewFilter>(new ViewFilter());
+  const [roleFilter, setRoleFilter] = React.useState<RoleFilter>(new RoleFilter());
 
   // -------------------------------------------------------------------------------------------------------------------------------------------------
 
   // Default List -----------------------------------------------------------------------------------------------------------------------------------
 
-  const defaultRoleList: Role[] = crudService.useDefaultList<Role>(permission.role);
+  // const defaultMenuList: Menu[] = crudService.useDefaultList<Menu>(permission.menu);
 
-  const defaultViewList: View[] = crudService.useDefaultList<View>(permission.view);
+  const defaultRoleList: Role[] = crudService.useDefaultList<Role>(permission.role);
 
   // -------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -98,45 +112,64 @@ function PermissionDetail() {
 
             <FormItem label={translate('permissions.id')}
                       validateStatus={formService.getValidationStatus<Permission>(permission.errors, nameof(permission.id))}
-                      help={permission.errors?.id}
+                      help={ permission.errors?.id }
             >
-              <InputNumber defaultValue={permission.id}
+              <InputNumber defaultValue={ permission.id }
                            className="w-100"
                            onChange={handleChangeSimpleField(nameof(permission.id))}
               />
             </FormItem>
 
 
+
+
             <FormItem label={translate('permissions.name')}
                       validateStatus={formService.getValidationStatus<Permission>(permission.errors, nameof(permission.name))}
-                      help={permission.errors?.name}
+                      help={ permission.errors?.name }
             >
               <input type="text"
-                     defaultValue={permission.name}
-                     className="form-control form-control-sm"
-                     onChange={handleChangeSimpleField(nameof(permission.name))}
+                           defaultValue={ permission.name }
+                           className="form-control form-control-sm"
+                           onChange={handleChangeSimpleField(nameof(permission.name))}
               />
             </FormItem>
 
 
-            <Select value={permission.role?.id}
-                    onChange={handleChangeObjectField(nameof(permission.role))}
-                    getList={permissionRepository.singleListRole}
-                    list={defaultRoleList}
-                    modelFilter={roleFilter}
-                    setModelFilter={setRoleFilter}
-                    searchField={nameof(roleFilter.id)}
-            />
 
 
-            <Select value={permission.view?.id}
-                    onChange={handleChangeObjectField(nameof(permission.view))}
-                    getList={permissionRepository.singleListView}
-                    list={defaultViewList}
-                    modelFilter={viewFilter}
-                    setModelFilter={setViewFilter}
-                    searchField={nameof(viewFilter.id)}
-            />
+
+
+
+
+
+
+
+
+              {/* <Select value={ permission.menu?.id }
+                      onChange={handleChangeObjectField(nameof(permission.menu))}
+                      getList={ permissionRepository.singleListMenu }
+                      list={ defaultMenuList }
+                      modelFilter={ menuFilter }
+                      setModelFilter={ setMenuFilter }
+                      searchField={nameof(menuFilter.id)}
+              /> */}
+
+
+
+
+              <Select value={ permission.role?.id }
+                      onChange={handleChangeObjectField(nameof(permission.role))}
+                      getList={ permissionRepository.singleListRole }
+                      list={ defaultRoleList }
+                      modelFilter={ roleFilter }
+                      setModelFilter={ setRoleFilter }
+                      searchField={nameof(roleFilter.id)}
+              />
+
+
+
+
+
 
 
           </Form>
@@ -151,18 +184,18 @@ function PermissionDetail() {
           <Tabs defaultActiveKey="1">
 
             <TabPane key="1" tab={translate('permission.tabs.roles.title')}>
-              <PermissionFieldMappingTable model={permission}
-                                           setModel={setPermission}
-                                           field={(nameof(permission.permissionFieldMappings))}
-                                           onChange={handleChangeSimpleField(nameof(permission.permissionFieldMappings))}
+              <PermissionFieldMappingTable model={ permission }
+                                setModel={ setPermission }
+                                field={(nameof(permission.permissionFieldMappings))}
+                                onChange={handleChangeSimpleField(nameof(permission.permissionFieldMappings))}
               />
             </TabPane>
 
             <TabPane key="1" tab={translate('permission.tabs.roles.title')}>
-              <PermissionPageMappingTable model={permission}
-                                          setModel={setPermission}
-                                          field={(nameof(permission.permissionPageMappings))}
-                                          onChange={handleChangeSimpleField(nameof(permission.permissionPageMappings))}
+              <PermissionPageMappingTable model={ permission }
+                                setModel={ setPermission }
+                                field={(nameof(permission.permissionPageMappings))}
+                                onChange={handleChangeSimpleField(nameof(permission.permissionPageMappings))}
               />
             </TabPane>
 
