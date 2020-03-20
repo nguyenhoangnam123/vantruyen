@@ -1,9 +1,10 @@
 $themes: (
-        default: (
-        ),
+  default: (
+  ),
 );
+
 $red: #E35B5A;
-$white : #ffffff;
+$white: #ffffff;
 $primary: #23282c;
 
 $sidebar-nav-link-color: $primary;
@@ -13,15 +14,15 @@ $sidebar-nav-link-active-bg: $red;
 $sidebar-nav-link-active-color: $white;
 
 $sidebar-nav-link-hover-bg: $white;
-$sidebar-nav-link-hover-color:$red;
+$sidebar-nav-link-hover-color: $red;
 
-$sidebar-minimizer-bg: $white ;
+$sidebar-minimizer-bg: $white;
 $sidebar-minimizer-hover-bg: $red;
 $sidebar-minimizer-hover-indicator-color: $white;
-$sidebar-minimizer-indicator-color:$red;
+$sidebar-minimizer-indicator-color: $red;
 
 $sidebar-nav-link-icon-color: $primary;
-$sidebar-nav-link-active-icon-color:$white;
+$sidebar-nav-link-active-icon-color: $white;
 
 $sidebar-nav-dropdown-bg: $white;
 $sidebar-nav-dropdown-color: $primary;
@@ -33,37 +34,57 @@ $input-focus-border-color: $red;
 $input-btn-focus-color: rgba($red, 0.25);
 $primary: $red;
 
-.sidebar .nav-link {
-        margin: 2px;
-        padding: 4px;
-        height: 35px;
-}
-.sidebar .nav-dropdown.open .nav-link:hover{
-        color: $red;
-}
+.sidebar {
+  .nav-link {
+    margin: 2px;
+    padding: 4px;
+    height: 35px;
+  }
 
-.sidebar .nav-dropdown.open .nav-link.active {
-        color:$white;
-}
+  .nav-dropdown {
+    &.open {
+      .nav-link {
+        &:hover {
+          color: $red;
+        }
 
-.navbar{
-        justify-content: unset;
-}
-.sidebar .nav-dropdown-items .nav-item a {
+        &.active {
+          color: $white;
+        }
+      }
+    }
+
+    &.active {
+      &:hover {
+        .nav-icon {
+          color: $white;
+        }
+      }
+    }
+  }
+
+  .nav-dropdown-items  {
+    .nav-item  {
+      a {
         padding-left: 14px;
-}
+      }
+    }
+  }
 
-.sidebar .nav-link.active:hover{
+  .nav-link {
+    &:hover {
+      &.active {
         color: $white;
         background: $red;
-}
+      }
 
-.sidebar .nav-link:hover .nav-icon {
+      .nav-icon {
         color: $red;
+      }
+    }
+  }
 }
-.sidebar .nav-link.active:hover .nav-icon {
-        color: $white;
- }
-    
-    
 
+.navbar {
+  justify-content: unset;
+}

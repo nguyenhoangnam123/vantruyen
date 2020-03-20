@@ -17,29 +17,3 @@
 
 // ie fixes
 @import "ie-fix";
-
-@import "mixins";
-
-.page {
-  &.master-page {
-    input {
-      &[type="file"] {
-        &.hidden {
-          @include hidden();
-        }
-      }
-    }
-  }
-}
-
-:root {
-  font-size: 1rem;
-}
-
-.ant-card {
-  &.head-borderless {
-    .ant-card-head {
-      border: none;
-    }
-  }
-}
