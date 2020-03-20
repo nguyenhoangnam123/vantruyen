@@ -1,9 +1,13 @@
+@import "~bootstrap/scss/functions";
+@import "~@coreui/coreui/scss/mixins";
+@import "~@coreui/coreui/scss/variables";
+
 $themes: (
   default: (
   ),
 );
 
-$red: #E35B5A;
+$red: #EE534D;
 $white: #ffffff;
 $primary: #23282c;
 
@@ -32,59 +36,14 @@ $sidebar-bg: $white;
 
 $input-focus-border-color: $red;
 $input-btn-focus-color: rgba($red, 0.25);
-$primary: $red;
 
-.sidebar {
-  .nav-link {
-    margin: 2px;
-    padding: 4px;
-    height: 35px;
-  }
+$primary: $red !global;
 
-  .nav-dropdown {
-    &.open {
-      .nav-link {
-        &:hover {
-          color: $red;
-        }
+$theme-colors: map-merge(
+    $theme-colors,
+    (
+      "primary": $primary,
+    ),
+);
 
-        &.active {
-          color: $white;
-        }
-      }
-    }
-
-    &.active {
-      &:hover {
-        .nav-icon {
-          color: $white;
-        }
-      }
-    }
-  }
-
-  .nav-dropdown-items  {
-    .nav-item  {
-      a {
-        padding-left: 14px;
-      }
-    }
-  }
-
-  .nav-link {
-    &:hover {
-      &.active {
-        color: $white;
-        background: $red;
-      }
-
-      .nav-icon {
-        color: $red;
-      }
-    }
-  }
-}
-
-.navbar {
-  justify-content: unset;
-}
+$link-color: $primary;
