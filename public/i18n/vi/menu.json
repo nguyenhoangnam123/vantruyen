@@ -1,8 +1,6 @@
 {
   "menu": {
-    "products": "Sản phẩm",
-    "provinces": "Tỉnh thành",
-    "report": "Báo cáo",
-    "tree": "Tree"
+    "applicationUsers": "Người dùng",
+    "provinces": "Tỉnh thành"
   }
 }

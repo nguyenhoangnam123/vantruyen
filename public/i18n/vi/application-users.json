@@ -1,6 +1,6 @@
 {
   "applicationUsers": {
-    "applicationUserType": "Loại người dùng",
+    "applicationUserType": "",
     "createdAt": "Ngày tạo",
     "detail": {
       "title": "Thông tin chi tiết"
@@ -15,8 +15,10 @@
     "name": "Tên người dùng",
     "phone": "Số điện thoại",
     "provider": "Nhà cung cấp",
-    "roleContentModal": {
-      "title": "Vai trò"
+    "roleContentTable": {
+      "popup": {
+        "title": "Thêm vai trò cho người dùng"
+      }
     },
     "tabs": {
       "roles": {

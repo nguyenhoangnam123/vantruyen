@@ -15,8 +15,10 @@
     "name": "",
     "phone": "",
     "provider": "",
-    "roleContentModal": {
-      "title": ""
+    "roleContentTable": {
+      "popup": {
+        "title": ""
+      }
     },
     "tabs": {
       "roles": {
