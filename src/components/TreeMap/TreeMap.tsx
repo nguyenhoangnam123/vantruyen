@@ -1,5 +1,5 @@
 import React from 'react';
-import './Tree.scss';
+import './TreeMap.scss';
 import AntTree, { TreeProps as AntTreeProps } from 'antd/lib/tree';
 import { Model } from 'core/models';
 import Modal from 'reactstrap/lib/Modal';
@@ -29,7 +29,7 @@ export interface TreeProps<T> extends AntTreeProps {
 function Tree<T extends Model>(props: TreeProps<T>) {
   const [translate] = useTranslation();
   const [visible, setVisible] = React.useState<boolean>(false);
-  const [currentItem, setCurrentItem] = React.useState<T>(null);
+  const [, setCurrentItem] = React.useState<T>(null);
   const [visibleDelete, setVisibleDelete] = React.useState<boolean>(false);
   const [visibleNotification, setVisibleNotification] = React.useState<boolean>(false);
   // const [, setCheckedItems] = React.useState<T[]>(props.selectedItems || []);

@@ -10,9 +10,9 @@ import { UnitOfMeasure } from './UnitOfMeasure';
 import { Item } from './Item';
 import { ProductImageMapping } from './ProductImageMapping';
 import { VariationGrouping } from './VariationGrouping';
+import { ProductProductGroupingMappings } from './ProductProductGroupingMappings';
 
-export class Product extends Model
-{
+export class Product extends Model {
     public id?: number;
     public code?: string;
     public supplierCode?: string;
@@ -40,4 +40,5 @@ export class Product extends Model
     public items?: Item[];
     public productImageMappings?: ProductImageMapping[];
     public variationGroupings?: VariationGrouping[];
+    public productProductGroupingMappings?: ProductProductGroupingMappings[];
 }

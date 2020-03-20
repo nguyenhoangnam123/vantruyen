@@ -26,6 +26,9 @@ import ImageUpload from 'components/ImageUpload/ImageUpload';
 // import classNames from 'classnames';
 import { Image } from 'models/Image';
 import TreeSelectDropdown from 'components/TreeSelect/TreeSelect';
+import { ProductProductGroupingMappings } from 'models/ProductProductGroupingMappings';
+import { ProductProductGroupingMappingsFilter } from 'models/ProductProductGroupingMappingsFilter';
+import TreePopup from 'components/TreePopup/TreePopup';
 
 const { TabPane } = Tabs;
 
@@ -59,7 +62,7 @@ function ProductDetail1() {
   ] = crudService.useChangeHandlers<Product>(product, setProduct);
 
   // Filter
-  const [productGroupingFilter, setProductGroupingFilter] = React.useState<ProductGroupingFilter>(new ProductGroupingFilter());
+  const [productProductGroupingMappingsFilter, setProductProductGroupingMappingsFilter] = React.useState<ProductProductGroupingMappingsFilter>(new ProductProductGroupingMappingsFilter());
 
   const [productTypeFilter, setProductTypeFilter] = React.useState<ProductTypeFilter>(new ProductTypeFilter());
 
@@ -72,7 +75,7 @@ function ProductDetail1() {
   const [brandFilter, setBrandFilter] = React.useState<BrandFilter>(new BrandFilter());
   ///////
 
-  const defaultProductGroupingList: ProductGrouping[] = crudService.useDefaultList<ProductGrouping>(product.productGrouping);
+  const defaultProductProductGroupingMappingsList: ProductProductGroupingMappings[] = crudService.useDefaultList<ProductProductGroupingMappings>(product.productProductGroupingMappings);
 
   const defaultProductTypeList: ProductType[] = crudService.useDefaultList<ProductType>(product.productType);
 
@@ -81,6 +84,8 @@ function ProductDetail1() {
   const defaultSupplierList: Supplier[] = crudService.useDefaultList<Supplier>(product.supplier);
 
   const defaultBrandList: Brand[] = crudService.useDefaultList<Brand>(product.brand);
+
+  const [visible, setVisible] = React.useState<boolean>(false);
 
 
   // const handleChangeStatus = React.useCallback(
@@ -127,28 +132,12 @@ function ProductDetail1() {
     [setProduct],
   );
 
-  const treeData = [
-    {
-      id: 1,
-      name: 'Máy tính',
-      children: [
-        {
-          id: 2,
-          parentId: 1,
-          name: 'Laptop',
-        },
-        {
-          id: 3,
-          parentId: 1,
-          name: 'Desktop',
-        },
-      ],
+  const handleFocus = React.useCallback(
+    () => {
+      setVisible(true);
     },
-    {
-      id: 4,
-      name: 'Điện thoại',
-    },
-  ];
+    [setVisible],
+  );
   return (
     <div className="page detail-page">
       <Spin spinning={loading}>
@@ -194,24 +183,18 @@ function ProductDetail1() {
                       />
                     </FormItem>
                     <FormItem label={translate('products.productGrouping')}>
-                      {/* {/* <Select value={product.productGrouping?.id}
-                        onChange={handleChangeObjectField(nameof(product.productGrouping))}
+                      <input type="text"
+                        // defaultValue={product.productProductGroupingMappings}
+                        className="form-control form-control-sm"
+                        onFocus={handleFocus}
+                      />
+                      <TreePopup
                         getList={productRepository.singleListProductGrouping}
-                        list={defaultProductGroupingList}
-                        modelFilter={productGroupingFilter}
-                        setModelFilter={setProductGroupingFilter}
-                        searchField={nameof(productGroupingFilter.id)}
-                      /> */}
-
-                      <TreeSelectDropdown
-                        mode="multiple"
-                        getList={productRepository.singleListProductGrouping}
-                        treeCheckable={true}
-                        list={defaultProductGroupingList}
-                        modelFilter={productGroupingFilter}
-                        setModelFilter={setProductGroupingFilter}
-                        searchField={nameof(productGroupingFilter.id)}
-                      /> */}
+                        list={defaultProductProductGroupingMappingsList}
+                        modelFilter={productProductGroupingMappingsFilter}
+                        setModelFilter={setProductProductGroupingMappingsFilter}
+                        searchField={nameof(productProductGroupingMappingsFilter.productId)}
+                        visible={visible} />
                     </FormItem>
                     <Form.Item label={translate('productDetail.status')}>
                       <div className="product-status">
