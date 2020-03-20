@@ -25,6 +25,7 @@ import { BrandFilter } from 'models/BrandFilter';
 import ImageUpload from 'components/ImageUpload/ImageUpload';
 // import classNames from 'classnames';
 import { Image } from 'models/Image';
+import TreeSelectDropdown from 'components/TreeSelect/TreeSelect';
 
 const { TabPane } = Tabs;
 
@@ -126,6 +127,28 @@ function ProductDetail1() {
     [setProduct],
   );
 
+  const treeData = [
+    {
+      id: 1,
+      name: 'Máy tính',
+      children: [
+        {
+          id: 2,
+          parentId: 1,
+          name: 'Laptop',
+        },
+        {
+          id: 3,
+          parentId: 1,
+          name: 'Desktop',
+        },
+      ],
+    },
+    {
+      id: 4,
+      name: 'Điện thoại',
+    },
+  ];
   return (
     <div className="page detail-page">
       <Spin spinning={loading}>
@@ -148,6 +171,7 @@ function ProductDetail1() {
               <Form {...defaultDetailFormLayout}>
                 <div className="row product-detail mt-5">
                   <div className="col-6">
+
                     <FormItem label={translate('products.name')}
                       validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.name))}
                       help={product.errors?.name}
@@ -170,14 +194,24 @@ function ProductDetail1() {
                       />
                     </FormItem>
                     <FormItem label={translate('products.productGrouping')}>
-                      <Select value={product.productGrouping?.id}
+                      {/* {/* <Select value={product.productGrouping?.id}
                         onChange={handleChangeObjectField(nameof(product.productGrouping))}
                         getList={productRepository.singleListProductGrouping}
                         list={defaultProductGroupingList}
                         modelFilter={productGroupingFilter}
                         setModelFilter={setProductGroupingFilter}
                         searchField={nameof(productGroupingFilter.id)}
-                      />
+                      /> */}
+
+                      <TreeSelectDropdown
+                        mode="multiple"
+                        getList={productRepository.singleListProductGrouping}
+                        treeCheckable={true}
+                        list={defaultProductGroupingList}
+                        modelFilter={productGroupingFilter}
+                        setModelFilter={setProductGroupingFilter}
+                        searchField={nameof(productGroupingFilter.id)}
+                      /> */}
                     </FormItem>
                     <Form.Item label={translate('productDetail.status')}>
                       <div className="product-status">

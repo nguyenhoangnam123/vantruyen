@@ -24,6 +24,7 @@ import { UnitOfMeasure } from 'models/UnitOfMeasure';
 import { UnitOfMeasureFilter } from 'models/UnitOfMeasureFilter';
 import { Image } from 'models/Image';
 import { ImageFilter } from 'models/ImageFilter';
+import { buildTree } from 'helpers/tree';
 
 export class ProductRepository extends Repository {
   constructor() {
@@ -76,7 +77,7 @@ export class ProductRepository extends Repository {
   public singleListProductGrouping = (productGroupingFilter: ProductGroupingFilter): Promise<ProductGrouping[]> => {
     return this.http.post<ProductGrouping[]>(kebabCase(nameof(this.singleListProductGrouping)), productGroupingFilter)
       .then((response: AxiosResponse<ProductGrouping[]>) => {
-        return response.data.map((productGrouping: PureModelData<ProductGrouping>) => ProductGrouping.clone<ProductGrouping>(productGrouping));
+        return buildTree(response.data.map((productGrouping: PureModelData<ProductGrouping>) => ProductGrouping.clone<ProductGrouping>(productGrouping)));
       });
   };
   public singleListProductType = (productTypeFilter: ProductTypeFilter): Promise<ProductType[]> => {

@@ -8,7 +8,7 @@ import ModalFooter from 'reactstrap/lib/ModalFooter';
 import { useTranslation } from 'react-i18next';
 // import { generalLanguageKeys } from 'config/consts';
 import { ModalHeader } from 'reactstrap';
-import TreeSelectDropdown from 'components/TreeSelect/TreeSelect';
+// import TreeSelectDropdown from 'components/TreeSelect/TreeSelect';
 import { Input } from 'antd';
 
 const { TreeNode } = AntTree;
@@ -161,12 +161,12 @@ function Tree<T extends Model>(props: TreeProps<T>) {
           <div className="org-hierarchy mt-2">
             <label>Đơn vị cha: </label>
             <div>
-              <TreeSelectDropdown
+              {/* <TreeSelectDropdown
                 value={currentItem?.id}
                 mode="single"
                 treeDefaultExpandAll={false}
                 treeData={props.value}
-              />
+              /> */}
             </div>
           </div>
           <div className="org-code mt-2">
