@@ -138,6 +138,47 @@ function ProductDetail1() {
     },
     [setVisible],
   );
+
+  const handlePopupCancel = React.useCallback(
+    () => {
+      setVisible(false);
+    },
+    [setVisible],
+  );
+
+  const handleChangeTreePopup = React.useCallback(
+    (event) => {
+      setVisible(false);
+      product.productProductGroupingMappings = event;
+      setProduct({
+        ...product,
+      });
+    },
+    [setVisible],
+  );
+
+
+  const renderItems = React.useCallback(
+    (node) => {
+      if (node && node.children && node.children.length > 0) {
+        return (
+          <div className="tree-node d-flex" key={node?.id}>
+            {node?.children?.length > 0 && node.children.map((subNode) => {
+              return renderItems(subNode);
+            })}</div>
+        );
+      } else {
+        return (
+          <div className="tree-node" key={node?.id}>
+            {node?.name}
+          </div>
+        );
+      }
+    },
+    [],
+  );
+
+
   return (
     <div className="page detail-page">
       <Spin spinning={loading}>
@@ -183,18 +224,29 @@ function ProductDetail1() {
                       />
                     </FormItem>
                     <FormItem label={translate('products.productGrouping')}>
+                      <div className="product-grouping d-flex">
+                        {
+                          product.productProductGroupingMappings && product.productProductGroupingMappings.length > 0
+                          && product.productProductGroupingMappings.map((productGroping) => {
+                            return renderItems(productGroping);
+                          })
+                        }
+                      </div>
                       <input type="text"
                         // defaultValue={product.productProductGroupingMappings}
                         className="form-control form-control-sm"
-                        onFocus={handleFocus}
+                        onClick={handleFocus}
                       />
                       <TreePopup
+                        onChange={handleChangeTreePopup}
                         getList={productRepository.singleListProductGrouping}
                         list={defaultProductProductGroupingMappingsList}
                         modelFilter={productProductGroupingMappingsFilter}
                         setModelFilter={setProductProductGroupingMappingsFilter}
                         searchField={nameof(productProductGroupingMappingsFilter.productId)}
-                        visible={visible} />
+                        selectedItems={product.productProductGroupingMappings}
+                        visible={visible}
+                        onClose={handlePopupCancel} />
                     </FormItem>
                     <Form.Item label={translate('productDetail.status')}>
                       <div className="product-status">

@@ -5,6 +5,6 @@ import { Product } from './Product';
 export class ProductProductGroupingMappings extends Model {
     public productId?: number;
     public productGroupingId?: number;
-    public Product?: Product;
-    public ProductGrouping?: ProductGrouping;
+    public product?: Product;
+    public productGrouping?: ProductGrouping;
 }

@@ -120,6 +120,7 @@ export class ProductRepository extends Repository {
   public listImage = (imageFilter: ImageFilter): Promise<Image[]> => {
     return this.http.post<Image[]>(kebabCase(nameof(this.listImage)), imageFilter)
       .then((response: AxiosResponse<Image[]>) => {
+
         return response.data.map((image: PureModelData<Image>) => Image.clone<Image>(image));
       });
   };

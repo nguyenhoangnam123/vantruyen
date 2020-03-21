@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './TreeMap.scss';
 import AntTree, { TreeProps as AntTreeProps } from 'antd/lib/tree';
 import { Model } from 'core/models';
@@ -29,13 +29,14 @@ export interface TreeProps<T> extends AntTreeProps {
 function Tree<T extends Model>(props: TreeProps<T>) {
   const [translate] = useTranslation();
   const [visible, setVisible] = React.useState<boolean>(false);
-  const [, setCurrentItem] = React.useState<T>(null);
+  const [currentItems, setCurrentItem] = React.useState<T>(null);
   const [visibleDelete, setVisibleDelete] = React.useState<boolean>(false);
   const [visibleNotification, setVisibleNotification] = React.useState<boolean>(false);
-  // const [, setCheckedItems] = React.useState<T[]>(props.selectedItems || []);
+  const [checkedKeys] = React.useState<string[]>([]);
 
   const {
     value,
+    onChange,
   } = props;
 
   const handleAdd = React.useCallback(
@@ -71,7 +72,7 @@ function Tree<T extends Model>(props: TreeProps<T>) {
   const renderTreeNode = React.useCallback(
     (node: T) => {
       return (
-        <TreeNode key={node?.id} title={(
+        <TreeNode key={node?.id} data={node} title={(
           <>
             <div className="title-tree-node d-flex">
               <div className="title form-control">
@@ -129,10 +130,22 @@ function Tree<T extends Model>(props: TreeProps<T>) {
   );
 
   const handleCheck = React.useCallback(
-    (checkedKeys) => {
-      props.onChange(checkedKeys);
+    (...params) => {
+      onChange(params[1].node.props.data);
     },
-    [],
+    [onChange],
+  );
+
+  useEffect(
+    () => {
+      if (props.selectedItems && props.selectedItems.length > 0) {
+        props.selectedItems.forEach((items: T) => {
+          const id = String(items.id);
+          checkedKeys.push(id);
+        });
+      }
+    },
+    [props.selectedItems],
   );
 
   return (
@@ -146,6 +159,7 @@ function Tree<T extends Model>(props: TreeProps<T>) {
 
       )}
       <AntTree
+        defaultCheckedKeys={checkedKeys}
         checkable={props.checkable}
         onCheck={handleCheck}
       >

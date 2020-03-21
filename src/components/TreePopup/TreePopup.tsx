@@ -115,8 +115,23 @@ const TreePopup = React.forwardRef(<T extends Model, TModelFilter extends ModelF
     [setSelectedItems],
   );
 
+  const handleChangeTree = React.useCallback(
+    (item) => {
+      const index: number = selectedItems.indexOf(item);
+      if (index < 0) {
+        selectedItems.push(item);
+      }
+      else {
+        selectedItems.splice(index, 1);
+      }
+      setSelectedItems(selectedItems);
+    },
+    [setSelectedItems],
+  );
+
 
   return renderModal();
+
 
   function renderModal() {
     return (
@@ -135,6 +150,8 @@ const TreePopup = React.forwardRef(<T extends Model, TModelFilter extends ModelF
           </ModalHeader>
           <ModalBody>
             <Tree
+              selectedItems={selectedItems}
+              onChange={handleChangeTree}
               value={list}
               isEdit={false}
               checkable={true} />
