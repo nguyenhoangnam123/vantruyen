@@ -166,7 +166,7 @@ function ProductDetail1() {
 
   React.useEffect(
     () => {
-      const listPorductGrouping = []
+      const listPorductGrouping = [];
       if (product.productProductGroupingMappings && product.productProductGroupingMappings.length > 0) {
         product.productProductGroupingMappings.map((productGrouping: ProductProductGroupingMappings) => {
           listPorductGrouping.push(productGrouping.productGrouping);
@@ -256,7 +256,7 @@ function ProductDetail1() {
                           && productProductGroupingMappings.map((productGrouping, index) => {
                             return (
                               <div key={index}>{productGrouping?.productGrouping && productGrouping?.productGrouping?.name}</div>
-                            )
+                            );
                           })
                         }
                       </div>
