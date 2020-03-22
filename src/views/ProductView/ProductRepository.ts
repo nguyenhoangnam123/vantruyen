@@ -25,6 +25,7 @@ import { UnitOfMeasureFilter } from 'models/UnitOfMeasureFilter';
 import { Image } from 'models/Image';
 import { ImageFilter } from 'models/ImageFilter';
 import { buildTree } from 'helpers/tree';
+import { resolve } from 'dns';
 
 export class ProductRepository extends Repository {
   constructor() {
@@ -80,6 +81,18 @@ export class ProductRepository extends Repository {
         return buildTree(response.data.map((productGrouping: PureModelData<ProductGrouping>) => ProductGrouping.clone<ProductGrouping>(productGrouping)));
       });
   };
+  public listProductGroupingFake = (productGroupingFilter: ProductGroupingFilter): Promise<ProductGrouping[]> => {
+    // console.log('listProductGroupingFake', productGroupingFilter);
+    const api = new Promise((resolve) => {
+      setTimeout(() => resolve(data), 100);
+    });
+    return api.then((response: AxiosResponse<ProductGrouping[]>) => {
+      // console.log('response: ', response);
+      return buildTree(response.data?.map((productGrouping: PureModelData<ProductGrouping>) => {
+        return ProductGrouping.clone<ProductGrouping>(productGrouping);
+      }));
+    });
+  }
   public singleListProductType = (productTypeFilter: ProductTypeFilter): Promise<ProductType[]> => {
     return this.http.post<ProductType[]>(kebabCase(nameof(this.singleListProductType)), productTypeFilter)
       .then((response: AxiosResponse<ProductType[]>) => {
@@ -137,5 +150,32 @@ export class ProductRepository extends Repository {
     return this.http.post<void>(kebabCase(nameof(this.import)), formData)
       .then((response: AxiosResponse<void>) => response.data);
   };
+
+
 }
 export const productRepository: Product = new ProductRepository();
+
+const data = {
+  data: [
+    {
+      id: 1,
+      name: 'Bánh kẹo',
+      parentId: null,
+    },
+    {
+      id: 2,
+      name: 'Bánh xốp',
+      parentId: 1,
+    },
+    {
+      id: 3,
+      name: 'Kẹo ngô',
+      parentId: 1,
+    },
+    {
+      id: 4,
+      name: 'Máy tính',
+      parentId: null,
+    },
+  ],
+};

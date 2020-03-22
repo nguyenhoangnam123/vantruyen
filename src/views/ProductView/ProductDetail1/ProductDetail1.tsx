@@ -87,26 +87,27 @@ function ProductDetail1() {
 
   const [visible, setVisible] = React.useState<boolean>(false);
 
+  const [productProductGroupingMappings, setProductProductGroupingMappings] = React.useState<ProductGrouping[]>([]);
 
-  // const handleChangeStatus = React.useCallback(
-  //   (checked: boolean) => {
-  //     const isActive: boolean = checked;
-  //     console.log('handleChangeStatus', product)
-  //     // setProduct({
-  //     //   ...product,
-  //     //   isActive,
-  //     // });
-  //   },
-  //   [],
-  // );
 
-  function handleChangeStatus(checked: boolean) {
-    const isActive: boolean = checked;
-    setProduct({
-      ...product,
-      isActive,
-    });
-  }
+  const handleChangeStatus = React.useCallback(
+    (checked: boolean) => {
+      const isActive: boolean = checked;
+      setProduct({
+        ...product,
+        isActive,
+      });
+    },
+    [setProduct],
+  );
+
+  // function handleChangeStatus(checked: boolean) {
+  //   const isActive: boolean = checked;
+  //   setProduct({
+  //     ...product,
+  //     isActive,
+  //   });
+  // }
 
   // const statusDisplay: string = React.useMemo(
   //   () => {
@@ -147,14 +148,33 @@ function ProductDetail1() {
   );
 
   const handleChangeTreePopup = React.useCallback(
-    (event) => {
+    (items) => {
       setVisible(false);
-      product.productProductGroupingMappings = event;
+      product.productProductGroupingMappings = Object.assign([]);
+      setProductProductGroupingMappings(items);
+      if (items && items.length > 0) {
+        items.forEach(item => {
+          product.productProductGroupingMappings.push({ productGroupingId: item.id });
+        });
+      }
       setProduct({
         ...product,
       });
     },
-    [setVisible],
+    [setVisible, setProductProductGroupingMappings],
+  );
+
+  React.useEffect(
+    () => {
+      const listPorductGrouping = []
+      if (product.productProductGroupingMappings && product.productProductGroupingMappings.length > 0) {
+        product.productProductGroupingMappings.map((productGrouping: ProductProductGroupingMappings) => {
+          listPorductGrouping.push(productGrouping.productGrouping);
+        });
+        setProductProductGroupingMappings(listPorductGrouping);
+      }
+    },
+    [setProductProductGroupingMappings],
   );
 
 
@@ -226,9 +246,17 @@ function ProductDetail1() {
                     <FormItem label={translate('products.productGrouping')}>
                       <div className="product-grouping d-flex">
                         {
-                          product.productProductGroupingMappings && product.productProductGroupingMappings.length > 0
-                          && product.productProductGroupingMappings.map((productGroping) => {
+                          productProductGroupingMappings && productProductGroupingMappings.length > 0
+                          && productProductGroupingMappings.map((productGroping) => {
                             return renderItems(productGroping);
+                          })
+                        }
+                        {
+                          product.productProductGroupingMappings && product.productProductGroupingMappings?.length > 0
+                          && productProductGroupingMappings.map((productGrouping, index) => {
+                            return (
+                              <div key={index}>{productGrouping?.productGrouping && productGrouping?.productGrouping?.name}</div>
+                            )
                           })
                         }
                       </div>
@@ -239,12 +267,12 @@ function ProductDetail1() {
                       />
                       <TreePopup
                         onChange={handleChangeTreePopup}
-                        getList={productRepository.singleListProductGrouping}
+                        getList={productRepository.listProductGroupingFake}
                         list={defaultProductProductGroupingMappingsList}
                         modelFilter={productProductGroupingMappingsFilter}
                         setModelFilter={setProductProductGroupingMappingsFilter}
                         searchField={nameof(productProductGroupingMappingsFilter.productId)}
-                        selectedItems={product.productProductGroupingMappings}
+                        selectedItems={productProductGroupingMappings}
                         visible={visible}
                         onClose={handlePopupCancel} />
                     </FormItem>
