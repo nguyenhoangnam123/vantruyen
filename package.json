@@ -55,6 +55,7 @@
     "@types/classnames": "^2.2.9",
     "@types/lodash": "^4.14.149",
     "@types/node": "^13.9.1",
+    "@types/query-string": "^6.3.0",
     "@types/react-router": "^5.1.4",
     "@types/react-router-config": "^5.0.1",
     "@types/react-router-dom": "^5.1.3",

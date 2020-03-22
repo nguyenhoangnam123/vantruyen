@@ -2,17 +2,78 @@ import {Model, ModelFilter} from 'core/models';
 import React, {Dispatch, SetStateAction} from 'react';
 import {Filter} from 'core/filters';
 import {AxiosError} from 'axios';
-import {API_BASE_URL} from 'core/config';
+import {API_BASE_URL, DEFAULT_TAKE} from 'core/config';
 import {url} from 'core/helpers/string';
 import {generalLanguageKeys} from 'config/consts';
 import nameof from 'ts-nameof.macro';
-import {useParams} from 'react-router';
+import {useHistory, useLocation, useParams} from 'react-router';
 import {debounce} from 'core/helpers/debounce';
-import {Moment} from 'moment';
+import moment, {Moment} from 'moment';
 import v4 from 'uuid/v4';
 import {TableRowSelection} from 'antd/lib/table';
+import queryString from 'query-string';
+import {unflatten} from 'core/helpers/json';
+import {isDateValue} from 'core/helpers/date-time';
 
 export class CRUDService {
+  public useQuery<TFilter extends ModelFilter>(modelClass): [TFilter, Dispatch<SetStateAction<TFilter>>] {
+    const {search} = useLocation();
+    const history = useHistory();
+    const modelFilter: TFilter = React.useMemo(
+      () => {
+        const modelFilter: TFilter = new modelClass();
+        const parsedQuery = queryString.parse(search) as any;
+        const params = unflatten(parsedQuery);
+        Object
+          .entries(params)
+          .forEach(([key, value]) => {
+            switch (key) {
+              case nameof(modelFilter.skip):
+                modelFilter.skip = parseInt(value as string, 10) || 0;
+                break;
+
+              case nameof(modelFilter.take):
+                modelFilter.take = parseInt(value as string, 10) || DEFAULT_TAKE;
+                break;
+
+              case nameof(modelFilter.orderBy):
+                modelFilter.orderBy = value as any;
+                break;
+
+              case nameof(modelFilter.orderType):
+                modelFilter.orderType = value as any;
+                break;
+
+              default:
+                if (modelFilter.hasOwnProperty(key) && typeof modelFilter[key] === 'object' && modelFilter[key] !== null && typeof value === 'object' && value !== null) {
+                  Object
+                    .entries(value)
+                    .forEach(([filterKey, filterValue]) => {
+                      if (isDateValue(filterValue as any)) {
+                        modelFilter[key][filterKey] = moment(new Date(filterValue as string));
+                      } else {
+                        modelFilter[key][filterKey] = filterValue;
+                      }
+                    });
+                }
+                break;
+            }
+          });
+        return modelFilter;
+      },
+      [modelClass, search],
+    );
+
+    const setModelFilter = React.useCallback(
+      (modelFilter: TFilter) => {
+        history.replace(queryString.stringify(modelFilter));
+      },
+      [history],
+    );
+
+    return [modelFilter, setModelFilter];
+  }
+
   public useMaster<T extends Model, TFilter extends ModelFilter>(
     modelClass: new () => T,
     modelFilterClass: new () => TFilter,
@@ -36,8 +97,8 @@ export class CRUDService {
     () => void,
     () => void,
   ] {
-    const [loading, setLoading] = React.useState<boolean>(false);
-    const [filter, setFilter] = React.useState<TFilter>(new modelFilterClass());
+    const [loading, setLoading] = React.useState<boolean>(true);
+    const [filter, setFilter] = this.useQuery<TFilter>(modelFilterClass);
     const [list, setList] = React.useState<T[]>([]);
     const [total, setTotal] = React.useState<number>(0);
     const [previewModel, setPreviewModel] = React.useState<T>(new modelClass());
@@ -46,20 +107,21 @@ export class CRUDService {
 
     React.useEffect(
       () => {
-        setLoading(true);
-        Promise.all([
-          getList(filter),
-          count(filter),
-        ])
-          .then(([list, total]) => {
-            setList(list);
-            setTotal(total);
-          })
-          .finally(() => {
-            setLoading(false);
-          });
+        if (loading) {
+          Promise.all([
+            getList(filter),
+            count(filter),
+          ])
+            .then(([list, total]) => {
+              setList(list);
+              setTotal(total);
+            })
+            .finally(() => {
+              setLoading(false);
+            });
+        }
       },
-      [count, filter, getList],
+      [count, filter, getList, loading],
     );
 
     const handleOpenPreview = React.useCallback(
@@ -97,21 +159,22 @@ export class CRUDService {
           }));
         };
       },
-      [filter],
+      [filter, setFilter],
     );
 
     const handleSearch = React.useCallback(
       () => {
-        setFilter(ModelFilter.clone<TFilter>(filter));
+        setLoading(true);
       },
-      [filter],
+      [],
     );
 
     const handleReset = React.useCallback(
       () => {
         setFilter(ModelFilter.clone<TFilter>(new modelFilterClass()));
+        setLoading(true);
       },
-      [modelFilterClass],
+      [modelFilterClass, setFilter],
     );
 
     return [
