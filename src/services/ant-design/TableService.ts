@@ -120,6 +120,7 @@ export class TableService {
     list?: T[],
     setList?: Dispatch<SetStateAction<T[]>>,
     setT?: Dispatch<SetStateAction<T>>,
+    handleLoadList?: () => void,
     onSuccess?: () => void,
     onError?: (error: AxiosError<T> | Error) => void,
     onCancel?: () => void,
@@ -138,7 +139,14 @@ export class TableService {
               onOk() {
                 setLoading(true);
                 onDelete(t)
-                  .then(onSuccess)
+                  .then(() => {
+                    if (typeof handleLoadList === 'function') {
+                      handleLoadList();
+                    }
+                    if (typeof onSuccess === 'function') {
+                      onSuccess();
+                    }
+                  })
                   .catch((error: AxiosError<T> | Error) => {
                     if (typeof onError === 'function') {
                       onError(error);
@@ -168,7 +176,7 @@ export class TableService {
             });
           };
         },
-        [list, onCancel, onDelete, onError, onSuccess, setList, setLoading, setT],
+        [handleLoadList, list, onCancel, onDelete, onError, onSuccess, setList, setLoading, setT],
       ),
     ];
   }
@@ -177,6 +185,7 @@ export class TableService {
     selectedRowKeys: number[] | string[],
     onDelete: (idList: BatchId) => Promise<void>,
     setLoading: Dispatch<SetStateAction<boolean>>,
+    handleLoadList?: () => void,
     onSuccess?: () => void,
     onError?: (error: AxiosError<any> | Error) => void,
     onCancel?: () => void,
@@ -196,7 +205,14 @@ export class TableService {
               onDelete({
                 ids: selectedRowKeys,
               })
-                .then(onSuccess)
+                .then(() => {
+                  if (typeof handleLoadList === 'function') {
+                    handleLoadList();
+                  }
+                  if (typeof onSuccess === 'function') {
+                    onSuccess();
+                  }
+                })
                 .catch(onError)
                 .finally(() => {
                   setLoading(false);
@@ -204,7 +220,7 @@ export class TableService {
             },
           });
         },
-        [onCancel, onDelete, onError, onSuccess, selectedRowKeys, setLoading],
+        [handleLoadList, onCancel, onDelete, onError, onSuccess, selectedRowKeys, setLoading],
       ),
     ];
   }

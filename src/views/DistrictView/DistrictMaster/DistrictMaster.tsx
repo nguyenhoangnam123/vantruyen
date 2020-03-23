@@ -90,11 +90,13 @@ function DistrictMaster() {
     setLoading,
     list,
     setList,
+    handleSearch,
   );
   const [handleBulkDelete] = tableService.useBulkDeleteHandler(
     rowSelection.selectedRowKeys,
     districtRepository.bulkDelete,
     setLoading,
+    handleSearch,
   );
   // ------------------------------------------------------------------------------------------------------------------------------------------------
 

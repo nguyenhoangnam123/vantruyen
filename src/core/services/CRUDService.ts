@@ -98,6 +98,7 @@ export class CRUDService {
     () => void,
   ] {
     const [loading, setLoading] = React.useState<boolean>(true);
+    const [loadList, setLoadList] = React.useState<boolean>(true);
     const [filter, setFilter] = this.useQuery<TFilter>(modelFilterClass);
     const [list, setList] = React.useState<T[]>([]);
     const [total, setTotal] = React.useState<number>(0);
@@ -107,7 +108,8 @@ export class CRUDService {
 
     React.useEffect(
       () => {
-        if (loading) {
+        if (loadList) {
+          setLoading(true);
           Promise.all([
             getList(filter),
             count(filter),
@@ -117,11 +119,12 @@ export class CRUDService {
               setTotal(total);
             })
             .finally(() => {
+              setLoadList(false);
               setLoading(false);
             });
         }
       },
-      [count, filter, getList, loading],
+      [count, filter, getList, loadList, loading],
     );
 
     const handleOpenPreview = React.useCallback(
@@ -164,7 +167,7 @@ export class CRUDService {
 
     const handleSearch = React.useCallback(
       () => {
-        setLoading(true);
+        setLoadList(true);
       },
       [],
     );
