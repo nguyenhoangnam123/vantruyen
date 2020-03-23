@@ -81,18 +81,18 @@ export class ProductRepository extends Repository {
         return buildTree(response.data.map((productGrouping: PureModelData<ProductGrouping>) => ProductGrouping.clone<ProductGrouping>(productGrouping)));
       });
   };
-  public listProductGroupingFake = (productGroupingFilter: ProductGroupingFilter): Promise<ProductGrouping[]> => {
-    // console.log('listProductGroupingFake', productGroupingFilter);
-    const api = new Promise((resolve) => {
-      setTimeout(() => resolve(data), 100);
-    });
-    return api.then((response: AxiosResponse<ProductGrouping[]>) => {
-      // console.log('response: ', response);
-      return buildTree(response.data?.map((productGrouping: PureModelData<ProductGrouping>) => {
-        return ProductGrouping.clone<ProductGrouping>(productGrouping);
-      }));
-    });
-  }
+  // public listProductGroupingFake = (productGroupingFilter: ProductGroupingFilter): Promise<ProductGrouping[]> => {
+  //   // console.log('listProductGroupingFake', productGroupingFilter);
+  //   const api = new Promise((resolve) => {
+  //     setTimeout(() => resolve(data), 100);
+  //   });
+  //   return api.then((response: AxiosResponse<ProductGrouping[]>) => {
+  //     // console.log('response: ', response);
+  //     return buildTree(response.data?.map((productGrouping: PureModelData<ProductGrouping>) => {
+  //       return ProductGrouping.clone<ProductGrouping>(productGrouping);
+  //     }));
+  //   });
+  // }
   public singleListProductType = (productTypeFilter: ProductTypeFilter): Promise<ProductType[]> => {
     return this.http.post<ProductType[]>(kebabCase(nameof(this.singleListProductType)), productTypeFilter)
       .then((response: AxiosResponse<ProductType[]>) => {

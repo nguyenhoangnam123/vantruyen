@@ -90,24 +90,26 @@ function ProductDetail1() {
   const [productProductGroupingMappings, setProductProductGroupingMappings] = React.useState<ProductGrouping[]>([]);
 
 
-  const handleChangeStatus = React.useCallback(
-    (checked: boolean) => {
-      const isActive: boolean = checked;
-      setProduct({
-        ...product,
-        isActive,
-      });
-    },
-    [setProduct],
-  );
+  // const handleChangeStatus = React.useCallback(
+  //   (checked: boolean) => {
+  //     const isActive: boolean = checked;
+  //     setProduct({
+  //       ...product,
+  //       isActive,
+  //     });
 
-  // function handleChangeStatus(checked: boolean) {
-  //   const isActive: boolean = checked;
-  //   setProduct({
-  //     ...product,
-  //     isActive,
-  //   });
-  // }
+  //   },
+  //   [setProduct],
+  // );
+
+
+  function handleChangeStatus(checked: boolean) {
+    const isActive: boolean = checked;
+    setProduct({
+      ...product,
+      isActive,
+    });
+  }
 
   // const statusDisplay: string = React.useMemo(
   //   () => {
@@ -150,18 +152,20 @@ function ProductDetail1() {
   const handleChangeTreePopup = React.useCallback(
     (items) => {
       setVisible(false);
-      product.productProductGroupingMappings = Object.assign([]);
+      // product.productProductGroupingMappings = Object.assign([]);
       setProductProductGroupingMappings(items);
+      const productProductGroupingMappings = [];
       if (items && items.length > 0) {
         items.forEach(item => {
-          product.productProductGroupingMappings.push({ productGroupingId: item.id });
+          productProductGroupingMappings.push({ productGroupingId: item.id });
         });
       }
       setProduct({
         ...product,
+        productProductGroupingMappings,
       });
     },
-    [setVisible, setProductProductGroupingMappings],
+    [setVisible, setProductProductGroupingMappings, setProduct],
   );
 
   React.useEffect(
@@ -190,7 +194,7 @@ function ProductDetail1() {
       } else {
         return (
           <div className="tree-node" key={node?.id}>
-            {node?.name}
+            {node?.name},
           </div>
         );
       }
@@ -267,7 +271,7 @@ function ProductDetail1() {
                       />
                       <TreePopup
                         onChange={handleChangeTreePopup}
-                        getList={productRepository.listProductGroupingFake}
+                        getList={productRepository.singleListProductGrouping}
                         list={defaultProductProductGroupingMappingsList}
                         modelFilter={productProductGroupingMappingsFilter}
                         setModelFilter={setProductProductGroupingMappingsFilter}
