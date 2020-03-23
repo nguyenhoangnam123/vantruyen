@@ -12,12 +12,12 @@ import moment, {Moment} from 'moment';
 import v4 from 'uuid/v4';
 import {TableRowSelection} from 'antd/lib/table';
 import queryString from 'query-string';
-import {unflatten} from 'core/helpers/json';
+import {flatten, unflatten} from 'core/helpers/json';
 import {isDateValue} from 'core/helpers/date-time';
 
 export class CRUDService {
   public useQuery<TFilter extends ModelFilter>(modelClass): [TFilter, Dispatch<SetStateAction<TFilter>>] {
-    const {search} = useLocation();
+    const {search, pathname} = useLocation();
     const history = useHistory();
     const modelFilter: TFilter = React.useMemo(
       () => {
@@ -66,9 +66,12 @@ export class CRUDService {
 
     const setModelFilter = React.useCallback(
       (modelFilter: TFilter) => {
-        history.replace(queryString.stringify(modelFilter));
+        history.replace({
+          pathname,
+          search: `?${queryString.stringify(flatten(modelFilter))}`,
+        });
       },
-      [history],
+      [history, pathname],
     );
 
     return [modelFilter, setModelFilter];
@@ -124,7 +127,7 @@ export class CRUDService {
             });
         }
       },
-      [count, filter, getList, loadList, loading],
+      [count, filter, getList, loadList],
     );
 
     const handleOpenPreview = React.useCallback(
@@ -167,15 +170,16 @@ export class CRUDService {
 
     const handleSearch = React.useCallback(
       () => {
+        setFilter(filter);
         setLoadList(true);
       },
-      [],
+      [filter, setFilter],
     );
 
     const handleReset = React.useCallback(
       () => {
         setFilter(ModelFilter.clone<TFilter>(new modelFilterClass()));
-        setLoading(true);
+        setLoadList(true);
       },
       [modelFilterClass, setFilter],
     );

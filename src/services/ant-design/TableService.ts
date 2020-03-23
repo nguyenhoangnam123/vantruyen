@@ -51,6 +51,7 @@ export class TableService {
     filter: TFilter,
     setFilter: Dispatch<SetStateAction<TFilter>>,
     total: number,
+    handleSearch?: () => void,
   ): [
     PaginationProps,
     SorterResult<T>,
@@ -92,6 +93,9 @@ export class TableService {
           });
           setOrderType(newFilter, newSorter.order);
           setFilter(newFilter);
+          if (typeof handleSearch === 'function') {
+            handleSearch();
+          }
           return;
         }
         const {
@@ -103,13 +107,19 @@ export class TableService {
             take: pageSize,
             skip: (current - 1) * pageSize,
           }));
+          if (typeof handleSearch === 'function') {
+            handleSearch();
+          }
           return;
         }
         setFilter(ModelFilter.clone<TFilter>({
           ...filter, ...filters,
         }));
+        if (typeof handleSearch === 'function') {
+          handleSearch();
+        }
       },
-      [pagination, filter, setFilter, sorter],
+      [sorter, pagination, setFilter, filter, handleSearch],
     );
     return [pagination, sorter, handleTableChange];
   }
@@ -119,8 +129,8 @@ export class TableService {
     setLoading: Dispatch<SetStateAction<boolean>>,
     list?: T[],
     setList?: Dispatch<SetStateAction<T[]>>,
-    setT?: Dispatch<SetStateAction<T>>,
     handleLoadList?: () => void,
+    setT?: Dispatch<SetStateAction<T>>,
     onSuccess?: () => void,
     onError?: (error: AxiosError<T> | Error) => void,
     onCancel?: () => void,
@@ -202,9 +212,7 @@ export class TableService {
             okType: 'danger',
             onOk() {
               setLoading(true);
-              onDelete({
-                ids: selectedRowKeys,
-              })
+              onDelete(selectedRowKeys)
                 .then(() => {
                   if (typeof handleLoadList === 'function') {
                     handleLoadList();

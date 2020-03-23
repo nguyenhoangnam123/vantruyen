@@ -44,9 +44,7 @@ declare module 'react3l' {
     [key in keyof T]: string | ErrorMap<T[key]> | null;
   };
 
-  export interface BatchId {
-    ids: number[] | string[];
-  }
+  export type BatchId = string[] | number[];
 
   export interface ContentTableProps<T extends Model, TContent extends Model> {
     model: T;

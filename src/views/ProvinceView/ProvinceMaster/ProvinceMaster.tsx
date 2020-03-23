@@ -58,7 +58,7 @@ function ProvinceMaster() {
     );
 
   const [handleGoCreate, handleGoDetail] = routerService.useMasterNavigation(PROVINCE_ROUTE);
-  const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total);
+  const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total, handleSearch);
   const [rowSelection, hasSelected] = tableService.useRowSelection<Province>();
 
   /**
@@ -88,11 +88,13 @@ function ProvinceMaster() {
     setLoading,
     list,
     setList,
+    handleSearch,
   );
   const [handleBulkDelete] = tableService.useBulkDeleteHandler(
     rowSelection.selectedRowKeys,
     provinceRepository.bulkDelete,
     setLoading,
+    handleSearch,
   );
   // ------------------------------------------------------------------------------------------------------------------------------------------------
 
