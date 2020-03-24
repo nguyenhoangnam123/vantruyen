@@ -58,7 +58,7 @@ function PropertyMaster() {
     );
 
   const [handleGoCreate, handleGoDetail] = routerService.useMasterNavigation(PROPERTY_ROUTE);
-  const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total);
+  const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total, handleSearch);
   const [rowSelection, hasSelected] = tableService.useRowSelection<Property>();
 
   /**

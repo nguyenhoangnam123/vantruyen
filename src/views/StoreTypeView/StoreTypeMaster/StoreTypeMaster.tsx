@@ -58,7 +58,7 @@ function StoreTypeMaster() {
     );
 
   const [handleGoCreate, handleGoDetail] = routerService.useMasterNavigation(STORE_TYPE_ROUTE);
-  const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total);
+  const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total, handleSearch);
   const [rowSelection, hasSelected] = tableService.useRowSelection<StoreType>();
 
   /**

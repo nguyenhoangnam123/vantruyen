@@ -54,7 +54,7 @@ function ApplicationUserMaster() {
     applicationUserRepository.get,
   );
   const [handleGoCreate, handleGoDetail] = routerService.useMasterNavigation(APP_USER_ROUTE);
-  const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total);
+  const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total, handleSearch);
   const [rowSelection, hasSelected] = tableService.useRowSelection<ApplicationUser>();
 
   /**

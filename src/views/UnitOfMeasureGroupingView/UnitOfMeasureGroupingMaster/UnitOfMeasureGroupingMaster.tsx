@@ -58,7 +58,7 @@ function UnitOfMeasureGroupingMaster() {
     );
 
   const [handleGoCreate, handleGoDetail] = routerService.useMasterNavigation(UNIT_OF_MEASURE_GROUPING_ROUTE);
-  const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total);
+  const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total, handleSearch);
   const [rowSelection, hasSelected] = tableService.useRowSelection<UnitOfMeasureGrouping>();
 
   /**

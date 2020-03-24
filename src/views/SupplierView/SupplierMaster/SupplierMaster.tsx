@@ -58,7 +58,7 @@ function SupplierMaster() {
     );
 
   const [handleGoCreate, handleGoDetail] = routerService.useMasterNavigation(SUPPLIER_ROUTE);
-  const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total);
+  const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total, handleSearch);
   const [rowSelection, hasSelected] = tableService.useRowSelection<Supplier>();
 
   /**
