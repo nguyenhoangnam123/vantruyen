@@ -170,10 +170,9 @@ export class CRUDService {
 
     const handleSearch = React.useCallback(
       () => {
-        setFilter(filter);
         setLoadList(true);
       },
-      [filter, setFilter],
+      [],
     );
 
     const handleReset = React.useCallback(
