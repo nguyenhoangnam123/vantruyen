@@ -28,6 +28,10 @@
     "userStatus": "",
     "username": ""
   },
+  "districts": {
+    "id": "",
+    "name": ""
+  },
   "filters": {
     "dateFilter": {
       "equal": "",
@@ -110,20 +114,21 @@
     "provinces": ""
   },
   "provinces": {
-    "code": "",
-    "createdAt": "",
     "detail": {
       "title": ""
     },
     "id": "",
-    "isActive": "",
     "master": {
       "title": ""
     },
     "name": "",
-    "provinceType": ""
+    "priority": ""
   },
   "roles": {
+    "id": "",
+    "name": ""
+  },
+  "stores": {
     "id": "",
     "name": ""
   }

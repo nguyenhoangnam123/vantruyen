@@ -28,6 +28,10 @@
     "userStatus": "Trạng thái người dùng",
     "username": "Tên đăng nhập"
   },
+  "districts": {
+    "id": "",
+    "name": ""
+  },
   "filters": {
     "dateFilter": {
       "equal": "Bằng",
@@ -110,21 +114,22 @@
     "provinces": "Tỉnh thành"
   },
   "provinces": {
-    "code": "Mã tỉnh thành",
-    "createdAt": "Ngày tạo",
     "detail": {
       "title": "Thông tin chi tiết"
     },
     "id": "ID tỉnh thành",
-    "isActive": "Hoạt động",
     "master": {
       "title": "Danh sách tỉnh thành"
     },
     "name": "Tên tỉnh thành",
-    "provinceType": "Loại"
+    "priority": "Thứ tự ưu tiên"
   },
   "roles": {
     "id": "ID",
     "name": "Tên vai trò"
+  },
+  "stores": {
+    "id": "",
+    "name": ""
   }
 }
