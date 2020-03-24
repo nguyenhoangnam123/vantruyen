@@ -2,6 +2,7 @@ import React from 'react';
 import './Input.scss';
 import classNames from 'classnames';
 import RichTextEditor from 'components/RichTextEditor/RichTextEditor';
+import nameof from 'ts-nameof.macro';
 
 export type InputType = 'text' | 'textarea' | 'editor';
 
@@ -15,6 +16,8 @@ export interface InputProps {
   defaultValue?: string;
 
   onChange?(value?: string): void;
+
+  onFocus?(event?: React.FocusEvent<any>): void;
 }
 
 function Input(props: InputProps) {
@@ -23,6 +26,7 @@ function Input(props: InputProps) {
     value,
     defaultValue,
     onChange,
+    onFocus,
     className,
   } = props;
 
@@ -35,28 +39,47 @@ function Input(props: InputProps) {
     [onChange],
   );
 
+  const valueProps = React.useMemo(
+    () => {
+      if (props.hasOwnProperty(nameof(props.value))) {
+        return {
+          value: typeof value === 'string' ? value : '',
+        };
+      }
+      return {
+        defaultValue: typeof defaultValue === 'string' ? defaultValue : '',
+      };
+    },
+    [defaultValue, props, value],
+  );
+
+  const htmlProps = {
+    onFocus,
+  };
+
   if (type === 'text') {
     return (
       <input type="text"
+             {...valueProps}
+             {...htmlProps}
              className={classNames('react3l-input form-control form-control-sm', className)}
-             value={value}
-             defaultValue={defaultValue}
              onChange={handleTextChange}/>
     );
   }
   if (type === 'textarea') {
     return (
       <textarea
+        {...valueProps}
+        {...htmlProps}
         className={classNames('react3l-input form-control form-control-sm', className)}
-        value={value}
-        defaultValue={defaultValue}
         onChange={handleTextChange}/>
     );
   }
   return (
-    <RichTextEditor value={value}
-                    className={className}
-                    onChange={onChange}/>
+    <RichTextEditor
+      {...valueProps}
+      className={className}
+      onChange={onChange}/>
   );
 }
 
