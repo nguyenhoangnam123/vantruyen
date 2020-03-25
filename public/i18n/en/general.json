@@ -1,7 +1,41 @@
 {
   "general": {
+    "actions": {
+      "add": "",
+      "close": "",
+      "create": "",
+      "delete": "",
+      "export": "",
+      "filter": "",
+      "import": "",
+      "label": "",
+      "reset": "",
+      "save": "",
+      "search": "",
+      "update": ""
+    },
+    "batchDelete": {
+      "content": "",
+      "title": ""
+    },
+    "cancel": "",
+    "columns": {
+      "index": ""
+    },
+    "confirm": "",
+    "delete": {
+      "content": "",
+      "sucess": "",
+      "title": ""
+    },
     "master": {
+      "defaultPreviewTitle": "",
       "pagination": ""
+    },
+    "notifications": "",
+    "numberRange": {
+      "from": "",
+      "to": ""
     }
   }
 }

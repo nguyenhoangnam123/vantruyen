@@ -1,0 +1,20 @@
+{
+  "districts": {
+    "createdAt": "",
+    "deletedAt": "",
+    "detail": {
+      "title": ""
+    },
+    "id": "",
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "priority": "",
+    "province": "",
+    "provinceId": "",
+    "stores": "",
+    "updatedAt": "",
+    "wards": ""
+  }
+}

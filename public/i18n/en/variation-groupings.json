@@ -1,7 +1,19 @@
 {
   "variationGroupings": {
     "code": "",
+    "createdAt": "",
+    "deletedAt": "",
+    "detail": {
+      "title": ""
+    },
     "id": "",
-    "name": ""
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "product": "",
+    "productId": "",
+    "updatedAt": "",
+    "variations": ""
   }
 }

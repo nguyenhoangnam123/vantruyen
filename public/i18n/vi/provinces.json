@@ -1,16 +1,18 @@
 {
   "provinces": {
-    "code": "Mã tỉnh thành",
     "createdAt": "Ngày tạo",
+    "deletedAt": "",
     "detail": {
       "title": "Thông tin chi tiết"
     },
+    "districts": "",
     "id": "ID tỉnh thành",
-    "isActive": "Hoạt động",
     "master": {
       "title": "Danh sách tỉnh thành"
     },
     "name": "Tên tỉnh thành",
-    "provinceType": "Loại"
+    "priority": "",
+    "stores": "",
+    "updatedAt": ""
   }
 }

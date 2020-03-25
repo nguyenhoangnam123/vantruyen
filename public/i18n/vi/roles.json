@@ -1,6 +1,13 @@
 {
   "roles": {
+    "detail": {
+      "title": ""
+    },
     "id": "ID",
-    "name": "Tên vai trò"
+    "master": {
+      "title": ""
+    },
+    "name": "Tên vai trò",
+    "permissions": ""
   }
 }

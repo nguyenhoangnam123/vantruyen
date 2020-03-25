@@ -1,6 +1,16 @@
 {
   "images": {
+    "createdAt": "",
+    "deletedAt": "",
+    "detail": {
+      "title": ""
+    },
     "id": "",
-    "name": ""
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "updatedAt": "",
+    "url": ""
   }
 }

@@ -1,7 +1,19 @@
 {
   "variationGroupings": {
     "code": "Mã",
+    "createdAt": "",
+    "deletedAt": "",
+    "detail": {
+      "title": ""
+    },
     "id": "ID",
-    "name": "Tên"
+    "master": {
+      "title": ""
+    },
+    "name": "Tên",
+    "product": "",
+    "productId": "",
+    "updatedAt": "",
+    "variations": ""
   }
 }

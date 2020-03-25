@@ -18,17 +18,21 @@
       "content": "Thao tác này không thể khôi phục, hãy cân nhắc!",
       "title": "Bạn đang muốn xóa nhiều bản ghi?"
     },
+    "cancel": "",
     "columns": {
       "index": "STT"
     },
+    "confirm": "",
     "delete": {
       "content": "Thao tác này không thể khôi phục, hãy cân nhắc!",
+      "sucess": "",
       "title": "Bạn đang muốn xóa bản ghi này?"
     },
     "master": {
       "defaultPreviewTitle": "Thông tin chi tiết {{name}}",
       "pagination": "Hiển thị {{pageSize}} / {{total}} bản ghi"
     },
+    "notifications": "",
     "numberRange": {
       "from": "Từ",
       "to": "Đến"

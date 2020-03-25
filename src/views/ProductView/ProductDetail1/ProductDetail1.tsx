@@ -35,7 +35,6 @@ const { TabPane } = Tabs;
 const { Item: FormItem } = Form;
 
 function ProductDetail1() {
-
   const [translate] = useTranslation();
 
   // Service goback
@@ -62,33 +61,58 @@ function ProductDetail1() {
   ] = crudService.useChangeHandlers<Product>(product, setProduct);
 
   // Filter
-  const [productProductGroupingMappingsFilter, setProductProductGroupingMappingsFilter] = React.useState<ProductProductGroupingMappingsFilter>(new ProductProductGroupingMappingsFilter());
+  const [
+    productProductGroupingMappingsFilter,
+    setProductProductGroupingMappingsFilter,
+  ] = React.useState<ProductProductGroupingMappingsFilter>(
+    new ProductProductGroupingMappingsFilter(),
+  );
 
-  const [productTypeFilter, setProductTypeFilter] = React.useState<ProductTypeFilter>(new ProductTypeFilter());
+  const [productTypeFilter, setProductTypeFilter] = React.useState<
+    ProductTypeFilter
+  >(new ProductTypeFilter());
 
-  const [supplierFilter, setSupplierFilter] = React.useState<SupplierFilter>(new SupplierFilter());
+  const [supplierFilter, setSupplierFilter] = React.useState<SupplierFilter>(
+    new SupplierFilter(),
+  );
 
   // const [taxTypeFilter, setTaxTypeFilter] = React.useState<TaxTypeFilter>(new TaxTypeFilter());
 
-  const [unitOfMeasureFilter, setUnitOfMeasureFilter] = React.useState<UnitOfMeasureFilter>(new UnitOfMeasureFilter());
+  const [unitOfMeasureFilter, setUnitOfMeasureFilter] = React.useState<
+    UnitOfMeasureFilter
+  >(new UnitOfMeasureFilter());
 
-  const [brandFilter, setBrandFilter] = React.useState<BrandFilter>(new BrandFilter());
+  const [brandFilter, setBrandFilter] = React.useState<BrandFilter>(
+    new BrandFilter(),
+  );
   ///////
 
-  const defaultProductProductGroupingMappingsList: ProductProductGroupingMappings[] = crudService.useDefaultList<ProductProductGroupingMappings>(product.productProductGroupingMappings);
+  const defaultProductProductGroupingMappingsList: ProductProductGroupingMappings[] = crudService.useDefaultList<
+    ProductProductGroupingMappings
+  >(product.productProductGroupingMappings);
 
-  const defaultProductTypeList: ProductType[] = crudService.useDefaultList<ProductType>(product.productType);
+  const defaultProductTypeList: ProductType[] = crudService.useDefaultList<
+    ProductType
+  >(product.productType);
 
-  const defaultUnitOfMeasureList: UnitOfMeasure[] = crudService.useDefaultList<UnitOfMeasure>(product.unitOfMeasure);
+  const defaultUnitOfMeasureList: UnitOfMeasure[] = crudService.useDefaultList<
+    UnitOfMeasure
+  >(product.unitOfMeasure);
 
-  const defaultSupplierList: Supplier[] = crudService.useDefaultList<Supplier>(product.supplier);
+  const defaultSupplierList: Supplier[] = crudService.useDefaultList<Supplier>(
+    product.supplier,
+  );
 
-  const defaultBrandList: Brand[] = crudService.useDefaultList<Brand>(product.brand);
+  const defaultBrandList: Brand[] = crudService.useDefaultList<Brand>(
+    product.brand,
+  );
 
   const [visible, setVisible] = React.useState<boolean>(false);
 
-  const [productProductGroupingMappings, setProductProductGroupingMappings] = React.useState<ProductGrouping[]>([]);
-
+  const [
+    productProductGroupingMappings,
+    setProductProductGroupingMappings,
+  ] = React.useState<ProductGrouping[]>([]);
 
   // const handleChangeStatus = React.useCallback(
   //   (checked: boolean) => {
@@ -101,7 +125,6 @@ function ProductDetail1() {
   //   },
   //   [setProduct],
   // );
-
 
   function handleChangeStatus(checked: boolean) {
     const isActive: boolean = checked;
@@ -124,7 +147,6 @@ function ProductDetail1() {
   //   [],
   // );
 
-
   const handleChangeImages = React.useCallback(
     (images: Image[]) => {
       setProduct({
@@ -135,22 +157,16 @@ function ProductDetail1() {
     [setProduct, product],
   );
 
-  const handleFocus = React.useCallback(
-    () => {
-      setVisible(true);
-    },
-    [setVisible],
-  );
+  const handleFocus = React.useCallback(() => {
+    setVisible(true);
+  }, [setVisible]);
 
-  const handlePopupCancel = React.useCallback(
-    () => {
-      setVisible(false);
-    },
-    [setVisible],
-  );
+  const handlePopupCancel = React.useCallback(() => {
+    setVisible(false);
+  }, [setVisible]);
 
   const handleChangeTreePopup = React.useCallback(
-    (items) => {
+    items => {
       setVisible(false);
       // product.productProductGroupingMappings = Object.assign([]);
       setProductProductGroupingMappings(items);
@@ -168,80 +184,93 @@ function ProductDetail1() {
     [setVisible, setProductProductGroupingMappings, setProduct, product],
   );
 
-  React.useEffect(
-    () => {
-      const listPorductGrouping = [];
-      if (product.productProductGroupingMappings && product.productProductGroupingMappings.length > 0) {
-        product.productProductGroupingMappings.map((productGrouping: ProductProductGroupingMappings) => {
+  React.useEffect(() => {
+    const listPorductGrouping = [];
+    if (
+      product.productProductGroupingMappings &&
+      product.productProductGroupingMappings.length > 0
+    ) {
+      product.productProductGroupingMappings.map(
+        (productGrouping: ProductProductGroupingMappings) => {
           listPorductGrouping.push(productGrouping.productGrouping);
-        });
-        setProductProductGroupingMappings(listPorductGrouping);
-      }
-    },
-    [setProductProductGroupingMappings],
-  );
+        },
+      );
+      setProductProductGroupingMappings(listPorductGrouping);
+    }
+  }, [setProductProductGroupingMappings]);
 
-
-  const renderItems = React.useCallback(
-    (node) => {
-      if (node && node.children && node.children.length > 0) {
-        return (
-          <div className="tree-node d-flex" key={node?.id}>
-            {node?.children?.length > 0 && node.children.map((subNode) => {
+  const renderItems = React.useCallback(node => {
+    if (node && node.children && node.children.length > 0) {
+      return (
+        <div className="tree-node d-flex" key={node?.id}>
+          {node?.children?.length > 0 &&
+            node.children.map(subNode => {
               return renderItems(subNode);
-            })}</div>
-        );
-      } else {
-        return (
-          <div className="tree-node" key={node?.id}>
-            {node?.name},
-          </div>
-        );
-      }
-    },
-    [],
-  );
-
+            })}
+        </div>
+      );
+    } else {
+      return (
+        <div className="tree-node" key={node?.id}>
+          {node?.name},
+        </div>
+      );
+    }
+  }, []);
 
   return (
     <div className="page detail-page">
       <Spin spinning={loading}>
-        <Card title={(
-          <>
-            <button className="btn btn-link mr-2" onClick={handleGoBack}>
-              <i className="fa fa-arrow-left" />
-            </button>
-            {isDetail ? translate('products.detail.title') : translate(generalLanguageKeys.actions.create)}
-            <button className="btn btn-sm btn-primary float-right" onClick={handleSave}>
-              <i className="fa mr-2 fa-save" />
-              {translate(generalLanguageKeys.actions.save)}
-            </button>
-          </>
-        )}>
-
+        <Card
+          title={
+            <>
+              <button className="btn btn-link mr-2" onClick={handleGoBack}>
+                <i className="fa fa-arrow-left" />
+              </button>
+              {isDetail
+                ? translate('products.detail.title')
+                : translate(generalLanguageKeys.actions.create)}
+              <button
+                className="btn btn-sm btn-primary float-right"
+                onClick={handleSave}
+              >
+                <i className="fa mr-2 fa-save" />
+                {translate(generalLanguageKeys.actions.save)}
+              </button>
+            </>
+          }
+        >
           <Tabs defaultActiveKey="1" className="mt-1">
-
             <TabPane key="1" tab={translate('product.tabs.general.title')}>
               <Form {...defaultDetailFormLayout}>
                 <div className="row product-detail mt-5">
                   <div className="col-6">
-
-                    <FormItem label={translate('products.name')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.name))}
+                    <FormItem
+                      label={translate('products.name')}
+                      validateStatus={formService.getValidationStatus<Product>(
+                        product.errors,
+                        nameof(product.name),
+                      )}
                       help={product.errors?.name}
                     >
-                      <input type="text"
+                      <input
+                        type="text"
                         defaultValue={product.name}
                         className="form-control form-control-sm"
                         onChange={handleChangeSimpleField(nameof(product.name))}
                       />
                     </FormItem>
 
-                    <FormItem label={translate('products.code')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.code))}
+                    <FormItem
+                      label={translate('products.code')}
+                      validateStatus={formService.getValidationStatus<Product>(
+                        product.errors,
+                        nameof(product.code),
+                      )}
                       help={product.errors?.code}
                     >
-                      <input type="text"
+                      <input
+                        type="text"
                         defaultValue={product.code}
                         className="form-control form-control-sm"
                         onChange={handleChangeSimpleField(nameof(product.code))}
@@ -249,22 +278,26 @@ function ProductDetail1() {
                     </FormItem>
                     <FormItem label={translate('products.productGrouping')}>
                       <div className="product-grouping d-flex">
-                        {
-                          productProductGroupingMappings && productProductGroupingMappings.length > 0
-                          && productProductGroupingMappings.map((productGroping) => {
+                        {productProductGroupingMappings &&
+                          productProductGroupingMappings.length > 0 &&
+                          productProductGroupingMappings.map(productGroping => {
                             return renderItems(productGroping);
-                          })
-                        }
-                        {
-                          product.productProductGroupingMappings && product.productProductGroupingMappings?.length > 0
-                          && productProductGroupingMappings.map((productGrouping, index) => {
-                            return (
-                              <div key={index}>{productGrouping?.productGrouping && productGrouping?.productGrouping?.name}</div>
-                            );
-                          })
-                        }
+                          })}
+                        {product.productProductGroupingMappings &&
+                          product.productProductGroupingMappings?.length > 0 &&
+                          productProductGroupingMappings.map(
+                            (productGrouping, index) => {
+                              return (
+                                <div key={index}>
+                                  {productGrouping?.productGrouping &&
+                                    productGrouping?.productGrouping?.name}
+                                </div>
+                              );
+                            },
+                          )}
                       </div>
-                      <input type="text"
+                      <input
+                        type="text"
                         // defaultValue={product.productProductGroupingMappings}
                         className="form-control form-control-sm"
                         onClick={handleFocus}
@@ -275,14 +308,20 @@ function ProductDetail1() {
                         list={defaultProductProductGroupingMappingsList}
                         modelFilter={productProductGroupingMappingsFilter}
                         setModelFilter={setProductProductGroupingMappingsFilter}
-                        searchField={nameof(productProductGroupingMappingsFilter.productId)}
+                        searchField={nameof(
+                          productProductGroupingMappingsFilter.productId,
+                        )}
                         selectedItems={productProductGroupingMappings}
                         visible={visible}
-                        onClose={handlePopupCancel} />
+                        onClose={handlePopupCancel}
+                      />
                     </FormItem>
                     <Form.Item label={translate('productDetail.status')}>
                       <div className="product-status">
-                        <Switch checked={product.isActive === true} onChange={handleChangeStatus} />
+                        <Switch
+                          checked={product.isActive === true}
+                          onChange={handleChangeStatus}
+                        />
                         {/* <span className={classNames('status-display', { active: product.isActive === true, inactive: product.isActive === false })}>
                           {statusDisplay}
                         </span> */}
@@ -290,8 +329,11 @@ function ProductDetail1() {
                     </Form.Item>
 
                     <FormItem label={translate('products.productType')}>
-                      <Select value={product.productType?.id}
-                        onChange={handleChangeObjectField(nameof(product.productType))}
+                      <Select
+                        value={product.productType?.id}
+                        onChange={handleChangeObjectField(
+                          nameof(product.productType),
+                        )}
                         getList={productRepository.singleListProductType}
                         list={defaultProductTypeList}
                         modelFilter={productTypeFilter}
@@ -301,8 +343,11 @@ function ProductDetail1() {
                     </FormItem>
 
                     <FormItem label={translate('products.unitOfMeasure')}>
-                      <Select value={product.unitOfMeasure?.id}
-                        onChange={handleChangeObjectField(nameof(product.unitOfMeasure))}
+                      <Select
+                        value={product.unitOfMeasure?.id}
+                        onChange={handleChangeObjectField(
+                          nameof(product.unitOfMeasure),
+                        )}
                         getList={productRepository.singleListUnitOfMeasure}
                         list={defaultUnitOfMeasureList}
                         modelFilter={unitOfMeasureFilter}
@@ -312,8 +357,11 @@ function ProductDetail1() {
                     </FormItem>
 
                     <FormItem label={translate('products.supplier')}>
-                      <Select value={product.supplier?.id}
-                        onChange={handleChangeObjectField(nameof(product.supplier))}
+                      <Select
+                        value={product.supplier?.id}
+                        onChange={handleChangeObjectField(
+                          nameof(product.supplier),
+                        )}
                         getList={productRepository.singleListSupplier}
                         list={defaultSupplierList}
                         modelFilter={supplierFilter}
@@ -321,20 +369,30 @@ function ProductDetail1() {
                         searchField={nameof(supplierFilter.id)}
                       />
                     </FormItem>
-                    <FormItem label={translate('products.scanCode')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.scanCode))}
+                    <FormItem
+                      label={translate('products.scanCode')}
+                      validateStatus={formService.getValidationStatus<Product>(
+                        product.errors,
+                        nameof(product.scanCode),
+                      )}
                       help={product.errors?.scanCode}
                     >
-                      <input type="text"
+                      <input
+                        type="text"
                         defaultValue={product.scanCode}
                         className="form-control form-control-sm"
-                        onChange={handleChangeSimpleField(nameof(product.scanCode))}
+                        onChange={handleChangeSimpleField(
+                          nameof(product.scanCode),
+                        )}
                       />
                     </FormItem>
 
                     <FormItem label={translate('products.brand')}>
-                      <Select value={product.brand?.id}
-                        onChange={handleChangeObjectField(nameof(product.brand))}
+                      <Select
+                        value={product.brand?.id}
+                        onChange={handleChangeObjectField(
+                          nameof(product.brand),
+                        )}
                         getList={productRepository.singleListBrand}
                         list={defaultBrandList}
                         modelFilter={brandFilter}
@@ -342,7 +400,6 @@ function ProductDetail1() {
                         searchField={nameof(brandFilter.id)}
                       />
                     </FormItem>
-
                   </div>
                   <div className="col-6">
                     <div className="product-image">
@@ -354,7 +411,7 @@ function ProductDetail1() {
                           aspectRatio={1}
                           onUpload={productRepository.uploadImage}
                           onChange={handleChangeImages}
-                        // action="/api/product/product-detail/upload-image"
+                          // action="/api/product/product-detail/upload-image"
                         />
                       </Form.Item>
                     </div>
@@ -366,14 +423,11 @@ function ProductDetail1() {
                         onChange={handleChangeSimpleField(nameof(product.description))}
                         />
                     </div> */}
-
                   </div>
                 </div>
               </Form>
             </TabPane>
-
           </Tabs>
-
         </Card>
       </Spin>
     </div>

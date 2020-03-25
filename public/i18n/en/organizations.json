@@ -1,0 +1,22 @@
+{
+  "organizations": {
+    "code": "",
+    "createdAt": "",
+    "deletedAt": "",
+    "detail": {
+      "title": ""
+    },
+    "id": "",
+    "inverseParent": "",
+    "level": "",
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "parent": "",
+    "parentId": "",
+    "path": "",
+    "stores": "",
+    "updatedAt": ""
+  }
+}

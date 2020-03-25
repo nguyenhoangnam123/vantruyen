@@ -3,7 +3,7 @@ import { ErrorMap } from 'react3l';
 import { Moment } from 'moment';
 import { Store } from './Store';
 
-export class StoreGrouping extends Model
+export class StoreGrouping extends Model 
 {
     public id?: number;
     public code?: string;

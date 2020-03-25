@@ -1,0 +1,18 @@
+{
+  "suppliers": {
+    "code": "",
+    "createdAt": "",
+    "deletedAt": "",
+    "detail": {
+      "title": ""
+    },
+    "id": "",
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "products": "",
+    "taxCode": "",
+    "updatedAt": ""
+  }
+}

@@ -1,7 +1,7 @@
 {
   "products": {
     "addVariation": "Thêm thuộc tính",
-    "brand": "Thương hiệu",
+    "brand": "Nhãn hiệu",
     "brandId": "ID Thương hiệu",
     "code": "Mã",
     "createVariations": "Tạo phiên bản",
@@ -9,38 +9,63 @@
     "deletedAt": "Ngày xóa",
     "description": "",
     "detail": {
-      "title": ""
+      "title": "Chỉnh sửa sản phẩm"
     },
     "general": "Thông tin chung",
     "id": "",
+    "images": {
+      "id": "",
+      "imageId": "",
+      "name": "",
+      "productId": "",
+      "url": ""
+    },
     "isActive": "",
     "items": "",
     "master": {
       "title": ""
     },
-    "name": "",
+    "name": "Tên sản phẩm",
     "price": "Giá",
-    "productGrouping": "",
+    "productGrouping": "Nhóm sản phẩm",
     "productGroupingId": "",
-    "productImageMappingModal": {
-      "title": ""
+    "productGroupings": {
+      "code": "",
+      "description": "",
+      "id": "",
+      "name": "",
+      "parentId": "",
+      "path": "",
+      "productGroupingId": "",
+      "productId": ""
     },
-    "productType": "",
+    "productImageMappings": {
+      "list": ""
+    },
+    "productProductGroupingMappings": {
+      "list": ""
+    },
+    "productType": "Loại sản phẩm",
     "productTypeId": "",
     "retailPrice": "Giá bán lẻ đề xuất",
     "salePrice": "",
-    "scanCode": "",
-    "supplier": "",
+    "scanCode": "Mã nhận diện sản phẩm",
+    "status": "Trạng thái",
+    "supplier": "Nhà cung cấp",
     "supplierCode": "",
     "supplierId": "",
     "tabs": {
-      "roles": {
-        "title": "Danh sách vai trò"
+      "items": {
+        "title": ""
+      },
+      "variationGroupings": {
+        "title": ""
       }
     },
     "taxType": "",
     "taxTypeId": "",
     "unitOfMeasure": "Đơn vị tính",
+    "unitOfMeasureGrouping": "Nhóm đơn vị chuyển đổi",
     "unitOfMeasureId": "",
     "updatedAt": "Ngày cập nhật",
     "variationGroupings": "Các phiên bản",

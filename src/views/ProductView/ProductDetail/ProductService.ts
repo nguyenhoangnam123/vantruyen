@@ -1,8 +1,8 @@
-import React, {Dispatch, SetStateAction} from 'react';
-import {Product} from 'models/Product';
-import {VariationGrouping} from 'models/VariationGrouping';
-import {Variation} from 'models/Variation';
-import {Item} from 'models/Item';
+import React, { Dispatch, SetStateAction } from 'react';
+import { Product } from 'models/Product';
+import { VariationGrouping } from 'models/VariationGrouping';
+import { Variation } from 'models/Variation';
+import { Item } from 'models/Item';
 
 export class ProductService {
   permutations(choices, callback, prefix = []) {
@@ -11,7 +11,11 @@ export class ProductService {
     }
     // tslint:disable-next-line:prefer-for-of
     for (let c = 0; c < choices[0].variations.length; c++) {
-      this.permutations(choices.slice(1), callback, prefix.concat(choices[0].variations[c]));
+      this.permutations(
+        choices.slice(1),
+        callback,
+        prefix.concat(choices[0].variations[c]),
+      );
     }
   }
 
@@ -30,30 +34,34 @@ export class ProductService {
   ] {
     const [retailPrice, setRetailPrice] = React.useState<number>(0);
     const [price, setPrice] = React.useState<number>(0);
-    const addable: boolean = typeof product.variationGroupings === 'object' ? !(product.variationGroupings?.length >= 4) : true;
+    const addable: boolean =
+      typeof product.variationGroupings === 'object'
+        ? !(product.variationGroupings?.length >= 4)
+        : true;
 
-    const handleAddVariation = React.useCallback(
-      () => {
-        if (addable) {
-          setProduct(Product.clone<Product>({
+    const handleAddVariation = React.useCallback(() => {
+      if (addable) {
+        setProduct(
+          Product.clone<Product>({
             ...product,
             variationGroupings: [
               ...(product.variationGroupings ?? []),
               new VariationGrouping(),
             ],
-          }));
-        }
-      },
-      [addable, product, setProduct],
-    );
+          }),
+        );
+      }
+    }, [addable, product, setProduct]);
 
     const handleChangeVariationGroupingName = React.useCallback(
       (index: number) => {
         return (value?: string) => {
           product.variationGroupings[index].name = value;
-          setProduct(Product.clone<Product>({
-            ...product,
-          }));
+          setProduct(
+            Product.clone<Product>({
+              ...product,
+            }),
+          );
         };
       },
       [product, setProduct],
@@ -63,9 +71,11 @@ export class ProductService {
       (index: number) => {
         return () => {
           product.variationGroupings?.splice(index, 1);
-          setProduct(Product.clone<Product>({
-            ...product,
-          }));
+          setProduct(
+            Product.clone<Product>({
+              ...product,
+            }),
+          );
         };
       },
       [product, setProduct],
@@ -100,8 +110,13 @@ export class ProductService {
     () => void,
   ] {
     const [visible, setVisible] = React.useState<boolean>(false);
-    const [currentVariationGrouping, setCurrentVariationGrouping] = React.useState<VariationGrouping>(null);
-    const [currentVariation, setCurrentVariation] = React.useState<Variation>(null);
+    const [
+      currentVariationGrouping,
+      setCurrentVariationGrouping,
+    ] = React.useState<VariationGrouping>(null);
+    const [currentVariation, setCurrentVariation] = React.useState<Variation>(
+      null,
+    );
     const [currentIndex, setCurrentIndex] = React.useState<number>(-1);
     const handleOpenModal = React.useCallback(
       (index: number) => {
@@ -126,29 +141,32 @@ export class ProductService {
       },
       [currentVariation],
     );
-    const handleUpdateVariationGrouping = React.useCallback(
-      () => {
-        const {variations = []} = currentVariationGrouping;
-        product.variationGroupings[currentIndex].variations = [...variations, currentVariation];
-        setProduct(Product.clone<Product>({
+    const handleUpdateVariationGrouping = React.useCallback(() => {
+      const { variations = [] } = currentVariationGrouping;
+      product.variationGroupings[currentIndex].variations = [
+        ...variations,
+        currentVariation,
+      ];
+      setProduct(
+        Product.clone<Product>({
           ...product,
-          variationGroupings: [
-            ...product.variationGroupings,
-          ],
-        }));
-        setVisible(false);
-      },
-      [currentIndex, currentVariation, currentVariationGrouping, product, setProduct],
-    );
-    const handleCloseModal = React.useCallback(
-      () => {
-        setCurrentVariationGrouping(null);
-        setVisible(false);
-      },
-      [],
-    );
+          variationGroupings: [...product.variationGroupings],
+        }),
+      );
+      setVisible(false);
+    }, [
+      currentIndex,
+      currentVariation,
+      currentVariationGrouping,
+      product,
+      setProduct,
+    ]);
+    const handleCloseModal = React.useCallback(() => {
+      setCurrentVariationGrouping(null);
+      setVisible(false);
+    }, []);
     const getDisplayValue: (index: number) => string[] = React.useCallback(
-      (index) => {
+      index => {
         return product.variationGroupings[index].variations
           ?.filter((v: Variation) => {
             return typeof v.name === 'string' && v.name !== '';
@@ -158,39 +176,42 @@ export class ProductService {
       [product.variationGroupings],
     );
 
-    const handleCombineVariations = React.useCallback(
-      () => {
-        const {variationGroupings} = product;
-        const result: { [key: string]: Item } = {};
-        const currentItems: Item[] = product.items;
-        const currentItemKeys: { [key: number]: Item } = {};
-        currentItems.forEach((item: Item) => {
-          currentItemKeys[item.id] = item;
+    const handleCombineVariations = React.useCallback(() => {
+      const { variationGroupings } = product;
+      const result: { [key: string]: Item } = {};
+      const currentItems: Item[] = product.items;
+      const currentItemKeys: { [key: number]: Item } = {};
+      currentItems.forEach((item: Item) => {
+        currentItemKeys[item.id] = item;
+      });
+      this.permutations(variationGroupings, prefix => {
+        const key: string = prefix.map((v: Variation) => v.code).join('-');
+        const newItem: Item = Item.clone<Item>({
+          key,
+          productId: product.id,
+          product,
+          name: `${product.name} - ${prefix
+            .map((v: Variation) => v.name)
+            .join(' - ')}`,
+          code: `${product.code}-${prefix
+            .map((v: Variation) => v.code)
+            .join('-')}`,
+          scanCode: product.scanCode,
+          price,
+          retailPrice,
+          images: [],
         });
-        this.permutations(variationGroupings, (prefix) => {
-          const key: string = prefix.map((v: Variation) => v.code).join('-');
-          const newItem: Item = Item.clone<Item>({
-            key,
-            productId: product.id,
-            product,
-            name: `${product.name} - ${prefix.map((v: Variation) => v.name).join(' - ')}`,
-            code: `${product.code}-${prefix.map((v: Variation) => v.code).join('-')}`,
-            scanCode: product.scanCode,
-            price,
-            retailPrice,
-            images: [],
-          });
-          result[key] = newItem;
-          return newItem;
-        });
-        setProduct(Product.clone<Product>({
+        result[key] = newItem;
+        return newItem;
+      });
+      setProduct(
+        Product.clone<Product>({
           ...product,
           items: Object.values(result),
-        }));
-        return result;
-      },
-      [product, setProduct],
-    );
+        }),
+      );
+      return result;
+    }, [product, setProduct]);
 
     return [
       visible,

@@ -1,13 +1,14 @@
 import { Model } from 'core/models';
 import { ErrorMap } from 'react3l';
 import { Moment } from 'moment';
-import { AppUserRoleMapping } from './AppUserRoleMapping';
+import { Status } from './Status';
 import { Permission } from './Permission';
 
-export class Role extends Model
+export class Role extends Model 
 {
     public id?: number;
     public name?: string;
-    public appUserRoleMappings?: AppUserRoleMapping[];
+    public statusId?: number;
+    public status?: Status;
     public permissions?: Permission[];
 }

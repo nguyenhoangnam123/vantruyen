@@ -4,7 +4,7 @@ import { Moment } from 'moment';
 import { Field } from './Field';
 import { Permission } from './Permission';
 
-export class PermissionFieldMapping extends Model
+export class PermissionFieldMapping extends Model 
 {
     public permissionId?: number;
     public fieldId?: number;

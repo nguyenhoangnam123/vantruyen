@@ -8,4 +8,9 @@ export class OrganizationFilter extends ModelFilter  {
   public parentId?: IdFilter = new IdFilter();
   public path?: StringFilter = new StringFilter();
   public level?: NumberFilter = new NumberFilter();
+  public statusId?: IdFilter = new IdFilter();
+  public phone?: StringFilter = new StringFilter();
+  public address?: StringFilter = new StringFilter();
+  public latitude?: NumberFilter = new NumberFilter();
+  public longitude?: NumberFilter = new NumberFilter();
 }

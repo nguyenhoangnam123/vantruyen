@@ -13,6 +13,13 @@
     },
     "general": "",
     "id": "",
+    "images": {
+      "id": "",
+      "imageId": "",
+      "name": "",
+      "productId": "",
+      "url": ""
+    },
     "isActive": "",
     "items": "",
     "master": {
@@ -22,25 +29,43 @@
     "price": "",
     "productGrouping": "",
     "productGroupingId": "",
-    "productImageMappingModal": {
-      "title": ""
+    "productGroupings": {
+      "code": "",
+      "description": "",
+      "id": "",
+      "name": "",
+      "parentId": "",
+      "path": "",
+      "productGroupingId": "",
+      "productId": ""
+    },
+    "productImageMappings": {
+      "list": ""
+    },
+    "productProductGroupingMappings": {
+      "list": ""
     },
     "productType": "",
     "productTypeId": "",
     "retailPrice": "",
     "salePrice": "",
     "scanCode": "",
+    "status": "",
     "supplier": "",
     "supplierCode": "",
     "supplierId": "",
     "tabs": {
-      "roles": {
+      "items": {
+        "title": ""
+      },
+      "variationGroupings": {
         "title": ""
       }
     },
     "taxType": "",
     "taxTypeId": "",
     "unitOfMeasure": "",
+    "unitOfMeasureGrouping": "",
     "unitOfMeasureId": "",
     "updatedAt": "",
     "variationGroupings": "",

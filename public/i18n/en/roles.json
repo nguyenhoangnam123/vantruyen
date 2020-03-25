@@ -1,6 +1,13 @@
 {
   "roles": {
+    "detail": {
+      "title": ""
+    },
     "id": "",
-    "name": ""
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "permissions": ""
   }
 }

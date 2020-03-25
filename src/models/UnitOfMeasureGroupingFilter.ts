@@ -5,4 +5,5 @@ export class UnitOfMeasureGroupingFilter extends ModelFilter  {
   public id?: IdFilter = new IdFilter();
   public name?: StringFilter = new StringFilter();
   public unitOfMeasureId?: IdFilter = new IdFilter();
+  public statusId?: IdFilter = new IdFilter();
 }

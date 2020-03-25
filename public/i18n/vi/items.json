@@ -1,11 +1,23 @@
 {
   "items": {
     "code": "Mã",
+    "createdAt": "",
+    "deletedAt": "",
+    "detail": {
+      "title": ""
+    },
     "id": "ID",
     "images": "Danh sách hình ảnh",
+    "master": {
+      "title": ""
+    },
     "name": "Tên",
     "price": "Giá",
+    "product": "",
+    "productId": "",
     "retailPrice": "Giá bán lẻ đề xuất",
-    "sku": "Mã hiển thị"
+    "salePrice": "",
+    "scanCode": "",
+    "updatedAt": ""
   }
 }

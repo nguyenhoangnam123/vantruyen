@@ -1,10 +1,10 @@
-import React, {Dispatch, SetStateAction} from 'react';
-import {crudService, tableService} from 'core/services';
-import Table, {ColumnProps} from 'antd/lib/table';
-import {renderMasterIndex} from 'helpers/ant-design/table';
+import React, { Dispatch, SetStateAction } from 'react';
+import { crudService, tableService } from 'core/services';
+import Table, { ColumnProps } from 'antd/lib/table';
+import { renderMasterIndex } from 'helpers/ant-design/table';
 import nameof from 'ts-nameof.macro';
-import {useTranslation} from 'react-i18next';
-import {generalColumnWidths, generalLanguageKeys} from 'config/consts';
+import { useTranslation } from 'react-i18next';
+import { generalColumnWidths, generalLanguageKeys } from 'config/consts';
 
 // Parent Repo
 import { productRepository } from 'views/ProductView/ProductRepository';
@@ -27,10 +27,7 @@ export interface ProductImageMappingTableProps {
 function ProductImageMappingTable(props: ProductImageMappingTableProps) {
   const [translate] = useTranslation();
 
-  const {
-    product,
-    setProduct,
-  } = props;
+  const { product, setProduct } = props;
 
   const [
     productImageMappings,
@@ -53,13 +50,16 @@ function ProductImageMappingTable(props: ProductImageMappingTableProps) {
     pagination,
     ,
     handleTableChange,
-  ] = tableService.useLocalTable<ProductImageMapping, ProductImageMappingFilter>(
+  ] = tableService.useLocalTable<
+    ProductImageMapping,
+    ProductImageMappingFilter
+  >(
     productImageMappings,
     productImageMappingFilter,
     setProductImageMappingFilter,
   );
 
-    const [
+  const [
     loading,
     visible,
     list,
@@ -74,7 +74,10 @@ function ProductImageMappingTable(props: ProductImageMappingTableProps) {
     ProductImageMappingFilter,
   );
 
-  const rowSelection = tableService.useModalRowSelection<Image, ProductImageMapping>(
+  const rowSelection = tableService.useModalRowSelection<
+    Image,
+    ProductImageMapping
+  >(
     product.id,
     nameof(product),
     nameof(productImageMappings[0].image),
@@ -110,36 +113,39 @@ function ProductImageMappingTable(props: ProductImageMappingTableProps) {
     [dataSource, pagination, translate],
   );
 
-    return (
+  return (
     <>
-      <Table tableLayout="fixed"
-             bordered={true}
-             size="small"
-             columns={columns}
-             dataSource={dataSource}
-             pagination={pagination}
-             rowKey={nameof(productImageMappings[0].imageId)}
-             onChange={handleTableChange}
-             title={() => (
-               <>
-                 <div className="d-flex justify-content-end">
-                   <button className="btn btn-sm btn-primary" onClick={handleOpen}>
-                     <i className="fa fa-plus mr-2"/>
-                     {translate(generalLanguageKeys.actions.add)}
-                   </button>
-                 </div>
-               </>
-             )}
+      <Table
+        tableLayout="fixed"
+        bordered={true}
+        size="small"
+        columns={columns}
+        dataSource={dataSource}
+        pagination={pagination}
+        rowKey={nameof(productImageMappings[0].imageId)}
+        onChange={handleTableChange}
+        title={() => (
+          <>
+            <div className="d-flex justify-content-end">
+              <button className="btn btn-sm btn-primary" onClick={handleOpen}>
+                <i className="fa fa-plus mr-2" />
+                {translate(generalLanguageKeys.actions.add)}
+              </button>
+            </div>
+          </>
+        )}
       />
-      <ProductImageMappingModal current={ productImageMappings }
-                         list={list}
-                         total={total}
-                         loading={loading}
-                         isOpen={visible}
-                         modelFilter={filter}
-                         setModelFilter={setFilter}
-                         rowSelection={rowSelection}
-                         onClose={handleClose}/>
+      <ProductImageMappingModal
+        current={productImageMappings}
+        list={list}
+        total={total}
+        loading={loading}
+        isOpen={visible}
+        modelFilter={filter}
+        setModelFilter={setFilter}
+        rowSelection={rowSelection}
+        onClose={handleClose}
+      />
     </>
   );
 }

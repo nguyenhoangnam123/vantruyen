@@ -6,4 +6,5 @@ export class WardFilter extends ModelFilter  {
   public name?: StringFilter = new StringFilter();
   public priority?: NumberFilter = new NumberFilter();
   public districtId?: IdFilter = new IdFilter();
+  public statusId?: IdFilter = new IdFilter();
 }

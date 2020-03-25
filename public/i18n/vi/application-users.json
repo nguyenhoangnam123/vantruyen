@@ -15,10 +15,8 @@
     "name": "Tên người dùng",
     "phone": "Số điện thoại",
     "provider": "Nhà cung cấp",
-    "roleContentTable": {
-      "popup": {
-        "title": "Thêm vai trò cho người dùng"
-      }
+    "roleContentModal": {
+      "title": ""
     },
     "tabs": {
       "roles": {

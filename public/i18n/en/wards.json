@@ -1,0 +1,19 @@
+{
+  "wards": {
+    "createdAt": "",
+    "deletedAt": "",
+    "detail": {
+      "title": ""
+    },
+    "district": "",
+    "districtId": "",
+    "id": "",
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "priority": "",
+    "stores": "",
+    "updatedAt": ""
+  }
+}

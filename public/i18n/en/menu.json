@@ -1,6 +1,28 @@
 {
   "menu": {
-    "applicationUsers": "",
-    "provinces": ""
+    "appUsers": "",
+    "districts": "",
+    "fields": "",
+    "images": "",
+    "items": "",
+    "pages": "",
+    "permissions": "",
+    "productGroupings": "",
+    "productTypes": "",
+    "products": "",
+    "properties": "",
+    "propertyTypes": "",
+    "propertyValues": "",
+    "provinces": "",
+    "roles": "",
+    "storeLevels": "",
+    "suppliers": "",
+    "unitOfMeasureGroupingContents": "",
+    "unitOfMeasureGroupings": "",
+    "unitOfMeasures": "",
+    "variationGroupings": "",
+    "variations": "",
+    "views": "",
+    "wards": ""
   }
 }

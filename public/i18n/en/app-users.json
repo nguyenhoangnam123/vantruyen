@@ -1,0 +1,22 @@
+{
+  "appUsers": {
+    "createdAt": "",
+    "deletedAt": "",
+    "detail": {
+      "title": ""
+    },
+    "displayName": "",
+    "email": "",
+    "id": "",
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "password": "",
+    "phone": "",
+    "updatedAt": "",
+    "userStatus": "",
+    "userStatusId": "",
+    "username": ""
+  }
+}

@@ -4,7 +4,7 @@ import { Moment } from 'moment';
 import { UnitOfMeasure } from './UnitOfMeasure';
 import { UnitOfMeasureGrouping } from './UnitOfMeasureGrouping';
 
-export class UnitOfMeasureGroupingContent extends Model
+export class UnitOfMeasureGroupingContent extends Model 
 {
     public id?: number;
     public unitOfMeasureGroupingId?: number;
