@@ -4,7 +4,7 @@ import {VariationGrouping} from 'models/VariationGrouping';
 import {Variation} from 'models/Variation';
 import {Item} from 'models/Item';
 
-export const productService = {
+export class ProductService {
   permutations(choices, callback, prefix = []) {
     if (!choices.length) {
       return callback(prefix);
@@ -13,7 +13,7 @@ export const productService = {
     for (let c = 0; c < choices[0].variations.length; c++) {
       this.permutations(choices.slice(1), callback, prefix.concat(choices[0].variations[c]));
     }
-  },
+  }
 
   usePrice(
     product: Product,
@@ -81,7 +81,7 @@ export const productService = {
       handleChangeVariationGroupingName,
       handleRemoveVariation,
     ];
-  },
+  }
 
   useVariationGrouping(
     product: Product,
@@ -203,5 +203,7 @@ export const productService = {
       getDisplayValue,
       handleCombineVariations,
     ];
-  },
-};
+  }
+}
+
+export const productService: ProductService = new ProductService();
