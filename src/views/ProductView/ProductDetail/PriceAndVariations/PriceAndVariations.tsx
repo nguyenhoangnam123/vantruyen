@@ -182,6 +182,7 @@ function PriceAndVariations(props: PriceAndVariations) {
                  bordered={true}
                  columns={columns}
                  dataSource={props.product.items}
+                 pagination={false}
           />
         </Col>
       </Row>
@@ -191,6 +192,7 @@ function PriceAndVariations(props: PriceAndVariations) {
                  bordered={true}
                  columns={imageTableColumns}
                  dataSource={props.product.items}
+                 pagination={false}
           />
         </Col>
       </Row>
