@@ -10,23 +10,23 @@ import {generalColumnWidths, generalLanguageKeys} from 'config/consts';
 import {tableService} from 'core/services';
 import {useTranslation} from 'react-i18next';
 
-import { ProductImageMapping } from 'models/ProductImageMapping';
-import { Image } from 'models/Image';
-import { ImageFilter } from 'models/ImageFilter';
+import { ProductProductGroupingMapping } from 'models/ProductProductGroupingMapping';
+import { ProductGrouping } from 'models/ProductGrouping';
+import { ProductGroupingFilter } from 'models/ProductGroupingFilter';
 
 
-export interface ProductImageMappingModalProps extends ModalProps {
-  current: ProductImageMapping[];
+export interface ProductProductGroupingMappingModalProps extends ModalProps {
+  current: ProductProductGroupingMapping[];
 
   loading: boolean;
 
-  modelFilter: ImageFilter;
+  modelFilter: ProductGroupingFilter;
 
-  setModelFilter: Dispatch<SetStateAction<ImageFilter>>;
+  setModelFilter: Dispatch<SetStateAction<ProductGroupingFilter>>;
 
-  rowSelection: TableRowSelection<Image>;
+  rowSelection: TableRowSelection<ProductGrouping>;
 
-  list: ProductImageMapping[];
+  list: ProductProductGroupingMapping[];
 
   total: number;
 
@@ -34,7 +34,7 @@ export interface ProductImageMappingModalProps extends ModalProps {
 }
 
 
-function ProductImageMappingMappingModal(props: ProductImageMappingModalProps) {
+function ProductProductGroupingMappingMappingModal(props: ProductProductGroupingMappingModalProps) {
   const [translate] = useTranslation();
 
   const {
@@ -51,35 +51,56 @@ function ProductImageMappingMappingModal(props: ProductImageMappingModalProps) {
 
   const [pagination, sorter, handleTableChange] = tableService.useMasterTable(modelFilter, setModelFilter, total);
 
-  const columns: ColumnProps<ProductImageMapping>[] = React.useMemo(
+  const columns: ColumnProps<ProductProductGroupingMapping>[] = React.useMemo(
     () => {
       return [
       {
         key: generalLanguageKeys.columns.index,
         title: translate(generalLanguageKeys.columns.index),
         width: generalColumnWidths.index,
-        render: renderMasterIndex<ProductImageMapping>(pagination),
+        render: renderMasterIndex<ProductProductGroupingMapping>(pagination),
       },
       {
         key: nameof(list[0].id),
         dataIndex: nameof(list[0].id),
         sorter: true,
         sortOrder: getOrderTypeForTable(nameof(list[0].name), sorter),
-        title: translate('products.images.id'),
+        title: translate('products.productGroupings.id'),
+      },
+      {
+        key: nameof(list[0].code),
+        dataIndex: nameof(list[0].code),
+        sorter: true,
+        sortOrder: getOrderTypeForTable(nameof(list[0].name), sorter),
+        title: translate('products.productGroupings.code'),
       },
       {
         key: nameof(list[0].name),
         dataIndex: nameof(list[0].name),
         sorter: true,
         sortOrder: getOrderTypeForTable(nameof(list[0].name), sorter),
-        title: translate('products.images.name'),
+        title: translate('products.productGroupings.name'),
       },
       {
-        key: nameof(list[0].url),
-        dataIndex: nameof(list[0].url),
+        key: nameof(list[0].parentId),
+        dataIndex: nameof(list[0].parentId),
         sorter: true,
         sortOrder: getOrderTypeForTable(nameof(list[0].name), sorter),
-        title: translate('products.images.url'),
+        title: translate('products.productGroupings.parentId'),
+      },
+      {
+        key: nameof(list[0].path),
+        dataIndex: nameof(list[0].path),
+        sorter: true,
+        sortOrder: getOrderTypeForTable(nameof(list[0].name), sorter),
+        title: translate('products.productGroupings.path'),
+      },
+      {
+        key: nameof(list[0].description),
+        dataIndex: nameof(list[0].description),
+        sorter: true,
+        sortOrder: getOrderTypeForTable(nameof(list[0].name), sorter),
+        title: translate('products.productGroupings.description'),
       },
       ];
     },
@@ -115,4 +136,4 @@ function ProductImageMappingMappingModal(props: ProductImageMappingModalProps) {
   );
 }
 
-export default ProductImageMappingMappingModal;
+export default ProductProductGroupingMappingMappingModal;

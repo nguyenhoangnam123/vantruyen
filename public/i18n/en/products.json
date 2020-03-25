@@ -1,0 +1,51 @@
+{
+  "products": {
+    "addVariation": "",
+    "brand": "",
+    "brandId": "",
+    "code": "",
+    "createVariations": "",
+    "createdAt": "",
+    "deletedAt": "",
+    "description": "",
+    "detail": {
+      "title": ""
+    },
+    "general": "",
+    "id": "",
+    "isActive": "",
+    "items": "",
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "price": "",
+    "productGrouping": "",
+    "productGroupingId": "",
+    "productImageMappingModal": {
+      "title": ""
+    },
+    "productType": "",
+    "productTypeId": "",
+    "retailPrice": "",
+    "salePrice": "",
+    "scanCode": "",
+    "supplier": "",
+    "supplierCode": "",
+    "supplierId": "",
+    "tabs": {
+      "roles": {
+        "title": ""
+      }
+    },
+    "taxType": "",
+    "taxTypeId": "",
+    "unitOfMeasure": "",
+    "unitOfMeasureId": "",
+    "updatedAt": "",
+    "variationGroupings": "",
+    "variationName": "",
+    "variationValue": "",
+    "variationsAndPrice": ""
+  }
+}

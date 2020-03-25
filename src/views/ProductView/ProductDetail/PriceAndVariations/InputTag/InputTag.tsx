@@ -1,26 +1,36 @@
-import Input from 'antd/lib/input';
 import Tag from 'antd/lib/tag';
-import React, { useState } from 'react';
-import './InputTag.scss';
-import { useTranslation } from 'react-i18next';
+import React, {useState} from 'react';
+import 'views/ProductView/ProductDetail/PriceAndVariations/InputTag/InputTag.scss';
 
 interface IInputTagProps {
   defaultValue?: string[];
+
   value?: string[];
+
   onChange?: (value: string[]) => void;
+
   onRemove?: (value: string, index?: number) => void;
+
+  onRemoveVariation?: () => void;
+
   onClear?: () => void;
+
   disabled?: boolean;
+
+  max?: number;
+
+  onClick?(): void;
 }
 
-function TagInput(props: IInputTagProps) {
+function InputTag(props: IInputTagProps) {
   if (props.value && props.defaultValue) {
     throw new Error('Component must be controlled or uncontrolled, but not both');
   }
 
+  const {max} = props;
+
   const [value, setValue] = useState<string[]>(props.defaultValue || []);
   const [input, setInput] = useState<string>('');
-  const [translate] = useTranslation();
 
   const handleRemove = React.useCallback(
     (index: number) => {
@@ -37,9 +47,8 @@ function TagInput(props: IInputTagProps) {
         setValue(newValue);
       };
     },
-    [props.onRemove, props.onChange],
+    [value, props],
   );
-
 
   const handleChange = React.useCallback(
     (event) => {
@@ -76,46 +85,39 @@ function TagInput(props: IInputTagProps) {
         }
       }
     },
-    [setInput, props.onChange, setValue],
+    [props, value],
   );
 
-  const handleDeteleAll = React.useCallback(
-    () => {
-      setValue([]);
-      if (props.onChange) {
-        props.onChange([]);
-      }
-    },
-    [setValue],
-  );
-
-  function renderOutput(value: string[]) {
-    return (
-      <div className="input-tag d-flex ">
-        <div className="form-tag">
-          <div className="list-tag">
-            {value.map((tag: string, index: number) => (
-              <Tag className="tag" key={`${tag}-${index}`} closable={!props.disabled} onClick={handleRemove(index)}>
-                {tag}
-              </Tag>
-            ))}
+  const renderOutput = React.useCallback(
+    (value: string[]) => {
+      return (
+        <div className="input-tag">
+          <div className="flex-grow-1 d-flex">
+            <button className="btn btn-sm btn-link" onClick={props.onClick}
+                    disabled={props.disabled || (typeof max !== 'undefined' && value?.length >= max)}>
+              <i className="fa fa-plus"/>
+            </button>
+            <div className="list-tag flex-grow-1">
+              {value.map((tag: string, index: number) => (
+                <Tag className="tag"
+                     key={`${tag}-${index}`}
+                     closable={!props.disabled}
+                     onClick={handleRemove(index)}>
+                  {tag}
+                </Tag>
+              ))}
+            </div>
           </div>
-
-          <input
-            type="text"
-            className="input form-control form-control-sm"
-            onChange={handleChange}
-            value={input} onKeyDown={handlePressEnter}
-            disabled={props.disabled}
-          />
+          <div className="delete-all">
+          <span onClick={props.onRemoveVariation} className="text-danger delete ml-3">
+            <i className="fa fa-trash"/>
+          </span>
+          </div>
         </div>
-        <div className="delete-all">
-          <span onClick={handleDeteleAll} className="text-danger delete ml-3"><i className="fa fa-trash"></i></span>
-        </div>
-      </div>
-    );
-  }
-
+      );
+    },
+    [handleChange, handlePressEnter, handleRemove, input, max, props.disabled, props.onRemoveVariation],
+  );
 
   if (props.value) {
     return renderOutput(props.value);
@@ -124,4 +126,4 @@ function TagInput(props: IInputTagProps) {
   return renderOutput(value);
 }
 
-export default TagInput;
+export default InputTag;

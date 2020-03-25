@@ -71,43 +71,79 @@
     }
   },
   "general": {
-    "actions": {
-      "add": "",
-      "close": "",
-      "create": "",
-      "delete": "",
-      "export": "",
-      "filter": "",
-      "import": "",
-      "label": "",
-      "reset": "",
-      "save": "",
-      "search": "",
-      "update": ""
-    },
-    "batchDelete": {
-      "content": "",
-      "title": ""
-    },
-    "columns": {
-      "index": ""
-    },
-    "delete": {
-      "content": "",
-      "title": ""
-    },
     "master": {
-      "defaultPreviewTitle": "",
       "pagination": ""
-    },
-    "numberRange": {
-      "from": "",
-      "to": ""
     }
+  },
+  "images": {
+    "id": "",
+    "name": ""
+  },
+  "items": {
+    "code": "",
+    "id": "",
+    "images": "",
+    "name": "",
+    "price": "",
+    "retailPrice": "",
+    "sku": ""
   },
   "menu": {
     "applicationUsers": "",
     "provinces": ""
+  },
+  "productImageMappings": {
+    "id": "",
+    "name": ""
+  },
+  "products": {
+    "addVariation": "",
+    "brand": "",
+    "brandId": "",
+    "code": "",
+    "createVariations": "",
+    "createdAt": "",
+    "deletedAt": "",
+    "description": "",
+    "detail": {
+      "title": ""
+    },
+    "general": "",
+    "id": "",
+    "isActive": "",
+    "items": "",
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "price": "",
+    "productGrouping": "",
+    "productGroupingId": "",
+    "productImageMappingModal": {
+      "title": ""
+    },
+    "productType": "",
+    "productTypeId": "",
+    "retailPrice": "",
+    "salePrice": "",
+    "scanCode": "",
+    "supplier": "",
+    "supplierCode": "",
+    "supplierId": "",
+    "tabs": {
+      "roles": {
+        "title": ""
+      }
+    },
+    "taxType": "",
+    "taxTypeId": "",
+    "unitOfMeasure": "",
+    "unitOfMeasureId": "",
+    "updatedAt": "",
+    "variationGroupings": "",
+    "variationName": "",
+    "variationValue": "",
+    "variationsAndPrice": ""
   },
   "provinces": {
     "code": "",
@@ -124,6 +160,11 @@
     "provinceType": ""
   },
   "roles": {
+    "id": "",
+    "name": ""
+  },
+  "variationGroupings": {
+    "code": "",
     "id": "",
     "name": ""
   }
