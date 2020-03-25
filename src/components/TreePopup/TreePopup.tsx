@@ -56,7 +56,7 @@ function TreePopup<T extends Model>(props: ITreeInModalProps<T>) {
         return;
       }
     },
-    [selectedItems],
+    [props, selectedItems],
   );
 
   const handleClose = React.useCallback(
@@ -66,7 +66,7 @@ function TreePopup<T extends Model>(props: ITreeInModalProps<T>) {
         props.onClose(event);
       }
     },
-    [setSelectedItems],
+    [props],
   );
 
   return renderModal();
