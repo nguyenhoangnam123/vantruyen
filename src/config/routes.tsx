@@ -50,6 +50,7 @@ import VariationView, { VariationDetail, VariationMaster } from 'views/Variation
 import VariationGroupingView, { VariationGroupingDetail, VariationGroupingMaster } from 'views/VariationGroupingView/VariationGroupingView';
 import ViewView, { ViewDetail, ViewMaster } from 'views/ViewView/ViewView';
 import WardView, { WardDetail, WardMaster } from 'views/WardView/WardView';
+import ProductDetail1 from 'views/ProductView/ProductDetail1/ProductDetail1';
 export const routes: RouteConfig[] =
   [
     {
@@ -169,11 +170,15 @@ export const routes: RouteConfig[] =
             [
               {
                 path: join(PRODUCT_ROUTE, ':id'),
-                component: ProductDetail,
+                component: ProductDetail1,
               },
               {
                 path: join(PRODUCT_ROUTE),
                 component: ProductMaster,
+              },
+              {
+                path: join(PRODUCT_ROUTE, 'detail1'),
+                component: ProductDetail1,
               },
             ],
         },

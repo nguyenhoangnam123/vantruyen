@@ -1,55 +1,21 @@
 import React from 'react';
 import DatePicker from 'antd/lib/date-picker';
 import Switch from 'antd/lib/switch';
-import {crudService, routerService} from 'core/services';
+import { crudService, routerService } from 'core/services';
 import Spin from 'antd/lib/spin';
 import Card from 'antd/lib/card';
 import Form from 'antd/lib/form';
 import Tabs from 'antd/lib/tabs';
-import {useTranslation} from 'react-i18next';
-import {generalLanguageKeys} from 'config/consts';
+import { useTranslation } from 'react-i18next';
+import { generalLanguageKeys } from 'config/consts';
 import Select from 'components/Select/Select';
 import nameof from 'ts-nameof.macro';
-import {defaultDetailFormLayout} from 'config/ant-design/form';
+import { defaultDetailFormLayout } from 'config/ant-design/form';
 import InputNumber from 'components/InputNumber/InputNumber';
-import {formService} from 'core/services/FormService';
+import { formService } from 'core/services/FormService';
 import './ProductDetail.scss';
-import { productRepository }  from 'views/ProductView/ProductRepository';
+import { productRepository } from 'views/ProductView/ProductRepository';
 import { Product } from 'models/Product';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // import { Brand } from 'models/Brand'
@@ -85,18 +51,18 @@ import ProductImageMappingTable from 'views/ProductView/ProductDetail/ProductIma
 
 
 
-const {TabPane} = Tabs;
+const { TabPane } = Tabs;
 
-const {Item: FormItem} = Form;
+const { Item: FormItem } = Form;
 
 function ProductDetail() {
   const [translate] = useTranslation();
 
   // Service goback
-    const [handleGoBack] = routerService.useGoBack();
+  const [handleGoBack] = routerService.useGoBack();
 
   // Hooks, useDetail, useChangeHandler
-    const [
+  const [
     product,
     setProduct,
     loading,
@@ -109,7 +75,7 @@ function ProductDetail() {
     productRepository.save,
   );
 
-    const [
+  const [
     handleChangeSimpleField,
     handleChangeObjectField,
     handleChangeDateField,
@@ -157,26 +123,26 @@ function ProductDetail() {
         <Card title={(
           <>
             <button className="btn btn-link mr-2" onClick={handleGoBack}>
-              <i className="fa fa-arrow-left"/>
+              <i className="fa fa-arrow-left" />
             </button>
             {isDetail ? translate('products.detail.title') : translate(generalLanguageKeys.actions.create)}
           </>
         )}>
           <div className="d-flex justify-content-end mb-4">
             <button className="btn btn-sm btn-primary" onClick={handleSave}>
-              <i className="fa mr-2 fa-save"/>
+              <i className="fa mr-2 fa-save" />
               {translate(generalLanguageKeys.actions.save)}
             </button>
           </div>
           <Form {...defaultDetailFormLayout}>
 
             <FormItem label={translate('products.id')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.id))}
-                      help={ product.errors?.id }
+              validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.id))}
+              help={product.errors?.id}
             >
-              <InputNumber defaultValue={ product.id }
-                           className="w-100"
-                           onChange={handleChangeSimpleField(nameof(product.id))}
+              <InputNumber defaultValue={product.id}
+                className="w-100"
+                onChange={handleChangeSimpleField(nameof(product.id))}
               />
             </FormItem>
 
@@ -184,13 +150,13 @@ function ProductDetail() {
 
 
             <FormItem label={translate('products.code')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.code))}
-                      help={ product.errors?.code }
+              validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.code))}
+              help={product.errors?.code}
             >
               <input type="text"
-                           defaultValue={ product.code }
-                           className="form-control form-control-sm"
-                           onChange={handleChangeSimpleField(nameof(product.code))}
+                defaultValue={product.code}
+                className="form-control form-control-sm"
+                onChange={handleChangeSimpleField(nameof(product.code))}
               />
             </FormItem>
 
@@ -198,13 +164,13 @@ function ProductDetail() {
 
 
             <FormItem label={translate('products.supplierCode')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.supplierCode))}
-                      help={ product.errors?.supplierCode }
+              validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.supplierCode))}
+              help={product.errors?.supplierCode}
             >
               <input type="text"
-                           defaultValue={ product.supplierCode }
-                           className="form-control form-control-sm"
-                           onChange={handleChangeSimpleField(nameof(product.supplierCode))}
+                defaultValue={product.supplierCode}
+                className="form-control form-control-sm"
+                onChange={handleChangeSimpleField(nameof(product.supplierCode))}
               />
             </FormItem>
 
@@ -212,13 +178,13 @@ function ProductDetail() {
 
 
             <FormItem label={translate('products.name')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.name))}
-                      help={ product.errors?.name }
+              validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.name))}
+              help={product.errors?.name}
             >
               <input type="text"
-                           defaultValue={ product.name }
-                           className="form-control form-control-sm"
-                           onChange={handleChangeSimpleField(nameof(product.name))}
+                defaultValue={product.name}
+                className="form-control form-control-sm"
+                onChange={handleChangeSimpleField(nameof(product.name))}
               />
             </FormItem>
 
@@ -226,13 +192,13 @@ function ProductDetail() {
 
 
             <FormItem label={translate('products.description')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.description))}
-                      help={ product.errors?.description }
+              validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.description))}
+              help={product.errors?.description}
             >
               <input type="text"
-                           defaultValue={ product.description }
-                           className="form-control form-control-sm"
-                           onChange={handleChangeSimpleField(nameof(product.description))}
+                defaultValue={product.description}
+                className="form-control form-control-sm"
+                onChange={handleChangeSimpleField(nameof(product.description))}
               />
             </FormItem>
 
@@ -240,13 +206,13 @@ function ProductDetail() {
 
 
             <FormItem label={translate('products.scanCode')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.scanCode))}
-                      help={ product.errors?.scanCode }
+              validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.scanCode))}
+              help={product.errors?.scanCode}
             >
               <input type="text"
-                           defaultValue={ product.scanCode }
-                           className="form-control form-control-sm"
-                           onChange={handleChangeSimpleField(nameof(product.scanCode))}
+                defaultValue={product.scanCode}
+                className="form-control form-control-sm"
+                onChange={handleChangeSimpleField(nameof(product.scanCode))}
               />
             </FormItem>
 
@@ -269,8 +235,8 @@ function ProductDetail() {
 
 
             <FormItem label={translate('products.salePrice')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.salePrice))}
-                      help={ product.errors?.salePrice }
+              validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.salePrice))}
+              help={product.errors?.salePrice}
             >
             </FormItem>
 
@@ -278,8 +244,8 @@ function ProductDetail() {
 
 
             <FormItem label={translate('products.retailPrice')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.retailPrice))}
-                      help={ product.errors?.retailPrice }
+              validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.retailPrice))}
+              help={product.errors?.retailPrice}
             >
             </FormItem>
 
@@ -290,8 +256,8 @@ function ProductDetail() {
 
 
             <FormItem label={translate('products.isActive')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.isActive))}
-                      help={ product.errors?.isActive }
+              validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.isActive))}
+              help={product.errors?.isActive}
             >
             </FormItem>
 
@@ -299,36 +265,36 @@ function ProductDetail() {
 
 
             <FormItem label={translate('products.createdAt')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.createdAt))}
-                      help={ product.errors?.createdAt }
+              validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.createdAt))}
+              help={product.errors?.createdAt}
             >
-              <DatePicker defaultValue={ product.createdAt }
-                          onChange={handleChangeDateField(nameof(product.createdAt))}
-                          className="w-100"
+              <DatePicker defaultValue={product.createdAt}
+                onChange={handleChangeDateField(nameof(product.createdAt))}
+                className="w-100"
               />
             </FormItem>
 
 
 
             <FormItem label={translate('products.updatedAt')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.updatedAt))}
-                      help={ product.errors?.updatedAt }
+              validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.updatedAt))}
+              help={product.errors?.updatedAt}
             >
-              <DatePicker defaultValue={ product.updatedAt }
-                          onChange={handleChangeDateField(nameof(product.updatedAt))}
-                          className="w-100"
+              <DatePicker defaultValue={product.updatedAt}
+                onChange={handleChangeDateField(nameof(product.updatedAt))}
+                className="w-100"
               />
             </FormItem>
 
 
 
             <FormItem label={translate('products.deletedAt')}
-                      validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.deletedAt))}
-                      help={ product.errors?.deletedAt }
+              validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.deletedAt))}
+              help={product.errors?.deletedAt}
             >
-              <DatePicker defaultValue={ product.deletedAt }
-                          onChange={handleChangeDateField(nameof(product.deletedAt))}
-                          className="w-100"
+              <DatePicker defaultValue={product.deletedAt}
+                onChange={handleChangeDateField(nameof(product.deletedAt))}
+                className="w-100"
               />
             </FormItem>
 
@@ -336,7 +302,7 @@ function ProductDetail() {
 
 
 
-              {/* <Select value={ product.brand?.id }
+            {/* <Select value={ product.brand?.id }
                       onChange={handleChangeObjectField(nameof(product.brand))}
                       getList={ productRepository.singleListBrand }
                       list={ defaultBrandList }
@@ -348,43 +314,43 @@ function ProductDetail() {
 
 
 
-              <Select value={ product.productGrouping?.id }
-                      onChange={handleChangeObjectField(nameof(product.productGrouping))}
-                      getList={ productRepository.singleListProductGrouping }
-                      list={ defaultProductGroupingList }
-                      modelFilter={ productGroupingFilter }
-                      setModelFilter={ setProductGroupingFilter }
-                      searchField={nameof(productGroupingFilter.id)}
-              />
+            <Select value={product.productGrouping?.id}
+              onChange={handleChangeObjectField(nameof(product.productGrouping))}
+              getList={productRepository.singleListProductGrouping}
+              list={defaultProductGroupingList}
+              modelFilter={productGroupingFilter}
+              setModelFilter={setProductGroupingFilter}
+              searchField={nameof(productGroupingFilter.id)}
+            />
 
 
 
 
-              <Select value={ product.productType?.id }
-                      onChange={handleChangeObjectField(nameof(product.productType))}
-                      getList={ productRepository.singleListProductType }
-                      list={ defaultProductTypeList }
-                      modelFilter={ productTypeFilter }
-                      setModelFilter={ setProductTypeFilter }
-                      searchField={nameof(productTypeFilter.id)}
-              />
+            <Select value={product.productType?.id}
+              onChange={handleChangeObjectField(nameof(product.productType))}
+              getList={productRepository.singleListProductType}
+              list={defaultProductTypeList}
+              modelFilter={productTypeFilter}
+              setModelFilter={setProductTypeFilter}
+              searchField={nameof(productTypeFilter.id)}
+            />
 
 
 
 
-              <Select value={ product.supplier?.id }
-                      onChange={handleChangeObjectField(nameof(product.supplier))}
-                      getList={ productRepository.singleListSupplier }
-                      list={ defaultSupplierList }
-                      modelFilter={ supplierFilter }
-                      setModelFilter={ setSupplierFilter }
-                      searchField={nameof(supplierFilter.id)}
-              />
+            <Select value={product.supplier?.id}
+              onChange={handleChangeObjectField(nameof(product.supplier))}
+              getList={productRepository.singleListSupplier}
+              list={defaultSupplierList}
+              modelFilter={supplierFilter}
+              setModelFilter={setSupplierFilter}
+              searchField={nameof(supplierFilter.id)}
+            />
 
 
 
 
-              {/* <Select value={ product.taxType?.id }
+            {/* <Select value={ product.taxType?.id }
                       onChange={handleChangeObjectField(nameof(product.taxType))}
                       getList={ productRepository.singleListTaxType }
                       list={ defaultTaxTypeList }
@@ -396,14 +362,14 @@ function ProductDetail() {
 
 
 
-              <Select value={ product.unitOfMeasure?.id }
-                      onChange={handleChangeObjectField(nameof(product.unitOfMeasure))}
-                      getList={ productRepository.singleListUnitOfMeasure }
-                      list={ defaultUnitOfMeasureList }
-                      modelFilter={ unitOfMeasureFilter }
-                      setModelFilter={ setUnitOfMeasureFilter }
-                      searchField={nameof(unitOfMeasureFilter.id)}
-              />
+            <Select value={product.unitOfMeasure?.id}
+              onChange={handleChangeObjectField(nameof(product.unitOfMeasure))}
+              getList={productRepository.singleListUnitOfMeasure}
+              list={defaultUnitOfMeasureList}
+              modelFilter={unitOfMeasureFilter}
+              setModelFilter={setUnitOfMeasureFilter}
+              searchField={nameof(unitOfMeasureFilter.id)}
+            />
 
 
 
@@ -417,7 +383,7 @@ function ProductDetail() {
           </Form>
           <div className="d-flex justify-content-end mt-4">
             <button className="btn btn-sm btn-primary" onClick={handleSave}>
-              <i className="fa mr-2 fa-save"/>
+              <i className="fa mr-2 fa-save" />
               {translate(generalLanguageKeys.actions.save)}
             </button>
           </div>
@@ -426,17 +392,17 @@ function ProductDetail() {
           <Tabs defaultActiveKey="1">
 
             <TabPane key="1" tab={translate('product.tabs.roles.title')}>
-              <ProductImageMappingTable model={ product }
-                                setModel={ setProduct }
-                                field={(nameof(product.productImageMappings))}
-                                onChange={handleChangeSimpleField(nameof(product.productImageMappings))}
+              <ProductImageMappingTable model={product}
+                setModel={setProduct}
+                field={(nameof(product.productImageMappings))}
+                onChange={handleChangeSimpleField(nameof(product.productImageMappings))}
               />
             </TabPane>
 
           </Tabs>
           <div className="d-flex justify-content-end mt-4">
             <button className="btn btn-sm btn-primary" onClick={handleSave}>
-              <i className="fa mr-2 fa-save"/>
+              <i className="fa mr-2 fa-save" />
               {translate(generalLanguageKeys.actions.save)}
             </button>
           </div>

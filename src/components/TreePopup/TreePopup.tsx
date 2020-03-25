@@ -1,17 +1,18 @@
 import Button, { ButtonType } from 'antd/lib/button';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { ITreeItem } from 'helpers/tree';
-import { Model } from 'core/models';
+import { Model, ModelFilter } from 'core/models';
 import { useTranslation } from 'react-i18next';
 import Tree from 'components/TreeMap/TreeMap';
+import { AxiosError } from 'axios';
 
 
 export interface ISelectedItems<T> {
   [key: number]: T;
 }
 
-interface ITreeInModalProps<T extends Model> {
+interface ITreeInModalProps<T extends Model, TModelFilter extends ModelFilter> {
   defaultSelectedItems?: T[];
   selectedItems?: T[];
   defaultDataSource?: ITreeItem[];
@@ -31,14 +32,37 @@ interface ITreeInModalProps<T extends Model> {
   closeText?: string;
   closeType?: ButtonType;
 
+  getList?: (TModelFilter?: TModelFilter) => Promise<T[]>;
+  list?: T[];
+  modelFilter?: TModelFilter;
+
+  setModelFilter?: Dispatch<SetStateAction<TModelFilter>>;
+  onSearchError?: (error: AxiosError<T>) => void;
+  searchField?: string;
+
 }
 
 
-function TreePopup<T extends Model>(props: ITreeInModalProps<T>) {
+const TreePopup = React.forwardRef(<T extends Model, TModelFilter extends ModelFilter>
+  (props: ITreeInModalProps<T, TModelFilter>) => {
+
+  const {
+    modelFilter,
+    getList,
+    list: defaultList,
+    // onSearchError,
+    // searchField,
+    onChange,
+  } = props;
 
   const [translate] = useTranslation();
 
   const [selectedItems, setSelectedItems] = useState<T[]>(props.selectedItems || props.defaultSelectedItems || []);
+
+  const [list, setList] = React.useState<T[]>(defaultList ?? []);
+
+  const [, setLoading] = React.useState<boolean>(false);
+
 
   useEffect(
     () => {
@@ -51,12 +75,34 @@ function TreePopup<T extends Model>(props: ITreeInModalProps<T>) {
 
   const handleOk = React.useCallback(
     () => {
-      if (props.onChange) {
-        props.onChange(selectedItems);
+      if (onChange) {
+        onChange(selectedItems);
         return;
       }
     },
-    [selectedItems],
+    [selectedItems, onChange],
+  );
+  const handleLoadList = React.useCallback(
+    async () => {
+      try {
+        setLoading(true);
+        setList(await getList(modelFilter));
+      } catch (error) {
+        // if (typeof onSearchError === 'function') {
+        //   onSearchError(error);
+        // }
+      }
+      setLoading(false);
+    },
+    [getList, modelFilter],
+  );
+
+  React.useEffect(
+    () => {
+
+      handleLoadList();
+    },
+    [handleLoadList],
   );
 
   const handleClose = React.useCallback(
@@ -69,7 +115,23 @@ function TreePopup<T extends Model>(props: ITreeInModalProps<T>) {
     [setSelectedItems],
   );
 
+  const handleChangeTree = React.useCallback(
+    (item) => {
+      const index: number = selectedItems.indexOf(item);
+      if (index < 0) {
+        selectedItems.push(item);
+      }
+      else {
+        selectedItems.splice(index, 1);
+      }
+      setSelectedItems(selectedItems);
+    },
+    [setSelectedItems],
+  );
+
+
   return renderModal();
+
 
   function renderModal() {
     return (
@@ -87,7 +149,12 @@ function TreePopup<T extends Model>(props: ITreeInModalProps<T>) {
             {translate(props.title)}
           </ModalHeader>
           <ModalBody>
-            <Tree value={props.selectedItems} isEdit={false} checkable={true} />
+            <Tree
+              selectedItems={selectedItems}
+              onChange={handleChangeTree}
+              value={list}
+              isEdit={false}
+              checkable={true} />
           </ModalBody>
           <ModalFooter>
             <Button htmlType="button" type={props.okType} onClick={handleOk}>
@@ -101,7 +168,7 @@ function TreePopup<T extends Model>(props: ITreeInModalProps<T>) {
       </>
     );
   }
-}
+});
 
 TreePopup.defaultProps = {
   allowOk: true,
