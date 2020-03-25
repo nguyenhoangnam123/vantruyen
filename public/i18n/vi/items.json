@@ -1,6 +1,11 @@
 {
   "items": {
-    "id": "",
-    "name": ""
+    "code": "Mã",
+    "id": "ID",
+    "images": "Danh sách hình ảnh",
+    "name": "Tên",
+    "price": "Giá",
+    "retailPrice": "Giá bán lẻ đề xuất",
+    "sku": "Mã hiển thị"
   }
 }

@@ -1,6 +1,6 @@
 import Tag from 'antd/lib/tag';
 import React, {useState} from 'react';
-import './InputTag.scss';
+import 'views/ProductView/ProductDetail/PriceAndVariations/InputTag/InputTag.scss';
 import classNames from 'classnames';
 
 interface IInputTagProps {
@@ -12,11 +12,15 @@ interface IInputTagProps {
 
   onRemove?: (value: string, index?: number) => void;
 
+  onRemoveVariation?: () => void;
+
   onClear?: () => void;
 
   disabled?: boolean;
 
   max?: number;
+
+  onClick?(): void;
 }
 
 function InputTag(props: IInputTagProps) {
@@ -85,16 +89,6 @@ function InputTag(props: IInputTagProps) {
     [props, value],
   );
 
-  const handleDeleteAll = React.useCallback(
-    () => {
-      setValue([]);
-      if (props.onChange) {
-        props.onChange([]);
-      }
-    },
-    [props],
-  );
-
   const renderOutput = React.useCallback(
     (value: string[]) => {
       return (
@@ -102,6 +96,7 @@ function InputTag(props: IInputTagProps) {
           <div className="flex-grow-1 d-flex">
             <input
               type="text"
+              onClick={props.onClick}
               className={classNames('form-control form-control-sm input-tag-input')}
               onChange={handleChange}
               value={input}
@@ -120,14 +115,14 @@ function InputTag(props: IInputTagProps) {
             </div>
           </div>
           <div className="delete-all">
-          <span onClick={handleDeleteAll} className="text-danger delete ml-3">
+          <span onClick={props.onRemoveVariation} className="text-danger delete ml-3">
             <i className="fa fa-trash"/>
           </span>
           </div>
         </div>
       );
     },
-    [handleChange, handleDeleteAll, handlePressEnter, handleRemove, input, max, props.disabled],
+    [handleChange, handlePressEnter, handleRemove, input, max, props.disabled, props.onRemoveVariation],
   );
 
   if (props.value) {

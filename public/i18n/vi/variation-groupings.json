@@ -1,6 +1,7 @@
 {
   "variationGroupings": {
-    "id": "",
-    "name": ""
+    "code": "Mã",
+    "id": "ID",
+    "name": "Tên"
   }
 }

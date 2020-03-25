@@ -18,5 +18,5 @@ export class VariationGrouping extends Model {
 
   public product?: Product;
 
-  public variations?: Variation[];
+  public variations?: Variation[] = [];
 }

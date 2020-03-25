@@ -80,8 +80,13 @@
     "name": ""
   },
   "items": {
+    "code": "",
     "id": "",
-    "name": ""
+    "images": "",
+    "name": "",
+    "price": "",
+    "retailPrice": "",
+    "sku": ""
   },
   "menu": {
     "applicationUsers": "",
@@ -92,9 +97,11 @@
     "name": ""
   },
   "products": {
+    "addVariation": "",
     "brand": "",
     "brandId": "",
     "code": "",
+    "createVariations": "",
     "createdAt": "",
     "deletedAt": "",
     "description": "",
@@ -157,6 +164,7 @@
     "name": ""
   },
   "variationGroupings": {
+    "code": "",
     "id": "",
     "name": ""
   }

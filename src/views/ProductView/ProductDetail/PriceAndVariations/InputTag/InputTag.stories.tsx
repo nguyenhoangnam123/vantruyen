@@ -1,5 +1,5 @@
 import React, { useState } from 'reactn';
-import InputTag from './InputTag';
+import InputTag from 'views/ProductView/ProductDetail/PriceAndVariations/InputTag/InputTag';
 import { storiesOf } from '@storybook/react';
 import nameof from 'ts-nameof.macro';
 

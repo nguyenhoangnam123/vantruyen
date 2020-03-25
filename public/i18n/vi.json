@@ -110,8 +110,13 @@
     "name": ""
   },
   "items": {
-    "id": "",
-    "name": ""
+    "code": "Mã",
+    "id": "ID",
+    "images": "Danh sách hình ảnh",
+    "name": "Tên",
+    "price": "Giá",
+    "retailPrice": "Giá bán lẻ đề xuất",
+    "sku": "Mã hiển thị"
   },
   "menu": {
     "applicationUsers": "Người dùng",
@@ -122,16 +127,18 @@
     "name": ""
   },
   "products": {
+    "addVariation": "Thêm thuộc tính",
     "brand": "Thương hiệu",
     "brandId": "ID Thương hiệu",
     "code": "Mã",
+    "createVariations": "Tạo phiên bản",
     "createdAt": "Ngày tạo",
     "deletedAt": "Ngày xóa",
     "description": "",
     "detail": {
       "title": ""
     },
-    "general": "",
+    "general": "Thông tin chung",
     "id": "",
     "isActive": "",
     "items": "",
@@ -155,7 +162,7 @@
     "supplierId": "",
     "tabs": {
       "roles": {
-        "title": ""
+        "title": "Danh sách vai trò"
       }
     },
     "taxType": "",
@@ -187,7 +194,8 @@
     "name": "Tên vai trò"
   },
   "variationGroupings": {
-    "id": "",
-    "name": ""
+    "code": "Mã",
+    "id": "ID",
+    "name": "Tên"
   }
 }
