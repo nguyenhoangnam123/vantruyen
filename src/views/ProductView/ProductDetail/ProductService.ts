@@ -55,5 +55,5 @@ export const productService = {
       addable,
       handleChangeVariationGroupingName,
     ];
-  }
+  },
 };
