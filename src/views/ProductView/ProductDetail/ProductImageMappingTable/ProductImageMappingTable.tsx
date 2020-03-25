@@ -34,18 +34,18 @@ function ProductImageMappingTable(props: ProductImageMappingTableProps) {
 
   const [
     productImageMappings,
-    setProductImageMappings
+    setProductImageMappings,
   ] = crudService.useContentTable<Product, ProductImageMapping>(
     product,
     setProduct,
-    nameof(product.productImageMappings)
+    nameof(product.productImageMappings),
   );
 
   const [
     productImageMappingFilter,
     setProductImageMappingFilter,
   ] = React.useState<ProductImageMappingFilter>(
-    new ProductImageMappingFilter()
+    new ProductImageMappingFilter(),
   );
 
   const [
@@ -58,7 +58,7 @@ function ProductImageMappingTable(props: ProductImageMappingTableProps) {
     productImageMappingFilter,
     setProductImageMappingFilter,
   );
-  
+
     const [
     loading,
     visible,
@@ -129,9 +129,9 @@ function ProductImageMappingTable(props: ProductImageMappingTableProps) {
                    </button>
                  </div>
                </>
-             )}            
+             )}
       />
-      <ProductImageMappingModal current={ productImageMappings } 
+      <ProductImageMappingModal current={ productImageMappings }
                          list={list}
                          total={total}
                          loading={loading}
@@ -139,7 +139,7 @@ function ProductImageMappingTable(props: ProductImageMappingTableProps) {
                          modelFilter={filter}
                          setModelFilter={setFilter}
                          rowSelection={rowSelection}
-                         onClose={handleClose}/>                 
+                         onClose={handleClose}/>
     </>
   );
 }

@@ -34,18 +34,18 @@ function ProductProductGroupingMappingTable(props: ProductProductGroupingMapping
 
   const [
     productProductGroupingMappings,
-    setProductProductGroupingMappings
+    setProductProductGroupingMappings,
   ] = crudService.useContentTable<Product, ProductProductGroupingMapping>(
     product,
     setProduct,
-    nameof(product.productProductGroupingMappings)
+    nameof(product.productProductGroupingMappings),
   );
 
   const [
     productProductGroupingMappingFilter,
     setProductProductGroupingMappingFilter,
   ] = React.useState<ProductProductGroupingMappingFilter>(
-    new ProductProductGroupingMappingFilter()
+    new ProductProductGroupingMappingFilter(),
   );
 
   const [
@@ -58,7 +58,7 @@ function ProductProductGroupingMappingTable(props: ProductProductGroupingMapping
     productProductGroupingMappingFilter,
     setProductProductGroupingMappingFilter,
   );
-  
+
     const [
     loading,
     visible,
@@ -129,9 +129,9 @@ function ProductProductGroupingMappingTable(props: ProductProductGroupingMapping
                    </button>
                  </div>
                </>
-             )}            
+             )}
       />
-      <ProductProductGroupingMappingModal current={ productProductGroupingMappings } 
+      <ProductProductGroupingMappingModal current={ productProductGroupingMappings }
                          list={list}
                          total={total}
                          loading={loading}
@@ -139,7 +139,7 @@ function ProductProductGroupingMappingTable(props: ProductProductGroupingMapping
                          modelFilter={filter}
                          setModelFilter={setFilter}
                          rowSelection={rowSelection}
-                         onClose={handleClose}/>                 
+                         onClose={handleClose}/>
     </>
   );
 }
