@@ -112,7 +112,7 @@ const TreePopup = React.forwardRef(<T extends Model, TModelFilter extends ModelF
         props.onClose(event);
       }
     },
-    [setSelectedItems],
+    [props],
   );
 
   const handleChangeTree = React.useCallback(

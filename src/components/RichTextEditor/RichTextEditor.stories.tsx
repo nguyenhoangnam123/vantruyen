@@ -6,8 +6,26 @@ import nameof from 'ts-nameof.macro';
 export const title: string = 'RichTextEditor';
 
 function Default() {
+  const [value, setValue] = React.useState<string>('');
+
+  const changeOutside = React.useCallback(
+    () => {
+      setValue('Set value from outside');
+    },
+    [],
+  );
+
   return (
-    <RichTextEditor/>
+    <>
+      <button className="btn btn-sm btn-primary" onClick={changeOutside}>
+        Change value from outside
+      </button>
+      <RichTextEditor value={value} onChange={setValue}/>
+
+      <span>
+        {value}
+      </span>
+    </>
   );
 }
 

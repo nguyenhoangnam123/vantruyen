@@ -21,19 +21,6 @@ import { Product } from 'models/Product';
 // import { Brand } from 'models/Brand'
 // import { BrandFilter } from 'models/BrandFilter'
 
-
-import { ProductGrouping } from 'models/ProductGrouping';
-import { ProductGroupingFilter } from 'models/ProductGroupingFilter';
-
-
-import { ProductType } from 'models/ProductType';
-import { ProductTypeFilter } from 'models/ProductTypeFilter';
-
-
-import { Supplier } from 'models/Supplier';
-import { SupplierFilter } from 'models/SupplierFilter';
-
-
 // import { TaxType } from 'models/TaxType'
 // import { TaxTypeFilter } from 'models/TaxTypeFilter'
 
@@ -147,8 +134,6 @@ function ProductDetail() {
             </FormItem>
 
 
-
-
             <FormItem label={translate('products.code')}
               validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.code))}
               help={product.errors?.code}
@@ -159,8 +144,6 @@ function ProductDetail() {
                 onChange={handleChangeSimpleField(nameof(product.code))}
               />
             </FormItem>
-
-
 
 
             <FormItem label={translate('products.supplierCode')}
@@ -175,8 +158,6 @@ function ProductDetail() {
             </FormItem>
 
 
-
-
             <FormItem label={translate('products.name')}
               validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.name))}
               help={product.errors?.name}
@@ -187,8 +168,6 @@ function ProductDetail() {
                 onChange={handleChangeSimpleField(nameof(product.name))}
               />
             </FormItem>
-
-
 
 
             <FormItem label={translate('products.description')}
@@ -203,8 +182,6 @@ function ProductDetail() {
             </FormItem>
 
 
-
-
             <FormItem label={translate('products.scanCode')}
               validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.scanCode))}
               help={product.errors?.scanCode}
@@ -217,30 +194,11 @@ function ProductDetail() {
             </FormItem>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <FormItem label={translate('products.salePrice')}
               validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.salePrice))}
               help={product.errors?.salePrice}
             >
             </FormItem>
-
-
 
 
             <FormItem label={translate('products.retailPrice')}
@@ -250,18 +208,11 @@ function ProductDetail() {
             </FormItem>
 
 
-
-
-
-
-
             <FormItem label={translate('products.isActive')}
               validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.isActive))}
               help={product.errors?.isActive}
             >
             </FormItem>
-
-
 
 
             <FormItem label={translate('products.createdAt')}
@@ -275,7 +226,6 @@ function ProductDetail() {
             </FormItem>
 
 
-
             <FormItem label={translate('products.updatedAt')}
               validateStatus={formService.getValidationStatus<Product>(product.errors, nameof(product.updatedAt))}
               help={product.errors?.updatedAt}
@@ -285,7 +235,6 @@ function ProductDetail() {
                 className="w-100"
               />
             </FormItem>
-
 
 
             <FormItem label={translate('products.deletedAt')}
@@ -312,6 +261,14 @@ function ProductDetail() {
               /> */}
 
 
+            <Select value={product.productGrouping?.id}
+                    onChange={handleChangeObjectField(nameof(product.productGrouping))}
+                    getList={productRepository.singleListProductGrouping}
+                    list={defaultProductGroupingList}
+                    modelFilter={productGroupingFilter}
+                    setModelFilter={setProductGroupingFilter}
+                    searchField={nameof(productGroupingFilter.id)}
+            />
 
 
             <Select value={product.productGrouping?.id}
@@ -348,6 +305,14 @@ function ProductDetail() {
             />
 
 
+            <Select value={product.supplier?.id}
+                    onChange={handleChangeObjectField(nameof(product.supplier))}
+                    getList={productRepository.singleListSupplier}
+                    list={defaultSupplierList}
+                    modelFilter={supplierFilter}
+                    setModelFilter={setSupplierFilter}
+                    searchField={nameof(supplierFilter.id)}
+            />
 
 
             {/* <Select value={ product.taxType?.id }
