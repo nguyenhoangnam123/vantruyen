@@ -132,7 +132,7 @@ function ProductDetail1() {
         images,
       });
     },
-    [setProduct],
+    [setProduct, product],
   );
 
   const handleFocus = React.useCallback(
@@ -165,7 +165,7 @@ function ProductDetail1() {
         productProductGroupingMappings,
       });
     },
-    [setVisible, setProductProductGroupingMappings, setProduct],
+    [setVisible, setProductProductGroupingMappings, setProduct, product],
   );
 
   React.useEffect(

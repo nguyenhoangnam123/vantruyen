@@ -80,7 +80,7 @@ const TreePopup = React.forwardRef(<T extends Model, TModelFilter extends ModelF
         return;
       }
     },
-    [selectedItems],
+    [selectedItems, onChange],
   );
   const handleLoadList = React.useCallback(
     async () => {
