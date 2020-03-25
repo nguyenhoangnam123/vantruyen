@@ -66,9 +66,9 @@ function PriceAndVariations(props: PriceAndVariations) {
           dataIndex: nameof(props.product.items[0].code),
         },
         {
-          title: translate('items.sku'),
-          key: nameof(props.product.items[0].sku),
-          dataIndex: nameof(props.product.items[0].sku),
+          title: translate('items.scanCode'),
+          key: nameof(props.product.items[0].scanCode),
+          dataIndex: nameof(props.product.items[0].scanCode),
         },
         {
           title: translate('items.price'),
