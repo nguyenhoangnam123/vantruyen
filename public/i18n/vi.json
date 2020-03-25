@@ -105,9 +105,68 @@
       "to": "Đến"
     }
   },
+  "images": {
+    "id": "",
+    "name": ""
+  },
+  "items": {
+    "id": "",
+    "name": ""
+  },
   "menu": {
     "applicationUsers": "Người dùng",
     "provinces": "Tỉnh thành"
+  },
+  "productImageMappings": {
+    "id": "",
+    "name": ""
+  },
+  "products": {
+    "brand": "Thương hiệu",
+    "brandId": "ID Thương hiệu",
+    "code": "Mã",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
+    "description": "",
+    "detail": {
+      "title": ""
+    },
+    "general": "",
+    "id": "",
+    "isActive": "",
+    "items": "",
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "price": "Giá",
+    "productGrouping": "",
+    "productGroupingId": "",
+    "productImageMappingModal": {
+      "title": ""
+    },
+    "productType": "",
+    "productTypeId": "",
+    "retailPrice": "Giá bán lẻ đề xuất",
+    "salePrice": "",
+    "scanCode": "",
+    "supplier": "",
+    "supplierCode": "",
+    "supplierId": "",
+    "tabs": {
+      "roles": {
+        "title": ""
+      }
+    },
+    "taxType": "",
+    "taxTypeId": "",
+    "unitOfMeasure": "Đơn vị tính",
+    "unitOfMeasureId": "",
+    "updatedAt": "Ngày cập nhật",
+    "variationGroupings": "Các phiên bản",
+    "variationName": "Thuộc tính {{index}}",
+    "variationValue": "Giá trị",
+    "variationsAndPrice": "Quản lý giá và phiên bản"
   },
   "provinces": {
     "code": "Mã tỉnh thành",
@@ -126,5 +185,9 @@
   "roles": {
     "id": "ID",
     "name": "Tên vai trò"
+  },
+  "variationGroupings": {
+    "id": "",
+    "name": ""
   }
 }

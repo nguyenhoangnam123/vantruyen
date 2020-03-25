@@ -1,39 +1,35 @@
 .input-tag {
-  .form-tag {
-    .input {
-      width: auto;
-      outline: none;
-      border: none;
-      margin: 1px;
-    }
-    .input:focus {
-      &:hover {
-        border-color: none;
-        box-shadow: unset;
-      }
-    }
-    .form-control:focus {
-      border-color: none;
-      box-shadow: unset;
-    }
-    .list-tag {
-      display: inline;
-    }
-    display: inline-block;
-    max-width: 363px;
-    position: relative;
-    border: 1px solid #d9d9d9;
-    border-radius: 7px;
-    display: block;
-    flex: 1 1 auto;
-    min-height: calc(1.5em + 0.5rem + 5px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  .input-tag-input {
+    width: auto;
+    margin: 1px;
+    max-width: 156px !important;
+    min-width: 40px;
   }
+
+  .form-control:focus {
+    border-color: unset;
+    box-shadow: unset;
+  }
+
+  .list-tag {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+  }
+
   .delete-all {
     .delete {
       cursor: pointer;
     }
   }
 }
+
 .ant-tag {
   background: #ee534d;
 }

@@ -144,7 +144,7 @@ function ProductImageMappingTable(props: ContentTableProps<Product, ProductImage
     return (
     <>
     <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
-        <ProductImageMappingModal title={translate('product.productImageMappingModal.title')}
+        <ProductImageMappingModal title={translate('products.productImageMappingModal.title')}
                           selectedList={ productImageMappings }
                           setSelectedList={ setProductImageMappings }
                           list={list}
