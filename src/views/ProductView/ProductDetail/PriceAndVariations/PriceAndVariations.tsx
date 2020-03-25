@@ -50,7 +50,7 @@ function PriceAndVariations(props: PriceAndVariations) {
     handleChangeCurrentVariation,
     getDisplayValue,
     handleCombine,
-  ] = productService.useVariationGrouping(props.product, props.setProduct);
+  ] = productService.useVariationGrouping(props.product, props.setProduct, price, retailPrice);
 
   const columns: ColumnProps<Item>[] = React.useMemo(
     () => {
@@ -99,7 +99,9 @@ function PriceAndVariations(props: PriceAndVariations) {
           key: nameof(props.product.items[0].images),
           dataIndex: nameof(props.product.items[0].images),
           render(images: Image[]) {
-            return JSON.stringify(images);
+            return (
+              JSON.stringify(images)
+            );
           },
         },
       ];

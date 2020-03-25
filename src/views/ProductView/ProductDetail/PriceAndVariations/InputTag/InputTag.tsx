@@ -1,7 +1,6 @@
 import Tag from 'antd/lib/tag';
 import React, {useState} from 'react';
 import 'views/ProductView/ProductDetail/PriceAndVariations/InputTag/InputTag.scss';
-import classNames from 'classnames';
 
 interface IInputTagProps {
   defaultValue?: string[];
@@ -94,15 +93,10 @@ function InputTag(props: IInputTagProps) {
       return (
         <div className="input-tag">
           <div className="flex-grow-1 d-flex">
-            <input
-              type="text"
-              onClick={props.onClick}
-              className={classNames('form-control form-control-sm input-tag-input')}
-              onChange={handleChange}
-              value={input}
-              onKeyDown={handlePressEnter}
-              disabled={props.disabled || (typeof max !== 'undefined' && value?.length >= max)}
-            />
+            <button className="btn btn-sm btn-link" onClick={props.onClick}
+                    disabled={props.disabled || (typeof max !== 'undefined' && value?.length >= max)}>
+              <i className="fa fa-plus"/>
+            </button>
             <div className="list-tag flex-grow-1">
               {value.map((tag: string, index: number) => (
                 <Tag className="tag"

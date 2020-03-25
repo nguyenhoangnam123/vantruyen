@@ -86,6 +86,8 @@ export const productService = {
   useVariationGrouping(
     product: Product,
     setProduct: Dispatch<SetStateAction<Product>>,
+    price: number,
+    retailPrice: number,
   ): [
     boolean,
     Variation,
@@ -174,8 +176,8 @@ export const productService = {
             name: `${product.name} - ${prefix.map((v: Variation) => v.name).join(' - ')}`,
             code: `${product.code}-${prefix.map((v: Variation) => v.code).join('-')}`,
             scanCode: product.scanCode,
-            price: product.price,
-            retailPrice: product.retailPrice,
+            price,
+            retailPrice,
             images: [],
           });
           result[key] = newItem;
