@@ -112,7 +112,6 @@ function ProductDetailGeneral(props: ProductDetailGeneralProps) {
 
   const handleChangeStatus = React.useCallback(
     (checked: boolean) => {
-      debugger;
       const statusId = checked ? 1 : 0;
       setProduct({
         ...product,
