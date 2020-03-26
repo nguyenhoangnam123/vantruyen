@@ -14,9 +14,6 @@ import PriceAndVariations from 'views/ProductView/ProductDetail/PriceAndVariatio
 import ProductDetailGeneral from './ProductDetailGeneral/ProductDetailGeneral';
 
 const { TabPane } = Tabs;
-
-const { Item: FormItem } = Form;
-
 function ProductDetail() {
   const [translate] = useTranslation();
 
@@ -73,55 +70,6 @@ function ProductDetail() {
             </button>
           </div>
         </Card>
-        {/* <Card className="mt-2">
-          <Tabs defaultActiveKey="1">
-            <TabPane key="items" tab={translate('products.items.title')}>
-              <ItemTable
-                model={product}
-                setModel={setProduct}
-                field={nameof(product.items)}
-                onChange={handleChangeSimpleField(nameof(product.items))}
-              />
-            </TabPane>
-            <Tabs.TabPane
-              key="productImageMappings"
-              tab={translate('products.productImageMappings.list')}
-            >
-              <ProductImageMappingTable
-                product={product}
-                setProduct={setProduct}
-              />
-            </Tabs.TabPane>
-            <Tabs.TabPane
-              key="productProductGroupingMappings"
-              tab={translate('products.productProductGroupingMappings.list')}
-            >
-              <ProductProductGroupingMappingTable
-                product={product}
-                setProduct={setProduct}
-              />
-            </Tabs.TabPane>
-            <TabPane
-              key="variationGroupings"
-              tab={translate('products.variationGroupings.title')}
-            >
-              <VariationGroupingTable
-                model={product}
-                setModel={setProduct}
-                field={nameof(product.variationGroupings)}
-                onChange={handleChangeSimpleField(
-                  nameof(product.variationGroupings),
-                )}
-              />
-            </TabPane>
-          </Tabs>
-          <div className="d-flex justify-content-end mt-4">
-            <button className="btn btn-sm btn-primary" onClick={handleSave}>
-              <i className="fa mr-2 fa-save" />
-              {translate(generalLanguageKeys.actions.save)}
-            </button>
-          </div>
-        </Card> */}
       </Spin>
     </div>
   );
