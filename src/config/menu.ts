@@ -1,6 +1,6 @@
 import { translate } from 'core/helpers/internationalization';
 import { RouteConfig } from 'react-router-config';
-import { APP_USER_ROUTE } from 'config/route-consts';
+import {APP_USER_ROUTE, STORE_ROUTE} from 'config/route-consts';
 import { DISTRICT_ROUTE } from 'config/route-consts';
 import { FIELD_ROUTE } from 'config/route-consts';
 import { IMAGE_ROUTE } from 'config/route-consts';
@@ -34,6 +34,11 @@ export const menu: RouteConfig[] =
     {
       name: translate('menu.districts'),
       url: DISTRICT_ROUTE,
+      icon: 'fa fa-building',
+    },
+    {
+      name: translate('menu.stores'),
+      url: STORE_ROUTE,
       icon: 'fa fa-building',
     },
     {

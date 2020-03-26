@@ -25,7 +25,7 @@
     "confirm": "Xác nhận",
     "delete": {
       "content": "Thao tác này không thể khôi phục, hãy cân nhắc!",
-      "sucess": "Thành công",
+      "sucess": "",
       "title": "Bạn đang muốn xóa bản ghi này?"
     },
     "master": {
