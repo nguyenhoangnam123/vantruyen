@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import Tree from 'components/TreeMap/TreeMap';
 import { AxiosError } from 'axios';
 
-
 export interface ISelectedItems<T> {
   [key: number]: T;
 }
@@ -39,51 +38,44 @@ interface ITreeInModalProps<T extends Model, TModelFilter extends ModelFilter> {
   setModelFilter?: Dispatch<SetStateAction<TModelFilter>>;
   onSearchError?: (error: AxiosError<T>) => void;
   searchField?: string;
-
 }
 
+const TreePopup = React.forwardRef(
+  <T extends Model, TModelFilter extends ModelFilter>(
+    props: ITreeInModalProps<T, TModelFilter>,
+  ) => {
+    const {
+      modelFilter,
+      getList,
+      list: defaultList,
+      // onSearchError,
+      // searchField,
+      onChange,
+    } = props;
 
-const TreePopup = React.forwardRef(<T extends Model, TModelFilter extends ModelFilter>
-  (props: ITreeInModalProps<T, TModelFilter>) => {
+    const [translate] = useTranslation();
 
-  const {
-    modelFilter,
-    getList,
-    list: defaultList,
-    // onSearchError,
-    // searchField,
-    onChange,
-  } = props;
+    const [selectedItems, setSelectedItems] = useState<T[]>(
+      props.selectedItems || props.defaultSelectedItems || [],
+    );
 
-  const [translate] = useTranslation();
+    const [list, setList] = React.useState<T[]>(defaultList ?? []);
 
-  const [selectedItems, setSelectedItems] = useState<T[]>(props.selectedItems || props.defaultSelectedItems || []);
+    const [, setLoading] = React.useState<boolean>(false);
 
-  const [list, setList] = React.useState<T[]>(defaultList ?? []);
-
-  const [, setLoading] = React.useState<boolean>(false);
-
-
-  useEffect(
-    () => {
+    useEffect(() => {
       if (props.selectedItems) {
         setSelectedItems(props.selectedItems);
       }
-    },
-    [props.selectedItems],
-  );
+    }, [props.selectedItems]);
 
-  const handleOk = React.useCallback(
-    () => {
+    const handleOk = React.useCallback(() => {
       if (onChange) {
         onChange(selectedItems);
         return;
       }
-    },
-    [selectedItems, onChange],
-  );
-  const handleLoadList = React.useCallback(
-    async () => {
+    }, [selectedItems, onChange]);
+    const handleLoadList = React.useCallback(async () => {
       try {
         setLoading(true);
         setList(await getList(modelFilter));
@@ -93,82 +85,81 @@ const TreePopup = React.forwardRef(<T extends Model, TModelFilter extends ModelF
         // }
       }
       setLoading(false);
-    },
-    [getList, modelFilter],
-  );
+    }, [getList, modelFilter]);
 
-  React.useEffect(
-    () => {
-
+    React.useEffect(() => {
       handleLoadList();
-    },
-    [handleLoadList],
-  );
+    }, [handleLoadList]);
 
-  const handleClose = React.useCallback(
-    (event) => {
-      setSelectedItems(props.selectedItems || props.defaultSelectedItems || []);
-      if (props.onClose) {
-        props.onClose(event);
-      }
-    },
-    [props],
-  );
-
-  const handleChangeTree = React.useCallback(
-    (item) => {
-      const index: number = selectedItems.indexOf(item);
-      if (index < 0) {
-        selectedItems.push(item);
-      }
-      else {
-        selectedItems.splice(index, 1);
-      }
-      setSelectedItems(selectedItems);
-    },
-    [setSelectedItems],
-  );
-
-
-  return renderModal();
-
-
-  function renderModal() {
-    return (
-      <>
-        <Modal
-          className={props.className}
-          isOpen={props.visible}
-          toggle={handleClose}
-          size="xl"
-          style={{ maxWidth: '1000px', width: '90%' }}
-          unmountOnClose
-          centered
-        >
-          <ModalHeader toggle={props.onClose}>
-            {translate(props.title)}
-          </ModalHeader>
-          <ModalBody>
-            <Tree
-              selectedItems={selectedItems}
-              onChange={handleChangeTree}
-              value={list}
-              isEdit={false}
-              checkable={true} />
-          </ModalBody>
-          <ModalFooter>
-            <Button htmlType="button" type={props.okType} onClick={handleOk}>
-              {translate(props.okText)}
-            </Button>
-            <Button htmlType="button" type={props.closeType} onClick={handleClose}>
-              {translate(props.closeText)}
-            </Button>
-          </ModalFooter>
-        </Modal>
-      </>
+    const handleClose = React.useCallback(
+      event => {
+        setSelectedItems(
+          props.selectedItems || props.defaultSelectedItems || [],
+        );
+        if (props.onClose) {
+          props.onClose(event);
+        }
+      },
+      [setSelectedItems],
     );
-  }
-});
+
+    const handleChangeTree = React.useCallback(
+      item => {
+        const index: number = selectedItems.indexOf(item);
+        if (index < 0) {
+          selectedItems.push(item);
+        } else {
+          selectedItems.splice(index, 1);
+        }
+        setSelectedItems(selectedItems);
+      },
+      [setSelectedItems],
+    );
+
+    return renderModal();
+
+    function renderModal() {
+      return (
+        <>
+          <Modal
+            className={props.className}
+            isOpen={props.visible}
+            toggle={handleClose}
+            size="xl"
+            style={{ maxWidth: '1000px', width: '90%' }}
+            unmountOnClose
+            centered
+          >
+            <ModalHeader toggle={props.onClose}>
+              {translate(props.title)}
+            </ModalHeader>
+            <ModalBody>
+              <Tree
+                selectedItems={selectedItems}
+                onChange={handleChangeTree}
+                value={list}
+                isEdit={false}
+                checkable={true}
+              />
+            </ModalBody>
+            <ModalFooter>
+              <Button htmlType="button" type={props.okType} onClick={handleOk}>
+                {translate(props.okText)}
+              </Button>
+              <Button
+                htmlType="button"
+                type={props.closeType}
+                onClick={handleClose}
+              >
+                {translate(props.closeText)}
+              </Button>
+            </ModalFooter>
+          </Modal>
+        </>
+      );
+    }
+  },
+);
 
 TreePopup.defaultProps = {
   allowOk: true,
