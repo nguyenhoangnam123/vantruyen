@@ -6,39 +6,11 @@ import Form from 'antd/lib/form';
 import Tabs from 'antd/lib/tabs';
 import { useTranslation } from 'react-i18next';
 import { generalLanguageKeys } from 'config/consts';
-import nameof from 'ts-nameof.macro';
 import './ProductDetail.scss';
 import { productRepository } from 'views/ProductView/ProductRepository';
 import { Product } from 'models/Product';
 
-import { Brand } from 'models/Brand';
-import { BrandFilter } from 'models/BrandFilter';
-
-import { ProductType } from 'models/ProductType';
-import { ProductTypeFilter } from 'models/ProductTypeFilter';
-
-import { Status } from 'models/Status';
-
-import { Supplier } from 'models/Supplier';
-import { SupplierFilter } from 'models/SupplierFilter';
-
-import { TaxType } from 'models/TaxType';
-import { TaxTypeFilter } from 'models/TaxTypeFilter';
-
-import { UnitOfMeasure } from 'models/UnitOfMeasure';
-import { UnitOfMeasureFilter } from 'models/UnitOfMeasureFilter';
-
-import { UnitOfMeasureGrouping } from 'models/UnitOfMeasureGrouping';
-import { UnitOfMeasureGroupingFilter } from 'models/UnitOfMeasureGroupingFilter';
-
-import ItemTable from 'views/ProductView/ProductDetail/ItemTable/ItemTable';
-import ProductImageMappingTable from 'views/ProductView/ProductDetail/ProductImageMappingTable/ProductImageMappingTable';
-import ProductProductGroupingMappingTable from 'views/ProductView/ProductDetail/ProductProductGroupingMappingTable/ProductProductGroupingMappingTable';
-import VariationGroupingTable from 'views/ProductView/ProductDetail/VariationGroupingTable/VariationGroupingTable';
-
 import PriceAndVariations from 'views/ProductView/ProductDetail/PriceAndVariations/PriceAndVariations';
-import { ProductProductGroupingMappingsFilter } from 'models/ProductProductGroupingMappingsFilter';
-import { ProductProductGroupingMappings } from 'models/ProductProductGroupingMappings';
 import ProductDetailGeneral from './ProductDetailGeneral/ProductDetailGeneral';
 
 const { TabPane } = Tabs;
@@ -64,72 +36,6 @@ function ProductDetail() {
     productRepository.get,
     productRepository.save,
   );
-
-  const [
-    handleChangeSimpleField,
-    handleChangeObjectField,
-  ] = crudService.useChangeHandlers<Product>(product, setProduct);
-
-  // Enums  -----------------------------------------------------------------------------------------------------------------------------------------
-
-  const [statusList] = crudService.useEnumList<Status>(
-    productRepository.singleListStatus,
-  );
-
-  // Reference  -------------------------------------------------------------------------------------------------------------------------------------
-  const [brandFilter, setBrandFilter] = React.useState<BrandFilter>(
-    new BrandFilter(),
-  );
-  const [productTypeFilter, setProductTypeFilter] = React.useState<
-    ProductTypeFilter
-  >(new ProductTypeFilter());
-  const [supplierFilter, setSupplierFilter] = React.useState<SupplierFilter>(
-    new SupplierFilter(),
-  );
-  const [taxTypeFilter, setTaxTypeFilter] = React.useState<TaxTypeFilter>(
-    new TaxTypeFilter(),
-  );
-  const [unitOfMeasureFilter, setUnitOfMeasureFilter] = React.useState<
-    UnitOfMeasureFilter
-  >(new UnitOfMeasureFilter());
-
-  const [
-    unitOfMeasureGroupingFilter,
-    setUnitOfMeasureGroupingFilter,
-  ] = React.useState<UnitOfMeasureGroupingFilter>(
-    new UnitOfMeasureGroupingFilter(),
-  );
-
-  const [
-    productProductGroupingMappingsFilter,
-    setProductProductGroupingMappingsFilter,
-  ] = React.useState<ProductProductGroupingMappingsFilter>(
-    new ProductProductGroupingMappingsFilter(),
-  );
-
-  // Default List -----------------------------------------------------------------------------------------------------------------------------------
-  const defaultBrandList: Brand[] = crudService.useDefaultList<Brand>(
-    product.brand,
-  );
-  const defaultProductTypeList: ProductType[] = crudService.useDefaultList<
-    ProductType
-  >(product.productType);
-  const defaultSupplierList: Supplier[] = crudService.useDefaultList<Supplier>(
-    product.supplier,
-  );
-  const defaultTaxTypeList: TaxType[] = crudService.useDefaultList<TaxType>(
-    product.taxType,
-  );
-  const defaultUnitOfMeasureList: UnitOfMeasure[] = crudService.useDefaultList<
-    UnitOfMeasure
-  >(product.unitOfMeasure);
-  const defaultUnitOfMeasureGroupingList: UnitOfMeasureGrouping[] = crudService.useDefaultList<
-    UnitOfMeasureGrouping
-  >(product.unitOfMeasureGrouping);
-
-  const defaultProductProductGroupingMappingsList: ProductProductGroupingMappings[] = crudService.useDefaultList<
-    ProductProductGroupingMappings
-  >(product.productProductGroupingMappings);
 
   return (
     <div className="page detail-page">
@@ -167,9 +73,9 @@ function ProductDetail() {
             </button>
           </div>
         </Card>
-        <Card className="mt-2">
+        {/* <Card className="mt-2">
           <Tabs defaultActiveKey="1">
-            <TabPane key="items" tab={translate('products.tabs.items.title')}>
+            <TabPane key="items" tab={translate('products.items.title')}>
               <ItemTable
                 model={product}
                 setModel={setProduct}
@@ -197,7 +103,7 @@ function ProductDetail() {
             </Tabs.TabPane>
             <TabPane
               key="variationGroupings"
-              tab={translate('products.tabs.variationGroupings.title')}
+              tab={translate('products.variationGroupings.title')}
             >
               <VariationGroupingTable
                 model={product}
@@ -215,7 +121,7 @@ function ProductDetail() {
               {translate(generalLanguageKeys.actions.save)}
             </button>
           </div>
-        </Card>
+        </Card> */}
       </Spin>
     </div>
   );

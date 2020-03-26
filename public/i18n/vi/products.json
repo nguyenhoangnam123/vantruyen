@@ -7,7 +7,7 @@
     "createVariations": "Tạo phiên bản",
     "createdAt": "Ngày tạo",
     "deletedAt": "Ngày xóa",
-    "description": "",
+    "description": "Mô tả sản phẩm",
     "detail": {
       "title": "Chỉnh sửa sản phẩm"
     },
@@ -21,7 +21,9 @@
       "url": ""
     },
     "isActive": "",
-    "items": "",
+    "items": {
+      "title": ""
+    },
     "master": {
       "title": ""
     },
@@ -54,21 +56,15 @@
     "supplier": "Nhà cung cấp",
     "supplierCode": "",
     "supplierId": "",
-    "tabs": {
-      "items": {
-        "title": ""
-      },
-      "variationGroupings": {
-        "title": ""
-      }
-    },
     "taxType": "",
     "taxTypeId": "",
     "unitOfMeasure": "Đơn vị tính",
     "unitOfMeasureGrouping": "Nhóm đơn vị chuyển đổi",
     "unitOfMeasureId": "",
     "updatedAt": "Ngày cập nhật",
-    "variationGroupings": "Các phiên bản",
+    "variationGroupings": {
+      "title": ""
+    },
     "variationName": "Thuộc tính {{index}}",
     "variationValue": "Giá trị",
     "variationsAndPrice": "Quản lý giá và phiên bản"

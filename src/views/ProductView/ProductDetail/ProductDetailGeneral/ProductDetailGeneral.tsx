@@ -25,6 +25,7 @@ import TreePopup from 'components/TreePopup/TreePopup';
 import { UnitOfMeasureGroupingFilter } from 'models/UnitOfMeasureGroupingFilter';
 import { UnitOfMeasureGrouping } from 'models/UnitOfMeasureGrouping';
 import { Switch } from 'antd';
+import RichTextEditor from 'components/RichTextEditor/RichTextEditor';
 
 const { Item: FormItem } = Form;
 
@@ -109,13 +110,17 @@ function ProductDetailGeneral(props: ProductDetailGeneralProps) {
     setProductProductGroupingMappings,
   ] = React.useState<ProductGrouping[]>([]);
 
-  function handleChangeStatus(checked: boolean) {
-    const isActive: boolean = checked;
-    setProduct({
-      ...product,
-      isActive,
-    });
-  }
+  const handleChangeStatus = React.useCallback(
+    (checked: boolean) => {
+      debugger;
+      const statusId = checked ? 1 : 0;
+      setProduct({
+        ...product,
+        statusId,
+      });
+    },
+    [setProduct, product],
+  );
 
   const handleChangeImages = React.useCallback(
     (images: Image[]) => {
@@ -189,6 +194,19 @@ function ProductDetailGeneral(props: ProductDetailGeneralProps) {
       );
     }
   }, []);
+
+  const renderInputTag = React.useCallback(() => {
+    const tagGroup: string[] = [];
+    if (
+      productProductGroupingMappings &&
+      productProductGroupingMappings.length > 0
+    ) {
+      productProductGroupingMappings.map((item: ProductGrouping) => {
+        tagGroup.push(`<span>${item.name}</span>`);
+      });
+    }
+    return tagGroup.join('');
+  }, [productProductGroupingMappings]);
 
   return (
     <Form {...defaultDetailFormLayout}>
@@ -268,7 +286,7 @@ function ProductDetailGeneral(props: ProductDetailGeneralProps) {
           <Form.Item label={translate('products.status')}>
             <div className="product-status">
               <Switch
-                checked={product.isActive === true}
+                checked={product.statusId === 1}
                 onChange={handleChangeStatus}
               />
             </div>
@@ -373,14 +391,14 @@ function ProductDetailGeneral(props: ProductDetailGeneralProps) {
               />
             </Form.Item>
           </div>
-          {/* <div className="product-editor">
-          <label>{translate('products.description')}</label>
-          <RichTextEditor
-            className="text-editor"
-            value={product.description}
-            onChange={handleChangeSimpleField(nameof(product.description))}
+          <div className="product-editor">
+            <label>{translate('products.description')}</label>
+            <RichTextEditor
+              className="text-editor"
+              value={product.description}
+              onChange={handleChangeSimpleField(nameof(product.description))}
             />
-        </div> */}
+          </div>
         </div>
       </div>
     </Form>
