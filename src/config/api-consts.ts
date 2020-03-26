@@ -29,8 +29,8 @@ export const API_VIEW_ROUTE: string = 'rpc/dms/view';
 export const API_WARD_ROUTE: string = 'rpc/dms/ward';
 
 export const API_ORGANIZATION_ROUTE : string ='rpc/dms/organization';
- export const API_STORE_GROUPING_ROUTE: string ='rpc/dms/stoneGrouping';
+ export const API_STORE_GROUPING_ROUTE: string ='rpc/dms/store-grouping';
 
- export const API_STORE_TYPE_ROUTE  : string ='rpc/dms/storeType ';
+ export const API_STORE_TYPE_ROUTE  : string ='rpc/dms/store-type';
  export const API_STORE_ROUTE  : string ='rpc/dms/store ';
  export const API_TAX_TYPE_ROUTE  : string ='rpc/dms/taxType ';

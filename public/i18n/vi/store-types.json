@@ -1,18 +1,14 @@
 {
   "storeTypes": {
-    "code": "",
-    "createdAt": "",
-    "deletedAt": "",
+    "code": "Mã loại",
     "detail": {
-      "title": ""
+      "title": "Thêm mới loại cửa hàng"
     },
     "id": "",
-    "isActive": "",
     "master": {
-      "title": ""
+      "title": "Danh sách loại cửa hàng"
     },
-    "name": "",
-    "stores": "",
-    "updatedAt": ""
+    "name": "Tên loại cửa hàng",
+    "status": "Trạng thái"
   }
 }

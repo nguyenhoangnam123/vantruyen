@@ -600,19 +600,15 @@
   },
   "storeTypes": {
     "code": "",
-    "createdAt": "",
-    "deletedAt": "",
     "detail": {
       "title": ""
     },
     "id": "",
-    "isActive": "",
     "master": {
       "title": ""
     },
     "name": "",
-    "stores": "",
-    "updatedAt": ""
+    "status": ""
   },
   "store": {
     "storeImageMappingModal": {

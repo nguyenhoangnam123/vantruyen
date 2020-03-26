@@ -18,6 +18,8 @@ import { PROPERTY_VALUE_ROUTE } from 'config/route-consts';
 import { PROVINCE_ROUTE } from 'config/route-consts';
 import { ROLE_ROUTE } from 'config/route-consts';
 import { STORE_LEVEL_ROUTE } from 'config/route-consts';
+import { STORE_TYPE_ROUTE } from 'config/route-consts';
+import { STORE_GROUPING_ROUTE } from 'config/route-consts';
 import { SUPPLIER_ROUTE } from 'config/route-consts';
 import { UNIT_OF_MEASURE_ROUTE } from 'config/route-consts';
 import { UNIT_OF_MEASURE_GROUPING_CONTENT_ROUTE } from 'config/route-consts';
@@ -75,6 +77,14 @@ import StoreLevelView, {
   StoreLevelDetail,
   StoreLevelMaster,
 } from 'views/StoreLevelView/StoreLevelView';
+import StoreTypeView, {
+  StoreTypeDetail,
+  StoreTypeMaster,
+} from 'views/StoreTypeView/StoreTypeView';
+import StoreGroupingView, {
+  StoreGroupingDetail,
+  StoreGroupingMaster,
+} from 'views/StoreGroupingView/StoreGroupingView';
 import SupplierView, {
   SupplierDetail,
   SupplierMaster,
@@ -328,6 +338,34 @@ export const routes: RouteConfig[] = [
           {
             path: join(STORE_LEVEL_ROUTE),
             component: StoreLevelMaster,
+          },
+        ],
+      },
+      {
+        path: STORE_TYPE_ROUTE,
+        component: StoreTypeView,
+        children: [
+          {
+            path: join(STORE_TYPE_ROUTE, ':id'),
+            component: StoreTypeDetail,
+          },
+          {
+            path: join(STORE_TYPE_ROUTE),
+            component: StoreTypeMaster,
+          },
+        ],
+      },
+      {
+        path: STORE_GROUPING_ROUTE,
+        component: StoreGroupingView,
+        children: [
+          {
+            path: join(STORE_GROUPING_ROUTE, ':id'),
+            component: StoreGroupingDetail,
+          },
+          {
+            path: join(STORE_GROUPING_ROUTE),
+            component: StoreGroupingMaster,
           },
         ],
       },

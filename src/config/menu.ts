@@ -16,6 +16,8 @@ import { PROPERTY_VALUE_ROUTE } from 'config/route-consts';
 import { PROVINCE_ROUTE } from 'config/route-consts';
 import { ROLE_ROUTE } from 'config/route-consts';
 import { STORE_LEVEL_ROUTE } from 'config/route-consts';
+import { STORE_TYPE_ROUTE } from 'config/route-consts';
+import { STORE_GROUPING_ROUTE } from 'config/route-consts';
 import { SUPPLIER_ROUTE } from 'config/route-consts';
 import { UNIT_OF_MEASURE_ROUTE } from 'config/route-consts';
 import { UNIT_OF_MEASURE_GROUPING_CONTENT_ROUTE } from 'config/route-consts';
@@ -104,6 +106,16 @@ export const menu: RouteConfig[] =
     {
       name: translate('menu.storeLevels'),
       url: STORE_LEVEL_ROUTE,
+      icon: 'fa fa-building',
+    },
+    {
+      name: translate('menu.storeType'),
+      url: STORE_TYPE_ROUTE,
+      icon: 'fa fa-building',
+    },
+    {
+      name: translate('menu.storeGrouping'),
+      url: STORE_GROUPING_ROUTE,
       icon: 'fa fa-building',
     },
     {
