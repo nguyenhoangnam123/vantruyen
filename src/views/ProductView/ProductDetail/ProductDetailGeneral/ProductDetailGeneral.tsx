@@ -110,16 +110,16 @@ function ProductDetailGeneral(props: ProductDetailGeneralProps) {
     setProductProductGroupingMappings,
   ] = React.useState<ProductGrouping[]>([]);
 
-  const handleChangeStatus = React.useCallback(
-    (checked: boolean) => {
-      const statusId = checked ? 1 : 0;
-      setProduct({
-        ...product,
-        statusId,
-      });
-    },
-    [setProduct, product],
-  );
+  // const handleChangeStatus = React.useCallback(
+  //   (checked: boolean) => {
+  //     const statusId = checked ? 1 : 0;
+  //     setProduct({
+  //       ...product,
+  //       statusId,
+  //     });
+  //   },
+  //   [setProduct, product],
+  // );
 
   const handleChangeImages = React.useCallback(
     (images: Image[]) => {
@@ -170,10 +170,7 @@ function ProductDetailGeneral(props: ProductDetailGeneralProps) {
       );
       setProductProductGroupingMappings(listPorductGrouping);
     }
-  }, [
-    setProductProductGroupingMappings,
-    product.productProductGroupingMappings,
-  ]);
+  }, [setProductProductGroupingMappings]);
 
   const renderItems = React.useCallback(node => {
     if (node && node.children && node.children.length > 0) {
@@ -282,14 +279,14 @@ function ProductDetailGeneral(props: ProductDetailGeneralProps) {
             />
           </FormItem>
 
-          <Form.Item label={translate('products.status')}>
+          {/* <Form.Item label={translate('products.status')}>
             <div className="product-status">
               <Switch
                 checked={product.statusId === 1}
                 onChange={handleChangeStatus}
               />
             </div>
-          </Form.Item>
+          </Form.Item> */}
 
           <FormItem label={translate('products.productType')}>
             <Select
