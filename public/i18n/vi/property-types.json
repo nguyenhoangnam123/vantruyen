@@ -1,17 +1,17 @@
 {
   "propertyTypes": {
-    "code": "",
-    "createdAt": "",
-    "deletedAt": "",
+    "code": "Mã loại tài sản",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
     "detail": {
-      "title": ""
+      "title": "Thông tin chi tiết"
     },
-    "id": "",
-    "isActive": "",
+    "id": "ID",
+    "isActive": "Hoạt động",
     "master": {
-      "title": ""
+      "title": "Danh sách loại tài sản"
     },
-    "name": "",
-    "updatedAt": ""
+    "name": "Tên",
+    "updatedAt": "Ngày cập nhật"
   }
 }

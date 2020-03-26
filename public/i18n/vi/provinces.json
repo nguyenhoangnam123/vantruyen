@@ -1,18 +1,18 @@
 {
   "provinces": {
     "createdAt": "Ngày tạo",
-    "deletedAt": "",
+    "deletedAt": "Ngày xóa",
     "detail": {
       "title": "Thông tin chi tiết"
     },
-    "districts": "",
+    "districts": "Huyện",
     "id": "ID tỉnh thành",
     "master": {
       "title": "Danh sách tỉnh thành"
     },
     "name": "Tên tỉnh thành",
-    "priority": "",
-    "stores": "",
-    "updatedAt": ""
+    "priority": "Ưu tiên",
+    "stores": "Cửa hàng",
+    "updatedAt": "Ngày tạo"
   }
 }
