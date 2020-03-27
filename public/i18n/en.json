@@ -415,7 +415,9 @@
       "url": ""
     },
     "isActive": "",
-    "items": "",
+    "items": {
+      "title": ""
+    },
     "master": {
       "title": ""
     },
@@ -448,21 +450,15 @@
     "supplier": "",
     "supplierCode": "",
     "supplierId": "",
-    "tabs": {
-      "items": {
-        "title": ""
-      },
-      "variationGroupings": {
-        "title": ""
-      }
-    },
     "taxType": "",
     "taxTypeId": "",
     "unitOfMeasure": "",
     "unitOfMeasureGrouping": "",
     "unitOfMeasureId": "",
     "updatedAt": "",
-    "variationGroupings": "",
+    "variationGroupings": {
+      "title": ""
+    },
     "variationName": "",
     "variationValue": "",
     "variationsAndPrice": ""

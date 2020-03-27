@@ -68,7 +68,9 @@
     "unitOfMeasureGrouping": "Nhóm đơn vị chuyển đổi",
     "unitOfMeasureId": "",
     "updatedAt": "Ngày cập nhật",
-    "variationGroupings": "Các phiên bản",
+    "variationGroupings": {
+      "title": ""
+    },
     "variationName": "Thuộc tính {{index}}",
     "variationValue": "Giá trị",
     "variationsAndPrice": "Quản lý giá và phiên bản"
