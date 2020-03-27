@@ -4,7 +4,7 @@ import { Moment } from 'moment';
 import { Status } from './Status';
 import { Permission } from './Permission';
 
-export class Role extends Model 
+export class Role extends Model
 {
     public id?: number;
     public name?: string;

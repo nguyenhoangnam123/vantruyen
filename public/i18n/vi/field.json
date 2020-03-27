@@ -1,11 +1,11 @@
 {
   "field": {
     "permissionFieldMappingModal": {
-      "title": ""
+      "title": "Chọn để thêm mới"
     },
     "tabs": {
       "roles": {
-        "title": ""
+        "title": "Danh sách vai trò"
       }
     }
   }

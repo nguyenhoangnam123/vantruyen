@@ -1,18 +1,18 @@
 {
   "unitOfMeasureGroupings": {
-    "createdAt": "",
-    "deletedAt": "",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
     "detail": {
-      "title": ""
+      "title": "Thông tin chi tiết"
     },
-    "id": "",
+    "id": "ID",
     "master": {
-      "title": ""
+      "title": "Danh sách nhóm đơn vị tính phân phối"
     },
-    "name": "",
-    "unitOfMeasure": "",
-    "unitOfMeasureGroupingContents": "",
+    "name": "Tên",
+    "unitOfMeasure": "Đơn vị đơn vị tính phân phối",
+    "unitOfMeasureGroupingContents": "Nội dung nhóm đơn vị đơn vị tính phân phối",
     "unitOfMeasureId": "",
-    "updatedAt": ""
+    "updatedAt": "Ngày"
   }
 }

@@ -1,19 +1,19 @@
 {
   "taxTypes": {
-    "code": "",
-    "createdAt": "",
-    "deletedAt": "",
+    "code": "Mã loại thuế",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
     "detail": {
-      "title": ""
+      "title": "Thông tin chi tiết"
     },
-    "id": "",
-    "isActive": "",
+    "id": "ID",
+    "isActive": "Hoạt động",
     "master": {
-      "title": ""
+      "title": "Danh sách loại thuế"
     },
-    "name": "",
-    "percentage": "",
-    "products": "",
-    "updatedAt": ""
+    "name": "Tên",
+    "percentage": "Phần trăm",
+    "products": "Sản phẩm",
+    "updatedAt": "Ngày tạo"
   }
 }

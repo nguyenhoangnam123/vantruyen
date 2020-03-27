@@ -1,17 +1,17 @@
 {
   "views": {
     "detail": {
-      "title": ""
+      "title": "Thông tin chi tiết"
     },
-    "fields": "",
-    "id": "",
-    "isDeleted": "",
+    "fields": "Khu vực",
+    "id": "ID",
+    "isDeleted": "Xóa",
     "master": {
-      "title": ""
+      "title": "Danh sách màn hình"
     },
-    "name": "",
-    "pages": "",
+    "name": "Tên",
+    "pages": "Trang",
     "path": "",
-    "permissions": ""
+    "permissions": "Quyền"
   }
 }

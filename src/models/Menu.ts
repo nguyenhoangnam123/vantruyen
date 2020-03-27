@@ -4,7 +4,7 @@ import { Moment } from 'moment';
 import { Field } from './Field';
 import { Page } from './Page';
 
-export class Menu extends Model 
+export class Menu extends Model
 {
     public id?: number;
     public name?: string;

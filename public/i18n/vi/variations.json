@@ -1,15 +1,15 @@
 {
   "variations": {
-    "code": "",
+    "code": "Mã thuộc tính",
     "detail": {
-      "title": ""
+      "title": "Thông tin chi tiết"
     },
-    "id": "",
+    "id": "ID",
     "master": {
-      "title": ""
+      "title": "Danh sách thuộc tính"
     },
-    "name": "",
-    "variationGrouping": "",
+    "name": "Tên",
+    "variationGrouping": "Nhóm thuộc tính",
     "variationGroupingId": ""
   }
 }

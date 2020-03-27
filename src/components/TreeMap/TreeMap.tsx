@@ -13,7 +13,6 @@ import { Input } from 'antd';
 
 const { TreeNode } = AntTree;
 
-
 export interface ISelectedItems<T> {
   [key: number]: T;
 }
@@ -31,13 +30,12 @@ function Tree<T extends Model>(props: TreeProps<T>) {
   const [visible, setVisible] = React.useState<boolean>(false);
   const [, setCurrentItem] = React.useState<T>(null);
   const [visibleDelete, setVisibleDelete] = React.useState<boolean>(false);
-  const [visibleNotification, setVisibleNotification] = React.useState<boolean>(false);
+  const [visibleNotification, setVisibleNotification] = React.useState<boolean>(
+    false,
+  );
   // const [checkedKeys] = React.useState<string[]>([]);
 
-  const {
-    value,
-    onChange,
-  } = props;
+  const { value, onChange } = props;
 
   const handleAdd = React.useCallback(
     (node: T) => {
@@ -72,62 +70,67 @@ function Tree<T extends Model>(props: TreeProps<T>) {
   const renderTreeNode = React.useCallback(
     (node: T) => {
       return (
-        <TreeNode key={node?.id} data={node} title={(
-          <>
-            <div className="title-tree-node d-flex">
-              <div className="title form-control">
-                {node.name}
-              </div>
-              {
-                props.isEdit === true && (
+        <TreeNode
+          key={node?.id}
+          data={node}
+          title={
+            <>
+              <div className="title-tree-node d-flex">
+                <div className="title form-control">{node.name}</div>
+                {props.isEdit === true && (
                   <div>
-                    <i role="button" className="fa fa-eye mr-2" onClick={handleAdd(node)} />
-                    <i role="button" className="fa fa-plus mr-2" onClick={handleAdd(node)} />
-                    <i role="button" className="fa fa-edit mr-2" onClick={handleEdit(node)} />
-                    <i role="button" className="fa fa-trash" onClick={handleDelete(node)} />
+                    <i
+                      role="button"
+                      className="fa fa-eye mr-2"
+                      onClick={handleAdd(node)}
+                    />
+                    <i
+                      role="button"
+                      className="fa fa-plus mr-2"
+                      onClick={handleAdd(node)}
+                    />
+                    <i
+                      role="button"
+                      className="fa fa-edit mr-2"
+                      onClick={handleEdit(node)}
+                    />
+                    <i
+                      role="button"
+                      className="fa fa-trash"
+                      onClick={handleDelete(node)}
+                    />
                   </div>
-                )
-              }
-            </div>
-          </>
-        )}>
-          {node?.children?.length > 0 && node.children.map((subNode: T) => {
-            return renderTreeNode(subNode);
-          })}
+                )}
+              </div>
+            </>
+          }
+        >
+          {node?.children?.length > 0 &&
+            node.children.map((subNode: T) => {
+              return renderTreeNode(subNode);
+            })}
         </TreeNode>
       );
     },
     [handleAdd],
   );
 
-  const handleToggle = React.useCallback(
-    () => {
-      setVisible(false);
-    },
-    [setVisible],
-  );
+  const handleToggle = React.useCallback(() => {
+    setVisible(false);
+  }, [setVisible]);
 
-  const handleClose = React.useCallback(
-    () => {
-      setVisible(false);
-    },
-    [setVisible],
-  );
+  const handleClose = React.useCallback(() => {
+    setVisible(false);
+  }, [setVisible]);
 
-  const toggle = React.useCallback(
-    () => {
-      setVisibleDelete(false);
-      setVisibleNotification(true);
-    },
-    [setVisibleDelete],
-  );
+  const toggle = React.useCallback(() => {
+    setVisibleDelete(false);
+    setVisibleNotification(true);
+  }, [setVisibleDelete]);
 
-  const toggleNotification = React.useCallback(
-    () => {
-      setVisibleNotification(false);
-    },
-    [setVisibleDelete],
-  );
+  const toggleNotification = React.useCallback(() => {
+    setVisibleNotification(false);
+  }, [setVisibleDelete]);
 
   const handleCheck = React.useCallback(
     (...params) => {
@@ -152,28 +155,23 @@ function Tree<T extends Model>(props: TreeProps<T>) {
       // chị đang chưa biết nếu dùng usememo thì phải xử lý thằng selectedItems như thế nào
       // selectedItems là đầu vào, khi đầu vào thay đổi thì memo nó sẽ tính
       // tức là cái checkedKeys sẽ là KẾT QUẢ TRẢ VỀ của memo, chứ KHÔNG phải state
-
     },
     [onChange],
   );
 
-  const checkedKeys = useMemo(
-    () => {
-      const checked = [];
-      if (props.selectedItems && props.selectedItems.length > 0) {
-        props.selectedItems.forEach((items: T) => {
-          const id = String(items.id);
-          checked.push(id);
-        });
+  const checkedKeys = useMemo(() => {
+    const checked = [];
+    if (props.selectedItems && props.selectedItems.length > 0) {
+      props.selectedItems.forEach((items: T) => {
+        const id = String(items.id);
+        checked.push(id);
+      });
 
-        return checked;
-      }
-      else {
-        return [];
-      }
-    },
-    [props.selectedItems],
-  );
+      return checked;
+    } else {
+      return [];
+    }
+  }, [props.selectedItems]);
 
   // useEffect(
   //   () => {
@@ -196,7 +194,6 @@ function Tree<T extends Model>(props: TreeProps<T>) {
             {translate('general.actions.add')}
           </button>
         </div>
-
       )}
       <AntTree
         defaultCheckedKeys={checkedKeys}
@@ -209,9 +206,7 @@ function Tree<T extends Model>(props: TreeProps<T>) {
         })}
       </AntTree>
       <Modal isOpen={visible}>
-        <ModalHeader>
-          {translate('tree.created')}
-        </ModalHeader>
+        <ModalHeader>{translate('tree.created')}</ModalHeader>
         <ModalBody>
           <div className="org-hierarchy mt-2">
             <label>Đơn vị cha: </label>
@@ -252,23 +247,33 @@ function Tree<T extends Model>(props: TreeProps<T>) {
       </Modal>
       <Modal isOpen={visibleDelete}>
         <ModalHeader>{translate('general.confirm')}</ModalHeader>
-        <ModalBody>
-          {translate('general.delete.content')}
-        </ModalBody>
+        <ModalBody>{translate('general.delete.content')}</ModalBody>
         <ModalFooter>
-          <button className="btn btn-sm btn-primary" onClick={toggle}>{translate('general.delete')}</button>
-          <button className="btn btn-sm btn-cancel" onClick={toggle}>{translate('general.cancel')}</button>
+          <button className="btn btn-sm btn-primary" onClick={toggle}>
+            {translate('general.delete')}
+          </button>
+          <button className="btn btn-sm btn-cancel" onClick={toggle}>
+            {translate('general.cancel')}
+          </button>
         </ModalFooter>
       </Modal>
 
       <Modal isOpen={visibleNotification}>
         <ModalHeader>{translate('general.notifications')}</ModalHeader>
-        <ModalBody>
-          {translate('general.delete.content.sucess')}
-        </ModalBody>
+        <ModalBody>{translate('general.delete.content.sucess')}</ModalBody>
         <ModalFooter>
-          <button className="btn btn-sm btn-primary" onClick={toggleNotification}>{translate('general.delete')}</button>
-          <button className="btn btn-sm btn-cancel" onClick={toggleNotification}>{translate('general.cancel')}</button>
+          <button
+            className="btn btn-sm btn-primary"
+            onClick={toggleNotification}
+          >
+            {translate('general.delete')}
+          </button>
+          <button
+            className="btn btn-sm btn-cancel"
+            onClick={toggleNotification}
+          >
+            {translate('general.cancel')}
+          </button>
         </ModalFooter>
       </Modal>
     </>

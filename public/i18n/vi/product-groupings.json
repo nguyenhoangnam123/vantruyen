@@ -1,23 +1,23 @@
 {
   "productGroupings": {
-    "code": "",
-    "createdAt": "",
-    "deletedAt": "",
-    "description": "",
+    "code": "Mã nhóm sản phẩm",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
+    "description": "Miêu tả",
     "detail": {
-      "title": ""
+      "title": "Thông tin chi tiết"
     },
-    "id": "",
+    "id": "ID",
     "inverseParent": "",
-    "isActive": "",
+    "isActive": "Hoạt động",
     "master": {
-      "title": ""
+      "title": "Danh sách nhóm sản phẩm"
     },
-    "name": "",
-    "parent": "",
-    "parentId": "",
+    "name": "Tên",
+    "parent": "nhóm sản phẩm cha",
+    "parentId": "ID nhóm sản phẩm cha",
     "path": "",
-    "products": "",
-    "updatedAt": ""
+    "products": "Sản phẩm",
+    "updatedAt": "Ngày tạo"
   }
 }

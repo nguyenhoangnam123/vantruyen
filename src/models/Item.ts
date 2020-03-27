@@ -3,7 +3,7 @@ import { ErrorMap } from 'react3l';
 import { Moment } from 'moment';
 import { Product } from './Product';
 
-export class Item extends Model 
+export class Item extends Model
 {
     public id?: number;
     public productId?: number;

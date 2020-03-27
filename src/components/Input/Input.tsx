@@ -13,6 +13,8 @@ export interface InputProps {
 
   className?: string;
 
+  placeholder?: string;
+
   defaultValue?: string | number;
 
   onChange?(value?: string): void;
@@ -28,6 +30,7 @@ function Input(props: InputProps) {
     onChange,
     onFocus,
     className,
+    placeholder,
   } = props;
 
   const handleTextChange = React.useCallback(
@@ -55,6 +58,7 @@ function Input(props: InputProps) {
 
   const htmlProps = {
     onFocus,
+    placeholder,
     className: classNames('react3l-input form-control form-control-sm', className),
   };
 

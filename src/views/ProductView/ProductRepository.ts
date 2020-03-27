@@ -30,6 +30,7 @@ import { TaxType } from 'models/TaxType';
 import { TaxTypeFilter } from 'models/TaxTypeFilter';
 import { UnitOfMeasureGrouping } from 'models/UnitOfMeasureGrouping';
 import { UnitOfMeasureGroupingFilter } from 'models/UnitOfMeasureGroupingFilter';
+import { buildTree } from 'helpers/tree';
 
 export class ProductRepository extends Repository {
   constructor() {
@@ -198,9 +199,10 @@ export class ProductRepository extends Repository {
         productGroupingFilter,
       )
       .then((response: AxiosResponse<ProductGrouping[]>) => {
-        return response.data.map(
-          (productGrouping: PureModelData<ProductGrouping>) =>
+        return buildTree(
+          response.data.map((productGrouping: PureModelData<ProductGrouping>) =>
             ProductGrouping.clone<ProductGrouping>(productGrouping),
+          ),
         );
       });
   };

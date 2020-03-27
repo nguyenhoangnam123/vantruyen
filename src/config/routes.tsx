@@ -1,7 +1,7 @@
 import DefaultLayout from 'layouts/DefaultLayout/DefaultLayout';
 import { join } from 'path';
 import { RouteConfig } from 'react-router-config';
-import { ROOT_ROUTE } from 'config/route-consts';
+import { ROOT_ROUTE, STORE_ROUTE } from 'config/route-consts';
 import { APP_USER_ROUTE } from 'config/route-consts';
 import { DISTRICT_ROUTE } from 'config/route-consts';
 import { FIELD_ROUTE } from 'config/route-consts';
@@ -52,47 +52,15 @@ import ProductGroupingView, {
   ProductGroupingDetail,
   ProductGroupingMaster,
 } from 'views/ProductGroupingView/ProductGroupingView';
-import ProductTypeView, {
-  ProductTypeDetail,
-  ProductTypeMaster,
-} from 'views/ProductTypeView/ProductTypeView';
-import PropertyView, {
-  PropertyDetail,
-  PropertyMaster,
-} from 'views/PropertyView/PropertyView';
-import PropertyTypeView, {
-  PropertyTypeDetail,
-  PropertyTypeMaster,
-} from 'views/PropertyTypeView/PropertyTypeView';
-import PropertyValueView, {
-  PropertyValueDetail,
-  PropertyValueMaster,
-} from 'views/PropertyValueView/PropertyValueView';
-import ProvinceView, {
-  ProvinceDetail,
-  ProvinceMaster,
-} from 'views/ProvinceView/ProvinceView';
-import RoleView, { RoleDetail, RoleMaster } from 'views/RoleView/RoleView';
-import StoreLevelView, {
-  StoreLevelDetail,
-  StoreLevelMaster,
-} from 'views/StoreLevelView/StoreLevelView';
-import StoreTypeView, {
-  StoreTypeDetail,
-  StoreTypeMaster,
-} from 'views/StoreTypeView/StoreTypeView';
-import StoreGroupingView, {
-  StoreGroupingDetail,
-  StoreGroupingMaster,
-} from 'views/StoreGroupingView/StoreGroupingView';
-import SupplierView, {
-  SupplierDetail,
-  SupplierMaster,
-} from 'views/SupplierView/SupplierView';
-import UnitOfMeasureView, {
-  UnitOfMeasureDetail,
-  UnitOfMeasureMaster,
-} from 'views/UnitOfMeasureView/UnitOfMeasureView';
+import ProductTypeView, {ProductTypeDetail, ProductTypeMaster} from 'views/ProductTypeView/ProductTypeView';
+import PropertyView, {PropertyDetail, PropertyMaster} from 'views/PropertyView/PropertyView';
+import PropertyTypeView, {PropertyTypeDetail, PropertyTypeMaster} from 'views/PropertyTypeView/PropertyTypeView';
+import PropertyValueView, {PropertyValueDetail, PropertyValueMaster} from 'views/PropertyValueView/PropertyValueView';
+import ProvinceView, {ProvinceDetail, ProvinceMaster} from 'views/ProvinceView/ProvinceView';
+import RoleView, {RoleDetail, RoleMaster} from 'views/RoleView/RoleView';
+import StoreLevelView, {StoreLevelDetail, StoreLevelMaster} from 'views/StoreLevelView/StoreLevelView';
+import SupplierView, {SupplierDetail, SupplierMaster} from 'views/SupplierView/SupplierView';
+import UnitOfMeasureView, {UnitOfMeasureDetail, UnitOfMeasureMaster} from 'views/UnitOfMeasureView/UnitOfMeasureView';
 import UnitOfMeasureGroupingContentView, {
   UnitOfMeasureGroupingContentDetail,
   UnitOfMeasureGroupingContentMaster,
@@ -101,17 +69,17 @@ import UnitOfMeasureGroupingView, {
   UnitOfMeasureGroupingDetail,
   UnitOfMeasureGroupingMaster,
 } from 'views/UnitOfMeasureGroupingView/UnitOfMeasureGroupingView';
-import VariationView, {
-  VariationDetail,
-  VariationMaster,
-} from 'views/VariationView/VariationView';
+import VariationView, {VariationDetail, VariationMaster} from 'views/VariationView/VariationView';
 import VariationGroupingView, {
   VariationGroupingDetail,
   VariationGroupingMaster,
 } from 'views/VariationGroupingView/VariationGroupingView';
-import ViewView, { ViewDetail, ViewMaster } from 'views/ViewView/ViewView';
-import WardView, { WardDetail, WardMaster } from 'views/WardView/WardView';
-import ProductDetail1 from 'views/ProductView/ProductDetail1/ProductDetail1';
+import ViewView, {ViewDetail, ViewMaster} from 'views/ViewView/ViewView';
+import WardView, {WardDetail, WardMaster} from 'views/WardView/WardView';
+import StoreView, {StoreDetail, StoreMaster} from 'views/StoreView/StoreView';
+import StoreTypeView, {StoreTypeDetail, StoreTypeMaster} from 'views/StoreTypeView/StoreTypeView';
+import StoreGroupingView, {StoreGroupingDetail, StoreGroupingMaster} from 'views/StoreGroupingView/StoreGroupingView';
+
 export const routes: RouteConfig[] = [
   {
     path: ROOT_ROUTE,
@@ -156,6 +124,20 @@ export const routes: RouteConfig[] = [
           {
             path: join(FIELD_ROUTE),
             component: FieldMaster,
+          },
+        ],
+      },
+      {
+        path: STORE_ROUTE,
+        component: StoreView,
+        children: [
+          {
+            path: join(STORE_ROUTE, ':id'),
+            component: StoreDetail,
+          },
+          {
+            path: join(STORE_ROUTE),
+            component: StoreMaster,
           },
         ],
       },

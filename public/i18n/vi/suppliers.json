@@ -1,18 +1,18 @@
 {
   "suppliers": {
-    "code": "",
-    "createdAt": "",
-    "deletedAt": "",
+    "code": "Mã nhà cung cấp",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
     "detail": {
-      "title": ""
+      "title": "Thông tin chi tiết"
     },
-    "id": "",
+    "id": "ID",
     "master": {
-      "title": ""
+      "title": "Danh sách nhà cung cấp"
     },
-    "name": "",
-    "products": "",
-    "taxCode": "",
-    "updatedAt": ""
+    "name": "Tên",
+    "products": "Sản phẩm",
+    "taxCode": "Mã số thuế",
+    "updatedAt": "Ngày tạo"
   }
 }

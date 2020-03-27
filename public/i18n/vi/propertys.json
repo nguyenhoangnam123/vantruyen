@@ -1,13 +1,13 @@
 {
   "propertys": {
-    "code": "",
-    "description": "",
-    "id": "",
-    "isActive": "",
-    "isSystem": "",
+    "code": "Mã tài sản",
+    "description": "Mô tả",
+    "id": "ID",
+    "isActive": "Hoạt động",
+    "isSystem": "Hệ thống",
     "master": {
-      "title": ""
+      "title": "Danh sách tài sản"
     },
-    "name": ""
+    "name": "Tên"
   }
 }
