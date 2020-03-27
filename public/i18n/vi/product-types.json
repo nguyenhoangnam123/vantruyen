@@ -1,19 +1,19 @@
 {
   "productTypes": {
-    "code": "",
-    "createdAt": "",
-    "deletedAt": "",
-    "description": "",
+    "code": "Mã loại sản phẩm",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
+    "description": "Miêu tả",
     "detail": {
-      "title": ""
+      "title": "Thông tin chi tiết"
     },
-    "id": "",
-    "isActive": "",
+    "id": "ID",
+    "isActive": "Hoạt động",
     "master": {
-      "title": ""
+      "title": "Danh sách loại sản phẩm"
     },
-    "name": "",
-    "products": "",
-    "updatedAt": ""
+    "name": "Tên",
+    "products": "Sản phẩm",
+    "updatedAt": "Ngày tạo"
   }
 }

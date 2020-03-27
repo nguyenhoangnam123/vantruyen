@@ -1,13 +1,13 @@
 {
   "roles": {
     "detail": {
-      "title": ""
+      "title": "Thông tin chi tiết"
     },
     "id": "ID",
     "master": {
-      "title": ""
+      "title": "Danh sách vai trò"
     },
     "name": "Tên vai trò",
-    "permissions": ""
+    "permissions": "Quyền"
   }
 }
