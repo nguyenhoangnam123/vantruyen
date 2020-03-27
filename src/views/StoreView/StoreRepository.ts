@@ -16,14 +16,14 @@ import { Organization } from 'models/Organization';
 import { OrganizationFilter } from 'models/OrganizationFilter';
 import { Province } from 'models/Province';
 import { ProvinceFilter } from 'models/ProvinceFilter';
+import { Status } from 'models/Status';
+import { StatusFilter } from 'models/StatusFilter';
 import { StoreGrouping } from 'models/StoreGrouping';
 import { StoreGroupingFilter } from 'models/StoreGroupingFilter';
 import { StoreType } from 'models/StoreType';
 import { StoreTypeFilter } from 'models/StoreTypeFilter';
 import { Ward } from 'models/Ward';
 import { WardFilter } from 'models/WardFilter';
-import { Image } from 'models/Image';
-import { ImageFilter } from 'models/ImageFilter';
 
 export class StoreRepository extends Repository {
   constructor() {
@@ -42,6 +42,7 @@ export class StoreRepository extends Repository {
         return response.data?.map((store: PureModelData<Store>) =>  Store.clone<Store>(store));
     });
   };
+
   public get = (id: number | string): Promise<Store> => {
     return this.http.post<Store>
       (kebabCase(nameof(this.get)), { id })
@@ -79,11 +80,24 @@ export class StoreRepository extends Repository {
           return response.data.map((organization: PureModelData<Organization>) => Organization.clone<Organization>(organization));
         });
   };
+  public singleListStore = (storeFilter: StoreFilter): Promise<Store[]> => {
+      return this.http.post<Store[]>(kebabCase(nameof(this.singleListStore)), storeFilter)
+        .then((response: AxiosResponse<Store[]>) => {
+          return response.data.map((store: PureModelData<Store>) => Store.clone<Store>(store));
+        });
+  };
   public singleListProvince = (provinceFilter: ProvinceFilter): Promise<Province[]> => {
       return this.http.post<Province[]>(kebabCase(nameof(this.singleListProvince)), provinceFilter)
         .then((response: AxiosResponse<Province[]>) => {
           return response.data.map((province: PureModelData<Province>) => Province.clone<Province>(province));
         });
+  };
+  public singleListStatus = (): Promise<Status[]> =>
+  {
+      return this.http.post<Status[]>(kebabCase(nameof(this.singleListStatus)), new StatusFilter())
+        .then((response: AxiosResponse<Status[]>) => {
+          return response.data.map((status: PureModelData<Status>) => Status.clone<Status>(status));
+      });
   };
   public singleListStoreGrouping = (storeGroupingFilter: StoreGroupingFilter): Promise<StoreGrouping[]> => {
       return this.http.post<StoreGrouping[]>(kebabCase(nameof(this.singleListStoreGrouping)), storeGroupingFilter)
@@ -103,25 +117,6 @@ export class StoreRepository extends Repository {
           return response.data.map((ward: PureModelData<Ward>) => Ward.clone<Ward>(ward));
         });
   };
-  public singleListImage = (imageFilter: ImageFilter): Promise<Image[]> => {
-      return this.http.post<Image[]>(kebabCase(nameof(this.singleListImage)), imageFilter)
-        .then((response: AxiosResponse<Image[]>) => {
-          return response.data.map((image: PureModelData<Image>) => Image.clone<Image>(image));
-        });
-  };
-
-  public countImage = (imageFilter: ImageFilter):
-      Promise<number> => {
-        return this.http.post<number>(kebabCase(nameof(this.countImage)), imageFilter)
-          .then((response: AxiosResponse<number>) =>  response.data);
-    };
-
-  public listImage = (imageFilter: ImageFilter): Promise<Image[]> => {
-        return this.http.post<Image[]>(kebabCase(nameof(this.listImage)), imageFilter)
-          .then((response: AxiosResponse<Image[]>) => {
-            return response.data.map((image: PureModelData<Image>) => Image.clone<Image>(image));
-          });
-  };
 
 
   public bulkDelete = (idList: BatchId): Promise<void> => {
@@ -136,4 +131,5 @@ export class StoreRepository extends Repository {
       .then((response: AxiosResponse<void>) => response.data);
     };
   }
+
   export const storeRepository: Store = new StoreRepository();

@@ -400,7 +400,7 @@
     "createVariations": "Tạo phiên bản",
     "createdAt": "Ngày tạo",
     "deletedAt": "Ngày xóa",
-    "description": "",
+    "description": "Mô tả",
     "detail": {
       "title": "Chỉnh sửa sản phẩm"
     },
@@ -617,48 +617,41 @@
   "store": {
     "storeImageMappingModal": {
       "title": ""
-    },
-    "tabs": {
-      "roles": {
-        "title": ""
-      }
     }
   },
   "stores": {
-    "address1": "",
-    "address2": "",
-    "code": "",
-    "createdAt": "",
-    "deletedAt": "",
+    "address1": "Địa chỉ 1",
+    "address2": "Địa chỉ 2",
+    "code": "Mã",
     "detail": {
-      "title": ""
+      "title": "Thông tin chi tiết"
     },
-    "district": "",
-    "districtId": "",
-    "id": "",
-    "isActive": "",
-    "latitude": "",
-    "longitude": "",
+    "district": "Quận/huyện",
+    "general": {
+      "info": "Thông tin cửa hàng"
+    },
+    "id": "ID",
+    "latitude": "Vĩ độ",
+    "location": "Vị trí",
+    "longitude": "Kinh độ",
     "master": {
-      "title": ""
+      "title": "Danh sách cửa hàng"
     },
-    "name": "",
-    "organization": "",
-    "organizationId": "",
-    "ownerEmail": "",
-    "ownerName": "",
-    "ownerPhone": "",
-    "parentStoreId": "",
-    "province": "",
-    "provinceId": "",
-    "storeGrouping": "",
-    "storeGroupingId": "",
-    "storeType": "",
-    "storeTypeId": "",
-    "telephone": "",
-    "updatedAt": "",
-    "ward": "",
-    "wardId": ""
+    "name": "Tên cửa hàng",
+    "organization": "Đơn vị",
+    "owner": {
+      "info": "Thông tin chủ sở hữu"
+    },
+    "ownerEmail": "Email",
+    "ownerName": "Tên chủ sở hữu",
+    "ownerPhone": "Số điện thoại",
+    "parentStore": "Cửa hàng cha",
+    "province": "Tỉnh thành",
+    "status": "Trạng thái",
+    "storeGrouping": "Nhóm cửa hàng",
+    "storeType": "Loại cửa hàng",
+    "telephone": "Số điện thoại",
+    "ward": "Xã phường"
   },
   "suppliers": {
     "code": "",

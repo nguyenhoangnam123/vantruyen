@@ -1,12 +1,11 @@
-import Button, { ButtonType } from 'antd/lib/button';
-import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { ITreeItem } from 'helpers/tree';
-import { Model, ModelFilter } from 'core/models';
-import { useTranslation } from 'react-i18next';
+import Button, {ButtonType} from 'antd/lib/button';
+import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
+import {ITreeItem} from 'helpers/tree';
+import {Model, ModelFilter} from 'core/models';
+import {useTranslation} from 'react-i18next';
 import Tree from 'components/TreeMap/TreeMap';
-import { AxiosError } from 'axios';
-
+import {AxiosError} from 'axios';
 
 export interface ISelectedItems<T> {
   [key: number]: T;
@@ -14,37 +13,48 @@ export interface ISelectedItems<T> {
 
 interface ITreeInModalProps<T extends Model, TModelFilter extends ModelFilter> {
   defaultSelectedItems?: T[];
+
   selectedItems?: T[];
+
   defaultDataSource?: ITreeItem[];
 
   visible?: boolean;
+
   onChange?: (selectedItem: T[]) => void;
+
   onClose?: (event) => void;
 
   title?: string;
+
   className?: string;
 
   allowOk?: boolean;
+
   okText?: string;
+
   okType?: ButtonType;
 
   allowClose?: boolean;
+
   closeText?: string;
+
   closeType?: ButtonType;
 
   getList?: (TModelFilter?: TModelFilter) => Promise<T[]>;
+
   list?: T[];
+
   modelFilter?: TModelFilter;
 
   setModelFilter?: Dispatch<SetStateAction<TModelFilter>>;
+
   onSearchError?: (error: AxiosError<T>) => void;
+
   searchField?: string;
 
 }
 
-
-const TreePopup = React.forwardRef(<T extends Model, TModelFilter extends ModelFilter>
-  (props: ITreeInModalProps<T, TModelFilter>) => {
+function TreePopup<T extends Model, TModelFilter extends ModelFilter>(props: ITreeInModalProps<T, TModelFilter>) {
 
   const {
     modelFilter,
@@ -62,7 +72,6 @@ const TreePopup = React.forwardRef(<T extends Model, TModelFilter extends ModelF
   const [list, setList] = React.useState<T[]>(defaultList ?? []);
 
   const [, setLoading] = React.useState<boolean>(false);
-
 
   useEffect(
     () => {
@@ -120,18 +129,15 @@ const TreePopup = React.forwardRef(<T extends Model, TModelFilter extends ModelF
       const index: number = selectedItems.indexOf(item);
       if (index < 0) {
         selectedItems.push(item);
-      }
-      else {
+      } else {
         selectedItems.splice(index, 1);
       }
       setSelectedItems(selectedItems);
     },
-    [setSelectedItems],
+    [selectedItems],
   );
 
-
   return renderModal();
-
 
   function renderModal() {
     return (
@@ -141,7 +147,7 @@ const TreePopup = React.forwardRef(<T extends Model, TModelFilter extends ModelF
           isOpen={props.visible}
           toggle={handleClose}
           size="xl"
-          style={{ maxWidth: '1000px', width: '90%' }}
+          style={{maxWidth: '1000px', width: '90%'}}
           unmountOnClose
           centered
         >
@@ -154,7 +160,7 @@ const TreePopup = React.forwardRef(<T extends Model, TModelFilter extends ModelF
               onChange={handleChangeTree}
               value={list}
               isEdit={false}
-              checkable={true} />
+              checkable={true}/>
           </ModalBody>
           <ModalFooter>
             <Button htmlType="button" type={props.okType} onClick={handleOk}>
@@ -168,7 +174,7 @@ const TreePopup = React.forwardRef(<T extends Model, TModelFilter extends ModelF
       </>
     );
   }
-});
+}
 
 TreePopup.defaultProps = {
   allowOk: true,
