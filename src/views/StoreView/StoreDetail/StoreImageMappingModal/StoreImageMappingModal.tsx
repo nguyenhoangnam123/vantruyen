@@ -1,8 +1,8 @@
 import React, {Dispatch, SetStateAction} from 'react';
 import {ColumnProps} from 'antd/lib/table';
-import { Image } from 'models/Image';
+import {Image} from 'models/Image';
 import {useTranslation} from 'react-i18next';
-import { ImageFilter } from 'models/ImageFilter';
+import {ImageFilter} from 'models/ImageFilter';
 import nameof from 'ts-nameof.macro';
 import {crudService} from 'core/services';
 import ContentModal, {ContentModalProps} from 'components/ContentModal/ContentModal';

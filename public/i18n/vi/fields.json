@@ -1,0 +1,16 @@
+{
+  "fields": {
+    "detail": {
+      "title": "Thông tin chi tiết"
+    },
+    "id": "ID",
+    "isDeleted": "Xóa",
+    "master": {
+      "title": "Danh sách khu vực"
+    },
+    "menu": "Danh sách",
+    "menuId": "",
+    "name": "Tên",
+    "type": "Loại"
+  }
+}

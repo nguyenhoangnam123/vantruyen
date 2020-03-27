@@ -1,13 +1,18 @@
 {
   "provinces": {
+    "createdAt": "",
+    "deletedAt": "",
     "detail": {
       "title": ""
     },
+    "districts": "",
     "id": "",
     "master": {
       "title": ""
     },
     "name": "",
-    "priority": ""
+    "priority": "",
+    "stores": "",
+    "updatedAt": ""
   }
 }

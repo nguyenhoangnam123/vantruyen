@@ -9,11 +9,13 @@ export type InputType = 'text' | 'textarea' | 'editor';
 export interface InputProps {
   type?: InputType;
 
-  value?: string;
+  value?: string | number;
 
   className?: string;
 
-  defaultValue?: string;
+  placeholder?: string;
+
+  defaultValue?: string | number;
 
   onChange?(value?: string): void;
 
@@ -28,6 +30,7 @@ function Input(props: InputProps) {
     onChange,
     onFocus,
     className,
+    placeholder,
   } = props;
 
   const handleTextChange = React.useCallback(
@@ -55,6 +58,8 @@ function Input(props: InputProps) {
 
   const htmlProps = {
     onFocus,
+    placeholder,
+    className: classNames('react3l-input form-control form-control-sm', className),
   };
 
   if (type === 'text') {
@@ -62,7 +67,6 @@ function Input(props: InputProps) {
       <input type="text"
              {...valueProps}
              {...htmlProps}
-             className={classNames('react3l-input form-control form-control-sm', className)}
              onChange={handleTextChange}/>
     );
   }
@@ -71,7 +75,6 @@ function Input(props: InputProps) {
       <textarea
         {...valueProps}
         {...htmlProps}
-        className={classNames('react3l-input form-control form-control-sm', className)}
         onChange={handleTextChange}/>
     );
   }

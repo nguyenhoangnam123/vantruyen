@@ -1,0 +1,19 @@
+{
+  "taxTypes": {
+    "code": "Mã loại thuế",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
+    "detail": {
+      "title": "Thông tin chi tiết"
+    },
+    "id": "ID",
+    "isActive": "Hoạt động",
+    "master": {
+      "title": "Danh sách loại thuế"
+    },
+    "name": "Tên",
+    "percentage": "Phần trăm",
+    "products": "Sản phẩm",
+    "updatedAt": "Ngày tạo"
+  }
+}

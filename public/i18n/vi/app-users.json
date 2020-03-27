@@ -1,0 +1,22 @@
+{
+  "appUsers": {
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
+    "detail": {
+      "title": "Thông tin chi tiết"
+    },
+    "displayName": "Tên hiển thị",
+    "email": "Địa chỉ email",
+    "id": "ID người dùng",
+    "master": {
+      "title": "Danh sách người dùng"
+    },
+    "name": "Tên",
+    "password": "Mật khẩu",
+    "phone": "Số điện thoại",
+    "updatedAt": "Ngày cập nhật",
+    "userStatus": "Trạng thái người dùng",
+    "userStatusId": "ID trạng thái người dùng",
+    "username": "Tên đăng nhập"
+  }
+}

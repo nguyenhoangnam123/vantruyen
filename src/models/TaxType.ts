@@ -1,7 +1,7 @@
 import { Model } from 'core/models';
 import { ErrorMap } from 'react3l';
 import { Moment } from 'moment';
-import { Product } from './Product';
+import { Status } from './Status';
 
 export class TaxType extends Model
 {
@@ -9,9 +9,9 @@ export class TaxType extends Model
     public code?: string;
     public name?: string;
     public percentage?: number;
-    public isActive?: boolean;
+    public statusId?: number;
     public createdAt?: Moment;
     public updatedAt?: Moment;
     public deletedAt?: Moment;
-    public products?: Product[];
+    public status?: Status;
 }

@@ -1,0 +1,44 @@
+/* Style for PriceAndVariations.tsx */
+
+.price-and-variations {
+  ul {
+    &.variations {
+      padding: unset;
+
+      .variation {
+        list-style: none;
+        display: flex;
+
+        .name, .value {
+          display: flex;
+          align-items: flex-end;
+
+          .label {
+            white-space: nowrap;
+            display: inline-block;
+            margin-right: 0.25rem;
+
+            &:after {
+              content: ":";
+            }
+          }
+        }
+
+        .name {
+          margin-right: 0.75rem;
+          max-width: 250px;
+          min-width: 220px;
+        }
+
+        .value {
+          flex-grow: 1;
+        }
+      }
+    }
+  }
+
+  .btn-icon {
+    width: 14px;
+    height: 14px;
+  }
+}

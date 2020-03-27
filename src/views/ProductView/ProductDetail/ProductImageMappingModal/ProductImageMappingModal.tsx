@@ -1,95 +1,118 @@
 import React, {Dispatch, SetStateAction} from 'react';
-import {ColumnProps} from 'antd/lib/table';
-import { Image } from 'models/Image';
-import {useTranslation} from 'react-i18next';
-import { ImageFilter } from 'models/ImageFilter';
+import Modal, {ModalProps} from 'reactstrap/lib/Modal';
+import ModalHeader from 'reactstrap/lib/ModalHeader';
+import ModalBody from 'reactstrap/lib/ModalBody';
+import ModalFooter from 'reactstrap/lib/ModalFooter';
+import {getOrderTypeForTable, renderMasterIndex} from 'helpers/ant-design/table';
+import Table, {ColumnProps, TableRowSelection} from 'antd/lib/table';
 import nameof from 'ts-nameof.macro';
-import {crudService} from 'core/services';
-import ContentModal, {ContentModalProps} from 'components/ContentModal/ContentModal';
-import {tableService} from 'services';
-import Form from 'antd/lib/form';
-import {formItemLayout} from 'config/ant-design/form';
-import {Col, Row} from 'antd/lib/grid';
-import AdvancedStringFilter from 'components/AdvancedStringFilter/AdvancedStringFilter';
+import {generalColumnWidths, generalLanguageKeys} from 'config/consts';
+import {tableService} from 'core/services';
+import {useTranslation} from 'react-i18next';
 
-const {Item: FormItem} = Form;
+import { ProductImageMapping } from 'models/ProductImageMapping';
+import { Image } from 'models/Image';
+import { ImageFilter } from 'models/ImageFilter';
 
-export interface ProductImageMappingModalProps extends ContentModalProps<Image> {
-  title: string;
 
-  selectedList: Image[];
-
-  setSelectedList: Dispatch<SetStateAction<Image[]>>;
-
-  list: Image[];
+export interface ProductImageMappingModalProps extends ModalProps {
+  current: ProductImageMapping[];
 
   loading: boolean;
 
-  filter: ImageFilter;
+  modelFilter: ImageFilter;
 
-  setFilter: Dispatch<SetStateAction<ImageFilter>>;
+  setModelFilter: Dispatch<SetStateAction<ImageFilter>>;
+
+  rowSelection: TableRowSelection<Image>;
+
+  list: ProductImageMapping[];
 
   total: number;
+
+  onClose: () => void;
 }
 
-function ProductImageMappingModal(props: ProductImageMappingModalProps) {
+
+function ProductImageMappingMappingModal(props: ProductImageMappingModalProps) {
   const [translate] = useTranslation();
 
   const {
+    isOpen,
+    toggle,
+    onClose,
     list,
-    filter,
-    setFilter,
-    selectedList,
-    setSelectedList,
+    loading,
+    rowSelection,
+    modelFilter,
+    setModelFilter,
     total,
-    ...restProps
   } = props;
 
-  const columns: ColumnProps<Image>[] = React.useMemo(
+  const [pagination, sorter, handleTableChange] = tableService.useMasterTable(modelFilter, setModelFilter, total);
+
+  const columns: ColumnProps<ProductImageMapping>[] = React.useMemo(
     () => {
       return [
-        {
-          title: translate('images.id'),
-          key: nameof(list[0].id),
-          dataIndex: nameof(list[0].id),
-        },
-        {
-          title: translate('images.name'),
-          key: nameof(list[0].name),
-          dataIndex: nameof(list[0].name),
-        },
+      {
+        key: generalLanguageKeys.columns.index,
+        title: translate(generalLanguageKeys.columns.index),
+        width: generalColumnWidths.index,
+        render: renderMasterIndex<ProductImageMapping>(pagination),
+      },
+      {
+        key: nameof(list[0].id),
+        dataIndex: nameof(list[0].id),
+        sorter: true,
+        sortOrder: getOrderTypeForTable(nameof(list[0].name), sorter),
+        title: translate('products.images.id'),
+      },
+      {
+        key: nameof(list[0].name),
+        dataIndex: nameof(list[0].name),
+        sorter: true,
+        sortOrder: getOrderTypeForTable(nameof(list[0].name), sorter),
+        title: translate('products.images.name'),
+      },
+      {
+        key: nameof(list[0].url),
+        dataIndex: nameof(list[0].url),
+        sorter: true,
+        sortOrder: getOrderTypeForTable(nameof(list[0].name), sorter),
+        title: translate('products.images.url'),
+      },
       ];
     },
-    [list, translate],
+    [list, pagination, sorter, translate],
   );
 
-  const [pagination] = tableService.useMasterTable(filter, setFilter, total);
-
-  const [
-    handleChangeFilterSimpleField,
-  ] = crudService.useChangeHandlers<ImageFilter>(filter, setFilter);
-
   return (
-    <ContentModal  {...restProps}
-                   pagination={pagination}
-                   columns={columns}
-                   selectedList={selectedList}
-                   setSelectedList={setSelectedList}
-                   list={list}
-    >
-      <Form {...formItemLayout}>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={12} xl={8} xxl={8}>
-            <FormItem label={translate('images.id')}>
-              <AdvancedStringFilter filter={filter.id}
-                                    filterType={nameof(filter.id)}
-                                    onChange={handleChangeFilterSimpleField(nameof(filter.id))}/>
-            </FormItem>
-          </Col>
-        </Row>
-      </Form>
-    </ContentModal>
+    <Modal size="xl"
+           unmountOnClose={true}
+           toggle={toggle}
+           isOpen={isOpen}>
+      <ModalHeader>
+
+      </ModalHeader>
+      <ModalBody>
+        <Table tableLayout="fixed"
+               bordered={true}
+               columns={columns}
+               dataSource={list}
+               loading={loading}
+               rowSelection={rowSelection}
+               pagination={pagination}
+               rowKey={nameof(list[0].id)}
+               onChange={handleTableChange}
+        />
+      </ModalBody>
+      <ModalFooter className="d-flex justify-content-end">
+        <button className="btn btn-sm btn-primary" onClick={onClose}>
+          {translate(generalLanguageKeys.actions.close)}
+        </button>
+      </ModalFooter>
+    </Modal>
   );
 }
 
-export default ProductImageMappingModal;
+export default ProductImageMappingMappingModal;

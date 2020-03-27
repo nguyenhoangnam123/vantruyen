@@ -1,0 +1,16 @@
+{
+  "pages": {
+    "detail": {
+      "title": "Thông tin chi tiết"
+    },
+    "id": "ID",
+    "isDeleted": "Xóa",
+    "master": {
+      "title": "Danh sách trang"
+    },
+    "menu": "Danh sách",
+    "menuId": "ID danh sách",
+    "name": "Tên",
+    "path": "Đường dẫn"
+  }
+}

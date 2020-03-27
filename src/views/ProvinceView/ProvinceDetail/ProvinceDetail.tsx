@@ -73,6 +73,16 @@ function ProvinceDetail() {
                 onChange={handleChangeSimpleField(nameof(province.name))}
               />
             </FormItem>
+            <FormItem label={translate('provinces.code')}
+              validateStatus={formService.getValidationStatus<Province>(province.errors, nameof(province.code))}
+              help={province.errors?.code}
+            >
+              <input type="text"
+                defaultValue={province.code}
+                className="form-control form-control-sm"
+                onChange={handleChangeSimpleField(nameof(province.code))}
+              />
+            </FormItem>
             <FormItem label={translate('provinces.priority')}
               validateStatus={formService.getValidationStatus<Province>(province.errors, nameof(province.priority))}
               help={province.errors?.priority}

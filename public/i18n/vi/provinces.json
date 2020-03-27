@@ -1,13 +1,17 @@
 {
   "provinces": {
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
     "detail": {
       "title": "Thông tin chi tiết"
     },
+    "districts": "Huyện",
     "id": "ID tỉnh thành",
     "master": {
       "title": "Danh sách tỉnh thành"
     },
     "name": "Tên tỉnh thành",
-    "priority": "Thứ tự ưu tiên"
+    "priority": "Thứ tự ưu tiên",
+    "code":"Mã tỉnh thành"
   }
 }

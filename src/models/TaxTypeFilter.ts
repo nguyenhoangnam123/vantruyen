@@ -6,4 +6,5 @@ export class TaxTypeFilter extends ModelFilter  {
   public code?: StringFilter = new StringFilter();
   public name?: StringFilter = new StringFilter();
   public percentage?: NumberFilter = new NumberFilter();
+  public statusId?: IdFilter = new IdFilter();
 }

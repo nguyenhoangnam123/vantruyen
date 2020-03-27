@@ -1,0 +1,22 @@
+{
+  "organizations": {
+    "code": "Mã tổ chức",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
+    "detail": {
+      "title": "Thông tin chi tiết"
+    },
+    "id": "ID",
+    "inverseParent": "",
+    "level": "Cấp",
+    "master": {
+      "title": "Danh sách cơ quan"
+    },
+    "name": "Tên",
+    "parent": "Tổ chức cha",
+    "parentId": "",
+    "path": "",
+    "stores": "Cửa hàng",
+    "updatedAt": "Ngày tạo"
+  }
+}

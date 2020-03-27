@@ -1,6 +1,29 @@
 {
   "menu": {
-    "applicationUsers": "Người dùng",
-    "provinces": "Tỉnh thành"
+    "appUsers": "Tài khoản",
+    "districts": "Quận/Huyện",
+    "fields": "Khu vực",
+    "images": "Hình ảnh",
+    "items": "Item",
+    "pages": "Trang",
+    "permissions": "Quyền",
+    "productGroupings": "Nhóm sản phẩm",
+    "productTypes": "Loại sản phẩm",
+    "products": "Sản phẩm",
+    "properties": "Property",
+    "propertyTypes": "Property Type",
+    "propertyValues": "Property Values",
+    "provinces": "Tỉnh thành",
+    "roles": "Roles",
+    "storeLevels": "Kho",
+    "stores": "Cửa hàng",
+    "suppliers": "Nhà cung cấp",
+    "unitOfMeasureGroupingContents": "Nội dung đơn vị chuyển đổi",
+    "unitOfMeasureGroupings": "Đơn vị chuyển đổi",
+    "unitOfMeasures": "Đơn vị tính",
+    "variationGroupings": "Nhóm thuộc tính",
+    "variations": "Thuộc tính",
+    "views": "Views",
+    "wards": "Xã/Phường"
   }
 }

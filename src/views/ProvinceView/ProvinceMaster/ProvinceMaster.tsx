@@ -84,7 +84,6 @@ function ProvinceMaster() {
     setLoading,
     handleSearch,
   );
-  // ------------------------------------------------------------------------------------------------------------------------------------------------
 
   const columns: ColumnProps<Province>[] = React.useMemo(
     () => {
@@ -94,6 +93,17 @@ function ProvinceMaster() {
           key: nameof(generalLanguageKeys.index),
           width: generalColumnWidths.index,
           render: renderMasterIndex<Province>(pagination),
+        },
+        {
+          title: translate('provinces.code'),
+          key: nameof(list[0].code),
+          dataIndex: nameof(list[0].code),
+          sorter: true,
+          sortOrder: getOrderTypeForTable<Province>(
+            nameof(list[0].code),
+            sorter,
+          ),
+
         },
         {
           title: translate('provinces.name'),
@@ -171,6 +181,19 @@ function ProvinceMaster() {
         >
           <Form {...formItemLayout}>
             <Row>
+            <Col className="pl-1" span={8}>
+                <FormItem
+                  className="mb-0"
+                  label={translate('provinces.code')}
+                >
+                  <AdvancedStringFilter
+                    filterType={nameof(filter.code.startWith)}
+                    filter={filter.name}
+                    onChange={handleFilter(nameof(filter.code))}
+                    className="w-100"
+                  />
+                </FormItem>
+              </Col>
               <Col className="pl-1" span={8}>
                 <FormItem
                   className="mb-0"

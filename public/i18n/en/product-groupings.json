@@ -1,0 +1,23 @@
+{
+  "productGroupings": {
+    "code": "",
+    "createdAt": "",
+    "deletedAt": "",
+    "description": "",
+    "detail": {
+      "title": ""
+    },
+    "id": "",
+    "inverseParent": "",
+    "isActive": "",
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "parent": "",
+    "parentId": "",
+    "path": "",
+    "products": "",
+    "updatedAt": ""
+  }
+}

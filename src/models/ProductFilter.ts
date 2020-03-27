@@ -8,12 +8,13 @@ export class ProductFilter extends ModelFilter  {
   public name?: StringFilter = new StringFilter();
   public description?: StringFilter = new StringFilter();
   public scanCode?: StringFilter = new StringFilter();
-  public productGroupingId?: IdFilter = new IdFilter();
   public productTypeId?: IdFilter = new IdFilter();
   public supplierId?: IdFilter = new IdFilter();
   public brandId?: IdFilter = new IdFilter();
   public unitOfMeasureId?: IdFilter = new IdFilter();
+  public unitOfMeasureGroupingId?: IdFilter = new IdFilter();
   public salePrice?: NumberFilter = new NumberFilter();
   public retailPrice?: NumberFilter = new NumberFilter();
   public taxTypeId?: IdFilter = new IdFilter();
+  public statusId?: IdFilter = new IdFilter();
 }

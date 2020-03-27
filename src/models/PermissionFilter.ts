@@ -6,4 +6,5 @@ export class PermissionFilter extends ModelFilter  {
   public name?: StringFilter = new StringFilter();
   public roleId?: IdFilter = new IdFilter();
   public menuId?: IdFilter = new IdFilter();
+  public statusId?: IdFilter = new IdFilter();
 }

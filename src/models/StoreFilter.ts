@@ -20,4 +20,5 @@ export class StoreFilter extends ModelFilter  {
   public ownerName?: StringFilter = new StringFilter();
   public ownerPhone?: StringFilter = new StringFilter();
   public ownerEmail?: StringFilter = new StringFilter();
+  public statusId?: IdFilter = new IdFilter();
 }

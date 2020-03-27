@@ -1,0 +1,23 @@
+{
+  "items": {
+    "code": "",
+    "createdAt": "",
+    "deletedAt": "",
+    "detail": {
+      "title": ""
+    },
+    "id": "",
+    "images": "",
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "price": "",
+    "product": "",
+    "productId": "",
+    "retailPrice": "",
+    "salePrice": "",
+    "scanCode": "",
+    "updatedAt": ""
+  }
+}

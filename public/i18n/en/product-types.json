@@ -1,0 +1,19 @@
+{
+  "productTypes": {
+    "code": "",
+    "createdAt": "",
+    "deletedAt": "",
+    "description": "",
+    "detail": {
+      "title": ""
+    },
+    "id": "",
+    "isActive": "",
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "products": "",
+    "updatedAt": ""
+  }
+}

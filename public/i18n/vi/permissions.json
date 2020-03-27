@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "detail": {
+      "title": "Thông tin chi tiết"
+    },
+    "id": "ID",
+    "master": {
+      "title": "Danh sách quyền"
+    },
+    "menu": "Danh sách",
+    "menuId": "ID danh sách",
+    "name": "Tên",
+    "role": "Vai trò",
+    "roleId": "ID vai trò"
+  }
+}

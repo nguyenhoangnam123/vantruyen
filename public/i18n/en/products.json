@@ -1,0 +1,76 @@
+{
+  "products": {
+    "addVariation": "",
+    "brand": "",
+    "brandId": "",
+    "code": "",
+    "createVariations": "",
+    "createdAt": "",
+    "deletedAt": "",
+    "description": "",
+    "detail": {
+      "title": ""
+    },
+    "general": "",
+    "id": "",
+    "images": {
+      "id": "",
+      "imageId": "",
+      "name": "",
+      "productId": "",
+      "url": ""
+    },
+    "isActive": "",
+    "items": "",
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "price": "",
+    "productGrouping": "",
+    "productGroupingId": "",
+    "productGroupings": {
+      "code": "",
+      "description": "",
+      "id": "",
+      "name": "",
+      "parentId": "",
+      "path": "",
+      "productGroupingId": "",
+      "productId": ""
+    },
+    "productImageMappings": {
+      "list": ""
+    },
+    "productProductGroupingMappings": {
+      "list": ""
+    },
+    "productType": "",
+    "productTypeId": "",
+    "retailPrice": "",
+    "salePrice": "",
+    "scanCode": "",
+    "status": "",
+    "supplier": "",
+    "supplierCode": "",
+    "supplierId": "",
+    "tabs": {
+      "items": {
+        "title": ""
+      },
+      "variationGroupings": {
+        "title": ""
+      }
+    },
+    "taxType": "",
+    "taxTypeId": "",
+    "unitOfMeasure": "",
+    "unitOfMeasureGrouping": "",
+    "unitOfMeasureId": "",
+    "updatedAt": "",
+    "variationGroupings": "",
+    "variationName": "",
+    "variationValue": "",
+    "variationsAndPrice": ""
+  }
+}

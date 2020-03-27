@@ -1,0 +1,16 @@
+{
+  "fields": {
+    "detail": {
+      "title": ""
+    },
+    "id": "",
+    "isDeleted": "",
+    "master": {
+      "title": ""
+    },
+    "menu": "",
+    "menuId": "",
+    "name": "",
+    "type": ""
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "wards": {
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
+    "detail": {
+      "title": "Thông tin chi tiết"
+    },
+    "district": "Huyện",
+    "districtId": "",
+    "id": "ID",
+    "master": {
+      "title": "Danh sách phường"
+    },
+    "name": "Tên",
+    "priority": "Thứ tự ưu tiên",
+    "stores": "Cửa hàng",
+    "updatedAt": "Ngày tạo"
+  }
+}

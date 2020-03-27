@@ -1,0 +1,23 @@
+{
+  "items": {
+    "code": "Mã",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
+    "detail": {
+      "title": "Thông tin chi tiết"
+    },
+    "id": "ID",
+    "images": "Danh sách hình ảnh",
+    "master": {
+      "title": "Danh sách sản phẩm"
+    },
+    "name": "Tên",
+    "price": "Giá",
+    "product": "Sản phẩm",
+    "productId": "",
+    "retailPrice": "Giá bán lẻ đề xuất",
+    "salePrice": "Giá bán",
+    "scanCode": "Quét mã",
+    "updatedAt": "Ngày tạo"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "unitOfMeasures": {
+    "code": "Mã đơn vị tính phân phối",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
+    "description": "Mô tả",
+    "detail": {
+      "title": "Thông tin chi tiết"
+    },
+    "id": "ID",
+    "isActive": "Hoạt động",
+    "master": {
+      "title": "Danh sách đơn vị tính phân phối"
+    },
+    "name": "Tên",
+    "products": "Sản phẩm",
+    "unitOfMeasureGroupingContents": "Nội dung đơn vị tính phân phối",
+    "unitOfMeasureGroupings": "Nhóm đơn vị tính phân phối",
+    "updatedAt": "Ngày cập nhật"
+  }
+}

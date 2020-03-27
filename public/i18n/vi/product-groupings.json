@@ -1,0 +1,23 @@
+{
+  "productGroupings": {
+    "code": "Mã nhóm sản phẩm",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
+    "description": "Miêu tả",
+    "detail": {
+      "title": "Thông tin chi tiết"
+    },
+    "id": "ID",
+    "inverseParent": "",
+    "isActive": "Hoạt động",
+    "master": {
+      "title": "Danh sách nhóm sản phẩm"
+    },
+    "name": "Tên",
+    "parent": "nhóm sản phẩm cha",
+    "parentId": "ID nhóm sản phẩm cha",
+    "path": "",
+    "products": "Sản phẩm",
+    "updatedAt": "Ngày tạo"
+  }
+}

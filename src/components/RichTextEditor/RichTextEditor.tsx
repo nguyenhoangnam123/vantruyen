@@ -1,7 +1,6 @@
 import React from 'react';
 import './RichTextEditor.scss';
-import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {Editor} from '@tinymce/tinymce-react';
 
 export interface RichTextEditorProps {
   value?: string;
@@ -19,26 +18,21 @@ function RichTextEditor(props: RichTextEditorProps) {
   const {
     value,
     onChange,
-    editorConfig,
-    className,
   } = props;
 
   const handleChange = React.useCallback(
-    (...[, editor]: any) => {
+    (...[content]: any) => {
       if (typeof onChange === 'function') {
-        onChange(editor.getData());
+        onChange(content);
       }
     },
     [onChange],
   );
 
   return (
-    <CKEditor
-      editor={ClassicEditor}
-      config={editorConfig}
-      data={value}
-      className={className}
-      onChange={handleChange}
+    <Editor
+      value={value}
+      onEditorChange={handleChange}
     />
   );
 }

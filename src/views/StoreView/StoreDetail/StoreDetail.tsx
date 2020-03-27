@@ -1,106 +1,67 @@
 import React from 'react';
-import DatePicker from 'antd/lib/date-picker';
-import Switch from 'antd/lib/switch';
 import {crudService, routerService} from 'core/services';
 import Spin from 'antd/lib/spin';
 import Card from 'antd/lib/card';
-import Form from 'antd/lib/form';
-import Tabs from 'antd/lib/tabs';
+import Form, {FormProps} from 'antd/lib/form';
 import {useTranslation} from 'react-i18next';
 import {generalLanguageKeys} from 'config/consts';
 import Select from 'components/Select/Select';
 import nameof from 'ts-nameof.macro';
-import {defaultDetailFormLayout} from 'config/ant-design/form';
-import InputNumber from 'components/InputNumber/InputNumber';
 import {formService} from 'core/services/FormService';
 import './StoreDetail.scss';
-import { storeRepository }  from 'views/StoreView/StoreRepository';
-import { Store } from 'models/Store';
+import {storeRepository} from 'views/StoreView/StoreRepository';
+import {Store} from 'models/Store';
 
+import {District} from 'models/District';
+import {DistrictFilter} from 'models/DistrictFilter';
+import GoogleMapReact from 'google-map-react';
+import {Organization} from 'models/Organization';
+import {OrganizationFilter} from 'models/OrganizationFilter';
 
+import {StoreFilter} from 'models/StoreFilter';
 
+import {Province} from 'models/Province';
+import {ProvinceFilter} from 'models/ProvinceFilter';
 
+import {Status} from 'models/Status';
 
+import {StoreGrouping} from 'models/StoreGrouping';
+import {StoreGroupingFilter} from 'models/StoreGroupingFilter';
 
+import {StoreType} from 'models/StoreType';
+import {StoreTypeFilter} from 'models/StoreTypeFilter';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import { District } from 'models/District';
-import { DistrictFilter } from 'models/DistrictFilter';
-
-
-import { Organization } from 'models/Organization';
-import { OrganizationFilter } from 'models/OrganizationFilter';
-
-
-import { Province } from 'models/Province';
-import { ProvinceFilter } from 'models/ProvinceFilter';
-
-
-import { StoreGrouping } from 'models/StoreGrouping';
-import { StoreGroupingFilter } from 'models/StoreGroupingFilter';
-
-
-import { StoreType } from 'models/StoreType';
-import { StoreTypeFilter } from 'models/StoreTypeFilter';
-
-
-import { Ward } from 'models/Ward';
-import { WardFilter } from 'models/WardFilter';
-
-
-
-
-import StoreImageMappingTable from 'views/StoreView/StoreDetail/StoreImageMappingTable/StoreImageMappingTable';
-
-
-const {TabPane} = Tabs;
+import {Ward} from 'models/Ward';
+import {WardFilter} from 'models/WardFilter';
+import Row from 'antd/lib/grid/row';
+import Col from 'antd/lib/grid/col';
+import {Switch} from 'antd';
 
 const {Item: FormItem} = Form;
+
+export const defaultDetailFormLayout: FormProps = {
+  labelCol: {
+    xs: {span: 24},
+    sm: {span: 24},
+    md: {span: 12},
+    lg: {span: 8},
+  },
+  wrapperCol: {
+    xs: {span: 24},
+    sm: {span: 24},
+    md: {span: 12},
+    lg: {span: 8},
+  },
+};
 
 function StoreDetail() {
   const [translate] = useTranslation();
 
   // Service goback
-    const [handleGoBack] = routerService.useGoBack();
+  const [handleGoBack] = routerService.useGoBack();
 
   // Hooks, useDetail, useChangeHandler
-    const [
+  const [
     store,
     setStore,
     loading,
@@ -113,21 +74,23 @@ function StoreDetail() {
     storeRepository.save,
   );
 
-    const [
+  const [
     handleChangeSimpleField,
     handleChangeObjectField,
-    handleChangeDateField,
+    ,
   ] = crudService.useChangeHandlers<Store>(store, setStore);
 
   // Enums  -----------------------------------------------------------------------------------------------------------------------------------------
 
-  // -------------------------------------------------------------------------------------------------------------------------------------------------
+  const [statusList] = crudService.useEnumList<Status>(storeRepository.singleListStatus);
 
   // Reference  -------------------------------------------------------------------------------------------------------------------------------------
 
   const [districtFilter, setDistrictFilter] = React.useState<DistrictFilter>(new DistrictFilter());
 
   const [organizationFilter, setOrganizationFilter] = React.useState<OrganizationFilter>(new OrganizationFilter());
+
+  const [storeFilter, setStoreFilter] = React.useState<StoreFilter>(new StoreFilter());
 
   const [provinceFilter, setProvinceFilter] = React.useState<ProvinceFilter>(new ProvinceFilter());
 
@@ -137,13 +100,13 @@ function StoreDetail() {
 
   const [wardFilter, setWardFilter] = React.useState<WardFilter>(new WardFilter());
 
-  // -------------------------------------------------------------------------------------------------------------------------------------------------
-
   // Default List -----------------------------------------------------------------------------------------------------------------------------------
 
   const defaultDistrictList: District[] = crudService.useDefaultList<District>(store.district);
 
   const defaultOrganizationList: Organization[] = crudService.useDefaultList<Organization>(store.organization);
+
+  const defaultStoreList: Store[] = crudService.useDefaultList<Store>(store.store);
 
   const defaultProvinceList: Province[] = crudService.useDefaultList<Province>(store.province);
 
@@ -152,8 +115,6 @@ function StoreDetail() {
   const defaultStoreTypeList: StoreType[] = crudService.useDefaultList<StoreType>(store.storeType);
 
   const defaultWardList: Ward[] = crudService.useDefaultList<Ward>(store.ward);
-
-  // -------------------------------------------------------------------------------------------------------------------------------------------------
 
   return (
     <div className="page detail-page">
@@ -172,311 +133,259 @@ function StoreDetail() {
               {translate(generalLanguageKeys.actions.save)}
             </button>
           </div>
-          <Form {...defaultDetailFormLayout}>
-
-            <FormItem label={translate('stores.id')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.id))}
-                      help={ store.errors?.id }
-            >
-              <InputNumber defaultValue={ store.id }
-                           className="w-100"
-                           onChange={handleChangeSimpleField(nameof(store.id))}
-              />
-            </FormItem>
-
-
-
-
-            <FormItem label={translate('stores.code')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.code))}
-                      help={ store.errors?.code }
-            >
-              <input type="text"
-                           defaultValue={ store.code }
+          <Form>
+            <Card bordered={false} title={translate('stores.general.info')}>
+              <Row>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.code')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.code))}
+                            help={store.errors?.code}
+                  >
+                    <input type="text"
+                           defaultValue={store.code}
                            className="form-control form-control-sm"
                            onChange={handleChangeSimpleField(nameof(store.code))}
-              />
-            </FormItem>
-
-
-
-
-            <FormItem label={translate('stores.name')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.name))}
-                      help={ store.errors?.name }
-            >
-              <input type="text"
-                           defaultValue={ store.name }
+                    />
+                  </FormItem>
+                </Col>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.name')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.name))}
+                            help={store.errors?.name}
+                  >
+                    <input type="text"
+                           defaultValue={store.name}
                            className="form-control form-control-sm"
                            onChange={handleChangeSimpleField(nameof(store.name))}
-              />
-            </FormItem>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <FormItem label={translate('stores.telephone')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.telephone))}
-                      help={ store.errors?.telephone }
-            >
-              <input type="text"
-                           defaultValue={ store.telephone }
-                           className="form-control form-control-sm"
-                           onChange={handleChangeSimpleField(nameof(store.telephone))}
-              />
-            </FormItem>
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <FormItem label={translate('stores.address1')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.address1))}
-                      help={ store.errors?.address1 }
-            >
-              <input type="text"
-                           defaultValue={ store.address1 }
+                    />
+                  </FormItem>
+                </Col>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.organization')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.organization))}
+                            help={store.errors?.organization}
+                  >
+                    <Select value={store.organization?.id}
+                            onChange={handleChangeObjectField(nameof(store.organization))}
+                            getList={storeRepository.singleListOrganization}
+                            list={defaultOrganizationList}
+                            modelFilter={organizationFilter}
+                            setModelFilter={setOrganizationFilter}
+                            searchField={nameof(organizationFilter.id)}
+                    />
+                  </FormItem>
+                </Col>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.parentStore')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.parentStore))}
+                            help={store.errors?.parentStore}
+                  >
+                    <Select value={store.parentStore?.id}
+                            onChange={handleChangeObjectField(nameof(store.parentStore))}
+                            getList={storeRepository.singleListStore}
+                            list={defaultStoreList}
+                            modelFilter={storeFilter}
+                            setModelFilter={setStoreFilter}
+                            searchField={nameof(storeFilter.id)}
+                    />
+                  </FormItem>
+                </Col>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.storeType')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.storeType))}
+                            help={store.errors?.storeType}
+                  >
+                    <Select value={store.storeType?.id}
+                            onChange={handleChangeObjectField(nameof(store.storeType))}
+                            getList={storeRepository.singleListStoreType}
+                            list={defaultStoreTypeList}
+                            modelFilter={storeTypeFilter}
+                            setModelFilter={setStoreTypeFilter}
+                            searchField={nameof(storeTypeFilter.id)}
+                    />
+                  </FormItem>
+                </Col>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.storeGrouping')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.storeGrouping))}
+                            help={store.errors?.storeGrouping}
+                  >
+                    <Select value={store.storeGrouping?.id}
+                            onChange={handleChangeObjectField(nameof(store.storeGrouping))}
+                            getList={storeRepository.singleListStoreGrouping}
+                            list={defaultStoreGroupingList}
+                            modelFilter={storeGroupingFilter}
+                            setModelFilter={setStoreGroupingFilter}
+                            searchField={nameof(storeGroupingFilter.id)}
+                    />
+                  </FormItem>
+                </Col>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.province')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.province))}
+                            help={store.errors?.province}
+                  >
+                    <Select value={store.province?.id}
+                            onChange={handleChangeObjectField(nameof(store.province))}
+                            getList={storeRepository.singleListProvince}
+                            list={defaultProvinceList}
+                            modelFilter={provinceFilter}
+                            setModelFilter={setProvinceFilter}
+                            searchField={nameof(provinceFilter.id)}
+                    />
+                  </FormItem>
+                </Col>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.district')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.district))}
+                            help={store.errors?.district}
+                  >
+                    <Select value={store.district?.id}
+                            onChange={handleChangeObjectField(nameof(store.district))}
+                            getList={storeRepository.singleListDistrict}
+                            list={defaultDistrictList}
+                            modelFilter={districtFilter}
+                            setModelFilter={setDistrictFilter}
+                            searchField={nameof(districtFilter.id)}
+                    />
+                  </FormItem>
+                </Col>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.ward')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.ward))}
+                            help={store.errors?.ward}
+                  >
+                    <Select value={store.ward?.id}
+                            onChange={handleChangeObjectField(nameof(store.ward))}
+                            getList={storeRepository.singleListWard}
+                            list={defaultWardList}
+                            modelFilter={wardFilter}
+                            setModelFilter={setWardFilter}
+                            searchField={nameof(wardFilter.id)}
+                    />
+                  </FormItem>
+                </Col>
+                <Col lg={12}>
+                </Col>
+                <Col lg={12}>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.address1')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.address1))}
+                            help={store.errors?.address1}
+                  >
+                    <input type="text"
+                           defaultValue={store.address1}
                            className="form-control form-control-sm"
                            onChange={handleChangeSimpleField(nameof(store.address1))}
-              />
-            </FormItem>
-
-
-
-
-            <FormItem label={translate('stores.address2')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.address2))}
-                      help={ store.errors?.address2 }
-            >
-              <input type="text"
-                           defaultValue={ store.address2 }
+                    />
+                    <div style={{height: 300}} className="mt-4">
+                      <GoogleMapReact
+                        bootstrapURLKeys={{key: 'AIzaSyBO59KB85b4gH6F5Yy2KyhWwfOnOUUqLsY'}}
+                        defaultCenter={{
+                          lat: 59.95,
+                          lng: 30.33,
+                        }}
+                        defaultZoom={11}
+                        yesIWantToUseGoogleMapApiInternals
+                      />
+                    </div>
+                  </FormItem>
+                  <FormItem label={translate('stores.location')}>
+                    <Row>
+                      <Col span={12} className="pr-2">
+                        <input type="text"
+                               className="form-control form-control-sm"
+                               placeholder={translate('stores.latitude')}
+                               defaultValue={nameof(store.latitude)}/>
+                      </Col>
+                      <Col span={12} className="pl-2">
+                        <input type="text"
+                               className="form-control form-control-sm"
+                               placeholder={translate('stores.longitude')}
+                               defaultValue={nameof(store.longitude)}/>
+                      </Col>
+                    </Row>
+                  </FormItem>
+                  <FormItem label={translate('stores.telephone')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.telephone))}
+                            help={store.errors?.telephone}
+                  >
+                    <input type="text"
+                           defaultValue={store.telephone}
+                           className="form-control form-control-sm"
+                           onChange={handleChangeSimpleField(nameof(store.telephone))}
+                    />
+                  </FormItem>
+                </Col>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.address2')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.address2))}
+                            help={store.errors?.address2}
+                  >
+                    <input type="text"
+                           defaultValue={store.address2}
                            className="form-control form-control-sm"
                            onChange={handleChangeSimpleField(nameof(store.address2))}
-              />
-            </FormItem>
-
-
-
-
-            <FormItem label={translate('stores.latitude')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.latitude))}
-                      help={ store.errors?.latitude }
-            >
-            </FormItem>
-
-
-
-
-            <FormItem label={translate('stores.longitude')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.longitude))}
-                      help={ store.errors?.longitude }
-            >
-            </FormItem>
-
-
-
-
-            <FormItem label={translate('stores.ownerName')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.ownerName))}
-                      help={ store.errors?.ownerName }
-            >
-              <input type="text"
-                           defaultValue={ store.ownerName }
+                    />
+                  </FormItem>
+                </Col>
+              </Row>
+            </Card>
+            <Card bordered={false} title={translate('stores.owner.info')}>
+              <Row>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.ownerName')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.ownerName))}
+                            help={store.errors?.ownerName}
+                  >
+                    <input type="text"
+                           defaultValue={store.ownerName}
                            className="form-control form-control-sm"
                            onChange={handleChangeSimpleField(nameof(store.ownerName))}
-              />
-            </FormItem>
-
-
-
-
-            <FormItem label={translate('stores.ownerPhone')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.ownerPhone))}
-                      help={ store.errors?.ownerPhone }
-            >
-              <input type="text"
-                           defaultValue={ store.ownerPhone }
+                    />
+                  </FormItem>
+                </Col>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.ownerPhone')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.ownerPhone))}
+                            help={store.errors?.ownerPhone}
+                  >
+                    <input type="text"
+                           defaultValue={store.ownerPhone}
                            className="form-control form-control-sm"
                            onChange={handleChangeSimpleField(nameof(store.ownerPhone))}
-              />
-            </FormItem>
-
-
-
-
-            <FormItem label={translate('stores.ownerEmail')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.ownerEmail))}
-                      help={ store.errors?.ownerEmail }
-            >
-              <input type="text"
-                           defaultValue={ store.ownerEmail }
+                    />
+                  </FormItem>
+                </Col>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.ownerEmail')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.ownerEmail))}
+                            help={store.errors?.ownerEmail}
+                  >
+                    <input type="text"
+                           defaultValue={store.ownerEmail}
                            className="form-control form-control-sm"
                            onChange={handleChangeSimpleField(nameof(store.ownerEmail))}
-              />
-            </FormItem>
-
-
-
-
-            <FormItem label={translate('stores.isActive')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.isActive))}
-                      help={ store.errors?.isActive }
-            >
-            </FormItem>
-
-
-
-
-            <FormItem label={translate('stores.createdAt')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.createdAt))}
-                      help={ store.errors?.createdAt }
-            >
-              <DatePicker defaultValue={ store.createdAt }
-                          onChange={handleChangeDateField(nameof(store.createdAt))}
-                          className="w-100"
-              />
-            </FormItem>
-
-
-
-            <FormItem label={translate('stores.updatedAt')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.updatedAt))}
-                      help={ store.errors?.updatedAt }
-            >
-              <DatePicker defaultValue={ store.updatedAt }
-                          onChange={handleChangeDateField(nameof(store.updatedAt))}
-                          className="w-100"
-              />
-            </FormItem>
-
-
-
-            <FormItem label={translate('stores.deletedAt')}
-                      validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.deletedAt))}
-                      help={ store.errors?.deletedAt }
-            >
-              <DatePicker defaultValue={ store.deletedAt }
-                          onChange={handleChangeDateField(nameof(store.deletedAt))}
-                          className="w-100"
-              />
-            </FormItem>
-
-
-
-
-
-              <Select value={ store.district?.id }
-                      onChange={handleChangeObjectField(nameof(store.district))}
-                      getList={ storeRepository.singleListDistrict }
-                      list={ defaultDistrictList }
-                      modelFilter={ districtFilter }
-                      setModelFilter={ setDistrictFilter }
-                      searchField={nameof(districtFilter.id)}
-              />
-
-
-
-
-              <Select value={ store.organization?.id }
-                      onChange={handleChangeObjectField(nameof(store.organization))}
-                      getList={ storeRepository.singleListOrganization }
-                      list={ defaultOrganizationList }
-                      modelFilter={ organizationFilter }
-                      setModelFilter={ setOrganizationFilter }
-                      searchField={nameof(organizationFilter.id)}
-              />
-
-
-
-
-              <Select value={ store.province?.id }
-                      onChange={handleChangeObjectField(nameof(store.province))}
-                      getList={ storeRepository.singleListProvince }
-                      list={ defaultProvinceList }
-                      modelFilter={ provinceFilter }
-                      setModelFilter={ setProvinceFilter }
-                      searchField={nameof(provinceFilter.id)}
-              />
-
-
-
-
-              <Select value={ store.storeGrouping?.id }
-                      onChange={handleChangeObjectField(nameof(store.storeGrouping))}
-                      getList={ storeRepository.singleListStoreGrouping }
-                      list={ defaultStoreGroupingList }
-                      modelFilter={ storeGroupingFilter }
-                      setModelFilter={ setStoreGroupingFilter }
-                      searchField={nameof(storeGroupingFilter.id)}
-              />
-
-
-
-
-              <Select value={ store.storeType?.id }
-                      onChange={handleChangeObjectField(nameof(store.storeType))}
-                      getList={ storeRepository.singleListStoreType }
-                      list={ defaultStoreTypeList }
-                      modelFilter={ storeTypeFilter }
-                      setModelFilter={ setStoreTypeFilter }
-                      searchField={nameof(storeTypeFilter.id)}
-              />
-
-
-
-
-              <Select value={ store.ward?.id }
-                      onChange={handleChangeObjectField(nameof(store.ward))}
-                      getList={ storeRepository.singleListWard }
-                      list={ defaultWardList }
-                      modelFilter={ wardFilter }
-                      setModelFilter={ setWardFilter }
-                      searchField={nameof(wardFilter.id)}
-              />
-
-
-
-
+                    />
+                  </FormItem>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg={12}>
+                  <FormItem label={translate('stores.status')}
+                            validateStatus={formService.getValidationStatus<Store>(store.errors, nameof(store.status))}
+                            help={store.errors?.status}
+                  >
+                    <Switch checked={typeof store.status?.id === 'number' && store.status?.id === statusList[1]?.id}
+                            onChange={handleChangeSimpleField(nameof(store.status))}/>
+                  </FormItem>
+                </Col>
+              </Row>
+            </Card>
           </Form>
-          <div className="d-flex justify-content-end mt-4">
-            <button className="btn btn-sm btn-primary" onClick={handleSave}>
-              <i className="fa mr-2 fa-save"/>
-              {translate(generalLanguageKeys.actions.save)}
-            </button>
-          </div>
-        </Card>
-        <Card className="mt-2">
-          <Tabs defaultActiveKey="1">
-
-            <TabPane key="1" tab={translate('store.tabs.roles.title')}>
-              <StoreImageMappingTable model={ store }
-                                setModel={ setStore }
-                                field={(nameof(store.storeImageMappings))}
-                                onChange={handleChangeSimpleField(nameof(store.storeImageMappings))}
-              />
-            </TabPane>
-
-          </Tabs>
           <div className="d-flex justify-content-end mt-4">
             <button className="btn btn-sm btn-primary" onClick={handleSave}>
               <i className="fa mr-2 fa-save"/>

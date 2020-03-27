@@ -1,71 +1,88 @@
-import React from 'react';
-import {ContentTableProps} from 'react3l';
-import {crudService, formService} from 'core/services';
-import Table, {ColumnProps} from 'antd/lib/table';
-import {tableService} from 'services';
-import {getOrderTypeForTable, renderMasterIndex} from 'helpers/ant-design/table';
+import React, { Dispatch, SetStateAction } from 'react';
+import { crudService, tableService } from 'core/services';
+import Table, { ColumnProps } from 'antd/lib/table';
+import { renderMasterIndex } from 'helpers/ant-design/table';
 import nameof from 'ts-nameof.macro';
-import {useTranslation} from 'react-i18next';
-import {generalColumnWidths, generalLanguageKeys} from 'config/consts';
-import Form from 'antd/lib/form';
-import {formItemLayout} from 'config/ant-design/form';
-import {Col, Row} from 'antd/lib/grid';
-import AdvancedIdFilter from 'components/AdvancedIdFilter/AdvancedIdFilter';
-import CollapsibleCard from 'components/CollapsibleCard/CollapsibleCard';
+import { useTranslation } from 'react-i18next';
+import { generalColumnWidths, generalLanguageKeys } from 'config/consts';
 
+// Parent Repo
 import { productRepository } from 'views/ProductView/ProductRepository';
+// Parent Class
 import { Product } from 'models/Product';
+// Class
 import { ProductImageMapping } from 'models/ProductImageMapping';
+// Filter Class
 import { ProductImageMappingFilter } from 'models/ProductImageMappingFilter';
+// Mapping Class
+import { Image } from 'models/Image';
 import ProductImageMappingModal from 'views/ProductView/ProductDetail/ProductImageMappingModal/ProductImageMappingModal';
-const {Item: FormItem} = Form;
 
-function ProductImageMappingTable(props: ContentTableProps<Product, ProductImageMapping>) {
+export interface ProductImageMappingTableProps {
+  product: Product;
+
+  setProduct: Dispatch<SetStateAction<Product>>;
+}
+
+function ProductImageMappingTable(props: ProductImageMappingTableProps) {
   const [translate] = useTranslation();
 
-  const {
-    model,
-    setModel,
-  } = props;
+  const { product, setProduct } = props;
 
   const [
     productImageMappings,
     setProductImageMappings,
-    handleAdd,
-    handleDelete,
   ] = crudService.useContentTable<Product, ProductImageMapping>(
-    model,
-    setModel,
-    nameof(model.productImageMappings),
+    product,
+    setProduct,
+    nameof(product.productImageMappings),
   );
 
-    const [
+  const [
+    productImageMappingFilter,
+    setProductImageMappingFilter,
+  ] = React.useState<ProductImageMappingFilter>(
+    new ProductImageMappingFilter(),
+  );
+
+  const [
+    dataSource,
+    pagination,
+    ,
+    handleTableChange,
+  ] = tableService.useLocalTable<
+    ProductImageMapping,
+    ProductImageMappingFilter
+  >(
+    productImageMappings,
+    productImageMappingFilter,
+    setProductImageMappingFilter,
+  );
+
+  const [
     loading,
     visible,
     list,
     total,
     handleOpen,
     handleClose,
-    productImageMappingFilter,
-    setProductImageMappingFilter,
+    filter,
+    setFilter,
   ] = crudService.useContentModal(
     productRepository.listProductImageMapping,
     productRepository.countProductImageMapping,
     ProductImageMappingFilter,
   );
 
-  const [
-    dataSource,
-    pagination,
-    sorter,
-    handleTableChange,
-    handleFilter,
-    handleSearch,
-    handleReset,
-  ] = tableService.useLocalTable(
+  const rowSelection = tableService.useModalRowSelection<
+    Image,
+    ProductImageMapping
+  >(
+    product.id,
+    nameof(product),
+    nameof(productImageMappings[0].image),
     productImageMappings,
-    productImageMappingFilter,
-    setProductImageMappingFilter,
+    setProductImageMappings,
   );
 
   const columns: ColumnProps<ProductImageMapping>[] = React.useMemo(
@@ -77,116 +94,59 @@ function ProductImageMappingTable(props: ContentTableProps<Product, ProductImage
         render: renderMasterIndex<ProductImageMapping>(pagination),
       },
       {
-        title: translate('productImageMappings.id'),
-        key: nameof(dataSource[0].id),
-        dataIndex: nameof(dataSource[0].id),
-        render: renderMasterIndex<ProductImageMapping>(pagination),
-      },
-      {
-        title: translate('productImageMappings.name'),
-        key: nameof(dataSource[0].name),
-        dataIndex: nameof(dataSource[0].name),
-        sorter: true,
-        sortOrder: getOrderTypeForTable<Product>(nameof(dataSource[0].name), sorter),
-        render(name: string, productImageMapping: ProductImageMapping) {
-          return (
-            <FormItem validateStatus={formService.getValidationStatus<ProductImageMapping>(productImageMapping.errors, nameof(productImageMapping.name))}
-                      help={ productImageMapping.errors?.name }
-            >
-              <input type="text"
-                     className="form-control form-control-sm"
-                     name={nameof(name)}
-                     defaultValue={name}
-              />
-            </FormItem>
-          );
+        title: translate('products.images.productId'),
+        key: nameof(dataSource[0].image.productId),
+        dataIndex: nameof(dataSource[0].image),
+        render(image: Image) {
+          return image?.productId;
         },
       },
       {
-        title: translate(generalLanguageKeys.actions.label),
-        key: nameof(generalLanguageKeys.actions),
-        width: generalColumnWidths.actions,
-        align: 'center',
-        render(...params: [ProductImageMapping, ProductImageMapping, number]) {
-          return (
-            <>
-              <button className="btn btn-link mr-2" onClick={handleDelete(params[2])}>
-                <i className="fa fa-trash text-danger"/>
-              </button>
-            </>
-          );
+        title: translate('products.images.imageId'),
+        key: nameof(dataSource[0].image.imageId),
+        dataIndex: nameof(dataSource[0].image),
+        render(image: Image) {
+          return image?.imageId;
         },
       },
     ],
-    [dataSource, handleDelete, pagination, sorter, translate],
-  );
-  const tableTitle = React.useCallback(
-    () => (
-      <button className="btn btn-sm btn-primary" onClick={handleOpen}>
-        <i className="fa fa-plus mr-2"/>
-        {translate(generalLanguageKeys.actions.add)}
-      </button>
-    ),
-    [handleOpen, translate],
-  );
-    const tableFooter = React.useCallback(
-    () => (
-      <>
-        <button className="btn btn-link" onClick={handleAdd}>
-          <i className="fa fa-plus mr-2"/>
-          {translate(generalLanguageKeys.actions.create)}
-        </button>
-      </>
-    ),
-    [handleAdd, translate],
+    [dataSource, pagination, translate],
   );
 
-    return (
+  return (
     <>
-    <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
-        <ProductImageMappingModal title={translate('product.productImageMappingModal.title')}
-                          selectedList={ productImageMappings }
-                          setSelectedList={ setProductImageMappings }
-                          list={list}
-                          total={total}
-                          isOpen={visible}
-                          loading={loading}
-                          toggle={handleClose}
-                          onClose={handleClose}
-                          filter={ productImageMappingFilter }
-                          setFilter={setProductImageMappingFilter}
-        />
-        <Form {...formItemLayout}>
-          <Row>
-            <Col className="pl-1" span={8}>
-              <FormItem className="mb-0" label={translate('products.id')}>
-              </FormItem>
-            </Col>
-          </Row>
-        </Form>
-        <div className="d-flex justify-content-end mt-2">
-          <button className="btn btn-sm btn-primary mr-2" onClick={handleSearch}>
-            <i className="fa fa-search mr-2"/>
-            {translate(generalLanguageKeys.actions.filter)}
-          </button>
-          <button className="btn btn-sm btn-outline-secondary text-dark" onClick={handleReset}>
-            <i className="fa mr-2 fa-times"/>
-            {translate(generalLanguageKeys.actions.reset)}
-          </button>
-        </div>
-      </CollapsibleCard>
-      <Table pagination={pagination}
-             dataSource={dataSource}
-             columns={columns}
-             onChange={handleTableChange}
-             tableLayout="fixed"
-             bordered={true}
-             size="small"
-             title={tableTitle}
-             footer={tableFooter}
+      <Table
+        tableLayout="fixed"
+        bordered={true}
+        size="small"
+        columns={columns}
+        dataSource={dataSource}
+        pagination={pagination}
+        rowKey={nameof(productImageMappings[0].imageId)}
+        onChange={handleTableChange}
+        title={() => (
+          <>
+            <div className="d-flex justify-content-end">
+              <button className="btn btn-sm btn-primary" onClick={handleOpen}>
+                <i className="fa fa-plus mr-2" />
+                {translate(generalLanguageKeys.actions.add)}
+              </button>
+            </div>
+          </>
+        )}
+      />
+      <ProductImageMappingModal
+        current={productImageMappings}
+        list={list}
+        total={total}
+        loading={loading}
+        isOpen={visible}
+        modelFilter={filter}
+        setModelFilter={setFilter}
+        rowSelection={rowSelection}
+        onClose={handleClose}
       />
     </>
   );
 }
-
 export default ProductImageMappingTable;

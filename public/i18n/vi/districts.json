@@ -1,6 +1,20 @@
 {
   "districts": {
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
+    "detail": {
+      "title": "Thông tin chi tiết"
+    },
     "id": "",
-    "name": ""
+    "master": {
+      "title": "Danh sách quận huyện"
+    },
+    "name": "Tên",
+    "priority": "Thứ tự ưu tiên",
+    "province": "Tên tỉnh",
+    "provinceId": "",
+    "stores": "Cửa hàng",
+    "updatedAt": "Ngày cập nhật",
+    "wards": "Phường"
   }
 }

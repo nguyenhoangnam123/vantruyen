@@ -1,0 +1,19 @@
+{
+  "variationGroupings": {
+    "code": "Mã nhóm thuộc tính",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
+    "detail": {
+      "title": "Thông tin chi tiế"
+    },
+    "id": "ID",
+    "master": {
+      "title": "Danh sách nhóm thuộc tính"
+    },
+    "name": "Tên",
+    "product": "Sản phẩm",
+    "productId": "",
+    "updatedAt": "Ngày tạo",
+    "variations": "Thuộc tính"
+  }
+}

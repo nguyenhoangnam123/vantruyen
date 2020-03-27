@@ -207,9 +207,9 @@ export class CRUDService {
   public useEnumList<T extends Model>(
     handleList: () => Promise<T[]>,
   ): [
-    T[],
-    Dispatch<SetStateAction<T[]>>
-  ] {
+      T[],
+      Dispatch<SetStateAction<T[]>>
+    ] {
     const [list, setList] = React.useState<T[]>([]);
 
     React.useEffect(
@@ -234,8 +234,8 @@ export class CRUDService {
     onSuccess?: () => void,
     onError?: (error: AxiosError<any> | Error) => void,
   ): [
-    (event: React.ChangeEvent<HTMLInputElement>) => void,
-  ] {
+      (event: React.ChangeEvent<HTMLInputElement>) => void,
+    ] {
     return [
       React.useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -258,8 +258,8 @@ export class CRUDService {
   public useExport(
     baseRoute: string,
   ): [
-    () => void
-  ] {
+      () => void
+    ] {
     return [
       React.useCallback(
         () => {
@@ -275,20 +275,21 @@ export class CRUDService {
     handleGet: (id: number | string) => Promise<T>,
     onSave: (t: T) => Promise<T>,
   ): [
-    T,
-    Dispatch<SetStateAction<T>>,
-    boolean,
-    Dispatch<SetStateAction<boolean>>,
-    boolean,
-    () => void,
-  ] {
+      T,
+      Dispatch<SetStateAction<T>>,
+      boolean,
+      Dispatch<SetStateAction<boolean>>,
+      boolean,
+      () => void,
+    ] {
     const [loading, setLoading] = React.useState<boolean>(false);
     const [t, setT] = React.useState<T>(new modelClass());
-    const {id} = useParams();
+    const { id } = useParams();
     const isDetail: boolean = (typeof id !== 'undefined');
 
     React.useEffect(
       () => {
+
         if (isDetail) {
           setLoading(true);
           handleGet(id)
@@ -299,8 +300,9 @@ export class CRUDService {
               setLoading(false);
             });
         }
+        // return () => (isDetail === false)
       },
-      [handleGet, id, isDetail],
+      [handleGet, id, isDetail, setLoading, setT],
     );
 
     const handleSave = React.useCallback(
@@ -331,10 +333,10 @@ export class CRUDService {
     model?: T,
     setModel?: (t: T) => void,
   ): [
-    (field: string) => (value) => void,
-    (field: string) => (value) => void,
-    (field: string) => (value) => void,
-  ] {
+      (field: string) => (value) => void,
+      (field: string) => (value) => void,
+      (field: string) => (value) => void,
+    ] {
     const handleSetInputValue = React.useCallback(
       (field: string, value?: string | number | boolean | null) => {
         setModel(Model.clone<T>({
@@ -405,11 +407,11 @@ export class CRUDService {
     setModel: (t: T) => void,
     field: string,
   ): [
-    TContent[],
-    (v: TContent[]) => void,
-    () => void,
-    (id: number) => () => void,
-  ] {
+      TContent[],
+      (v: TContent[]) => void,
+      () => void,
+      (id: number) => () => void,
+    ] {
     const value: TContent[] = React.useMemo(
       () => {
         if (model[field]) {
@@ -469,15 +471,15 @@ export class CRUDService {
     getList: (filter: TModelFilter) => Promise<T[]>,
     count: (filter: TModelFilter) => Promise<number>,
   ): [
-    TModelFilter,
-    Dispatch<SetStateAction<TModelFilter>>,
-    boolean,
-    boolean,
-    T[],
-    number,
-    () => void,
-    () => void,
-  ] {
+      TModelFilter,
+      Dispatch<SetStateAction<TModelFilter>>,
+      boolean,
+      boolean,
+      T[],
+      number,
+      () => void,
+      () => void,
+    ] {
     const [visible, setVisible] = React.useState<boolean>(false);
     const [loading, setLoading] = React.useState<boolean>(false);
     const [filter, setFilter] = React.useState<TModelFilter>(new modelFilterClass());
@@ -548,15 +550,15 @@ export class CRUDService {
     count: (tFilter: TFilter) => Promise<number>,
     filterClass: new () => TFilter,
   ): [
-    boolean,
-    boolean,
-    T[],
-    number,
-    () => void,
-    () => void,
-    TFilter,
-    Dispatch<SetStateAction<TFilter>>,
-  ] {
+      boolean,
+      boolean,
+      T[],
+      number,
+      () => void,
+      () => void,
+      TFilter,
+      Dispatch<SetStateAction<TFilter>>,
+    ] {
     const [visible, setVisible] = React.useState<boolean>(false);
     const [loading, setLoading] = React.useState<boolean>(false);
     const [filter, setFilter] = React.useState<TFilter>(new filterClass());

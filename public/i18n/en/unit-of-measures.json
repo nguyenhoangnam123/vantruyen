@@ -1,0 +1,21 @@
+{
+  "unitOfMeasures": {
+    "code": "",
+    "createdAt": "",
+    "deletedAt": "",
+    "description": "",
+    "detail": {
+      "title": ""
+    },
+    "id": "",
+    "isActive": "",
+    "master": {
+      "title": ""
+    },
+    "name": "",
+    "products": "",
+    "unitOfMeasureGroupingContents": "",
+    "unitOfMeasureGroupings": "",
+    "updatedAt": ""
+  }
+}
