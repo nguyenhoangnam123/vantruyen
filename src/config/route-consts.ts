@@ -1,7 +1,7 @@
 export const APPLICATION_USER_ROUTE: string = '/applicationUser';
 export const APP_USER_ROUTE: string = '/appUsers';
 export const ORGANIZATION_ROUTE: string = '/organizations';
-export const STORE_GROUPING_ROUTE: string = '/stoneGroupings';
+export const STORE_GROUPING_ROUTE: string = '/storeGroupings';
 export const DISTRICT_ROUTE: string = '/districts';
 export const FIELD_ROUTE: string = '/fields';
 export const IMAGE_ROUTE: string = '/images';

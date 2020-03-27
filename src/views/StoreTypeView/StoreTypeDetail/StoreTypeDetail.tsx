@@ -58,16 +58,7 @@ function StoreTypeDetail() {
             {isDetail ? translate('storeTypes.detail.title') : translate(generalLanguageKeys.actions.create)}
           </>
         )}>
-          <div className="d-flex justify-content-end mb-4">
-            <button className="btn btn-sm btn-primary mr-2" onClick={handleSave}>
-              <i className="fa mr-2 fa-save" />
-              {translate(generalLanguageKeys.actions.save)}
-            </button>
-            <button className="btn btn-sm btn-outline-primary mr-2" onClick={handleGoBack}>
-              <i className="fa mr-2 fa-times-circle" />
-              {translate(generalLanguageKeys.actions.cancel)}
-            </button>
-          </div>
+
           <Form {...defaultDetailFormLayout}>
 
             <FormItem label={translate('storeTypes.code')}
@@ -95,7 +86,7 @@ function StoreTypeDetail() {
             <Form.Item label={translate('storeTypes.status')}>
               <div className="status">
                 <Switch
-                  checked={storeType.statusId===1}
+                  checked={storeType.statusId === 1}
                   onChange={handleChangeStatus}
                 />
               </div>

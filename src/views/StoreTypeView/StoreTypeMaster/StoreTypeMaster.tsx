@@ -191,7 +191,7 @@ function StoreTypeMaster() {
           <Form {...formItemLayout}>
             <Row>
 
-              <Col className="pl-1" span={8}>
+              <Col className="pl-1" span={12}>
                 <FormItem
                   className="mb-0"
                   label={translate('storeTypes.code')}
@@ -204,7 +204,7 @@ function StoreTypeMaster() {
                   />
                 </FormItem>
               </Col>
-              <Col className="pl-1" span={8}>
+              <Col className="pl-1" span={12}>
                 <FormItem
                   className="mb-0"
                   label={translate('storeTypes.name')}

@@ -15,18 +15,14 @@ import nameof from 'ts-nameof.macro';
 import { tableService } from 'services';
 import { formItemLayout } from 'config/ant-design/form';
 import AdvancedStringFilter from 'components/AdvancedStringFilter/AdvancedStringFilter';
-import AdvancedIdFilter from 'components/AdvancedIdFilter/AdvancedIdFilter';
-import AdvancedNumberFilter from 'components/AdvancedNumberFilter/AdvancedNumberFilter';
 import MasterPreview from 'components/MasterPreview/MasterPreview';
 import { generalColumnWidths, generalLanguageKeys } from 'config/consts';
-
 import { STORE_GROUPING_ROUTE } from 'config/route-consts';
 import { API_STORE_GROUPING_ROUTE } from 'config/api-consts';
 import './StoreGroupingMaster.scss';
-import { storeGroupingRepository }  from 'views/StoreGroupingView/StoreGroupingRepository';
+import { storeGroupingRepository } from 'views/StoreGroupingView/StoreGroupingRepository';
 import { StoreGrouping } from 'models/StoreGrouping';
-import { StoreGroupingFilter} from 'models/StoreGroupingFilter';
-
+import { StoreGroupingFilter } from 'models/StoreGroupingFilter';
 
 const { Item: FormItem } = Form;
 
@@ -55,7 +51,7 @@ function StoreGroupingMaster() {
     storeGroupingRepository.count,
     storeGroupingRepository.list,
     storeGroupingRepository.get,
-    );
+  );
 
   const [handleGoCreate, handleGoDetail] = routerService.useMasterNavigation(STORE_GROUPING_ROUTE);
   const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total, handleSearch);
@@ -74,51 +70,31 @@ function StoreGroupingMaster() {
    */
   const [handleExport] = crudService.useExport(API_STORE_GROUPING_ROUTE);
 
-  // Enums  -----------------------------------------------------------------------------------------------------------------------------------------
-
-  // ------------------------------------------------------------------------------------------------------------------------------------------------
-
-  // Reference  -------------------------------------------------------------------------------------------------------------------------------------
-
-  // ------------------------------------------------------------------------------------------------------------------------------------------------
-
-   // Delete handlers -------------------------------------------------------------------------------------------------------------------------------
   const [handleDelete] = tableService.useDeleteHandler<StoreGrouping>(
     storeGroupingRepository.delete,
     setLoading,
     list,
     setList,
+    handleSearch,
   );
   const [handleBulkDelete] = tableService.useBulkDeleteHandler(
     rowSelection.selectedRowKeys,
     storeGroupingRepository.bulkDelete,
     setLoading,
+    handleSearch,
   );
-  // ------------------------------------------------------------------------------------------------------------------------------------------------
 
   const columns: ColumnProps<StoreGrouping>[] = React.useMemo(
     () => {
       return [
-      {
-        title: translate(generalLanguageKeys.columns.index),
-        key: nameof(generalLanguageKeys.index),
-        width: generalColumnWidths.index,
-        render: renderMasterIndex<StoreGrouping>(pagination),
-      },
+        {
+          title: translate(generalLanguageKeys.columns.index),
+          key: nameof(generalLanguageKeys.index),
+          width: generalColumnWidths.index,
+          render: renderMasterIndex<StoreGrouping>(pagination),
+        },
 
-      {
-          title: translate('storeGroupings.id'),
-          key: nameof(list[0].id),
-          dataIndex: nameof(list[0].id),
-          sorter: true,
-          sortOrder: getOrderTypeForTable<StoreGrouping>(
-            nameof(list[0].id),
-            sorter,
-          ),
-
-      },
-
-      {
+        {
           title: translate('storeGroupings.code'),
           key: nameof(list[0].code),
           dataIndex: nameof(list[0].code),
@@ -128,9 +104,9 @@ function StoreGroupingMaster() {
             sorter,
           ),
 
-      },
+        },
 
-      {
+        {
           title: translate('storeGroupings.name'),
           key: nameof(list[0].name),
           dataIndex: nameof(list[0].name),
@@ -140,45 +116,8 @@ function StoreGroupingMaster() {
             sorter,
           ),
 
-      },
-
-      {
-          title: translate('storeGroupings.parentId'),
-          key: nameof(list[0].parentId),
-          dataIndex: nameof(list[0].parentId),
-          sorter: true,
-          sortOrder: getOrderTypeForTable<StoreGrouping>(
-            nameof(list[0].parentId),
-            sorter,
-          ),
-
-      },
-
-      {
-          title: translate('storeGroupings.path'),
-          key: nameof(list[0].path),
-          dataIndex: nameof(list[0].path),
-          sorter: true,
-          sortOrder: getOrderTypeForTable<StoreGrouping>(
-            nameof(list[0].path),
-            sorter,
-          ),
-
-      },
-
-      {
-          title: translate('storeGroupings.level'),
-          key: nameof(list[0].level),
-          dataIndex: nameof(list[0].level),
-          sorter: true,
-          sortOrder: getOrderTypeForTable<StoreGrouping>(
-            nameof(list[0].level),
-            sorter,
-          ),
-
-      },
-
-      {
+        },
+        {
           title: translate('storeGroupings.isActive'),
           key: nameof(list[0].isActive),
           dataIndex: nameof(list[0].isActive),
@@ -187,88 +126,48 @@ function StoreGroupingMaster() {
             nameof(list[0].isActive),
             sorter,
           ),
-
-      },
-
-      {
-          title: translate('storeGroupings.createdAt'),
-          key: nameof(list[0].createdAt),
-          dataIndex: nameof(list[0].createdAt),
-          sorter: true,
-          sortOrder: getOrderTypeForTable<StoreGrouping>(
-            nameof(list[0].createdAt),
-            sorter,
-          ),
-
-      },
-
-      {
-          title: translate('storeGroupings.updatedAt'),
-          key: nameof(list[0].updatedAt),
-          dataIndex: nameof(list[0].updatedAt),
-          sorter: true,
-          sortOrder: getOrderTypeForTable<StoreGrouping>(
-            nameof(list[0].updatedAt),
-            sorter,
-          ),
-
-      },
-
-      {
-          title: translate('storeGroupings.deletedAt'),
-          key: nameof(list[0].deletedAt),
-          dataIndex: nameof(list[0].deletedAt),
-          sorter: true,
-          sortOrder: getOrderTypeForTable<StoreGrouping>(
-            nameof(list[0].deletedAt),
-            sorter,
-          ),
-
-      },
-
-      {
-          title: translate('storeGroupings.stores'),
-          key: nameof(list[0].stores),
-          dataIndex: nameof(list[0].stores),
-          sorter: true,
-          sortOrder: getOrderTypeForTable<StoreGrouping>(
-            nameof(list[0].stores),
-            sorter,
-          ),
-
-      },
-
-      {
-        title: translate(generalLanguageKeys.actions.label),
-        key: nameof(generalLanguageKeys.columns.actions),
-        dataIndex: nameof(list[0].id),
-        width: generalColumnWidths.actions,
-        align: 'center',
-        render(id: number, storeGrouping: StoreGrouping) {
-          return (
-            <div className="d-flex justify-content-center">
-              <button
-                className="btn btn-sm btn-link text-warning"
-                onClick={handleOpenPreview(id)}
-              >
-                <i className="fa fa-eye" />
-              </button>
-              <button
-                className="btn btn-sm btn-link"
-                onClick={handleGoDetail(id)}
-              >
-                <i className="fa fa-edit" />
-              </button>
-              <button
-                className="btn btn-sm btn-link text-danger"
-                onClick={handleDelete(storeGrouping)}
-              >
-                <i className="fa fa-trash" />
-              </button>
-            </div>
-          );
+          align: 'center',
+          render(isActive: boolean) {
+            return (
+              <div className={isActive ? 'active' : ''}>
+                <i className="fa fa-check-circle d-flex justify-content-center" >
+                </i>
+              </div>
+            );
+          },
         },
-      },
+
+        {
+          title: translate(generalLanguageKeys.actions.label),
+          key: nameof(generalLanguageKeys.columns.actions),
+          dataIndex: nameof(list[0].id),
+          width: generalColumnWidths.actions,
+          align: 'center',
+          render(id: number, storeGrouping: StoreGrouping) {
+            return (
+              <div className="d-flex justify-content-center">
+                <button
+                  className="btn btn-sm btn-link text-warning"
+                  onClick={handleOpenPreview(id)}
+                >
+                  <i className="fa fa-eye" />
+                </button>
+                <button
+                  className="btn btn-sm btn-link"
+                  onClick={handleGoDetail(id)}
+                >
+                  <i className="fa fa-edit" />
+                </button>
+                <button
+                  className="btn btn-sm btn-link text-danger"
+                  onClick={handleDelete(storeGrouping)}
+                >
+                  <i className="fa fa-trash" />
+                </button>
+              </div>
+            );
+          },
+        },
       ];
     },
     // tslint:disable-next-line:max-line-length
@@ -292,117 +191,33 @@ function StoreGroupingMaster() {
           <Form {...formItemLayout}>
             <Row>
 
-              <Col className="pl-1" span={8}>
-                <FormItem
-                  className="mb-0"
-                  label={translate('storeGroupings.id')}
-                >
-
-
-                    <AdvancedIdFilter
-                      filterType={nameof(filter.id.equal)}
-                      filter={ filter.id }
-                      onChange={handleFilter(nameof(filter.id))}
-                      className="w-100"
-                    />
-                </FormItem>
-              </Col>
-
-
-
-              <Col className="pl-1" span={8}>
+              <Col className="pl-1" span={12}>
                 <FormItem
                   className="mb-0"
                   label={translate('storeGroupings.code')}
                 >
-                    <AdvancedStringFilter
-                      filterType={nameof(filter.code.startWith)}
-                      filter={filter.id}
-                      onChange={handleFilter(nameof(previewModel.id))}
-                      className="w-100"
-                    />
-
-
+                  <AdvancedStringFilter
+                    filterType={nameof(filter.code.startWith)}
+                    filter={filter.code}
+                    onChange={handleFilter(nameof(previewModel.code))}
+                    className="w-100"
+                  />
                 </FormItem>
               </Col>
 
-
-
-              <Col className="pl-1" span={8}>
+              <Col className="pl-1" span={12}>
                 <FormItem
                   className="mb-0"
                   label={translate('storeGroupings.name')}
                 >
-                    <AdvancedStringFilter
-                      filterType={nameof(filter.name.startWith)}
-                      filter={filter.id}
-                      onChange={handleFilter(nameof(previewModel.id))}
-                      className="w-100"
-                    />
-
-
+                  <AdvancedStringFilter
+                    filterType={nameof(filter.name.startWith)}
+                    filter={filter.name}
+                    onChange={handleFilter(nameof(previewModel.name))}
+                    className="w-100"
+                  />
                 </FormItem>
               </Col>
-
-
-
-
-
-              <Col className="pl-1" span={8}>
-                <FormItem
-                  className="mb-0"
-                  label={translate('storeGroupings.path')}
-                >
-                    <AdvancedStringFilter
-                      filterType={nameof(filter.path.startWith)}
-                      filter={filter.id}
-                      onChange={handleFilter(nameof(previewModel.id))}
-                      className="w-100"
-                    />
-
-
-                </FormItem>
-              </Col>
-
-
-
-              <Col className="pl-1" span={8}>
-                <FormItem
-                  className="mb-0"
-                  label={translate('storeGroupings.level')}
-                >
-
-                    <AdvancedNumberFilter
-                      filterType={nameof(filter.level.equal)}
-                      filter={ filter.level }
-                      onChange={handleFilter(nameof(filter.level))}
-                      className="w-100"
-                    />
-
-                </FormItem>
-              </Col>
-
-
-
-              <Col className="pl-1" span={8}>
-                <FormItem
-                  className="mb-0"
-                  label={translate('storeGroupings.isActive')}
-                >
-
-
-                </FormItem>
-              </Col>
-
-
-
-
-
-
-
-
-
-
             </Row>
           </Form>
           <div className="d-flex justify-content-end mt-2">
@@ -488,47 +303,21 @@ function StoreGroupingMaster() {
           size="xl"
         >
           <Spin spinning={previewLoading}>
-            <Descriptions title={previewModel.name} bordered>
-
-              <Descriptions.Item label={translate('storeGroupings.id')}>
-                { previewModel?.id }
-              </Descriptions.Item>
-
-
+            <Descriptions title={previewModel.name}>
               <Descriptions.Item label={translate('storeGroupings.code')}>
-                { previewModel?.code }
+                {previewModel?.code}
               </Descriptions.Item>
-
-
               <Descriptions.Item label={translate('storeGroupings.name')}>
-                { previewModel?.name }
+                {previewModel?.name}
               </Descriptions.Item>
-
-
-
-              <Descriptions.Item label={translate('storeGroupings.path')}>
-                { previewModel?.path }
-              </Descriptions.Item>
-
-
-              <Descriptions.Item label={translate('storeGroupings.level')}>
-                { previewModel?.level }
-              </Descriptions.Item>
-
-
               <Descriptions.Item label={translate('storeGroupings.isActive')}>
-                { previewModel?.isActive }
+                {previewModel?.isActive ? <div>Hoạt động</div> : <div>Ngừng hoạt động</div>}
               </Descriptions.Item>
-
-
-
-
-
-                          </Descriptions>
+            </Descriptions>
           </Spin>
         </MasterPreview>
       </Card>
-      </div>
+    </div>
   );
 }
 
