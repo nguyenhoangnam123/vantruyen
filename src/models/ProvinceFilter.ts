@@ -6,4 +6,5 @@ export class ProvinceFilter extends ModelFilter  {
   public name?: StringFilter = new StringFilter();
   public priority?: NumberFilter = new NumberFilter();
   public statusId?: IdFilter = new IdFilter();
+  public code?: StringFilter = new StringFilter();
 }

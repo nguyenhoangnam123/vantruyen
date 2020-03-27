@@ -1,38 +1,6 @@
 {
   "stores": {
-    "address1": "",
-    "address2": "",
-    "code": "",
-    "createdAt": "",
-    "deletedAt": "",
-    "detail": {
-      "title": ""
-    },
-    "district": "",
-    "districtId": "",
     "id": "",
-    "isActive": "",
-    "latitude": "",
-    "longitude": "",
-    "master": {
-      "title": ""
-    },
-    "name": "",
-    "organization": "",
-    "organizationId": "",
-    "ownerEmail": "",
-    "ownerName": "",
-    "ownerPhone": "",
-    "parentStoreId": "",
-    "province": "",
-    "provinceId": "",
-    "storeGrouping": "",
-    "storeGroupingId": "",
-    "storeType": "",
-    "storeTypeId": "",
-    "telephone": "",
-    "updatedAt": "",
-    "ward": "",
-    "wardId": ""
+    "name": ""
   }
 }

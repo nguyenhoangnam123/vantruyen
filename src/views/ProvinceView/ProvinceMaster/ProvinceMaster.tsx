@@ -15,18 +15,15 @@ import nameof from 'ts-nameof.macro';
 import { tableService } from 'services';
 import { formItemLayout } from 'config/ant-design/form';
 import AdvancedStringFilter from 'components/AdvancedStringFilter/AdvancedStringFilter';
-import AdvancedIdFilter from 'components/AdvancedIdFilter/AdvancedIdFilter';
 import AdvancedNumberFilter from 'components/AdvancedNumberFilter/AdvancedNumberFilter';
 import MasterPreview from 'components/MasterPreview/MasterPreview';
 import { generalColumnWidths, generalLanguageKeys } from 'config/consts';
-
 import { PROVINCE_ROUTE } from 'config/route-consts';
 import { API_PROVINCE_ROUTE } from 'config/api-consts';
 import './ProvinceMaster.scss';
-import { provinceRepository }  from 'views/ProvinceView/ProvinceRepository';
+import { provinceRepository } from 'views/ProvinceView/ProvinceRepository';
 import { Province } from 'models/Province';
-import { ProvinceFilter} from 'models/ProvinceFilter';
-
+import { ProvinceFilter } from 'models/ProvinceFilter';
 
 const { Item: FormItem } = Form;
 
@@ -55,7 +52,7 @@ function ProvinceMaster() {
     provinceRepository.count,
     provinceRepository.list,
     provinceRepository.get,
-    );
+  );
 
   const [handleGoCreate, handleGoDetail] = routerService.useMasterNavigation(PROVINCE_ROUTE);
   const [pagination, sorter, handleTableChange] = tableService.useMasterTable(filter, setFilter, total, handleSearch);
@@ -74,15 +71,6 @@ function ProvinceMaster() {
    */
   const [handleExport] = crudService.useExport(API_PROVINCE_ROUTE);
 
-  // Enums  -----------------------------------------------------------------------------------------------------------------------------------------
-
-  // ------------------------------------------------------------------------------------------------------------------------------------------------
-
-  // Reference  -------------------------------------------------------------------------------------------------------------------------------------
-
-  // ------------------------------------------------------------------------------------------------------------------------------------------------
-
-   // Delete handlers -------------------------------------------------------------------------------------------------------------------------------
   const [handleDelete] = tableService.useDeleteHandler<Province>(
     provinceRepository.delete,
     setLoading,
@@ -96,31 +84,28 @@ function ProvinceMaster() {
     setLoading,
     handleSearch,
   );
-  // ------------------------------------------------------------------------------------------------------------------------------------------------
 
   const columns: ColumnProps<Province>[] = React.useMemo(
     () => {
       return [
-      {
-        title: translate(generalLanguageKeys.columns.index),
-        key: nameof(generalLanguageKeys.index),
-        width: generalColumnWidths.index,
-        render: renderMasterIndex<Province>(pagination),
-      },
-
-      {
-          title: translate('provinces.id'),
-          key: nameof(list[0].id),
-          dataIndex: nameof(list[0].id),
+        {
+          title: translate(generalLanguageKeys.columns.index),
+          key: nameof(generalLanguageKeys.index),
+          width: generalColumnWidths.index,
+          render: renderMasterIndex<Province>(pagination),
+        },
+        {
+          title: translate('provinces.code'),
+          key: nameof(list[0].code),
+          dataIndex: nameof(list[0].code),
           sorter: true,
           sortOrder: getOrderTypeForTable<Province>(
-            nameof(list[0].id),
+            nameof(list[0].code),
             sorter,
           ),
 
-      },
-
-      {
+        },
+        {
           title: translate('provinces.name'),
           key: nameof(list[0].name),
           dataIndex: nameof(list[0].name),
@@ -130,9 +115,9 @@ function ProvinceMaster() {
             sorter,
           ),
 
-      },
+        },
 
-      {
+        {
           title: translate('provinces.priority'),
           key: nameof(list[0].priority),
           dataIndex: nameof(list[0].priority),
@@ -142,99 +127,38 @@ function ProvinceMaster() {
             sorter,
           ),
 
-      },
-
-      {
-          title: translate('provinces.createdAt'),
-          key: nameof(list[0].createdAt),
-          dataIndex: nameof(list[0].createdAt),
-          sorter: true,
-          sortOrder: getOrderTypeForTable<Province>(
-            nameof(list[0].createdAt),
-            sorter,
-          ),
-
-      },
-
-      {
-          title: translate('provinces.updatedAt'),
-          key: nameof(list[0].updatedAt),
-          dataIndex: nameof(list[0].updatedAt),
-          sorter: true,
-          sortOrder: getOrderTypeForTable<Province>(
-            nameof(list[0].updatedAt),
-            sorter,
-          ),
-
-      },
-
-      {
-          title: translate('provinces.deletedAt'),
-          key: nameof(list[0].deletedAt),
-          dataIndex: nameof(list[0].deletedAt),
-          sorter: true,
-          sortOrder: getOrderTypeForTable<Province>(
-            nameof(list[0].deletedAt),
-            sorter,
-          ),
-
-      },
-
-      {
-          title: translate('provinces.districts'),
-          key: nameof(list[0].districts),
-          dataIndex: nameof(list[0].districts),
-          sorter: true,
-          sortOrder: getOrderTypeForTable<Province>(
-            nameof(list[0].districts),
-            sorter,
-          ),
-
-      },
-
-      {
-          title: translate('provinces.stores'),
-          key: nameof(list[0].stores),
-          dataIndex: nameof(list[0].stores),
-          sorter: true,
-          sortOrder: getOrderTypeForTable<Province>(
-            nameof(list[0].stores),
-            sorter,
-          ),
-
-      },
-
-      {
-        title: translate(generalLanguageKeys.actions.label),
-        key: nameof(generalLanguageKeys.columns.actions),
-        dataIndex: nameof(list[0].id),
-        width: generalColumnWidths.actions,
-        align: 'center',
-        render(id: number, province: Province) {
-          return (
-            <div className="d-flex justify-content-center">
-              <button
-                className="btn btn-sm btn-link text-warning"
-                onClick={handleOpenPreview(id)}
-              >
-                <i className="fa fa-eye" />
-              </button>
-              <button
-                className="btn btn-sm btn-link"
-                onClick={handleGoDetail(id)}
-              >
-                <i className="fa fa-edit" />
-              </button>
-              <button
-                className="btn btn-sm btn-link text-danger"
-                onClick={handleDelete(province)}
-              >
-                <i className="fa fa-trash" />
-              </button>
-            </div>
-          );
         },
-      },
+        {
+          title: translate(generalLanguageKeys.actions.label),
+          key: nameof(generalLanguageKeys.columns.actions),
+          dataIndex: nameof(list[0].id),
+          width: generalColumnWidths.actions,
+          align: 'center',
+          render(id: number, province: Province) {
+            return (
+              <div className="d-flex justify-content-center">
+                <button
+                  className="btn btn-sm btn-link text-warning"
+                  onClick={handleOpenPreview(id)}
+                >
+                  <i className="fa fa-eye" />
+                </button>
+                <button
+                  className="btn btn-sm btn-link"
+                  onClick={handleGoDetail(id)}
+                >
+                  <i className="fa fa-edit" />
+                </button>
+                <button
+                  className="btn btn-sm btn-link text-danger"
+                  onClick={handleDelete(province)}
+                >
+                  <i className="fa fa-trash" />
+                </button>
+              </div>
+            );
+          },
+        },
       ];
     },
     // tslint:disable-next-line:max-line-length
@@ -257,70 +181,45 @@ function ProvinceMaster() {
         >
           <Form {...formItemLayout}>
             <Row>
-
-              <Col className="pl-1" span={8}>
+            <Col className="pl-1" span={8}>
                 <FormItem
                   className="mb-0"
-                  label={translate('provinces.id')}
+                  label={translate('provinces.code')}
                 >
-
-
-                    <AdvancedIdFilter
-                      filterType={nameof(filter.id.equal)}
-                      filter={ filter.id }
-                      onChange={handleFilter(nameof(filter.id))}
-                      className="w-100"
-                    />
+                  <AdvancedStringFilter
+                    filterType={nameof(filter.code.startWith)}
+                    filter={filter.name}
+                    onChange={handleFilter(nameof(filter.code))}
+                    className="w-100"
+                  />
                 </FormItem>
               </Col>
-
-
-
               <Col className="pl-1" span={8}>
                 <FormItem
                   className="mb-0"
                   label={translate('provinces.name')}
                 >
-                    <AdvancedStringFilter
-                      filterType={nameof(filter.name.startWith)}
-                      filter={filter.id}
-                      onChange={handleFilter(nameof(previewModel.id))}
-                      className="w-100"
-                    />
-
-
+                  <AdvancedStringFilter
+                    filterType={nameof(filter.name.startWith)}
+                    filter={filter.name}
+                    onChange={handleFilter(nameof(filter.name))}
+                    className="w-100"
+                  />
                 </FormItem>
               </Col>
-
-
-
               <Col className="pl-1" span={8}>
                 <FormItem
                   className="mb-0"
                   label={translate('provinces.priority')}
                 >
-
-                    <AdvancedNumberFilter
-                      filterType={nameof(filter.priority.equal)}
-                      filter={ filter.priority }
-                      onChange={handleFilter(nameof(filter.priority))}
-                      className="w-100"
-                    />
-
+                  <AdvancedNumberFilter
+                    filterType={nameof(filter.priority.equal)}
+                    filter={filter.priority}
+                    onChange={handleFilter(nameof(filter.priority))}
+                    className="w-100"
+                  />
                 </FormItem>
               </Col>
-
-
-
-
-
-
-
-
-
-
-
-
             </Row>
           </Form>
           <div className="d-flex justify-content-end mt-2">
@@ -406,32 +305,21 @@ function ProvinceMaster() {
           size="xl"
         >
           <Spin spinning={previewLoading}>
-            <Descriptions title={previewModel.name} bordered>
-
+            <Descriptions title={previewModel.name} >
               <Descriptions.Item label={translate('provinces.id')}>
-                { previewModel?.id }
+                {previewModel?.id}
               </Descriptions.Item>
-
-
               <Descriptions.Item label={translate('provinces.name')}>
-                { previewModel?.name }
+                {previewModel?.name}
               </Descriptions.Item>
-
-
               <Descriptions.Item label={translate('provinces.priority')}>
-                { previewModel?.priority }
+                {previewModel?.priority}
               </Descriptions.Item>
-
-
-
-
-
-
-                          </Descriptions>
+            </Descriptions>
           </Spin>
         </MasterPreview>
       </Card>
-      </div>
+    </div>
   );
 }
 

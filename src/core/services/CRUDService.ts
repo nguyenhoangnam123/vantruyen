@@ -14,11 +14,13 @@ import {TableRowSelection} from 'antd/lib/table';
 import queryString from 'query-string';
 import {flatten, unflatten} from 'core/helpers/json';
 import {isDateValue} from 'core/helpers/date-time';
+import { routerService } from '.';
 
 export class CRUDService {
   public useQuery<TFilter extends ModelFilter>(modelClass): [TFilter, Dispatch<SetStateAction<TFilter>>] {
     const {search, pathname} = useLocation();
     const history = useHistory();
+    const [handleGoMaster] = routerService.useGoBack();
     const modelFilter: TFilter = React.useMemo(
       () => {
         const modelFilter: TFilter = new modelClass();

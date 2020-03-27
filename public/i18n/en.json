@@ -251,6 +251,7 @@
     "provinces": "",
     "roles": "",
     "storeLevels": "",
+    "stores": "",
     "suppliers": "",
     "unitOfMeasureGroupingContents": "",
     "unitOfMeasureGroupings": "",
@@ -414,7 +415,9 @@
       "url": ""
     },
     "isActive": "",
-    "items": "",
+    "items": {
+      "title": ""
+    },
     "master": {
       "title": ""
     },
@@ -447,21 +450,15 @@
     "supplier": "",
     "supplierCode": "",
     "supplierId": "",
-    "tabs": {
-      "items": {
-        "title": ""
-      },
-      "variationGroupings": {
-        "title": ""
-      }
-    },
     "taxType": "",
     "taxTypeId": "",
     "unitOfMeasure": "",
     "unitOfMeasureGrouping": "",
     "unitOfMeasureId": "",
     "updatedAt": "",
-    "variationGroupings": "",
+    "variationGroupings": {
+      "title": ""
+    },
     "variationName": "",
     "variationValue": "",
     "variationsAndPrice": ""
@@ -613,48 +610,11 @@
   "store": {
     "storeImageMappingModal": {
       "title": ""
-    },
-    "tabs": {
-      "roles": {
-        "title": ""
-      }
     }
   },
   "stores": {
-    "address1": "",
-    "address2": "",
-    "code": "",
-    "createdAt": "",
-    "deletedAt": "",
-    "detail": {
-      "title": ""
-    },
-    "district": "",
-    "districtId": "",
     "id": "",
-    "isActive": "",
-    "latitude": "",
-    "longitude": "",
-    "master": {
-      "title": ""
-    },
-    "name": "",
-    "organization": "",
-    "organizationId": "",
-    "ownerEmail": "",
-    "ownerName": "",
-    "ownerPhone": "",
-    "parentStoreId": "",
-    "province": "",
-    "provinceId": "",
-    "storeGrouping": "",
-    "storeGroupingId": "",
-    "storeType": "",
-    "storeTypeId": "",
-    "telephone": "",
-    "updatedAt": "",
-    "ward": "",
-    "wardId": ""
+    "name": ""
   },
   "suppliers": {
     "code": "",

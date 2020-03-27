@@ -3,7 +3,7 @@ import { ErrorMap } from 'react3l';
 import { Moment } from 'moment';
 import { VariationGrouping } from './VariationGrouping';
 
-export class Variation extends Model 
+export class Variation extends Model
 {
     public id?: number;
     public code?: string;

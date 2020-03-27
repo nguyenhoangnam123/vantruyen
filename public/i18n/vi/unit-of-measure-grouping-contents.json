@@ -1,16 +1,16 @@
 {
   "unitOfMeasureGroupingContents": {
     "detail": {
-      "title": ""
+      "title": "Thông tin chi tiết"
     },
-    "factor": "",
-    "id": "",
+    "factor": "Hệ số",
+    "id": "ID",
     "master": {
-      "title": ""
+      "title": "Danh sách nhóm đơn vị đơn vị tính phân phối"
     },
-    "name": "",
-    "unitOfMeasure": "",
-    "unitOfMeasureGrouping": "",
+    "name": "Tên",
+    "unitOfMeasure": "Đơn vị đơn vị tính phân phối",
+    "unitOfMeasureGrouping": "Nhóm đơn vị đơn vị tính phân phối",
     "unitOfMeasureGroupingId": "",
     "unitOfMeasureId": ""
   }

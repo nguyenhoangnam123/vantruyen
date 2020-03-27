@@ -4,7 +4,7 @@ import { Moment } from 'moment';
 import { Page } from './Page';
 import { Permission } from './Permission';
 
-export class PermissionPageMapping extends Model 
+export class PermissionPageMapping extends Model
 {
     public permissionId?: number;
     public pageId?: number;

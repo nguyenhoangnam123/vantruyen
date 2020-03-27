@@ -1,22 +1,22 @@
 {
   "organizations": {
-    "code": "",
-    "createdAt": "",
-    "deletedAt": "",
+    "code": "Mã tổ chức",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
     "detail": {
-      "title": ""
+      "title": "Thông tin chi tiết"
     },
-    "id": "",
+    "id": "ID",
     "inverseParent": "",
-    "level": "",
+    "level": "Cấp",
     "master": {
-      "title": ""
+      "title": "Danh sách cơ quan"
     },
-    "name": "",
-    "parent": "",
+    "name": "Tên",
+    "parent": "Tổ chức cha",
     "parentId": "",
     "path": "",
-    "stores": "",
-    "updatedAt": ""
+    "stores": "Cửa hàng",
+    "updatedAt": "Ngày tạo"
   }
 }

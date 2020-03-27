@@ -4,7 +4,7 @@ import { Moment } from 'moment';
 import { District } from './District';
 import { Status } from './Status';
 
-export class Ward extends Model 
+export class Ward extends Model
 {
     public id?: number;
     public name?: string;
