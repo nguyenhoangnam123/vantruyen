@@ -560,23 +560,18 @@
     "permissions": ""
   },
   "storeGroupings": {
+    "address1": "",
+    "address2": "",
     "code": "",
-    "createdAt": "",
-    "deletedAt": "",
     "detail": {
       "title": ""
     },
     "id": "",
     "isActive": "",
-    "level": "",
     "master": {
       "title": ""
     },
-    "name": "",
-    "parentId": "",
-    "path": "",
-    "stores": "",
-    "updatedAt": ""
+    "name": ""
   },
   "storeImageMappings": {
     "id": "",
@@ -613,38 +608,8 @@
     }
   },
   "stores": {
-    "address1": "",
-    "address2": "",
-    "code": "",
-    "detail": {
-      "title": ""
-    },
-    "district": "",
-    "general": {
-      "info": ""
-    },
     "id": "",
-    "latitude": "",
-    "location": "",
-    "longitude": "",
-    "master": {
-      "title": ""
-    },
-    "name": "",
-    "organization": "",
-    "owner": {
-      "info": ""
-    },
-    "ownerEmail": "",
-    "ownerName": "",
-    "ownerPhone": "",
-    "parentStore": "",
-    "province": "",
-    "status": "",
-    "storeGrouping": "",
-    "storeType": "",
-    "telephone": "",
-    "ward": ""
+    "name": ""
   },
   "suppliers": {
     "code": "",

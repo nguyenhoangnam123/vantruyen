@@ -118,6 +118,28 @@ function StoreGroupingMaster() {
 
         },
         {
+          title: translate('storeGroupings.address1'),
+          key: nameof(list[0].address1),
+          dataIndex: nameof(list[0].address1),
+          sorter: true,
+          sortOrder: getOrderTypeForTable<StoreGrouping>(
+            nameof(list[0].address1),
+            sorter,
+          ),
+
+        },
+        {
+          title: translate('storeGroupings.address2'),
+          key: nameof(list[0].address2),
+          dataIndex: nameof(list[0].address2),
+          sorter: true,
+          sortOrder: getOrderTypeForTable<StoreGrouping>(
+            nameof(list[0].address2),
+            sorter,
+          ),
+
+        },
+        {
           title: translate('storeGroupings.isActive'),
           key: nameof(list[0].isActive),
           dataIndex: nameof(list[0].isActive),
@@ -191,7 +213,7 @@ function StoreGroupingMaster() {
           <Form {...formItemLayout}>
             <Row>
 
-              <Col className="pl-1" span={12}>
+              <Col className="pl-1" span={8}>
                 <FormItem
                   className="mb-0"
                   label={translate('storeGroupings.code')}
@@ -205,7 +227,7 @@ function StoreGroupingMaster() {
                 </FormItem>
               </Col>
 
-              <Col className="pl-1" span={12}>
+              <Col className="pl-1" span={8}>
                 <FormItem
                   className="mb-0"
                   label={translate('storeGroupings.name')}
@@ -214,6 +236,34 @@ function StoreGroupingMaster() {
                     filterType={nameof(filter.name.startWith)}
                     filter={filter.name}
                     onChange={handleFilter(nameof(previewModel.name))}
+                    className="w-100"
+                  />
+                </FormItem>
+              </Col>
+            </Row>
+            <Row>
+            <Col className="pl-1" span={8}>
+                <FormItem
+                  className="mb-0"
+                  label={translate('storeGroupings.address1')}
+                >
+                  <AdvancedStringFilter
+                    filterType={nameof(filter.address1.startWith)}
+                    filter={filter.address1}
+                    onChange={handleFilter(nameof(previewModel.address1))}
+                    className="w-100"
+                  />
+                </FormItem>
+              </Col>
+              <Col className="pl-1" span={8}>
+                <FormItem
+                  className="mb-0"
+                  label={translate('storeGroupings.address2')}
+                >
+                  <AdvancedStringFilter
+                    filterType={nameof(filter.address2.startWith)}
+                    filter={filter.address2}
+                    onChange={handleFilter(nameof(previewModel.address2))}
                     className="w-100"
                   />
                 </FormItem>

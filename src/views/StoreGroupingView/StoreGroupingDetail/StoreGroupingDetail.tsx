@@ -79,6 +79,27 @@ function StoreGroupingDetail() {
                 onChange={handleChangeSimpleField(nameof(storeGrouping.name))}
               />
             </FormItem>
+            <FormItem label={translate('storeGroupings.address1')}
+              validateStatus={formService.getValidationStatus<StoreGrouping>(storeGrouping.errors, nameof(storeGrouping.address1))}
+              help={storeGrouping.errors?.address1}
+            >
+              <input type="text"
+                defaultValue={storeGrouping.address1}
+                className="form-control form-control-sm"
+                onChange={handleChangeSimpleField(nameof(storeGrouping.address1))}
+              />
+            </FormItem>
+
+            <FormItem label={translate('storeGroupings.address2')}
+              validateStatus={formService.getValidationStatus<StoreGrouping>(storeGrouping.errors, nameof(storeGrouping.address2))}
+              help={storeGrouping.errors?.address2}
+            >
+              <input type="text"
+                defaultValue={storeGrouping.address2}
+                className="form-control form-control-sm"
+                onChange={handleChangeSimpleField(nameof(storeGrouping.address2))}
+              />
+            </FormItem>
 
             <FormItem label={translate('storeGroupings.isActive')}
               validateStatus={formService.getValidationStatus<StoreGrouping>(storeGrouping.errors, nameof(storeGrouping.status))}

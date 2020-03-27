@@ -1,36 +1,6 @@
 {
   "stores": {
-    "address1": "",
-    "address2": "",
-    "code": "",
-    "detail": {
-      "title": ""
-    },
-    "district": "",
-    "general": {
-      "info": ""
-    },
     "id": "",
-    "latitude": "",
-    "location": "",
-    "longitude": "",
-    "master": {
-      "title": ""
-    },
-    "name": "",
-    "organization": "",
-    "owner": {
-      "info": ""
-    },
-    "ownerEmail": "",
-    "ownerName": "",
-    "ownerPhone": "",
-    "parentStore": "",
-    "province": "",
-    "status": "",
-    "storeGrouping": "",
-    "storeType": "",
-    "telephone": "",
-    "ward": ""
+    "name": ""
   }
 }

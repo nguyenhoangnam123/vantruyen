@@ -8,4 +8,6 @@ export class StoreGroupingFilter extends ModelFilter  {
   public parentId?: IdFilter = new IdFilter();
   public path?: StringFilter = new StringFilter();
   public level?: NumberFilter = new NumberFilter();
+  public address1?: StringFilter = new StringFilter();
+  public address2?: StringFilter = new StringFilter();
 }

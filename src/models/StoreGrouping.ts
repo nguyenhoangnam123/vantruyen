@@ -14,4 +14,6 @@ export class StoreGrouping extends Model {
     public updatedAt?: Moment;
     public deletedAt?: Moment;
     public stores?: Store[];
+    public address1?: string;
+    public address2?: string;
 }
