@@ -1,21 +1,16 @@
 {
   "storeGroupings": {
+    "address1": "Địa chỉ 1",
+    "address2": "Địa chỉ 2",
     "code": "Mã nhóm",
-    "createdAt": "",
-    "deletedAt": "",
     "detail": {
       "title": "Thêm mới nhóm cửa hàng"
     },
     "id": "",
     "isActive": "Trạng thái",
-    "level": "",
     "master": {
       "title": "Danh sách nhóm cửa hàng"
     },
-    "name": "Tên nhóm cửa hàng",
-    "parentId": "",
-    "path": "",
-    "stores": "",
-    "updatedAt": ""
+    "name": "Tên nhóm cửa hàng"
   }
 }

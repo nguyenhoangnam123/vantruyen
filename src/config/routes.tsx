@@ -1,36 +1,33 @@
 import DefaultLayout from 'layouts/DefaultLayout/DefaultLayout';
 import { join } from 'path';
 import { RouteConfig } from 'react-router-config';
-import {
-  APP_USER_ROUTE,
-  DISTRICT_ROUTE,
-  FIELD_ROUTE,
-  IMAGE_ROUTE,
-  ITEM_ROUTE,
-  PAGE_ROUTE,
-  PERMISSION_ROUTE,
-  PRODUCT_GROUPING_ROUTE,
-  PRODUCT_ROUTE,
-  PRODUCT_TYPE_ROUTE,
-  PROPERTY_ROUTE,
-  PROPERTY_TYPE_ROUTE,
-  PROPERTY_VALUE_ROUTE,
-  PROVINCE_ROUTE,
-  ROLE_ROUTE,
-  ROOT_ROUTE,
-  STORE_LEVEL_ROUTE,
-  STORE_ROUTE,
-  STORE_TYPE_ROUTE,
-  STORE_GROUPING_ROUTE,
-  SUPPLIER_ROUTE,
-  UNIT_OF_MEASURE_GROUPING_CONTENT_ROUTE,
-  UNIT_OF_MEASURE_GROUPING_ROUTE,
-  UNIT_OF_MEASURE_ROUTE,
-  VARIATION_GROUPING_ROUTE,
-  VARIATION_ROUTE,
-  VIEW_ROUTE,
-  WARD_ROUTE,
-} from 'config/route-consts';
+import { ROOT_ROUTE, STORE_ROUTE } from 'config/route-consts';
+import { APP_USER_ROUTE } from 'config/route-consts';
+import { DISTRICT_ROUTE } from 'config/route-consts';
+import { FIELD_ROUTE } from 'config/route-consts';
+import { IMAGE_ROUTE } from 'config/route-consts';
+import { ITEM_ROUTE } from 'config/route-consts';
+import { PAGE_ROUTE } from 'config/route-consts';
+import { PERMISSION_ROUTE } from 'config/route-consts';
+import { PRODUCT_ROUTE } from 'config/route-consts';
+import { PRODUCT_GROUPING_ROUTE } from 'config/route-consts';
+import { PRODUCT_TYPE_ROUTE } from 'config/route-consts';
+import { PROPERTY_ROUTE } from 'config/route-consts';
+import { PROPERTY_TYPE_ROUTE } from 'config/route-consts';
+import { PROPERTY_VALUE_ROUTE } from 'config/route-consts';
+import { PROVINCE_ROUTE } from 'config/route-consts';
+import { ROLE_ROUTE } from 'config/route-consts';
+import { STORE_LEVEL_ROUTE } from 'config/route-consts';
+import { STORE_TYPE_ROUTE } from 'config/route-consts';
+import { STORE_GROUPING_ROUTE } from 'config/route-consts';
+import { SUPPLIER_ROUTE } from 'config/route-consts';
+import { UNIT_OF_MEASURE_ROUTE } from 'config/route-consts';
+import { UNIT_OF_MEASURE_GROUPING_CONTENT_ROUTE } from 'config/route-consts';
+import { UNIT_OF_MEASURE_GROUPING_ROUTE } from 'config/route-consts';
+import { VARIATION_ROUTE } from 'config/route-consts';
+import { VARIATION_GROUPING_ROUTE } from 'config/route-consts';
+import { VIEW_ROUTE } from 'config/route-consts';
+import { WARD_ROUTE } from 'config/route-consts';
 import AppUserView, {
   AppUserDetail,
   AppUserMaster,
@@ -88,14 +85,6 @@ import UnitOfMeasureView, {
   UnitOfMeasureDetail,
   UnitOfMeasureMaster,
 } from 'views/UnitOfMeasureView/UnitOfMeasureView';
-import StoreTypeView, {
-  StoreTypeDetail,
-  StoreTypeMaster,
-} from 'views/StoreTypeView/StoreTypeView';
-import StoreGroupingView, {
-  StoreGroupingDetail,
-  StoreGroupingMaster,
-} from 'views/StoreGroupingView/StoreGroupingView';
 import UnitOfMeasureGroupingContentView, {
   UnitOfMeasureGroupingContentDetail,
   UnitOfMeasureGroupingContentMaster,
@@ -115,6 +104,14 @@ import VariationGroupingView, {
 import ViewView, { ViewDetail, ViewMaster } from 'views/ViewView/ViewView';
 import WardView, { WardDetail, WardMaster } from 'views/WardView/WardView';
 import StoreView, { StoreDetail, StoreMaster } from 'views/StoreView/StoreView';
+import StoreTypeView, {
+  StoreTypeDetail,
+  StoreTypeMaster,
+} from 'views/StoreTypeView/StoreTypeView';
+import StoreGroupingView, {
+  StoreGroupingDetail,
+  StoreGroupingMaster,
+} from 'views/StoreGroupingView/StoreGroupingView';
 
 export const routes: RouteConfig[] = [
   {

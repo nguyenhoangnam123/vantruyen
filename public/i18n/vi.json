@@ -565,23 +565,18 @@
     "permissions": "Quyền"
   },
   "storeGroupings": {
+    "address1": "Địa chỉ 1",
+    "address2": "Địa chỉ 2",
     "code": "Mã nhóm",
-    "createdAt": "",
-    "deletedAt": "",
     "detail": {
       "title": "Thêm mới nhóm cửa hàng"
     },
     "id": "",
     "isActive": "Trạng thái",
-    "level": "",
     "master": {
       "title": "Danh sách nhóm cửa hàng"
     },
-    "name": "Tên nhóm cửa hàng",
-    "parentId": "",
-    "path": "",
-    "stores": "",
-    "updatedAt": ""
+    "name": "Tên nhóm cửa hàng"
   },
   "storeImageMappings": {
     "id": "",
@@ -618,38 +613,8 @@
     }
   },
   "stores": {
-    "address1": "Địa chỉ 1",
-    "address2": "Địa chỉ 2",
-    "code": "Mã",
-    "detail": {
-      "title": "Thông tin chi tiết"
-    },
-    "district": "Quận/huyện",
-    "general": {
-      "info": "Thông tin cửa hàng"
-    },
     "id": "ID",
-    "latitude": "Vĩ độ",
-    "location": "Vị trí",
-    "longitude": "Kinh độ",
-    "master": {
-      "title": "Danh sách cửa hàng"
-    },
-    "name": "Tên cửa hàng",
-    "organization": "Đơn vị",
-    "owner": {
-      "info": "Thông tin chủ sở hữu"
-    },
-    "ownerEmail": "Email",
-    "ownerName": "Tên chủ sở hữu",
-    "ownerPhone": "Số điện thoại",
-    "parentStore": "Cửa hàng cha",
-    "province": "Tỉnh thành",
-    "status": "Trạng thái",
-    "storeGrouping": "Nhóm cửa hàng",
-    "storeType": "Loại cửa hàng",
-    "telephone": "Số điện thoại",
-    "ward": "Xã phường"
+    "name": "Tên cửa hàng"
   },
   "suppliers": {
     "code": "Mã nhà cung cấp",

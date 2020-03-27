@@ -1,21 +1,16 @@
 {
   "storeGroupings": {
+    "address1": "",
+    "address2": "",
     "code": "",
-    "createdAt": "",
-    "deletedAt": "",
     "detail": {
       "title": ""
     },
     "id": "",
     "isActive": "",
-    "level": "",
     "master": {
       "title": ""
     },
-    "name": "",
-    "parentId": "",
-    "path": "",
-    "stores": "",
-    "updatedAt": ""
+    "name": ""
   }
 }
