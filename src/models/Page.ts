@@ -3,7 +3,7 @@ import { ErrorMap } from 'react3l';
 import { Moment } from 'moment';
 import { Menu } from './Menu';
 
-export class Page extends Model 
+export class Page extends Model
 {
     public id?: number;
     public name?: string;

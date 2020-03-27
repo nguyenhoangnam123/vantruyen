@@ -3,7 +3,7 @@ import { ErrorMap } from 'react3l';
 import { Moment } from 'moment';
 import { Status } from './Status';
 
-export class TaxType extends Model 
+export class TaxType extends Model
 {
     public id?: number;
     public code?: string;

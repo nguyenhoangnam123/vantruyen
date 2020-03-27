@@ -13,7 +13,7 @@ import { ProductImageMapping } from './ProductImageMapping';
 import { ProductProductGroupingMapping } from './ProductProductGroupingMapping';
 import { VariationGrouping } from './VariationGrouping';
 
-export class Product extends Model 
+export class Product extends Model
 {
     public id?: number;
     public code?: string;

@@ -5,7 +5,7 @@ import { Status } from './Status';
 import { UnitOfMeasure } from './UnitOfMeasure';
 import { UnitOfMeasureGroupingContent } from './UnitOfMeasureGroupingContent';
 
-export class UnitOfMeasureGrouping extends Model 
+export class UnitOfMeasureGrouping extends Model
 {
     public id?: number;
     public name?: string;
