@@ -1,9 +1,9 @@
 {
   "tree": {
     "actions": {
-      "addNode": "",
-      "addSubNode": ""
+      "addNode": "Thêm nút",
+      "addSubNode": "Thêm nút phụ"
     },
-    "created": ""
+    "created": "Tạo"
   }
 }

@@ -1,6 +1,6 @@
 import Button, { ButtonType } from 'antd/lib/button';
-import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { ITreeItem } from 'helpers/tree';
 import { Model, ModelFilter } from 'core/models';
 import { useTranslation } from 'react-i18next';
@@ -13,30 +13,43 @@ export interface ISelectedItems<T> {
 
 interface ITreeInModalProps<T extends Model, TModelFilter extends ModelFilter> {
   defaultSelectedItems?: T[];
+
   selectedItems?: T[];
+
   defaultDataSource?: ITreeItem[];
 
   visible?: boolean;
+
   onChange?: (selectedItem: T[]) => void;
+
   onClose?: (event) => void;
 
   title?: string;
+
   className?: string;
 
   allowOk?: boolean;
+
   okText?: string;
+
   okType?: ButtonType;
 
   allowClose?: boolean;
+
   closeText?: string;
+
   closeType?: ButtonType;
 
   getList?: (TModelFilter?: TModelFilter) => Promise<T[]>;
+
   list?: T[];
+
   modelFilter?: TModelFilter;
 
   setModelFilter?: Dispatch<SetStateAction<TModelFilter>>;
+
   onSearchError?: (error: AxiosError<T>) => void;
+
   searchField?: string;
 }
 

@@ -10,14 +10,14 @@ import {generalColumnWidths, generalLanguageKeys} from 'config/consts';
 import Form from 'antd/lib/form';
 import {formItemLayout} from 'config/ant-design/form';
 import {Col, Row} from 'antd/lib/grid';
-import AdvancedIdFilter from 'components/AdvancedIdFilter/AdvancedIdFilter';
 import CollapsibleCard from 'components/CollapsibleCard/CollapsibleCard';
 
-import { storeRepository } from 'views/StoreView/StoreRepository';
-import { Store } from 'models/Store';
-import { StoreImageMapping } from 'models/StoreImageMapping';
-import { StoreImageMappingFilter } from 'models/StoreImageMappingFilter';
+import {storeRepository} from 'views/StoreView/StoreRepository';
+import {Store} from 'models/Store';
+import {StoreImageMapping} from 'models/StoreImageMapping';
+import {StoreImageMappingFilter} from 'models/StoreImageMappingFilter';
 import StoreImageMappingModal from 'views/StoreView/StoreDetail/StoreImageMappingModal/StoreImageMappingModal';
+
 const {Item: FormItem} = Form;
 
 function StoreImageMappingTable(props: ContentTableProps<Store, StoreImageMapping>) {
@@ -39,7 +39,7 @@ function StoreImageMappingTable(props: ContentTableProps<Store, StoreImageMappin
     nameof(model.storeImageMappings),
   );
 
-    const [
+  const [
     loading,
     visible,
     list,
@@ -90,8 +90,9 @@ function StoreImageMappingTable(props: ContentTableProps<Store, StoreImageMappin
         sortOrder: getOrderTypeForTable<Store>(nameof(dataSource[0].name), sorter),
         render(name: string, storeImageMapping: StoreImageMapping) {
           return (
-            <FormItem validateStatus={formService.getValidationStatus<StoreImageMapping>(storeImageMapping.errors, nameof(storeImageMapping.name))}
-                      help={ storeImageMapping.errors?.name }
+            <FormItem
+              validateStatus={formService.getValidationStatus<StoreImageMapping>(storeImageMapping.errors, nameof(storeImageMapping.name))}
+              help={storeImageMapping.errors?.name}
             >
               <input type="text"
                      className="form-control form-control-sm"
@@ -129,7 +130,7 @@ function StoreImageMappingTable(props: ContentTableProps<Store, StoreImageMappin
     ),
     [handleOpen, translate],
   );
-    const tableFooter = React.useCallback(
+  const tableFooter = React.useCallback(
     () => (
       <>
         <button className="btn btn-link" onClick={handleAdd}>
@@ -141,20 +142,20 @@ function StoreImageMappingTable(props: ContentTableProps<Store, StoreImageMappin
     [handleAdd, translate],
   );
 
-    return (
+  return (
     <>
-    <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
+      <CollapsibleCard title={translate(generalLanguageKeys.actions.search)} className="mb-4">
         <StoreImageMappingModal title={translate('store.storeImageMappingModal.title')}
-                          selectedList={ storeImageMappings }
-                          setSelectedList={ setStoreImageMappings }
-                          list={list}
-                          total={total}
-                          isOpen={visible}
-                          loading={loading}
-                          toggle={handleClose}
-                          onClose={handleClose}
-                          filter={ storeImageMappingFilter }
-                          setFilter={setStoreImageMappingFilter}
+                                selectedList={storeImageMappings}
+                                setSelectedList={setStoreImageMappings}
+                                list={list}
+                                total={total}
+                                isOpen={visible}
+                                loading={loading}
+                                toggle={handleClose}
+                                onClose={handleClose}
+                                filter={storeImageMappingFilter}
+                                setFilter={setStoreImageMappingFilter}
         />
         <Form {...formItemLayout}>
           <Row>

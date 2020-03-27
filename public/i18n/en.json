@@ -251,6 +251,7 @@
     "provinces": "",
     "roles": "",
     "storeLevels": "",
+    "stores": "",
     "suppliers": "",
     "unitOfMeasureGroupingContents": "",
     "unitOfMeasureGroupings": "",
@@ -613,48 +614,41 @@
   "store": {
     "storeImageMappingModal": {
       "title": ""
-    },
-    "tabs": {
-      "roles": {
-        "title": ""
-      }
     }
   },
   "stores": {
     "address1": "",
     "address2": "",
     "code": "",
-    "createdAt": "",
-    "deletedAt": "",
     "detail": {
       "title": ""
     },
     "district": "",
-    "districtId": "",
+    "general": {
+      "info": ""
+    },
     "id": "",
-    "isActive": "",
     "latitude": "",
+    "location": "",
     "longitude": "",
     "master": {
       "title": ""
     },
     "name": "",
     "organization": "",
-    "organizationId": "",
+    "owner": {
+      "info": ""
+    },
     "ownerEmail": "",
     "ownerName": "",
     "ownerPhone": "",
-    "parentStoreId": "",
+    "parentStore": "",
     "province": "",
-    "provinceId": "",
+    "status": "",
     "storeGrouping": "",
-    "storeGroupingId": "",
     "storeType": "",
-    "storeTypeId": "",
     "telephone": "",
-    "updatedAt": "",
-    "ward": "",
-    "wardId": ""
+    "ward": ""
   },
   "suppliers": {
     "code": "",

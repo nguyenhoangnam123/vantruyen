@@ -7,7 +7,7 @@ import { Status } from './Status';
 import { PermissionFieldMapping } from './PermissionFieldMapping';
 import { PermissionPageMapping } from './PermissionPageMapping';
 
-export class Permission extends Model 
+export class Permission extends Model
 {
     public id?: number;
     public name?: string;

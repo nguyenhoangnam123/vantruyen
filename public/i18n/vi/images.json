@@ -1,16 +1,16 @@
 {
   "images": {
-    "createdAt": "",
-    "deletedAt": "",
+    "createdAt": "Ngày tạo",
+    "deletedAt": "Ngày xóa",
     "detail": {
-      "title": ""
+      "title": "Thông tin chi tiết"
     },
-    "id": "",
+    "id": "ID",
     "master": {
-      "title": ""
+      "title": "Danh sách hình ảnh"
     },
-    "name": "",
-    "updatedAt": "",
-    "url": ""
+    "name": "Tên",
+    "updatedAt": "Ngày cập nhật",
+    "url": "địa chỉ url"
   }
 }

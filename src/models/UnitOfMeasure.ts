@@ -3,7 +3,7 @@ import { ErrorMap } from 'react3l';
 import { Moment } from 'moment';
 import { Status } from './Status';
 
-export class UnitOfMeasure extends Model 
+export class UnitOfMeasure extends Model
 {
     public id?: number;
     public code?: string;
